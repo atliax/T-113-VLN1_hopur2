@@ -1,5 +1,4 @@
 # 25.11.2024 – Fundur nr. 1
-## Heading 2
 
 Fundurinn hófst á því að við fórum yfir kröfurnar. Byrjuðum á að kynna okkur verkefnið, hvað væri nauðsynlegt og hvað væri til upphækkunar. 
 Vinna hófst á því útfæra notendahópagreiningu, útbúa class diagram, state diagram, búa til GIT repository, búa til vinnuskjöl og skýrslur.
