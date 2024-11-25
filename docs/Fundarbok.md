@@ -1,4 +1,4 @@
-25.11.2024 – Fundur nr. 1
+# 25.11.2024 – Fundur nr. 1
 
 
 Fundurinn hófst á því að við fórum yfir kröfurnar. Byrjuðum á að kynna okkur verkefnið, hvað væri nauðsynlegt og hvað væri til upphækkunar. 
