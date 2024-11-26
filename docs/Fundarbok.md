@@ -52,3 +52,19 @@ Taka út allar B-kröfur. Við ætlum okkur að halda áfram að útfæra A-krö
 3.  Use cases: Daníel
 4.  Happy paths: Eva
 5.  Git handbók: Atli
+
+# 26.11.2024 - Þriðjudagur
+## Fundur nr. 4 
+
+
+## Niðurstaða dags:
+
+
+
+## Mæting:
+Atli  
+Daníel  
+Eva  
+Gísli  
+Hjörtur  
+Óli  
