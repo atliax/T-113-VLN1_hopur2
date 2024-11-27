@@ -96,3 +96,30 @@ Setja upp state diagram fyrir allt kerfið, klára að use-cases og útbúa non-
 2.  Use-cases: Óli, Eva & Hjörtur
 3.  State Diagram: Daníel
 4.  Git handbók: Atli
+
+
+
+# 26.11.2024 - Þriðjudagur
+## Fundur nr. 6 
+
+
+## Niðurstaða dags:
+
+Markmiðum dagsins náð fyrir utan enn er verið að vinna í Git handbókinni. State diagrams eru klár og sett í skýrslu. User-stories eru klár. Non-functional kröfulistinn er klár. En tek fram að þetta mun allt taka breytingum og er því klárt mögulega rangt orð.
+
+## Þátttaka:
+Allur hópurinn var tilstaðar nema Gísli var á discord og vann sín verkefni heiman frá.
+Hópurinn skilaði af sér heilum vinnudegi
+
+Atli  
+Daníel  
+Eva  
+Gísli  
+Hjörtur  
+Óli  
+
+## Hafa í huga á næsta fundi:
+Búa til user-stories sem fara í gegnum alla virkni kerfisins
+Útfæra happy path útfrá því
+Samræma heiti í skjali (Hafa þá fasteign sem housing unit - Ekki estate eða real estate, verkbeiðni = tickets, verkskýrsla = report, viðhaldsskýrsla = maintenance report)
+Þurfum að sammælast um hvernig notendaviðmótið á að vera og sérstaklega hvernig search mun líta út og hvernig það virkar.
