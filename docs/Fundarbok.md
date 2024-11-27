@@ -78,3 +78,21 @@ Hjörtur
 * skoða state diagrams
 * Fara yfir kröfulista og use cases
 * Útbúa non-functional kröfulista
+
+
+# 27.11.2024 - Miðvikudagur
+## Fundur nr. 5 
+
+Fundurinn hófst á því að við töluðum um state diagrams og hvernig þau eru skilgreind. State diagrams voru ekki kennd í GHOH og því þurftum við að kynna okkur það sérstaklega.
+Okkar besti Gísli datt illa í gær fyrir utan HR og eyðir því morgninum upp á bráðamótttöku.
+
+
+## Markmið:
+Setja upp state diagram fyrir allt kerfið, klára að use-cases og útbúa non-functional kröfulista ásamt því að klára Git handbókina.
+
+
+## Verkefni:
+1.  Non-functional: Hópurinn
+2.  Use-cases: Óli, Eva & Hjörtur
+3.  State Diagram: Daníel
+4.  Git handbók: Atli
