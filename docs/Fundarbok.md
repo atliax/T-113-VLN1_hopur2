@@ -123,3 +123,20 @@ Búa til user-stories sem fara í gegnum alla virkni kerfisins
 Útfæra happy path útfrá því
 Samræma heiti í skjali (Hafa þá fasteign sem housing unit - Ekki estate eða real estate, verkbeiðni = tickets, verkskýrsla = report, viðhaldsskýrsla = maintenance report)
 Þurfum að sammælast um hvernig notendaviðmótið á að vera og sérstaklega hvernig search mun líta út og hvernig það virkar.
+
+
+# 28.11.2024 - Fimmtudagur
+## Fundur nr. 7 
+Fundurinn hófst á því að fara yfir "Hafa í huga á næsta fundi". Allur hópurinn mættur nema Daníel sem vinnur í gegnum discord
+
+
+
+## Markmið:
+Samræma skjöl. Klára happy path. Fara yfir B-kröfur. Klára Git-handbókina. Klára síðustu 3 á kröfulista. Fara yfir skjalið og double-checka hvort allar A-kröfur séu ekki pottþétt inni.
+
+
+## Verkefni:
+1.  Happy path & Class diagram - Gísli
+2.  Samræma heiti í skjölum - Hjörtur / Eva
+3.  Fara yfir B-kröfur - Óli
+4.  Git-handbók - Atli
