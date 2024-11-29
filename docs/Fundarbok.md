@@ -162,3 +162,20 @@ Hjörtur
 
 ## Hafa í huga á næsta fundi:
 Útfæra notendaviðmótið betur. Klára happy path. Klára Git-handbókina. Skoða betur state diagrams.
+
+
+# 28.11.2024 - Föstudagur
+## Fundur nr. 9
+Fundurinn hófst á því að farið var yfir það hver markmið dagsins eru.
+
+
+## Markmið:
+Uppfæra klasarit. Klára happy path. Uppfæra user-stories. Klára git-handbókina og klára fyrsta fyrsta uppkast af skýrslu til að skila inn.
+
+
+## Verkefni:
+1.  Happy path - Gísli
+2.  Klasarit- Hjörtur
+3.	Yfirfara allar kröfurnar og sjá hvort allt standist - Óli
+4.  Git-handbók - Atli
+5.  Uppfæra user-stories - Eva, Daníel
