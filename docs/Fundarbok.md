@@ -179,3 +179,24 @@ Uppfæra klasarit. Klára happy path. Uppfæra user-stories. Klára git-handbók
 3.	Yfirfara allar kröfurnar og sjá hvort allt standist - Óli
 4.  Git-handbók - Atli
 5.  Uppfæra user-stories - Eva, Daníel
+
+
+# 29.11.2024 - Föstudagur
+## Fundur nr. 10 
+
+
+## Niðurstaða dags:
+
+Öllum settum markmiðum var náð. En við komumst af því að við þurftum að bæta við amk 1 c kröfu í skýrsluna og einnig þurfti að lagfæra klasaritið að 3-tier.
+
+## Þátttaka:
+Allur hópurinn var tilstaðar nema Daníel og Óli sem unnu heima. Hópurinn skilaði af sér heilum vinnudegi en Eva og Atli unnu sérstakleg lengi þennan dag við að klára að þríþætta klasaritið. 
+
+Atli  
+Daníel  
+Eva  
+Gísli  
+Hjörtur  
+Óli  
+
+## Hafa í huga á næsta fundi:
