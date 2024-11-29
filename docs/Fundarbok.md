@@ -140,3 +140,25 @@ Samræma skjöl. Klára happy path. Fara yfir B-kröfur. Klára Git-handbókina.
 2.  Samræma heiti í skjölum - Hjörtur / Eva
 3.  Fara yfir B-kröfur - Óli
 4.  Git-handbók - Atli
+
+
+# 28.11.2024 - Fimmtudagur
+## Fundur nr. 8 
+
+
+## Niðurstaða dags:
+
+Markmiðum dagins var náð. Happy path og class diagram voru uppfærð. Samræmt var heitið í skjölum. Git-handbók er á góðri leið í að verða kláruð. B-kröfur voru settar inn í skjalið og use-cases voru útfyllt.
+
+## Þátttaka:
+Allur hópurinn tilstaðar nema Daníel var heima sökum þess að börnin hans eru með gubbupest. Hann hinsvegar vann heima í gegnum discord. Allir tóku jafnan þátt og var skilað af sér heilum vinnudegi.
+
+Atli  
+Daníel  
+Eva  
+Gísli  
+Hjörtur  
+Óli  
+
+## Hafa í huga á næsta fundi:
+Útfæra notendaviðmótið betur. Klára happy path. Klára Git-handbókina. Skoða betur state diagrams.
