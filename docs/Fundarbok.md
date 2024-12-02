@@ -200,3 +200,11 @@ Hjörtur
 Óli  
 
 ## Hafa í huga á næsta fundi:
+
+
+## 12.2.2024 - Mánudagur
+## Morgunfundur er settur klukkan 10
+
+## Markmið dagsins
+Markmið dagsins er að endurhugsa klasarit okkar og vera með klárað Klasarit í enda dags, endurskrifa use requirements og cases, endurraða köflum í hönnunar skjalinu. 
+
