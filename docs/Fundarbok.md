@@ -206,5 +206,15 @@ Hjörtur
 ## Morgunfundur er settur klukkan 10
 
 ## Markmið dagsins
-Markmið dagsins er að endurhugsa klasarit okkar og vera með klárað Klasarit í enda dags, endurskrifa use requirements og cases, endurraða köflum í hönnunar skjalinu. 
+Markmið dagsins er að endurhugsa klasarit okkar og vera með klárað Klasarit í enda dags, endurskrifa use requirements og cases(viðhalds og verkskýrsla er sami hluturinn samkvæmt TA), endurraða köflum í hönnunar skjalinu. 
 
+## 12.2.2024 - Mánudagur
+## Lokafundur er settur klukkan 14:45
+
+Markmiðum var náð, endurskrifuðum skýrsluna töluvert og samræmdum hana með athugasemdum frá kennara í huga. Við breyttum klasaritinu okkar töluvert og er það mun betra núna. Ímynduðum hvernig við ætlum að kóða/útæra þetta aðeins betur. Verkum var ekki skipt niður heldur var þetta hópavinna. Erum með þónokkrar spurningar fyrir fund með TA/kennara á mrg eftir þennan dag. Við erum að sleppa einstaklings commentum eins og er, ætlum að vera duglegri að þeim þegar þetta er meira verkskipt. 
+
+Það var full mæting í dag , 6/6. 
+
+## Hafa í huga á næsta fundi
+
+Mæta á fyrirlestur um wrapper og hvernig er best að höndla þá. Skoða svo hvernig wrapper passar inn í Class diagram hjá okkur, Skipta í hópa til að forrita og mögulega byrja á forritun. 
