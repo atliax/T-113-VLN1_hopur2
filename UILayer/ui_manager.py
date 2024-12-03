@@ -1,3 +1,5 @@
+import os
+
 from UILayer.screen_factory import ScreenFactory
 
 class UIManager:
@@ -10,6 +12,8 @@ class UIManager:
 
     def run(self):
         while self.running:
+            os.system('cls' if os.name == 'nt' else 'clear')
+
             next_screen = self.current_screen.render()
 
             if next_screen == 'quit':
