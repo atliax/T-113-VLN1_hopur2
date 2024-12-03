@@ -6,3 +6,10 @@ class Amenities:
         self.schedule = schedule
 
 #TODO klára fallið
+
+
+
+
+
+
+
