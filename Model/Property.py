@@ -1,9 +1,9 @@
 
 
 class Property:
-    def __init__(self,id,condition,amenities):
+    def __init__(self,id,condition,amenity):
         self.id = id
         self.condition = condition
-        self.amenities = amenities
+        self.amenity = amenity
 
 #TODO klára fallið
