@@ -17,7 +17,7 @@ class LoginScreen(BaseScreen):
         # TODO: call some LogicAPI here to validate
         if user == 'test' and password == 'test':
             print("correct password")
-            return 'quit'
+            return 'menu'
         else:
             print("wrong password")
             return self
