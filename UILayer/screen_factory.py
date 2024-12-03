@@ -1,15 +1,19 @@
 from UILayer.login_screen import LoginScreen
-from UILayer.menu_screen import MenuScreen
+from UILayer.main_menu_screen import MainMenuScreen
+from UILayer.splash_screen import SplashScreen
 
 class ScreenFactory:
     def __init__(self, ui):
         self.ui = ui
 
     def create_screen(self, screen_name):
-        if screen_name == 'login':
-            return LoginScreen(self.ui)
-        elif screen_name == 'menu':
-            return MenuScreen(self.ui)
+        match screen_name:
+            case 'login':
+                return LoginScreen(self.ui)
+            case 'main_menu':
+                return MainMenuScreen(self.ui)
+            case 'splash':
+                return SplashScreen(self.ui)
 
         # TODO, other screens
 

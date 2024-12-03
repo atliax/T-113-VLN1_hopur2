@@ -6,7 +6,7 @@ class UIManager:
         self.running = True
         self.screen_factory = ScreenFactory(self)
         self.screen_stack = []
-        self.current_screen = self.screen_factory.create_screen('login')
+        self.current_screen = self.screen_factory.create_screen('splash')
 
     def run(self):
         while self.running:

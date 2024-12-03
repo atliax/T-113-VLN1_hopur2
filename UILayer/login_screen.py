@@ -6,18 +6,11 @@ class LoginScreen(BaseScreen):
 
     def render(self):
         print("Login")
-        user = input("User: ")
+        email = input("Email: ")
         password = input("Password: ")
 
-        if self.ui.logic_api.logic_test_function():
-            print("was True")
+        if self.ui.logic_api.authenticate_login(email,password):
+            return 'main_menu'
         else:
-            print("was False")
-
-        # TODO: call some LogicAPI here to validate
-        if user == 'test' and password == 'test':
-            print("correct password")
-            return 'menu'
-        else:
-            print("wrong password")
+            print("Wrong password.")
             return self

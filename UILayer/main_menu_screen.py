@@ -1,6 +1,6 @@
 from UILayer.base_screen import BaseScreen
 
-class MenuScreen(BaseScreen):
+class MainMenuScreen(BaseScreen):
     def __init__(self, ui):
         super().__init__(ui)
 
