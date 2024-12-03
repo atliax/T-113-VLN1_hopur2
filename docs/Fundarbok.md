@@ -232,6 +232,16 @@ Storage layer =
 Model = Hjörtur og Eva
 Wrapper = 
 
-
-
 Við munum byrja að skrifa kóða og sjá hvar við rekumst á veggi og lærum vonandi af því. 
+
+Það er 5/6 mæting, 1 er heima út af barnaveseni og er að taka þátt á Discord
+
+
+## 2.12.2024 - Þriðjudagur
+## lokafundur settur 15:00
+
+Byrjuðum á forritun, fórum langt með að setja Model klassa í python. Endurskrifuðum happy paths að einhverju leiti. Skiptingin á hópunm er enn ekki kominn. Við ákvaðum að skipta properties og amenenties í tvo mismunandi klasa eftir langa umræðu. Unnum að UML class diagrama aðeins meira og skilgreindum betur UI klasa og bættum Ameneties klasa við.
+
+## Hafa í huga fyrir næsta fund
+
+Byrja að forrita á fullu, koma smá kjöti á þetta svo við getum farið að skoða hvernig það virkar.
