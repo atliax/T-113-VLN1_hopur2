@@ -21,6 +21,7 @@ class MainMenuScreen(BaseScreen):
         print( "|    [D] Destinations")
         print( "|")
         print( "|    [L] Log out")
+        print( "|    [X] Exit")
         print( "|")
         print(self.separator_line)
 
@@ -32,5 +33,8 @@ class MainMenuScreen(BaseScreen):
         if cmd == "L":
             # log out user
             return "back"
+
+        if cmd == "X":
+            return "quit"
 
         return self
