@@ -1,7 +1,6 @@
 import os
 from UILayer import ui_consts
 
-
 class BaseScreen:
     def __init__(self, ui):
         self.ui = ui
