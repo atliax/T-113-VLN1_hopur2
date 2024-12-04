@@ -29,10 +29,16 @@ class MainMenuScreen(BaseScreen):
 
         if cmd == "P":
             return "properties"
+        if cmd == "T":
+            return "tickets"
+        if cmd == "S":
+            return "staff"
+        if cmd == "D":
+            return "destinations"
 
         if cmd == "L":
-            # log out user
-            return "back"
+            # TODO: log out user through staff manager
+            return "logout"
 
         if cmd == "X":
             return "quit"
