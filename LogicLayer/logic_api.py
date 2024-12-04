@@ -7,5 +7,5 @@ class LogicAPI:
     def authenticate_login(self, email, password):
         return self.staff_manager.authenticate_login(email, password)
 
-    def get_logged_in_user(self):
-        return self.staff_manager.get_logged_in_user()
+    def get_logged_in_staff(self):
+        return self.staff_manager.get_logged_in_staff()

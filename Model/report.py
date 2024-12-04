@@ -1,10 +1,10 @@
-from Model import Contractor
+
 
 class Report:
-    def __init__(self, id:str, staff:str, contractor:Contractor, notes:str, contractor_review:str, contractor_rating:str, contractor_fee:str, cost:float, date:str) -> None:
+    def __init__(self, id:str, staff:str, contractorID:str, notes:str, contractor_review:str, contractor_rating:str, contractor_fee:str, cost:float, date:str) -> None:
         self.id = id
         self.staff = staff
-        self.contractor = contractor
+        self.contractorID = contractorID
         self.notes = notes
         self.contractor_review = contractor_review
         self.contractor_rating = contractor_rating

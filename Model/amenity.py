@@ -1,9 +1,9 @@
-from Model import Property
+
 
 class Amenity:
-    def __init__(self, id:str, property:Property,description:str,condition:str) -> None:
+    def __init__(self, id:str, propertyID:str,description:str,condition:str) -> None:
         self.id = id
-        self.property = property
+        self.propertyID = propertyID
         self.description = description
         self.condition = condition
 

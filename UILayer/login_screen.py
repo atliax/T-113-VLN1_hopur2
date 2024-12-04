@@ -15,7 +15,7 @@ class LoginScreen(BaseScreen):
         print("|                                                           Login")
         print("|                                             User: ___________________")
         print("|                                         Password: ___________________")
-        print("|                                            ")
+        print("|")
         print(self.separator_line)
         print("")
         print("Demo cheat codes:")
