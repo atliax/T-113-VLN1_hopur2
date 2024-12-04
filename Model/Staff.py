@@ -1,15 +1,17 @@
 
 
 class Staff:
-    def __init__(self,name,ssn,address,home_phone,mobile_phone,email,location,username,password):
+    def __init__(self,id,name,ssn,address,phone_home,phone_gsm,email,password,destination,job_title,is_manager):
+        self.id = id
         self.name = name
         self.ssn = ssn
         self.address = address
-        self.home_phone = home_phone
-        self.mobile_phone = mobile_phone
+        self.phone_home = phone_home
+        self.phone_gsm = phone_gsm
         self.email = email
-        self.location = location
-        self.username = username
         self.password = password
+        self.destination = destination
+        self.job_title = job_title
+        self.is_manager = is_manager
 
 #TODO klára fallið
