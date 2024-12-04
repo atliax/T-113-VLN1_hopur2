@@ -8,13 +8,15 @@ class LoginScreen(BaseScreen):
         self.user_note = ""
 
     def render(self):
-        print("//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////")
+        self.clear_screen()
+
+        print(self.separator_line)
         print("|")
         print("|                                                           Login")
         print("|                                             User: ___________________")
         print("|                                         Password: ___________________")
         print("|                                            ")
-        print("//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////")
+        print(self.separator_line)
         print("")
         print("Demo cheat codes:")
         print("Username: Boss        and    Password: Man")

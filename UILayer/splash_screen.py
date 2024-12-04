@@ -5,6 +5,7 @@ class SplashScreen(BaseScreen):
         super().__init__(ui)
 
     def render(self):
+        self.clear_screen()
         print("          ___           ___           ___                    ___                       ___     ")
         print("         /\\__\\         /\\  \\         /\\__\\                  /\\  \\          ___        /\\  \\    ")
         print("        /::|  |       /::\\  \\       /::|  |                /::\\  \\        /\\  \\      /::\\  \\   ")
