@@ -1,10 +1,10 @@
 # Constants to use in UI layer
 
 # Screens
-PROP = "properties"
+PROPERTY = "properties"
 STAFF = "staff"
 TICKET = "tickets"
-DEST = "destinations"
+DESTINATION = "destinations"
 LOGIN = "login"
 MAIN_MENU = "main_menu"
 SPLASH = "splash"
@@ -14,4 +14,5 @@ LOGOUT = "logout"
 BACK = "back"
 QUIT = "quit"
 
+# Format
 SEPERATOR =  "//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////"

@@ -29,17 +29,17 @@ class MainMenuScreen(BaseScreen):
         cmd = input("Command: ").upper()
 
         if cmd == "P":
-            return "properties"
+            return ui_consts.PROPERTY
         if cmd == "T":
-            return "tickets"
+            return ui_consts.TICKET
         if cmd == "S":
-            return "staff"
+            return ui_consts.STAFF
         if cmd == "D":
-            return "destinations"
+            return ui_consts.DESTINATION
 
         if cmd == "L":
-            return "logout"
+            return ui_consts.LOGOUT
         if cmd == "X":
-            return "quit"
+            return ui_consts.QUIT
 
         return self
