@@ -7,8 +7,6 @@ class PropertiesScreen(BaseScreen):
     def render(self):
         self.clear_screen()
 
-        print("Properties")
-
         cmd = input("Command: ")
 
         return self
