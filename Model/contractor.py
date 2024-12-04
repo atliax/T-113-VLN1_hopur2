@@ -1,6 +1,6 @@
+from Model.base_model import BaseModel
 
-
-class Contractor:
+class Contractor(BaseModel):
     def __init__(self, id:str, rating:float, name:str, contact:str, phone_nr:str, address:str, opening_hours:str, destinationID:str, contractor_type:str) -> None:
         self.id = id
         self.rating = rating

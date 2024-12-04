@@ -1,6 +1,6 @@
+from Model.base_model import BaseModel
 
-
-class Ticket:
+class Ticket(BaseModel):
     def __init__(self, id:str, priority:str, title:str, amenityID:str, status:str, reportID:str, recurring:bool, recurring_days:int,open_date:str) -> None:
         self.id = id
         self.priority = priority
