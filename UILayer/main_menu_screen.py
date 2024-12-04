@@ -16,8 +16,8 @@ class MainMenuScreen(BaseScreen):
         print( "|    What would you like to view?")
         print( "|")
         print( "|    [P] Properties")
-        print( "|    [S] Staff")
         print( "|    [T] Tickets")
+        print( "|    [S] Staff")
         print( "|    [D] Destinations")
         print( "|")
         print( "|    [L] Log out")
@@ -25,5 +25,12 @@ class MainMenuScreen(BaseScreen):
         print(self.separator_line)
 
         cmd = input("Command: ")
+
+        if cmd == "P":
+            return "properties"
+
+        if cmd == "L":
+            # log out user
+            return "back"
 
         return self

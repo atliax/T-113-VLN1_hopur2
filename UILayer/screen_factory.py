@@ -1,5 +1,6 @@
 from UILayer.login_screen import LoginScreen
 from UILayer.main_menu_screen import MainMenuScreen
+from UILayer.properties_screen import PropertiesScreen
 from UILayer.splash_screen import SplashScreen
 
 class ScreenFactory:
@@ -14,6 +15,8 @@ class ScreenFactory:
                 return MainMenuScreen(self.ui)
             case 'splash':
                 return SplashScreen(self.ui)
+            case 'properties':
+                return PropertiesScreen(self.ui)
 
         # TODO, other screens
 
