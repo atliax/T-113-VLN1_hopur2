@@ -21,6 +21,7 @@ class UIManager:
                         print("Exiting...")
                         self.running = False
                     case "logout":
+                        # TODO: log out user through staff manager
                         self.screen_stack = []
                         self.current_screen = self.start_screen
                     case "back":

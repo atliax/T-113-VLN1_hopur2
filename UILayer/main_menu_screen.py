@@ -37,9 +37,7 @@ class MainMenuScreen(BaseScreen):
             return "destinations"
 
         if cmd == "L":
-            # TODO: log out user through staff manager
             return "logout"
-
         if cmd == "X":
             return "quit"
 
