@@ -1,4 +1,5 @@
 from UILayer.base_screen import BaseScreen
+from UILayer import ui_consts
 
 class SplashScreen(BaseScreen):
     def __init__(self, ui):
@@ -19,4 +20,4 @@ class SplashScreen(BaseScreen):
         print("         \\/__/         \\/__/         \\/__/                  \\/__/                     \\|__|    ")
         print("")
         input("Press enter to continue.")
-        return "login"
+        return ui_consts.LOGIN

@@ -5,6 +5,7 @@ from UILayer.tickets_screen import TicketsScreen
 from UILayer.staff_screen import StaffScreen
 from UILayer.destination_screen import DestinationScreen
 from UILayer.splash_screen import SplashScreen
+from UILayer import ui_consts
 
 class ScreenFactory:
     def __init__(self, ui):
@@ -12,19 +13,19 @@ class ScreenFactory:
 
     def create_screen(self, screen_name):
         match screen_name:
-            case 'login':
+            case ui_consts.LOGIN:
                 return LoginScreen(self.ui)
-            case 'main_menu':
+            case ui_consts.MAIN_MENU:
                 return MainMenuScreen(self.ui)
-            case 'splash':
+            case ui_consts.SPLASH:
                 return SplashScreen(self.ui)
-            case 'properties':
+            case ui_consts.PROPERTY:
                 return PropertiesScreen(self.ui)
-            case 'tickets':
+            case ui_consts.TICKET:
                 return TicketsScreen(self.ui)
-            case 'staff':
+            case ui_consts.STAFF:
                 return StaffScreen(self.ui)
-            case 'destinations':
+            case ui_consts.DESTINATION:
                 return DestinationScreen(self.ui)
 
         # TODO, other screens

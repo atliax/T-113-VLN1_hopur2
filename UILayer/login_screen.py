@@ -1,4 +1,5 @@
 from getpass import getpass
+from UILayer import ui_consts
 
 from UILayer.base_screen import BaseScreen
 
@@ -10,13 +11,13 @@ class LoginScreen(BaseScreen):
     def render(self):
         self.clear_screen()
 
-        print(self.separator_line)
+        print(ui_consts.SEPERATOR)
         print("|")
         print("|                                                           Login")
         print("|                                             User: ___________________")
         print("|                                         Password: ___________________")
         print("|")
-        print(self.separator_line)
+        print(ui_consts.SEPERATOR)
         print("")
         print("Demo cheat codes:")
         print("Username: Boss        and    Password: Man")
@@ -31,7 +32,7 @@ class LoginScreen(BaseScreen):
 
         if self.ui.logic_api.authenticate_login(email,password):
             self.user_note = ""
-            return 'main_menu'
+            return ui_consts.MAIN_MENU
         else:
             self.user_note = "Wrong password."
             return self

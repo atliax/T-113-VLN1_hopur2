@@ -1,6 +1,7 @@
 from UILayer.screen_factory import ScreenFactory
 from UILayer.base_screen import BaseScreen
 from LogicLayer import LogicAPI
+from UILayer import ui_consts
 
 class UIManager:
     def __init__(self, logic_api : LogicAPI) -> None:
@@ -17,14 +18,14 @@ class UIManager:
 
             if isinstance(next_screen, str):
                 match next_screen:
-                    case "quit":
+                    case ui_consts.QUIT:
                         print("Exiting...")
                         self.running = False
-                    case "logout":
+                    case ui_consts.LOGOUT:
                         # TODO: log out user through staff manager
                         self.screen_stack = []
                         self.current_screen = self.start_screen
-                    case "back":
+                    case ui_consts.BACK:
                         self.pop_screen()
                     case _:
                         self.push_screen(self.screen_factory.create_screen(next_screen))
