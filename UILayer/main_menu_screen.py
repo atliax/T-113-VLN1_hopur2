@@ -1,5 +1,6 @@
 from UILayer.base_screen import BaseScreen
 from Model import Staff
+from UILayer import ui_consts
 
 class MainMenuScreen(BaseScreen):
     def __init__(self, ui):
@@ -10,7 +11,7 @@ class MainMenuScreen(BaseScreen):
 
         logged_in_user : Staff = self.ui.logic_api.get_logged_in_staff()
 
-        print(self.separator_line)
+        print(ui_consts.SEPERATOR)
         print( "|")
         print(f"|    Hello {logged_in_user.name}!")
         print( "|    What would you like to view?")
@@ -23,7 +24,7 @@ class MainMenuScreen(BaseScreen):
         print( "|    [L] Log out")
         print( "|    [X] Exit")
         print( "|")
-        print(self.separator_line)
+        print(ui_consts.SEPERATOR)
 
         cmd = input("Command: ").upper()
 
