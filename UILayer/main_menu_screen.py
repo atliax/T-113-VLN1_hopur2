@@ -11,6 +11,7 @@ class MainMenuScreen(BaseScreen):
 
         logged_in_user : Staff = self.ui.logic_api.get_logged_in_staff()
 
+        print("Main menu")
         print(ui_consts.SEPERATOR)
         print( "|")
         print(f"|    Hello {logged_in_user.name}!")

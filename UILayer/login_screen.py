@@ -3,6 +3,8 @@ from UILayer import ui_consts
 
 from UILayer.base_screen import BaseScreen
 
+from UILayer import ui_consts
+
 class LoginScreen(BaseScreen):
     def __init__(self, ui):
         super().__init__(ui)
