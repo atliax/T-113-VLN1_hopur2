@@ -44,7 +44,8 @@ class PropertiesScreen(BaseScreen):
         print(ui_consts.SEPERATOR)
         print("")
 
-        cmd = input("Command: ")
+        cmd = input("Command: ").lower()
+
         # Add a property
         if cmd == "a": 
             new_property = input("New property name: ")
@@ -52,10 +53,11 @@ class PropertiesScreen(BaseScreen):
 
         # Remove a property
         if cmd == "r":
-            pass
+            remove_by_id = input("Remove property with the ID: ")
+
         # Property details
         if cmd == "d":
-            remove_by_id = input("Remove property with the ID: ")
+            pass
 
         # Edit a property
         if cmd == "e":
@@ -73,10 +75,9 @@ class PropertiesScreen(BaseScreen):
             employee = input("Employee writing report: ")
             report = input("Report: ")
             report_date = input("Report date: ")
+
         # Go Back
         if cmd == "b":
             return ui_consts.BACK
     
-
-
         return self
