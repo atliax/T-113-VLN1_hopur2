@@ -24,7 +24,7 @@ class MainMenuScreen(BaseScreen):
         print( "|")
         print(self.separator_line)
 
-        cmd = input("Command: ")
+        cmd = input("Command: ").upper()
 
         if cmd == "P":
             return "properties"
