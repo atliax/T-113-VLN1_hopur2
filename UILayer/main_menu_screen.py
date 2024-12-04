@@ -5,8 +5,22 @@ class MainMenuScreen(BaseScreen):
         super().__init__(ui)
 
     def render(self):
-        print("Menu")
+        username = self.ui.logic_api.get_logged_in_user()
 
-        input()
+        print("//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////")
+        print("|")
+        print(f"|    Hello {username}!")
+        print("|    What would you like to view?")
+        print("|")
+        print("|    [P] Properties")
+        print("|    [S] Staff")
+        print("|    [T] Tickets")
+        print("|    [D] Destinations")
+        print("|")
+        print("|    [L] Log out")
+        print("|")
+        print("//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////")
+
+        cmd = input("Command: ")
 
         return self

@@ -8,12 +8,23 @@ class LoginScreen(BaseScreen):
         self.user_note = ""
 
     def render(self):
-        print("Login")
+        print("//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////")
+        print("|")
+        print("|                                                           Login")
+        print("|                                             User: ___________________")
+        print("|                                         Password: ___________________")
+        print("|                                            ")
+        print("//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////")
+        print("")
+        print("Demo cheat codes:")
+        print("Username: Boss        and    Password: Man")
+        print("Username: Pleb        and    Password: 1234")
+        print("")
 
         if self.user_note != "":
             print(self.user_note)
 
-        email = input("Email: ")
+        email = input("Username: ")
         password = getpass("Password: ")
 
         if self.ui.logic_api.authenticate_login(email,password):
