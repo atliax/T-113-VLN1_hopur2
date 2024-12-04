@@ -6,9 +6,10 @@ class LoginScreen(BaseScreen):
     def __init__(self, ui):
         super().__init__(ui)
         self.user_note = ""
+        self.title = "Login"
 
     def render(self):
-        self.clear_screen()
+        #self.clear_screen()
 
         print(self.separator_line)
         print("|")

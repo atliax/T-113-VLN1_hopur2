@@ -13,6 +13,26 @@ class UIManager:
 
     def run(self) -> None:
         while self.running:
+            self.current_screen.clear_screen()
+
+            first = True
+            path_string = ""
+            for screen in self.screen_stack:
+                if screen.title != "Login" and screen.title != "Splash":
+                    if not first:
+                        path_string += " > "
+                    else:
+                        first = False
+
+                    path_string += screen.title
+
+            if self.current_screen.title != "Login" and self.current_screen.title != "Splash":
+                if len(self.screen_stack) >= 3:
+                    path_string += " > "
+                path_string += self.current_screen.title
+
+            print(path_string)
+
             next_screen = self.current_screen.render()
 
             if isinstance(next_screen, str):
