@@ -202,14 +202,14 @@ Hjörtur
 ## Hafa í huga á næsta fundi:
 
 
-## 12.2.2024 - Mánudagur
+## 2.12.2024 - Mánudagur
 ## Morgunfundur er settur klukkan 10
 
 ## Markmið dagsins
 Markmið dagsins er að endurhugsa klasarit okkar og vera með klárað Klasarit í enda dags, endurskrifa use requirements og cases(viðhalds og verkskýrsla er sami hluturinn samkvæmt TA), endurraða köflum í hönnunar skjalinu. 
 
-## 12.2.2024 - Mánudagur
-## Lokafundur er settur klukkan 14:45
+## 2.12.2024 - Mánudagur
+## Lokafundur er settur klukkan 14:30
 
 Markmiðum var náð, endurskrifuðum skýrsluna töluvert og samræmdum hana með athugasemdum frá kennara í huga. Við breyttum klasaritinu okkar töluvert og er það mun betra núna. Ímynduðum hvernig við ætlum að kóða/útæra þetta aðeins betur. Verkum var ekki skipt niður heldur var þetta hópavinna. Erum með þónokkrar spurningar fyrir fund með TA/kennara á mrg eftir þennan dag. Við erum að sleppa einstaklings commentum eins og er, ætlum að vera duglegri að þeim þegar þetta er meira verkskipt. 
 
@@ -218,3 +218,30 @@ Markmiðum var náð, endurskrifuðum skýrsluna töluvert og samræmdum hana me
 ## Hafa í huga á næsta fundi
 
 Mæta á fyrirlestur um wrapper og hvernig er best að höndla þá. Skoða svo hvernig wrapper passar inn í Class diagram hjá okkur, Skipta í hópa til að forrita og mögulega byrja á forritun. 
+
+
+## 2.12.2024 - Þriðjudagur
+## Morgunfundur 10:00
+
+## Markmið dagsins
+Mættum á fyrirlestur og lærðum eitthvað um hvernig við eigum að byrja á þessu, einnig gerði ein manneskja í hópnum uppdrög að öllum layers um nóttina. Fórum yfir það í sjónvarpi í fundarherbergi eins og þetta væri alvöru fundur. Ætluðum að skipta í hópa en erum að lenda í veseni með hvernig á að skipuleggja það. til að byrja með erum við að skipta eftirfarandi.
+
+UI hópur = Gísli
+Logic Layer = 
+Storage layer = 
+Model = Hjörtur og Eva
+Wrapper = 
+
+Við munum byrja að skrifa kóða og sjá hvar við rekumst á veggi og lærum vonandi af því. 
+
+Það er 5/6 mæting, 1 er heima út af barnaveseni og er að taka þátt á Discord
+
+
+## 2.12.2024 - Þriðjudagur
+## lokafundur settur 15:00
+
+Byrjuðum á forritun, fórum langt með að setja Model klassa í python. Endurskrifuðum happy paths að einhverju leiti. Skiptingin á hópunm er enn ekki kominn. Við ákvaðum að skipta properties og amenenties í tvo mismunandi klasa eftir langa umræðu. Unnum að UML class diagrama aðeins meira og skilgreindum betur UI klasa og bættum Ameneties klasa við.
+
+## Hafa í huga fyrir næsta fund
+
+Byrja að forrita á fullu, koma smá kjöti á þetta svo við getum farið að skoða hvernig það virkar.

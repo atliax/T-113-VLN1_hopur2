@@ -1,23 +1,24 @@
+from getpass import getpass
+
 from UILayer.base_screen import BaseScreen
 
 class LoginScreen(BaseScreen):
     def __init__(self, ui):
         super().__init__(ui)
+        self.user_note = ""
 
     def render(self):
         print("Login")
-        user = input("User: ")
-        password = input("Password: ")
 
-        if self.ui.logic_api.logic_test_function():
-            print("was True")
-        else:
-            print("was False")
+        if self.user_note != "":
+            print(self.user_note)
 
-        # TODO: call some LogicAPI here to validate
-        if user == 'test' and password == 'test':
-            print("correct password")
-            return 'menu'
+        email = input("Email: ")
+        password = getpass("Password: ")
+
+        if self.ui.logic_api.authenticate_login(email,password):
+            self.user_note = ""
+            return 'main_menu'
         else:
-            print("wrong password")
+            self.user_note = "Wrong password."
             return self

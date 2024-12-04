@@ -1,3 +1,5 @@
+import os
+
 from UILayer.screen_factory import ScreenFactory
 
 class UIManager:
@@ -6,10 +8,12 @@ class UIManager:
         self.running = True
         self.screen_factory = ScreenFactory(self)
         self.screen_stack = []
-        self.current_screen = self.screen_factory.create_screen('login')
+        self.current_screen = self.screen_factory.create_screen('splash')
 
     def run(self):
         while self.running:
+            os.system('cls' if os.name == 'nt' else 'clear')
+
             next_screen = self.current_screen.render()
 
             if next_screen == 'quit':
