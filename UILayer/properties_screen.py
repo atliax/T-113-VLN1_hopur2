@@ -46,5 +46,38 @@ class PropertiesScreen(BaseScreen):
         print("")
 
         cmd = input("Command: ")
+        # Add a property
+        if cmd == "a": 
+            new_property = input("New property name: ")
+            new_location = input("New property location: ")
+
+        # Remove a property
+        if cmd == "r":
+            pass
+        # Property details
+        if cmd == "d":
+            remove_by_id = input("Remove property with the ID: ")
+
+        # Edit a property
+        if cmd == "e":
+            edit_property = input("Edit property with the ID: ")
+            change_name = input("Change property name to: ")
+            change_location = input("Change property location to: ")
+
+        # Search for
+        if cmd == "s":
+            search = input("Search for: ")
+
+        # View last property report
+        if cmd == "v":
+            write_report = input("What is the ID of the property you'd like to report on? ")
+            employee = input("Employee writing report: ")
+            report = input("Report: ")
+            report_date = input("Report date: ")
+        # Go Back
+        if cmd == "b":
+            return ui_consts.BACK
+    
+
 
         return self
