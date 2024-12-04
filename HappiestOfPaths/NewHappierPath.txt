@@ -183,7 +183,7 @@ Main menu > Properties
 |
 |	[A] Add a property		[E] Edit a property			[B] Go back
 |	[R] Remove a property		[S] Search for
-|	[D] Property details		[V] View last property report
+|	[VA] View amenities		[V] View last property report
 |	[WR] Write a property report
 |
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

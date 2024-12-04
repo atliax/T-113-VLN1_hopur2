@@ -15,8 +15,8 @@ class PropertiesScreen(BaseScreen):
         print(ui_consts.SEPERATOR)
         print("|")
         print("|	[A] Add a property		[E] Edit a property			[B] Go back")
-        print("|	[R] Remove a property		[S] Search for")
-        print("|	[D] Property details		[V] View last property report")
+        print("|	[R] Remove a property	[S] Search for")
+        print("|	[VA] View amenities		[V] View last property report")
         print("|	[WR] Write a property report")
         print("|")
         print(ui_consts.SEPERATOR)
@@ -56,7 +56,7 @@ class PropertiesScreen(BaseScreen):
             remove_by_id = input("Remove property with the ID: ")
 
         # Property details
-        if cmd == "d":
+        if cmd == "va":
             pass
 
         # Edit a property

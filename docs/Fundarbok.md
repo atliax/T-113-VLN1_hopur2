@@ -252,7 +252,12 @@ Byrja að forrita á fullu, koma smá kjöti á þetta svo við getum farið að
 ## Markmið dagsins
 Við ætlum að færa meira af happy path yfir í kóða og finna betur út hvernig hvert skref væri leyst. Höldum áfram að fínpússa UML class diagram í samræmi við kóðun. Ætlum að klára að útfæra model classana og byrja á að gera nokkra UI klassa. Í raun erum við bara að gera markmiðið sem við settum fram í gær. Að byrja að forrita á fullu.
 
-Það er 3/6 mæting. 1 er heima með börn, 1 er veik og 1 er að vinna. Þau vinna með okkur í gegnum discord að heiman.
+Það er 3/6 mæting. 1 er heima með börn, 1 er veik og 1 gat ekki komið. Þau vinna öll með okkur í gegnum discord að heiman.
 
 ## 4.12.2024 - Miðvikudagur
 ## Lokafundur xxxx
+
+Það er búið að bæta ansi miklu við forritið. Það er búið að klára flesta model klassa og "Main menu" virkar. "Properties" er að koma saman. Það er hægt að lista fasteignir núna, það þarf bara að klára föllin í glugganum. UML ritið og happy path hafa verið breytt örlítið til að vera í samræmi við stöðu forritsins.
+
+## Hafa í huga á næsta fund
+Það þarf að skýra betur hvernig forritið virkar svo allir í hópnum séu á sama skrefi. Svo þarf líka bara að halda áfram að forrita.
