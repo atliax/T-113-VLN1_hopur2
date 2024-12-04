@@ -23,8 +23,6 @@ class UIManager:
                         self.pop_screen()
                     case _:
                         self.push_screen(self.screen_factory.create_screen(next_screen))
-            elif next_screen is not None:
-                self.push_screen(next_screen)
 
     def push_screen(self, screen : BaseScreen) -> None:
         self.screen_stack.append(self.current_screen)
