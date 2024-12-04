@@ -1,7 +1,7 @@
-
+from Model import Destination
 
 class Staff:
-    def __init__(self,id,name,ssn,address,phone_home,phone_gsm,email,password,destination,job_title,is_manager):
+    def __init__(self, id:str, name:str, ssn:str, address:str, phone_home:str, phone_gsm:str, email:str, password:str, destination:Destination, job_title:str, is_manager:str) -> None:
         self.id = id
         self.name = name
         self.ssn = ssn

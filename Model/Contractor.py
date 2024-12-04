@@ -1,7 +1,7 @@
-
+from Model import Destination
 
 class Contractor:
-    def __init__(self,id,rating,name,contact,phone_nr,address,opening_hours,destination,contractor_type):
+    def __init__(self, id:str, rating:float, name:str, contact:str, phone_nr:str, address:str, opening_hours:str, destination:Destination, contractor_type:str) -> None:
         self.id = id
         self.rating = rating
         self.name = name

@@ -1,7 +1,7 @@
-
+from Model import Destination
 
 class Property:
-    def __init__(self,id,name,location,status,destination):
+    def __init__(self, id:str, name:str, location:str, status:str, destination:Destination) -> None:
         self.id = id
         self.name = name
         self.location = location

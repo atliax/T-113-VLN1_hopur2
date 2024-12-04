@@ -1,7 +1,8 @@
-
+from Model import Amenity
+from Model import Report
 
 class Ticket:
-    def __init__(self,id,priority,title,amenity,status,report,recurring,recurring_days,open_date):
+    def __init__(self, id:str, priority:str, title:str, amenity:Amenity, status:str, report:Report, recurring:bool, recurring_days:int,open_date:str) -> None:
         self.id = id
         self.priority = priority
         self.title = title
