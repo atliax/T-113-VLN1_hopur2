@@ -1,6 +1,6 @@
+from Model.base_model import BaseModel
 
-
-class Staff:
+class Staff(BaseModel):
     def __init__(self, id:str, name:str, ssn:str, address:str, phone_home:str, phone_gsm:str, email:str, password:str, destinationID:str, job_title:str, is_manager:bool) -> None:
         self.id = id
         self.name = name

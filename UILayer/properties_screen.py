@@ -22,7 +22,6 @@ class PropertiesScreen(BaseScreen):
         print(ui_consts.SEPERATOR)
         print("|	Property list")
 
-        # sækir hérna öll property í gegnum LogicAPI
         properties : list[Property] = self.ui.logic_api.get_all_properties()
 
         property_table = PrettyTable()
