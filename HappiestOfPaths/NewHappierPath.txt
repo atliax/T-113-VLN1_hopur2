@@ -401,7 +401,7 @@ Go to "Main menu > Tickets > Ticket editor"
 Search for: (INPUT, MORE INPUTS)
 # Example
 # Search for: Location 2, Employee name 14, High
-# (Find all lines containing "Location 2", "Employe name 14", and "High")
+# (Find all lines containing "Location 2", "Employee name 14", and "High")
 
 # View closed tickets
 go to submenu "Main menu > Tickets > Closed tickets"

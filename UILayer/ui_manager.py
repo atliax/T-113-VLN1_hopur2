@@ -8,7 +8,8 @@ class UIManager:
         self.running = True
         self.screen_factory = ScreenFactory(self)
         self.screen_stack = []
-        self.current_screen = self.screen_factory.create_screen('splash')
+        self.start_screen = self.screen_factory.create_screen('splash')
+        self.current_screen = self.start_screen
 
     def run(self) -> None:
         while self.running:
@@ -19,6 +20,10 @@ class UIManager:
                     case "quit":
                         print("Exiting...")
                         self.running = False
+                    case "logout":
+                        # TODO: log out user through staff manager
+                        self.screen_stack = []
+                        self.current_screen = self.start_screen
                     case "back":
                         self.pop_screen()
                     case _:

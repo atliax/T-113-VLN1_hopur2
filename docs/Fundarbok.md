@@ -245,3 +245,14 @@ Byrjuðum á forritun, fórum langt með að setja Model klassa í python. Endur
 ## Hafa í huga fyrir næsta fund
 
 Byrja að forrita á fullu, koma smá kjöti á þetta svo við getum farið að skoða hvernig það virkar.
+
+## 4.12.2024 - Miðvikudagur
+## Morgunfundur 8:30
+
+## Markmið dagsins
+Við ætlum að færa meira af happy path yfir í kóða og finna betur út hvernig hvert skref væri leyst. Höldum áfram að fínpússa UML class diagram í samræmi við kóðun. Ætlum að klára að útfæra model classana og byrja á að gera nokkra UI klassa. Í raun erum við bara að gera markmiðið sem við settum fram í gær. Að byrja að forrita á fullu.
+
+Það er 3/6 mæting. 1 er heima með börn, 1 er veik og 1 er að vinna. Þau vinna með okkur í gegnum discord að heiman.
+
+## 4.12.2024 - Miðvikudagur
+## Lokafundur xxxx
