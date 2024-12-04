@@ -3,10 +3,9 @@ from UILayer.base_screen import BaseScreen
 class SplashScreen(BaseScreen):
     def __init__(self, ui):
         super().__init__(ui)
-        self.title = "Splash"
 
     def render(self):
-        #self.clear_screen()
+        self.clear_screen()
         print("          ___           ___           ___                    ___                       ___     ")
         print("         /\\__\\         /\\  \\         /\\__\\                  /\\  \\          ___        /\\  \\    ")
         print("        /::|  |       /::\\  \\       /::|  |                /::\\  \\        /\\  \\      /::\\  \\   ")

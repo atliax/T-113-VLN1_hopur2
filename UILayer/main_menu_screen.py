@@ -5,10 +5,9 @@ from UILayer import ui_consts
 class MainMenuScreen(BaseScreen):
     def __init__(self, ui):
         super().__init__(ui)
-        self.title = "Main menu"
 
     def render(self):
-        #self.clear_screen()
+        self.clear_screen()
 
         logged_in_user : Staff = self.ui.logic_api.get_logged_in_staff()
 
