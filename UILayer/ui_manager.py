@@ -9,7 +9,7 @@ class UIManager:
         self.running = True
         self.screen_factory = ScreenFactory(self)
         self.screen_stack = []
-        self.start_screen = self.screen_factory.create_screen('splash')
+        self.start_screen = self.screen_factory.create_screen(ui_consts.SPLASH)
         self.current_screen = self.start_screen
 
     def run(self) -> None:
