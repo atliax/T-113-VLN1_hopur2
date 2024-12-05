@@ -261,3 +261,12 @@ Við ætlum að færa meira af happy path yfir í kóða og finna betur út hver
 
 ## Hafa í huga á næsta fund
 Það þarf að skýra betur hvernig forritið virkar svo allir í hópnum séu á sama skrefi. Svo þarf líka bara að halda áfram að forrita.
+
+
+## 5.12.2024 - Fimmtudagur
+## Morgunfundur 8:10
+
+## markmið dagsins
+Við ætlum að gera 3 mismunandi flokka af hlutum(destination, property, reports) ready í gegnum allt 3 layer ferlið. Ekki endilega full klárað en að þetta virki. 
+
+Það er 4/6 mættir í skólann, 2 eru heima eins og er og vinna þaðan í gegnum discord.
