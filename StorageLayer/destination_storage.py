@@ -1,3 +1,5 @@
-class DestinationStorage:
+from StorageLayer.base_storage import BaseStorage
+
+class DestinationStorage(BaseStorage):
     def __init__(self, filename):
-        self.filename = filename
+        super().__init__(filename)

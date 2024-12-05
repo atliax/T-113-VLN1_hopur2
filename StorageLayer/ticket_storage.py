@@ -1,3 +1,5 @@
-class TicketStorage:
+from StorageLayer.base_storage import BaseStorage
+
+class TicketStorage(BaseStorage):
     def __init__(self, filename):
-        self.filename = filename
+        super().__init__(filename)
