@@ -147,15 +147,15 @@ password:(INPUT)
 Main menu
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
-|	Hello {username}!
-|	What would you like to view?
+|       Hello {username}!
+|       What would you like to view?
 |
-|	[P] Properties					
-|	[S] Staff
-|	[T] Tickets
-|	[D] Destinations
+|       [P] Properties
+|       [T] Tickets
+|       [S] Staff
+|       [D] Destinations
 |
-|	[L] Log out
+|       [L] Log out
 |
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -181,64 +181,133 @@ Command: (INPUT)
 Main menu > Properties
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
-|	[A] Add a property		[E] Edit a property			[B] Go back
-|	[R] Remove a property		[S] Search for
-|	[VA] View amenities		[V] View last property report
-|	[WR] Write a property report
+|       [A] Add a property              [E] Edit a property                     [B] Go back
+|       [R] Remove a property           [S] Search for
+|       [V] View facilites
 |
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-|	Property list
-|   ID   |                 Name               	|   Location   				|  Status  | Last report
-----------------------------------------------------------------------------------------------------------------------
-|    1   |  Example Property a                	|  Location a  				| Good	   |  dd/mm/yyyy
-|    2   |  Example Property b                	|  Location b  				| Normal   |  dd/mm/yyyy
-|    3   |  Example Property c   		|  Location b  				| Bad	   |  dd/mm/yyyy
-|   ...  |  ...                               	|      ...     				| ...	   |  
-|    n   |  Example Property n                	|  Location n  				|	   |
-|
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+|       Property list
++------+-----------------------------------+-------------------+-------------------------+-----------+-------+------------------+
+| ID   | Name                              | Destination       | Address                 | Sq meters | Rooms | Type             |
++------+-----------------------------------+-------------------+-------------------------+-----------+-------+------------------+
+| P1   | Hótel Gíslingur                   | Grænland          | Nuukstræti 4            | 900       | 13    | Hótel            |
+| P2   | Hótel Gummafjörður                | Færeyjar          | Gosbaðgota 32b          | 2490      | 42    | Hótel            |
+| ...  | ...                               | ...               | ...                     | ...       |       |                  |
++------+-----------------------------------+-------------------+-------------------------+-----------+-------+------------------+
+
 
 Command: (INPUT)
 
-# Add
-# An ID is auto generated for the property when its made
-Mew property name: (INPUT)
-New property location: (INPUT)
+# [A] Add a property
+    # Program runs through each command from top to bottom
 
-# Remove
-Remove property with the ID: (INPUT)
+    # ID Auto generate variable = int(n + 1) then make str("P"+(variable))
+    Mew property name: (INPUT/str)
+    New property destination: (INPUT/str)
+    New property address: (INPUT/str)
+    New property square meters: (INPUT/int)
+    New property number of rooms: (INPUT/int)
+    New property type: (INPUT/str)
 
-# Edit
-Edit property with the ID: (INPUT)
-# If nothing is input, the name/loc will be unchanged
-Change property name to: (INPUT)
-Change property location to: (INPUT)
+    # New property gets appended to list.
 
-# Search
-Search for: (INPUT, MORE INPUTS)
-# Example
-# Search for: Location b
-# (Find all lines containing "Location b")
+# [R] Remove a property
+    Remove property that has the ID: (INPUT/str)
 
-# Write property report
-What is the ID of the property you'd like to report on? (INPUT)
-Employee writing report: (INPUT)
-Report: (INPUT)
-Report date: (INPUT)
+# [V] View facilites
+    # Program runs through each command from top to bottom
+    View the facilities in property with ID: (INPUT/str)
+    GoTo "Main menu > Properties > Facilities"
+    # Print a list of facilities for property with input ID
+    # If ID does not exist in property list, raise error "No property found with that ID!"
+    
 
-# View property report
-print property report
-print last line with employee name and date
+# [E] Edit a property
+    # Program runs through each command from top to bottom
 
+    Edit property with the ID: (INPUT/str)
+    # If ID does not exist in property list, raise error "No property found with that ID!"
 
-
-
-
-
-
-
+    
+    print ("If you do not wish to change a specific field, you can leave the input empty)
+    Change property name to: (INPUT/str)
+    Change property destination to: (INPUT/str)
+    Change property address to: (INPUT/str)
+    Change property square meters to: (INPUT/int)
+    Change property number of rooms to: (INPUT/int)
+    Change property type to (INPUT/str)
 
 
+# [S] Search for
+    print ("What keyword would you like to search for?)
+    print ("You can combine keywords by following a word with ,"
+    print ("Example: (Grænland,Nuukstræti 4)
+    Search for: (INPUT/str)
+
+    # print out a new filtered list based on keywords input
+    GoTo "Main menu > Properties > Filtered"
+
+    # "Main menu > Properties > Filtered" window and commands are identical to "Main menu > Properties"
+    # Just replace the normal properties list with the filtered one
+
+# [B] Go back
+    Go back 1 menu
+
+
+
+
+
+
+
+Main menu > Properties > Facilities
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+|
+|       [A] Add a facility           [E] Edit a facility                    [B] Go back
+|       [R] Remove a facility        [S] Search for	
+|       [V] View details
+|
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+|       Facility list
++------+------------------------------------+-----------------------------------------------------------------------------------+
+| ID   | Facility name                      | Description                                                                       |
++------+------------------------------------+-----------------------------------------------------------------------------------+
+| F1   | Inngangur                          | Has a really nice couch, a big old door, and a water fountain                     |
+| F2   | Herbergi 30b                       | The worst room, give to mean guests. Old bed and intentionally dirty bathroom     |
+| ...  | ...                                | ...                                                                               |
++------+------------------------------------+-----------------------------------------------------------------------------------+
+
+# [A] Add a facility
+    # Program runs through each command from top to bottom
+	
+    # ID Auto generate variable = int(n + 1) then make str("F"+(variable))
+    New facility name: (INPUT/str)
+    New facility description: (INPUT/str)
+
+# [R] Remove a facility
+    Remove facility that has the ID: (INPUT/str)
+    # If ID does not exist in property list, raise error "No facility found with that ID!"
+
+# [V] View details
+    View the details of facility with the ID: (INPUT/str)
+    # If ID does not exist in property list, raise error "No facility found with that ID!"
+	
+    # *Variable* = whatever the variable is named in the program
+    print (*Facility name*)
+    print (*Facility description*)
+
+# [E] Edit a facility
+    Edit facility that has the ID: (INPUT/str)
+    # If ID does not exist in property list, raise error "No facility found with that ID!"
+
+    print ("If you do not wish to change a specific field, you can leave the input empty)
+    Change facility name to: (INPUT/str)
+    Change facility description to: (INPUT/str)
+
+# [S] Search for
+    SAME AS Search for in "Main menu > Properties"
+
+# [B] Go back
+    Go back 1 menu
 
 
 
@@ -254,15 +323,13 @@ Main menu > Staff
 |
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |	List of employees
-|   ID   |  Name                 	|  Phone  |	    Email	|  SSN	       | Job title 	   |  Location 	   
----------------------------------------------------------------------------------------------------------------------------------
-|    1   |  Example Staff 1             | 6969696 | JohnDoe@mail.com    |  1234567890  | Janitor	   |  Location 1  
-|    2   |  Example Staff 2             | 6969696 | BestBoi@notmail.com	|  0987654321  | Gamer		   |  Location 2  
-|    3   |  Example Staff 3             | 4201337 |			|  1122334455  | ImAnExample	   |  Location 3  
-|   ...  |   ...                  	|  	  |			|      ...     |       ...	   |      ...     
-|    n   |  Example Staff Member x      | 	  |			|  6677889900  | Job x		   |  Location x  
-|
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
++------+-------------------------+--------------+-------------------+------------+---------+---------+-------------------------------+
+| ID   | Name                    | Job Title    | Destination       | SSN        | Phone   | GSM     | Email                         |
++------+-------------------------+--------------+-------------------+------------+---------+---------+-------------------------------+
+| S1   | Chuck Norris            | Manager      | Færeyjar          | 1003402348 | 5236543 | 8234990 |
+| S2   | Chuck Norris jr         | Room service | Island            | 1003684231 | 5430823 | 7345899 |
+| ...  |
++------+
 
 Command: (INPUT)
 

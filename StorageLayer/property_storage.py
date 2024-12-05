@@ -1,3 +1,5 @@
-class PropertyStorage:
+from StorageLayer.base_storage import BaseStorage
+
+class PropertyStorage(BaseStorage):
     def __init__(self, filename):
-        self.filename = filename
+        super().__init__(filename)
