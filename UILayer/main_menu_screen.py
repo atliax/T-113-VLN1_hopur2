@@ -37,7 +37,6 @@ class MainMenuScreen(BaseScreen):
             return ui_consts.STAFF
         if cmd == "D":
             return ui_consts.DESTINATION
-
         if cmd == "L":
             return ui_consts.LOGOUT
         if cmd == "X":
