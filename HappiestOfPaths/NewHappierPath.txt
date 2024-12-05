@@ -217,9 +217,11 @@ Command: (INPUT)
 # [V] View facilites
     # Program runs through each command from top to bottom
     View the facilities in property with ID: (INPUT/str)
+    # If ID does not exist in property list, raise error "No property found with that ID!"
+    # If ID does not exist, cancel command	
+	
     GoTo "Main menu > Properties > Facilities"
     # Print a list of facilities for property with input ID
-    # If ID does not exist in property list, raise error "No property found with that ID!"
     
 
 # [E] Edit a property
@@ -227,6 +229,7 @@ Command: (INPUT)
 
     Edit property with the ID: (INPUT/str)
     # If ID does not exist in property list, raise error "No property found with that ID!"
+    # If ID does not exist, cancel command
 
     
     print ("If you do not wish to change a specific field, you can leave the input empty)
@@ -286,18 +289,22 @@ Main menu > Properties > Facilities
 # [R] Remove a facility
     Remove facility that has the ID: (INPUT/str)
     # If ID does not exist in property list, raise error "No facility found with that ID!"
+    # If ID does not exist, cancel command
 
 # [V] View details
     View the details of facility with the ID: (INPUT/str)
     # If ID does not exist in property list, raise error "No facility found with that ID!"
+    # If ID does not exist, cancel command	
 	
-    # *Variable* = whatever the variable is named in the program
+    # *variable* = whatever the variable is named in the program
     print (*Facility name*)
     print (*Facility description*)
 
 # [E] Edit a facility
     Edit facility that has the ID: (INPUT/str)
     # If ID does not exist in property list, raise error "No facility found with that ID!"
+    # If ID does not exist, cancel command
+
 
     print ("If you do not wish to change a specific field, you can leave the input empty)
     Change facility name to: (INPUT/str)
@@ -317,51 +324,81 @@ Main menu > Properties > Facilities
 Main menu > Staff
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
-|	[A] Add an employee		[E] Edit an employee			[B] Go back
-|	[R] Remove an employee		[S] Search for
-|	[C] View contractors
+|       [A] Add an employee		    [E] Edit an employee            [B] Go back
+|       [R] Remove an employee	    [S] Search for
+|       [V] View contact info       [C] View contractors
 |
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |	List of employees
-+------+-------------------------+--------------+-------------------+------------+---------+---------+-------------------------------+
-| ID   | Name                    | Job Title    | Destination       | SSN        | Phone   | GSM     | Email                         |
-+------+-------------------------+--------------+-------------------+------------+---------+---------+-------------------------------+
-| S1   | Chuck Norris            | Manager      | Færeyjar          | 1003402348 | 5236543 | 8234990 |
-| S2   | Chuck Norris jr         | Room service | Island            | 1003684231 | 5430823 | 7345899 |
-| ...  |
-+------+
++------+------------------------------------------+--------------------------+---------------------------+----------------------+
+| ID   | Name                                     | Job Title                | Destination               | SSN                  |
++------+------------------------------------------+--------------------------+---------------------------+----------------------+
+| S1   | Chuck Norris                             | Manager                  | Færeyjar                  | 1003402348           | 
+| S2   | Chuck Norris jr                          | Room service             | Island                    | 1003684231           |
+| ...  | ...                                      | ...                      | ...                       | ...                  |
++------+------------------------------------------+--------------------------+---------------------------+----------------------+
 
 Command: (INPUT)
 
-# Add
-# An ID is auto generated for the employee when they're added
-New employee name: (INPUT)
-New employee phone number: (INPUT)
-New employee email: (INPUT)
-New employee ssn: (INPUT)
-New employee job title: (INPUT)
-New employee location: (INPUT)
-
-# Remove
-Remove employee with the ID: (INPUT)
-
-# Edit
-Edit employee with the ID: (INPUT)
-# If nothing is input, the name/loc will be unchanged
-Change employee name to: (INPUT)
-Change employee phone number to: (INPUT)
-Change employee email to: (INPUT)
-Change employee job title to: (INPUT)
-Change employee location: (INPUT)
-
-# Search
-Search for: (INPUT, MORE INPUTS)
-# Example
-# Search for: Gamer, Location 2
-# (Find all lines containing "Gamer" and "Location 2")
+# [A] Add an employee
+    # ID Auto generate variable = int(n + 1) then make str("S"+(variable))
+	
+    New employee destination ID: (INPUT/str)
+	# If ID does not exist in destination list, raise error "No destination found with that ID!"
+	# Cancel command if destination ID is not found
+	
+	New employee name: (INPUT/str)
+    New employee ssn: (INPUT/int)
+	New employee address: (INPUT/str)
+	New employee phone: (INPUT/int)
+	New employee gsm: (INPUT/int)
+	New employee email: (INPUT/str)
+	New employee password: (INPUT/str)
+	New employee job title: (INPUT/str)
+	# If job title = "manager" or "boss" set isManager = True, otherwise False
+	
+	Is the new employee a manager? y/n: (INPUT/str) -> bool
+	# If the user does not input "y" or "n" raise error "Invalid input"
+	# Run "Is the new employee a manager? y/n" until correctly input
 
 
+# [R] Remove an employee
+    Remove employee with the ID: (INPUT/str)
 
+# [V] View contact info
+    View the contact information of employee with the ID: (INPUT/str)
+    # If ID does not exist in the employee list, raise error "No employee found with that ID!"    
+	# If ID does not exist, cancel command
+	
+    # *variable* = whatever the variable is named in the program
+    print ("Phone: " + *employee phone*)
+    print ("GSM: " + *employee gsm*)
+    print ("Address: " + *employee address*)
+
+
+# [E] Edit an employee
+    Edit employee with the ID: (INPUT/str)
+    # If ID does not exist in the employee list, raise error "No employee found with that ID!"    
+    # If ID does not exist, cancel command
+
+    print ("If you do not wish to change a specific field, you can leave the input empty")
+    Change employee name to: (INPUT/str)
+	Change empolyee address to: (INPUT/str)
+	Change employee phone to: (INPUT/int)
+	Change employee GSM to: (INPUT/int)
+    Change employee email to: (INPUT/str)
+	Change employee password to: (INPUT/str)
+	Change employee job title to: (INPUT/str)
+	# If job title = "manager" or "boss" set isManager = True, otherwise False
+
+# [S] Search for
+    SAME AS Search for in "Main menu > Properties"
+
+# [C] View contractors
+	GoTo "Main Menu > Staff > Contractors"
+
+# [B] Go back
+    Go back 1 menu
 
 
 
