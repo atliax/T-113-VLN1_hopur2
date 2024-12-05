@@ -270,3 +270,11 @@ Við ætlum að færa meira af happy path yfir í kóða og finna betur út hver
 Við ætlum að gera 3 mismunandi flokka af hlutum(destination, property, reports) ready í gegnum allt 3 layer ferlið. Ekki endilega full klárað en að þetta virki. 
 
 Það er 4/6 mættir í skólann, 2 eru heima eins og er og vinna þaðan í gegnum discord.
+
+## 5.12.2024 - Fimmtudagur
+## lokafundur 14:40
+
+## Niðurstöður dags
+Tókum eftir ósamræmi í happypath og uml diagram og var tekið á því og lagað.
+Það var sett JSON virkni með Models, er hægt að skrifa og lesa með þeirri virkni.
+Bættum við UI skjám í mikið af UI skránnar. Tökum fund á mrg um hvort við erum sátt með hvernig við erum að forrita þetta því það virðist vera mesta vandamálið hjá okkur hérna, náðum ekki einu af markmiðum dagsins.
