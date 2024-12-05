@@ -21,4 +21,6 @@ class BaseStorage:
         return ret
 
     def save_to_file(self, data : list[BaseModel]) -> None:
-        pass
+        with open(self.filename, "w") as file:
+            for item in data:
+                file.write(item.toJson()+"\n")
