@@ -3,4 +3,4 @@ class PropertyManager:
         self.storage_api = storage_api
 
     def get_all_properties(self):
-        pass
+        return self.storage_api.get_all_properties()

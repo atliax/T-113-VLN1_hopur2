@@ -36,5 +36,5 @@ class LoginScreen(BaseScreen):
             self.user_note = ""
             return ui_consts.MAIN_MENU
         else:
-            self.user_note = "Wrong username or password."
+            self.user_note = "invalid username or password."
             return self

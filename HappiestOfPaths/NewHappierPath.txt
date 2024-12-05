@@ -433,7 +433,7 @@ Rating (0.00 - 10.00): (INPUT)
 Main menu > Tickets
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
-|	[C] Create a ticket		[E] Edit a ticket			[B] Go back
+|	[A] Create a ticket		[E] Edit a ticket			[B] Go back
 |	[R] Remove a ticket		[S] Search for				
 |	[V] View closed tickets		[RV] Review a ticket report
 |	[D] Ticket details
