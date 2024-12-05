@@ -15,8 +15,8 @@ class PropertiesScreen(BaseScreen):
         print(ui_consts.SEPERATOR)
         print("|")
         print("|	[A] Add a property		[E] Edit a property			[B] Go back")
-        print("|	[R] Remove a property	[S] Search for")
-        print("|	[VA] View amenities		[V] View last property report")
+        print("|	[R] Remove a property		[S] Search for")
+        print("|	[D] Property details		[V] View last property report")
         print("|	[WR] Write a property report")
         print("|")
         print(ui_consts.SEPERATOR)
@@ -53,31 +53,52 @@ class PropertiesScreen(BaseScreen):
 
         # Remove a property
         if cmd == "r":
-            remove_by_id = input("Remove property with the ID: ")
-
-        # Property details
-        if cmd == "va":
-            pass
-
-        # Edit a property
+            remove_property = input("Remove property with the ID: ")
+        
+         # Edit a property 
         if cmd == "e":
-            edit_property = input("Edit property with the ID: ")
+            edit_property = input("Edit property with the ID: ") # If nothing is input, the field will be left unchanged
             change_name = input("Change property name to: ")
             change_location = input("Change property location to: ")
-
-        # Search for
+        
+         # Search for
         if cmd == "s":
-            search = input("Search for: ")
+            # Þegar notandi hefur valið að leita eftir einhverju fer hann í nýjan glugga sem er „Main menu > Properties > Filterd list“.
+            # Þessi gluggi er nákvæmlega eins og sá sem kom á undan. Nema það að hann sýnir breyttan lista eftir hverju var leitað af.
+            keyword_search = input("Search for: ")
+            date_search = input("Search between [start, end] [dd/mm/yyyy, dd/mm//yyyy]: ")
 
-        # View last property report
-        if cmd == "v":
-            write_report = input("What is the ID of the property you'd like to report on? ")
-            employee = input("Employee writing report: ")
+
+        # Write a property report
+        if cmd == "wr":
+            property_id = input("What is the ID of the property you'd like to report on? ")
+            writing_report = input("Employee writing report: ")
             report = input("Report: ")
-            report_date = input("Report date: ")
+            report_date = input("Report date (dd/mm/yyyy): ")
+
+         # View last property report
+        if cmd == "v":
+            last_property = input("What is the ID of the property you'd like to report on: ")
+            # print last report 
+            # print writer name and date
+
+        # View amenities
+        if cmd == "va":
+            amenity_id = input("What is the ID of the property you'd like to view? ")
+            #Listar svo upp amenities
+
+        
+
+       
+
+       
+
+       
 
         # Go Back
         if cmd == "b":
             return ui_consts.BACK
     
+
+
         return self
