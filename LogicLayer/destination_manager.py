@@ -1,10 +1,13 @@
 class DestinationManager:
-    def __init__(self) -> None:
-        self.properties_by_destination = self.load_properties()
+    def __init__(self, storage_api):
+        self.storage_api = storage_api
 
-    def load_properties(self):
-        """Loads from text file"""
+#   def __init__(self) -> None:
+#       self.properties_by_destination = self.load_properties()
 
-    def get_properties(self, destination: str):
-        """Return a list of properties for selected destination"""
-        return self.properties_by_destination.get(destination, [])
+#   def load_properties(self):
+#       """Loads from text file"""
+
+#   def get_properties(self, destination: str):
+#       """Return a list of properties for selected destination"""
+#       return self.properties_by_destination.get(destination, [])
