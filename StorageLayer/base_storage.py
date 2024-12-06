@@ -3,10 +3,11 @@ import json
 from Model import BaseModel
 
 class BaseStorage:
-    def __init__(self, filename):
+    def __init__(self, filename, model_class : BaseModel):
         self.filename = filename
+        self.model_class = model_class
 
-    def load_from_file(self, model_class : BaseModel) -> list[BaseModel]:
+    def load_from_file(self) -> list[BaseModel]:
         ret = []
 
         with open(self.filename, "r") as file:
@@ -14,7 +15,7 @@ class BaseStorage:
 
         for line in lines:
             line_json = json.loads(line)
-            tmp_model = model_class(**line_json)
+            tmp_model = self.model_class(**line_json)
             if tmp_model is not None:
                 ret.append(tmp_model)
 
