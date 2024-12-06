@@ -156,7 +156,6 @@ Main menu
 |       [D] Destinations
 |
 |       [L] Log out
-|       [X] Exit 
 |
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -351,8 +350,8 @@ Command: (INPUT)
 	New employee name: (INPUT/str)
     New employee ssn: (INPUT/int)
 	New employee address: (INPUT/str)
-	New employee phone number: (INPUT/int)
-	New employee mobile number: (INPUT/int)
+	New employee phone: (INPUT/int)
+	New employee gsm: (INPUT/int)
 	New employee email: (INPUT/str)
 	New employee password: (INPUT/str)
 	New employee job title: (INPUT/str)
@@ -372,11 +371,9 @@ Command: (INPUT)
 	# If ID does not exist, cancel command
 	
     # *variable* = whatever the variable is named in the program
-            print(f"Name: {new_employee}")
-            print(f"Email: {new_email}")
-            print(f"Phone number: {new_phone_nr}")
-            print(f"Mobile phone number: {new_gms}")
-            print(f"Address: {new_address}")
+    print ("Phone: " + *employee phone*)
+    print ("GSM: " + *employee gsm*)
+    print ("Address: " + *employee address*)
 
 
 # [E] Edit an employee
@@ -445,7 +442,7 @@ Command (INPUT)
 	New contractor address: (INPUT/str)
 
 # [R] Remove a contractor
-    Remove employee with the ID: (INPUT/str)
+    Remove contractor with the ID: (INPUT/str)
 	
 # [V] View contact info
     View the contact information of contractor with the ID: (INPUT/str)
@@ -486,10 +483,10 @@ Command (INPUT)
 Main menu > Tickets
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
-|       [A] Add a ticket		[E] Edit a ticket			[B] Go back
-|       [R] Remove a ticket		[S] Search for				
-|       [V] View closed tickets		[RV] Review a ticket report
-|       [D] Ticket details
+|       [A] Add a ticket            [E] Edit a ticket               [B] Go back
+|       [R] Remove a ticket         [S] Search for
+|       [V] View closed tickets     [MR] Make a ticket report
+|       [D] Ticket details          [VR] View a ticket report
 |
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |       List of tickets
@@ -513,205 +510,105 @@ Command: (INPUT)
 	New ticket facility ID:
 	# If ID does not exist in property list, raise error "No property found with that ID!"
 	# Cancel command if destination ID is not found
+
+    New ticket title: (INPUT/str)
+	New ticket description: (INPUT/str)
+	New ticket priority: (INPUT/str)
+	New ticket status: (INPUT/str)
+	New ticket open date: (INPUT/str)
+	Recur every N days (0 = never): (INPUT/int)
+	# if recur > 0 set recurring = True otherwise False
 	
-
-
-
-# Remove
-Remove ticket with ID: (INPUT)
-
-# Edit
-Edit ticket with the ID: (INPUT)
-Go to "Main menu > Tickets > Ticket editor"
-
-# Search
-Search for: (INPUT, MORE INPUTS)
-# Example
-# Search for: Location 2, Employee name 14, High
-# (Find all lines containing "Location 2", "Employee name 14", and "High")
-
-# View closed tickets
-go to submenu "Main menu > Tickets > Closed tickets"
-
-# Review
-Review ticket with ID: (INPUT)
-go to submenu "Main menu > Tickets > Review report ticket: (TICKET ID)"
-
-# Details
-View ticket with ID: (INPUT)
-Go to "Main menu > Tickets > Ticket details"
-
-
-
-
-
-
-
-
-
-
-
-Main menu > Tickets > Closed tickets
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-|
-|	[C] Create a ticket		[E] Edit a ticket			[B] Go back
-|	[R] Remove a ticket		[S] Search for				
-|	[V] View open tickets		[RV] Review a ticket report
-|	[D] Ticket details		[VC] View contractors
-|
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-|	    List of tickets
-|  ID  |  Priority  | 		Title		|     Location     |      Status      |  Employee	   | Contractor		
----------------------------------------------------------------------------------------------------------------------------------
-|  36  |    High    |  Ticket Title 01		|  Location 1	   | 	  closed      | Employee name 14   | Contractor 48		
-|  32  |    High    |  Ticket Title 02		|  Location 2	   |      closed      | Employee name 9	   | 
-|  31  |   Medium   |  Ticket Title 03		|  Location 2	   |	  closed      | Employee name 98   |
-|  30  |    Low	    |  Ticket Title 04		|  Location 6	   |      closed      |	Employee name 69   |
-|  ..  |    ....    |  ...			|  ...		   |	   ....	      | ...		   |					
-|
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-Command: (INPUT)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Main menu > Tickets > Ticket editor
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-|
-|							Ticket (ID)	
-|	Auto repeat ticket: (INPUT NUM DAYS) #If 0 then it wont repeat	
-|	Title: Example name 01
-|	Priority: High			Location: A location somewhere
-|	Employee: The best employee ever		  		Status: Open
-|	Description: Nothing is wrong here, this is just a test ticket! :)
-|	Date (dd/mm/yyyy): 29/11/2024	
-|
-|	[C] Cancel			[S] Save report changes
-|
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-Command: (INPUT)
-
-# Inputs loop until B or S is input
-# If F is input but a field is empty an error occurs
-# If nothing is input, the field will be unchanged
-Change ticket title: (INPUT)
-Change ticket description: (INPUT)
-Change ticket location: (INPUT)
-Change ticket priority: (INPUT)
-Change ticket status: (INPUT)
-Change ticket employee: (INPUT)
-
-
-
-
-
-
-
-
-
-
-
-
-
-Main menu > Tickets > Ticket details
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-|
-|	[C] Create a ticket		[E] Edit a ticket			[B] Go back
-|	[R] Remove a ticket		[S] Search for				
-|	[V] View open tickets		[MR] Make a ticket report
-|	[RV] Review a ticket report
-|
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-|
-|						Ticket (ID)	
-|	Title: Ticket title
-|	Priority: High				Location: Location K
-|	Employee: Jane Doe	      		Status: In progress
-|	Description: Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum 
-|	Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
-|	Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
-|
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-Command: (INPUT)
-
-# Same as ticket menu
-
-
-
-Main menu > Ticket > Ticket details > Report maker
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-|
-|	Ticket: (AUTO GEN ID)		Employee: __________________
-|
-|	Report: ___________________________________________________________________________________________
-|
-|	Contractor hired: _________________________________________________________________________________
-|	Contractor review: ________________________________________________________________________________
-|	
-|	Total cost: ___________________
-|
-|	[C] Cancel			[S] Save report 
-|
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-Command: (INPUT)
-
-# Inputs loop until C or S is input
-# If F is input but a field is empty an error occurs
-# If nothing is input, the field will be unchanged
-
-
-
-
-
-
-
-Main menu > Ticket > Ticket details > Report reviewer
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-|
-|	Ticket: 99				Employee: John Doe
-|
-|	Report: Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
-|	Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum 
-|	Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
-|
-|	Contractor hired: Contracter 1, Contracter 2, Contracter 3
-|	Contractor review: Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
-|	
-|	Total cost: $100000000000
-|
-|	[C] Cancel			[R] Review the report
-|	[A] Accept report		[D] Decline report
-|
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-Command: (INPUT)
-
-# Review the report
-Response: (INPUT)
-
-# Accept
-change ticket status to closed
-
-# Decline
-ticket status remains in progress
-
-
-
-
+# [R] Remove a ticket
+    Remove ticket with the ID: (INPUT/str)
+	
+# [V] View closed tickets
+    GoTo "Main menu > Tickets > Closed Tickets"
+	# Closed tickets menu is identical to tickets, just a different list.
+	# Remove "view closed tickets" command
+
+# [D] Ticket details
+    View the details of ticket with the ID: (INPUT/str)
+    # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"    
+	# If ID does not exist, cancel command
+	
+	print ("Property: " + *ticket property* + "Priority: " + *ticket priority*)
+	print ("Facility: " + *ticket facility* + "Status: " + *ticket status*)
+	print ("Title: " + *ticket title*)
+	print ("Description: " + *ticket description*)
+	print ("Open date: " + *ticket open date*)
+	
+	# If a response is available from a manager
+	print ("Response: " + *ticket response*)
+
+# [E] Edit ticket
+    Edit ticket with the ID: (INPUT/str)
+    # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"    
+    # If ID does not exist, cancel command
+	
+	print ("If you do not wish to change a specific field, you can leave the input empty")
+	Change ticket title to: (INPUT/str)
+	Change ticket description to: (INPUT/str)
+	Change ticket priority to: (INPUT/str)
+	Change ticket status to: (INPUT/str)
+	Change ticket open date to: (INPUT/str)
+	Change if ticket should recur every N days (0 = never): (INPUT/int)
+	# if recur > 0 set recurring = True otherwise False
+
+# [S] Search for
+	print ("You can search for a keyword and/or timeline, you can leave an input empty")
+    print ("What keyword would you like to search for?)
+    print ("You can combine keywords by following a word with ,"
+    print ("Example: (Grænland,Nuukstræti 4)
+    Search for: (INPUT/str)
+	
+	print ("What timeline would you like to search for?)
+	print ("Start             End")
+	print ("DD/MM/YYYY DD/MM/YYYY")
+	Search from: (INPUT/str)
+
+    # print out a new filtered list based on keywords input
+    GoTo "Main menu > Tickets > Filtered"
+
+    # "Main menu > Tickets > Filtered" window and commands are identical to "Main menu > Tickets"
+    # Just replace the normal tickets list with the filtered one
+
+# [MR] Make a ticket report
+    Make a report for ticket with the ID: (INPUT/str)
+    # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"    
+    # If ID does not exist, cancel command
+	
+	Employee writing report: (INPUT/str)
+	report: (INPUT/str)
+	print ("If applicable")
+	print ("If there are multiple contractors, type + to seperate them (C1 + C2 + C3)")
+	ID of contractor/s hired: (INPUT/str)
+	contractor/s review: (INPUT/str)
+	contractor/s fee: (INPUT/float)
+	total cost: (INPUT/float)
+
+# [VR] View a ticket report
+    View a report for ticket with the ID: (INPUT/str)
+    # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"    
+    # If ID does not exist, cancel command
+	# If the ticket doesnt have a report raise error "This ticket doesn't have a report!"
+	# If the ticket doesn't have a report, cancel command
+	
+	print ("Employee: " + *Employee*)
+	print (*Report*)
+	print (*contractor/s hired*)
+	print (*contractor review*)
+	print (*contractor fee*)
+	print (*total coast*)
+	
+	Rate contractor/s: (INPUT/float)
+	Write a response (optional): (INPUT/str)
+	Accept or decline report? (A/D): (INPUT/str)
+	# If "A" then ticket status == "Closed"
+	# If "D" then ticket status == "Needs work"
+
+# [B] Go back
+    Go back 1 menu
 
 
 
@@ -723,20 +620,18 @@ ticket status remains in progress
 Main menu > Destinations
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
-|	[A] Add a destination		[E] Edit a destination			[B] Go back
-|	[R] Remove a destination	[S] Search for		
+|	    [A] Add a destination		[E] Edit a destination			[B] Go back
+|       [R] Remove a destination	[S] Search for		
 |
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-|	Destination list
-|   ID   |                 Destination           | 	   Airport   	   | Opening hours
-----------------------------------------------------------------------------------------------------------------------
-|    1   |  Example destination a                |  airport a  	           | 6:20 - 23:00
-|    2   |  Example destination b                |  airport b  	           | 8:00 - 02:00
-|    3   |  Example Property c   		 |  airport c  	   	   | 0:00 - 24:00
-|   ...  |  ...                               	 |      ...     	   | ...	   
-|    n   |  Example Property n                	 |  Location n  	   |		   
-|
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+|       Destination list
++------+---------------------------------+-------------------------------+---------------+----------+---------------------------+
+|  ID  | Destination                     | Airport                       | Opening hours | Phone    | Manager                   |
++------+---------------------------------+-------------------------------+---------------+----------+---------------------------+
+|  D1  | Færeyjar                        | Faroe Islands Airport         | 8:00 - 24:00  | 9998888  | Bob Faroe                 |
+|  D2  | Grænland                        | Nuuk Air                      | 10:00 - 22:00 | 1349584  | Mr nuke                   |
+|  ..  | ...                             | ...                           | ...           | ...      | ...                       |
++------+---------------------------------+-------------------------------+---------------+----------+---------------------------+
 
 Command: (INPUT)
 
@@ -761,3 +656,4 @@ Search for: (INPUT, MORE INPUTS)
 # Example
 # Search for: Gamer, Location 2
 # (Find all lines containing "Gamer" and "Location 2")
+
