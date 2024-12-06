@@ -24,3 +24,7 @@ class StaffManager:
     
     def get_logged_in_staff(self) -> Staff:
         return self.logged_in_staff
+
+    def logout(self):
+        self.logged_in_staff = None
+        pass

@@ -1,4 +1,4 @@
-from StorageLayer.amenity_storage import AmenityStorage
+from StorageLayer.facility_storage import FacilityStorage
 from StorageLayer.contractor_storage import ContractorStorage
 from StorageLayer.destination_storage import DestinationStorage
 from StorageLayer.property_storage import PropertyStorage
@@ -10,7 +10,7 @@ from Model import Property
 
 class StorageAPI:
     def __init__(self):
-        self.amenity_storage = AmenityStorage("filename.json")
+        self.facility_storage = FacilityStorage("filename.json")
         self.contractor_storage = ContractorStorage("filename.json")
         self.destination_storage = DestinationStorage("filename.json")
         self.property_storage = PropertyStorage("data/properties.json")

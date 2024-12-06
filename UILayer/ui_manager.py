@@ -22,7 +22,7 @@ class UIManager:
                         print("Exiting...")
                         self.running = False
                     case ui_consts.LOGOUT:
-                        # TODO: log out user through staff manager
+                        self.logic_api.logout()
                         self.screen_stack = []
                         self.current_screen = self.start_screen
                     case ui_consts.BACK:
