@@ -284,3 +284,12 @@ Bættum við UI skjám í mikið af UI skránnar. Tökum fund á mrg um hvort vi
 ## Morgunfundur 8:30
 
 ## Markmið Dagsins
+Ætlum að breyta formatinu á þessu aðeins og sjá hvernig það virkar. Allir koma með einhver markmið fyrir daginn og við skoðum svo í endan hvar við erum.
+1.Við Viljum klára skjái, Ui design skjáina eða menu navigation. Svo við getum byrjað full force að vinna í þessu.
+2.Fara yfir Model Klasa til að geta sett inn Dæma gögnin.
+3.að fá Destination til að virka, ekki endilega fullklára.
+4.Skilgreina hvaða aðgerðir UIlayer getur framkvæmt.
+5.Tengja Happypath betur við UML.
+
+prófum þetta, það er 4/6 mæting, 2 heima sem vinna þaðan í gegnum discord.
+
