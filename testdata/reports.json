@@ -1,0 +1,2 @@
+{"reportID": "T1", "staff": "Siggi", "notes": "Blabla", "cost": 124.44, "date": "12/12/2025", "contractorID": "C1",
+"contractor_review": "Skítsæmilegur", "contractor_rating": "Hafa rating frekar float?", "contractor_fee": "Þetta er líka string?"}

@@ -1,0 +1,3 @@
+{"ticketID": "T1", "facilityID": "1", "reportID": "R1", "propertyID": "P1", 
+"priority": "Strengur?", "title": "generic ticket title", "description": "Blabla", "status": "Open?",
+"recurring": false, "recurring_days": 0, "open_date": "09/12/2024"}

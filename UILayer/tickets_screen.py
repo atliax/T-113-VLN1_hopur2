@@ -46,14 +46,15 @@ class TicketsScreen(BaseScreen):
             pass
 
         # Ticket details
-        view = input("View the details")
-        print(f"Property: {"MISSING"}, Priority: {new_priority}")
-        print(f"Facility: {"MISSING"}, Status: {new_status}")
-        print(f"Title: {new_ticket}")
-        print(f"Description: {new_description}")
-        print(f"Date: {new_date}")
-        # If a response is available from a manager
-        print(f"Response: {"MISSING"}")
+        if cmd == "d":
+            view = input("View the details")
+            print(f"Property: {"MISSING"}, Priority: {new_priority}")
+            print(f"Facility: {"MISSING"}, Status: {new_status}")
+            print(f"Title: {new_ticket}")
+            print(f"Description: {new_description}")
+            print(f"Date: {new_date}")
+            # If a response is available from a manager
+            print(f"Response: {"MISSING"}")
 
         # Edit ticket
         if cmd == "e":
