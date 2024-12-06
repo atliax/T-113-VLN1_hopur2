@@ -8,7 +8,7 @@ class StaffScreen(BaseScreen):
     def render(self):
         self.clear_screen()
 
-        print("Main menu > Staff")
+        print("Main Menu > Staff")
         print(ui_consts.SEPERATOR)
         print("|")
         print("|	[A] Add an employee		[E] Edit a destination			[B] Go back")
@@ -64,7 +64,7 @@ class StaffScreen(BaseScreen):
         if cmd == "s":
                 # Example gamer, Nuuk
                 # Finnur allar línur tengdar gamer, nuuk
-            search = input("Search for: ") # Sama search allstaðar á eftir að implementa
+            search = input("Search for: ") # Sama search allstaðar nema á tickets
 
         # View contact info
         if cmd == "c":

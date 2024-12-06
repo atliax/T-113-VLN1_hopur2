@@ -71,15 +71,15 @@ class PropertiesScreen(BaseScreen):
             view = input("View the facilities in property with ID: ")
                 # If ID does not exist in property list, raise error "No property found with that ID!"
                 # If ID does not exist, cancel command	
-                # GoTo "Main menu > Properties > Facilities" ******** Á EFTIR AÐ BÚA TIL GLUGGA
                 # Print a list of facilities for property with input ID
+            return ui_consts.FACILITY
 
 
          # Edit a property 
         if cmd == "e":
             edit_property = input("Edit property with the ID: ") # If nothing is input, the field will be left unchanged
                 # If ID does not exist in property list, raise error "No property found with that ID!"
-                # If ID does not exist, cancel command
+                # If ID does not exist, cancel command EKKI IMPLEMENTAÐ
             print("If you do not wish to change a specific field, you can leave the input empty")
             change_name = input("Change property name to: ")
             change_destination = input("Change property destination to: ")
@@ -93,7 +93,7 @@ class PropertiesScreen(BaseScreen):
             print("What keyword would you like to search for?")
             print("You can combine keywords by following a word with ,")
             print("Example: (Grænland,Nuukstræti 4)")
-            search = input("Search for: ")        
+            search = input("Search for: ")       # Sama search fyrir alla skjái
                 # print out a new filtered list based on keywords input
                 # GoTo "Main menu > Properties > Filtered"
                 # "Main menu > Properties > Filtered" window and commands are identical to "Main menu > Properties"
