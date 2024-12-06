@@ -629,7 +629,6 @@ Main menu > Destinations
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
 |	    [A] Add a destination       [E] Edit a destination          [B] Go back
-|                                   [S] Search for
 |
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |       Destination list
@@ -663,6 +662,3 @@ Command: (INPUT)
 	Change destination airport opening hours to: (INPUT/str)
 	Change destination phone number: (INPUT/int)
 	Change destination manager to: (INPUT/str)
-
-# [S] Search for
-    SAME AS Search for in "Main menu > Properties"
