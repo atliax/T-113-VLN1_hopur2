@@ -16,10 +16,10 @@ class PropertiesScreen(BaseScreen):
         properties : list[Property] = self.ui.logic_api.get_all_properties()
 
         property_table = PrettyTable()
-        property_table.field_names = ["ID","Name","Location","Status","Destination"]
+        property_table.field_names = ["ID","Name","Address","Rooms","Destination"]
 
         for property in properties:
-            property_table.add_row([property.id, property.name, property.location, property.status, property.destinationID])
+            property_table.add_row([property.propertyID, property.name, property.address, property.rooms, property.destinationID])
 
         # dæmi um prentun á töflu með ákveðinni breidd:
         property_table._min_table_width = 118
