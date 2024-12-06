@@ -97,6 +97,12 @@ class TicketsScreen(BaseScreen):
             cost = float(input("Total cost: "))
 
         # View a ticket report
+<<<<<<< HEAD
+        #if cmd == "vr"
+
+
+
+=======
         if cmd == "vr":
             view = input("View a report for ticket with the ID: ")
                 # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"    
@@ -120,6 +126,7 @@ class TicketsScreen(BaseScreen):
             accept = input("Accept or decline (A/D): ")
                 # If "A" then ticket status == "Closed"
                 # If "D" then ticket status == "Needs work"
+>>>>>>> d9dead0da3241c97e86b1b30f86b4ba3a8b8806c
 
         if cmd == "b":
             return ui_consts.BACK

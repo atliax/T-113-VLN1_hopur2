@@ -19,7 +19,7 @@ class DestinationScreen(BaseScreen):
         destination_table.field_names = ["ID","Country","Airport","Phone_nr","Opening_hours","manager"]
 
         for destination in destinations:
-            destination_table.add_row([destination.id, destination.country, destination.airport, destination.phone_nr, destination.opening_hours, destination.manager])
+            destination_table.add_row([destination.destinationID, destination.managerID, destination.country, destination.airport, destination.phone, destination.opening_hours])
 
         print(destination_table)
 
@@ -33,6 +33,22 @@ class DestinationScreen(BaseScreen):
 
         # Add a destination
         if cmd == "a":
+<<<<<<< HEAD
+            new_destination = ""
+            for _ in destination_table.field_names:
+                new_value = input(f"New {_}: ")
+                new_destination += new_value + ","
+            self.ui.logic_api.add_new_destination(new_destination)
+
+
+        # Edit destination
+        if cmd == "e":
+            #if nothing is input, the name/loc will be unchanged
+            change_dest = input("Change destination: ")
+            change_airport = input("Change destination airport: ")
+            change_opening_hours = input("Change destination airport opening hours: ")
+
+=======
             new_destination = input("New destination country: ")
             new_airport = input("New destination airport: ")
             new_opening_hours = input("New destination airport opening hours: ")
@@ -50,6 +66,7 @@ class DestinationScreen(BaseScreen):
             change_opening_hours = input("Change destination airport opening hours to: ")
             change_number = int(input("Change destination phone number to: "))
             change_manager = input("Change desination manager to: ")
+>>>>>>> d9dead0da3241c97e86b1b30f86b4ba3a8b8806c
         
         if cmd == "b":
             return ui_consts.BACK

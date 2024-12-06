@@ -32,3 +32,9 @@ class LogicAPI:
     
     def get_all_destinations(self):
         return self.destination_manager.get_all_destinations()
+    
+    def add_new_destination(self, new_destination : str) -> None:
+        self.destination_manager.add_new_destination(new_destination)
+        print(new_destination)
+        return 
+

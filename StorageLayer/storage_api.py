@@ -24,3 +24,6 @@ class StorageAPI:
     
     def get_all_destinations(self) -> list[Destination]:
         return self.destination_storage.load_from_file(Destination)
+
+    #def add_new_destination(self, new_destination_instance):
+        #self.destination_storage
