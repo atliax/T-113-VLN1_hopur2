@@ -1,220 +1,664 @@
-Log in
-/////////////////////////////////////////////////////////////////////////////////
-|										
-|					Login						
+Skjár 1
+
+
+                                          MMMMMMMMMMM
+                                       MMMMMMMMMMMMMMMMM
+                                   NMMMMMMMMMMMMMMMMMMMMMMMM
+                                 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN
+                                MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                               MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                               MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMD
+                              DMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                              MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                              MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                             MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                             MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                            MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN
+                            MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN
+                           MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN
+                           MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN
+      NM                  MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+      MMMMM              MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+       MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+        MMMMMMMMMMMMMMMMMMMMMMMMMM8MMMMMMMMMIMMMMM8,. ...........OMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+           MMMMMMMMMMMMMMMMMMMMMMM ..N. .....~MMMM...............:MMMMNMMMMMMMMMMMMMMMMMMMMMMM
+             NMMMMMMMMMMMMMMMMMMMMM.....:..DMMMMMNZ Z.... .......M$MMMMMMMMMMMMMMMMMMMMMMMMMMM
+                 MMMMMMMMMMNMMMMMMM....... 7=MMMMMMO....Z .......MM7MMMMMMMMMMMMMMMMMMMMMMMMM
+                    MMMMMMMMMMMMMMMMM  Z...MMMZ .. .,M..,........MMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                        MMMMMM.......DOM ....N7..................MMMMMMMMMMMMMMMMMMMMMMMMMMM
+                           MMM....... M. ... .  ... ..............M...$MMMMMMMMMMMMMMMMMMMM
+                             ........... ........~. ..............M..=....+MMMMMMMMMMMMMM
+                             ......+.NMI~........ . ..............M.,.I...MMMMMMMMMMMMMMN
+                             ......$... ...... O..................,.....$MMMMMMMMMMMMN
+                             .....M.......... M M.. .............. 8  .OMMMMMMMMMMMN
+                              ..=7I,,.,,IMI...M.................. ..MMMMMMMMMMM
+                              ....DMMMMMMMMMMMMMMMO..............D...MMMMMMMMM
+                               .MMMMMMMMMMMMMMDDMM:,N..............DMMMMMMMMMMM
+                               NMMMMMNMM8 . .... ...,~............  MMMMMMMMM
+                               MMMMM,:......::~..M8M8MM...............MMMMMM
+                               MMMM ... . .........,MM..............MMMMMO$
+                               MMMMM... =.=. .. . . MM ....... . ...MMMMMMM
+                                NMMMMMMMMMM?  ..O.?NM7 ....... ......MMMMMM
+                                 NMMMMMMMMMMMMMMMMM........  $ . ...MMMNMMM
+                                  MMMMMMMMMMMMMMM.........,, ......MMMMMMMM
+                                   OMMMMMMMM8 , .. .. .,N.... ...:MMMMMMMMMMN
+                                    MMMMMMMM?N. ...~MD.:MNI8MMMMMMMMMMMMMMMMMN
+                               MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN
+                            NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN
+                           MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMN
+                        MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                     MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                    NMMMMMMMMMMMMNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+                   MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Skjár 2
+
+			
+
+
+
+
+
+
+
+
+      ___           ___           ___                    ___                       ___     
+     /\__\         /\  \         /\__\                  /\  \          ___        /\  \    
+    /::|  |       /::\  \       /::|  |                /::\  \        /\  \      /::\  \   
+   /:|:|  |      /:/\:\  \     /:|:|  |               /:/\:\  \       \:\  \    /:/\:\  \  
+  /:/|:|  |__   /::\~\:\  \   /:/|:|  |__            /::\~\:\  \      /::\__\  /::\~\:\  \ 
+ /:/ |:| /\__\ /:/\:\ \:\__\ /:/ |:| /\__\          /:/\:\ \:\__\  __/:/\/__/ /:/\:\ \:\__\
+ \/__|:|/:/  / \/__\:\/:/  / \/__|:|/:/  /          \/__\:\/:/  / /\/:/  /    \/_|::\/:/  /
+     |:/:/  /       \::/  /      |:/:/  /                \::/  /  \::/__/        |:|::/  / 
+     |::/  /        /:/  /       |::/  /                 /:/  /    \:\__\        |:|\/__/  
+     /:/  /        /:/  /        /:/  /                 /:/  /      \/__/        |:|  |    
+     \/__/         \/__/         \/__/                  \/__/                     \|__|    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Skjár 3
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+|
+|						             Login
+|					      	    User: ___________________
+|				      	  	Password: ___________________
 |											
-|				User: ________________						
-|			    Password: ________________
-|											
-/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Input: ___
+Demo cheat codes
+Username: Boss	and Password: Man
+Username: Pleb	and Password: 1234
+
+username:(INPUT)
+password:(INPUT)
 
 
 
-Admin
-/////////////////////////////////////////////////////////////////////////////////
-| 
-|	Hello {boss_name}!
+
+
+
+
+
+
+
+
+Main menu
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
-|	Input
-|	1 for [Manage/view] Estates
-|	2 for [Manage/view] Staff
-|	3 for [Manage/view] Tickets
-|	4 for Search
-|       5 for Destinations
-|	
-|       q to log out
+|       Hello {username}!
+|       What would you like to view?
 |
-/////////////////////////////////////////////////////////////////////////////////
-
-Input: ___
-
-
-
-User
-/////////////////////////////////////////////////////////////////////////////////
+|       [P] Properties
+|       [T] Tickets
+|       [S] Staff
+|       [D] Destinations
 |
-|	Hello {staff_name}!
+|       [L] Log out
 |
-|	Input
-|	1 for [View] Tickets
-|	2 for Search
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Command: (INPUT)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Main menu > Properties
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
-|	q to log out
+|       [A] Add a property              [E] Edit a property                     [B] Go back
+|       [R] Remove a property           [S] Search for
+|       [V] View facilites
 |
-/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+|       Property list
++------+-----------------------------------+-------------------+-------------------------+-----------+-------+------------------+
+| ID   | Name                              | Destination       | Address                 | Sq meters | Rooms | Type             |
++------+-----------------------------------+-------------------+-------------------------+-----------+-------+------------------+
+| P1   | Hótel Gíslingur                   | Grænland          | Nuukstræti 4            | 900       | 13    | Hótel            |
+| P2   | Hótel Gummafjörður                | Færeyjar          | Gosbaðgota 32b          | 2490      | 42    | Hótel            |
+| ...  | ...                               | ...               | ...                     | ...       |       |                  |
++------+-----------------------------------+-------------------+-------------------------+-----------+-------+------------------+
 
-Input: ___
+
+Command: (INPUT)
+
+# [A] Add a property
+    # Program runs through each command from top to bottom
+
+    # ID Auto generate variable = int(n + 1) then make str("P"+(variable))
+    Mew property name: (INPUT/str)
+    New property destination: (INPUT/str)
+    New property address: (INPUT/str)
+    New property square meters: (INPUT/int)
+    New property number of rooms: (INPUT/int)
+    New property type: (INPUT/str)
+
+    # New property gets appended to list.
+
+# [R] Remove a property
+    Remove property that has the ID: (INPUT/str)
+    # If ID does not exist in property list, raise error "No property found with that ID!"
+    # If ID does not exist, cancel command
+
+# [V] View facilites
+    # Program runs through each command from top to bottom
+    View the facilities in property with ID: (INPUT/str)
+    # If ID does not exist in property list, raise error "No property found with that ID!"
+    # If ID does not exist, cancel command	
+	
+    GoTo "Main menu > Properties > Facilities"
+    # Print a list of facilities for property with input ID
+    
+
+# [E] Edit a property
+    # Program runs through each command from top to bottom
+
+    Edit property with the ID: (INPUT/str)
+    # If ID does not exist in property list, raise error "No property found with that ID!"
+    # If ID does not exist, cancel command
+
+    
+    print ("If you do not wish to change a specific field, you can leave the input empty)
+    Change property name to: (INPUT/str)
+    Change property destination to: (INPUT/str)
+    Change property address to: (INPUT/str)
+    Change property square meters to: (INPUT/int)
+    Change property number of rooms to: (INPUT/int)
+    Change property type to (INPUT/str)
+
+
+# [S] Search for
+    print ("What keyword would you like to search for?)
+    print ("You can combine keywords by following a word with ,"
+    print ("Example: (Grænland,Nuukstræti 4)
+    Search for: (INPUT/str)
+
+    # print out a new filtered list based on keywords input
+    GoTo "Main menu > Properties > Filtered"
+
+    # "Main menu > Properties > Filtered" window and commands are identical to "Main menu > Properties"
+    # Just replace the normal properties list with the filtered one
+
+# [B] Go back
+    Go back 1 menu
 
 
 
 
-Estates (Admin)
-/////////////////////////////////////////////////////////////////////////////////
+
+
+
+Main menu > Properties > Facilities
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
-|	Manage and view estates
+|       [A] Add a facility           [E] Edit a facility                    [B] Go back
+|       [R] Remove a facility        [S] Search for	
+|       [V] View details
 |
-|	Input
-|	1 to add an estate
-|	2 to remove an estate
-|	3 to edit an estate
-|	4 to list all estates
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+|       Facility list
++------+------------------------------------+-----------------------------------------------------------------------------------+
+| ID   | Facility name                      | Description                                                                       |
++------+------------------------------------+-----------------------------------------------------------------------------------+
+| F1   | Inngangur                          | Has a really nice couch, a big old door, and a water fountain                     |
+| F2   | Herbergi 30b                       | The worst room, give to mean guests. Old bed and intentionally dirty bathroom     |
+| ...  | ...                                | ...                                                                               |
++------+------------------------------------+-----------------------------------------------------------------------------------+
+
+# [A] Add a facility
+    # Program runs through each command from top to bottom
+	
+    # ID Auto generate variable = int(n + 1) then make str("F"+(variable))
+    New facility name: (INPUT/str)
+    New facility description: (INPUT/str)
+
+# [R] Remove a facility
+    Remove facility that has the ID: (INPUT/str)
+    # If ID does not exist in property list, raise error "No facility found with that ID!"
+    # If ID does not exist, cancel command
+
+# [V] View details
+    View the details of facility with the ID: (INPUT/str)
+    # If ID does not exist in property list, raise error "No facility found with that ID!"
+    # If ID does not exist, cancel command	
+	
+    # *variable* = whatever the variable is named in the program
+    print (*Facility name*)
+    print (*Facility description*)
+
+# [E] Edit a facility
+    Edit facility that has the ID: (INPUT/str)
+    # If ID does not exist in property list, raise error "No facility found with that ID!"
+    # If ID does not exist, cancel command
+
+
+    print ("If you do not wish to change a specific field, you can leave the input empty)
+    Change facility name to: (INPUT/str)
+    Change facility description to: (INPUT/str)
+
+# [S] Search for
+    SAME AS Search for in "Main menu > Properties"
+
+# [B] Go back
+    Go back 1 menu
+
+
+
+
+
+
+Main menu > Staff
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
-|	0 to go back
+|       [A] Add an employee		    [E] Edit an employee            [B] Go back
+|       [R] Remove an employee	    [S] Search for
+|       [V] View contact info       [C] View contractors
 |
-/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+|	    List of employees
++------+------------------------------------------+--------------------------+---------------------------+----------------------+
+| ID   | Name                                     | Job Title                | Destination               | SSN                  |
++------+------------------------------------------+--------------------------+---------------------------+----------------------+
+| S1   | Chuck Norris                             | Manager                  | Færeyjar                  | 1003402348           | 
+| S2   | Chuck Norris jr                          | Room service             | Island                    | 1003684231           |
+| ...  | ...                                      | ...                      | ...                       | ...                  |
++------+------------------------------------------+--------------------------+---------------------------+----------------------+
 
-Input: ___
+Command: (INPUT)
+
+# [A] Add an employee
+    # ID Auto generate variable = int(n + 1) then make str("S"+(variable))
+	
+    New employee destination ID: (INPUT/str)
+	# If ID does not exist in destination list, raise error "No destination found with that ID!"
+	# Cancel command if destination ID is not found
+	
+	New employee name: (INPUT/str)
+    New employee ssn: (INPUT/int)
+	New employee address: (INPUT/str)
+	New employee phone number: (INPUT/int)
+	New employee mobile number: (INPUT/int)
+	New employee email: (INPUT/str)
+	New employee password: (INPUT/str)
+	New employee job title: (INPUT/str)
+	# If job title = "manager" or "boss" set isManager = True, otherwise False
+	
+	Is the new employee a manager? y/n: (INPUT/str) -> bool
+	# If the user does not input "y" or "n" raise error "Invalid input"
+	# Run "Is the new employee a manager? y/n" until correctly input
+
+
+# [R] Remove an employee
+    Remove employee with the ID: (INPUT/str)
+    # If ID does not exist in the employee list, raise error "No employee found with that ID!"    
+    # If ID does not exist, cancel command
+
+# [V] View contact info
+    View the contact information of employee with the ID: (INPUT/str)
+    # If ID does not exist in the employee list, raise error "No employee found with that ID!"    
+	# If ID does not exist, cancel command
+	
+    # *variable* = whatever the variable is named in the program
+    print ("Phone number: " + *employee phone*)
+    print ("Mobile number: " + *employee gsm*)
+    print ("Address: " + *employee address*)
+
+
+# [E] Edit an employee
+    Edit employee with the ID: (INPUT/str)
+    # If ID does not exist in the employee list, raise error "No employee found with that ID!"    
+    # If ID does not exist, cancel command
+
+    print ("If you do not wish to change a specific field, you can leave the input empty")
+    Change employee name to: (INPUT/str)
+	Change empolyee address to: (INPUT/str)
+	Change employee phone to: (INPUT/int)
+	Change employee GSM to: (INPUT/int)
+    Change employee email to: (INPUT/str)
+	Change employee password to: (INPUT/str)
+	Change employee job title to: (INPUT/str)
+	# If job title = "manager" or "boss" set isManager = True, otherwise False
+
+# [S] Search for
+    SAME AS Search for in "Main menu > Properties"
+
+# [C] View contractors
+	GoTo "Main Menu > Staff > Contractors"
+
+# [B] Go back
+    Go back 1 menu
 
 
 
-Pick estate (Staff/Tickets)
-/////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+Main menu > Staff > Contractors
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
-|	Pick an estate
-|	
-|	Input
-|	1 for all
-|	2 for estate1
-|	3 for estate2
-|	...
+|       [A] Add a contractor        [E] Edit a contractor           [B] Go back
+|       [R] Remove a contractor	    [S] Search for
+|       [V] View contact info
 |
-|	0 to go back
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+|       List of contractors
++------+----------------------------------+----------------------+--------------------------+--------------------------+--------+
+|  ID  | Name                             |  Type                | Destination              | Contact                  | Rating |
++------+----------------------------------+----------------------+--------------------------+--------------------------+--------+
+|  C1  | Bubbi byggir                     | Construction         | Bubba eyjar              | Bubbi jr                 |  10.0  |
+|  C2  | Joe Plumber                      | Plumber              | Færeyjar                 | Óli                      |  9.4   |
+|  ... | ...                              | ...                  | ...                      |                          |  ...   |
++------+----------------------------------+----------------------+--------------------------+--------------------------+--------+
+
+Command (INPUT)
+
+# RATING is average of ratings given on ticket reports, default N/A
+
+# [A] Add a contractor
+    # ID Auto generate variable = int(n + 1) then make str("C"+(variable))
+	
+	New contractor destination ID:
+	# If ID does not exist in destination list, raise error "No destination found with that ID!"
+	# Cancel command if destination ID is not found
+	
+	New contractor name: (INPUT/str)
+	New contractor type: (INPUT/str)
+	New contractor contact (optional): (INPUT/str)
+	New contractor phone: (INPUT/int)
+	New contractor address: (INPUT/str)
+
+# [R] Remove a contractor
+    Remove contractor with the ID: (INPUT/str)
+	# If ID does not exist in the contractor list, raise error "No contractor found with that ID!"    
+    # If ID does not exist, cancel command
+	
+# [V] View contact info
+    View the contact information of contractor with the ID: (INPUT/str)
+    # If ID does not exist in the contractor list, raise error "No contractor found with that ID!"    
+	# If ID does not exist, cancel command
+	
+    # *variable* = whatever the variable is named in the program
+    print ("Phone: " + *employee phone*)
+    print ("Address: " + *employee address*)
+
+# [E] Edit an employee
+    Edit contractor with the ID: (INPUT/str)
+    # If ID does not exist in the contractor list, raise error "No contractor found with that ID!"    
+    # If ID does not exist, cancel command
+
+    print ("If you do not wish to change a specific field, you can leave the input empty")
+    Change contractor name to: (INPUT/str)
+	Change contractor type to: (INPUT/str)
+	Change contractor contact to: (INPUT/str)
+	Change contractor phone to: (INPUT/int)
+	Change contractor address to: (INPUT/str)
+	
+# [S] Search for
+    SAME AS Search for in "Main menu > Properties"
+
+# [B] Go back
+    Go back 1 menu
+
+
+
+
+
+
+
+
+
+
+Main menu > Tickets
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
-/////////////////////////////////////////////////////////////////////////////////
-
-Input: ___
-
-
-
-Staff (Admin)
-/////////////////////////////////////////////////////////////////////////////////
+|       [A] Add a ticket            [E] Edit a ticket               [B] Go back
+|       [R] Remove a ticket         [S] Search for
+|       [V] View closed tickets     [MR] Make a ticket report
+|       [D] Ticket details          [VR] View a ticket report
 |
-|	Manage and view staff
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+|       List of tickets
++------+-------------------------+--------------------------+------------------------------------+----------+-------------------+
+|  ID  | Property                | Facility                 | Title                              | Priority | Status            |
++------+-------------------------+--------------------------+------------------------------------+----------+-------------------+
+|  T1  | Hotel Gumafjörður       | Herbergi 3C              | Broken sink :(                     | Medium   | Open              |
+|  T2  | Hotel Hotel Hotel       | Inngangur                | Broken door hinge                  | High     | Ready for review  |
+|  ..  | ...                     | ...                      | ...                                | ...      | ...               |
++------+-------------------------+--------------------------+------------------------------------+----------+-------------------+
+
+Command: (INPUT)
+
+# [A] Add a ticket
+    # ID Auto generate variable = int(n + 1) then make str("T"+(variable))
+	
+	New ticket property ID:
+	# If ID does not exist in property list, raise error "No property found with that ID!"
+	# Cancel command if destination ID is not found
+	
+	New ticket facility ID:
+	# If ID does not exist in property list, raise error "No property found with that ID!"
+	# Cancel command if destination ID is not found
+
+    New ticket title: (INPUT/str)
+	New ticket description: (INPUT/str)
+	New ticket priority: (INPUT/str)
+	New ticket status: (INPUT/str)
+	New ticket open date: (INPUT/str)
+	Recur every N days (0 = never): (INPUT/int)
+	# if recur > 0 set recurring = True otherwise False
+	
+# [R] Remove a ticket
+    Remove ticket with the ID: (INPUT/str)
+	# If ID does not exist in the ticket list, raise error "No ticket found with that ID!"    
+    # If ID does not exist, cancel command
+	
+# [V] View closed tickets
+    GoTo "Main menu > Tickets > Closed Tickets"
+	# Closed tickets menu is identical to tickets, just a different list.
+	# Remove "view closed tickets" command
+
+# [D] Ticket details
+    View the details of ticket with the ID: (INPUT/str)
+    # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"    
+	# If ID does not exist, cancel command
+	
+	print ("Property: " + *ticket property* + "Priority: " + *ticket priority*)
+	print ("Facility: " + *ticket facility* + "Status: " + *ticket status*)
+	print ("Title: " + *ticket title*)
+	print ("Description: " + *ticket description*)
+	print ("Open date: " + *ticket open date*)
+	
+	# If a response is available from a manager
+	print ("Response: " + *ticket response*)
+
+# [E] Edit ticket
+    Edit ticket with the ID: (INPUT/str)
+    # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"    
+    # If ID does not exist, cancel command
+	
+	print ("If you do not wish to change a specific field, you can leave the input empty")
+	Change ticket title to: (INPUT/str)
+	Change ticket description to: (INPUT/str)
+	Change ticket priority to: (INPUT/str)
+	Change ticket status to: (INPUT/str)
+	Change ticket open date to: (INPUT/str)
+	Change if ticket should recur every N days (0 = never): (INPUT/int)
+	# if recur > 0 set recurring = True otherwise False
+
+# [S] Search for
+	print ("You can search for a keyword and/or timeline, you can leave an input empty")
+    print ("What keyword would you like to search for?)
+    print ("You can combine keywords by following a word with ,"
+    print ("Example: (Grænland,Nuukstræti 4)
+    Search for: (INPUT/str)
+	
+	print ("What timeline would you like to search for?)
+	print ("Start             End")
+	print ("DD/MM/YYYY DD/MM/YYYY")
+	Search from: (INPUT/str)
+
+    # print out a new filtered list based on keywords input
+    GoTo "Main menu > Tickets > Filtered"
+
+    # "Main menu > Tickets > Filtered" window and commands are identical to "Main menu > Tickets"
+    # Just replace the normal tickets list with the filtered one
+
+# [MR] Make a ticket report
+    Make a report for ticket with the ID: (INPUT/str)
+    # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"    
+    # If ID does not exist, cancel command
+	
+	Employee writing report: (INPUT/str)
+	report: (INPUT/str)
+	print ("If applicable")
+	print ("If there are multiple contractors, type + to seperate them (C1 + C2 + C3)")
+	ID of contractor/s hired: (INPUT/str)
+	contractor/s review: (INPUT/str)
+	contractor/s fee: (INPUT/float)
+	total cost: (INPUT/float)
+
+# [VR] View a ticket report
+    View a report for ticket with the ID: (INPUT/str)
+    # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"    
+    # If ID does not exist, cancel command
+	# If the ticket doesnt have a report raise error "This ticket doesn't have a report!"
+	# If the ticket doesn't have a report, cancel command
+	
+	print ("Employee: " + *Employee*)
+	print (*Report*)
+	print (*contractor/s hired*)
+	print (*contractor review*)
+	print (*contractor fee*)
+	print (*total coast*)
+	
+	Rate contractor/s: (INPUT/float)
+	Write a response (optional): (INPUT/str)
+	Accept or decline report? (A/D): (INPUT/str)
+	# If "A" then ticket status == "Closed"
+	# If "D" then ticket status == "Needs work"
+
+# [B] Go back
+    Go back 1 menu
+
+
+
+
+
+
+
+
+Main menu > Destinations
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
-|	Input
-|	1 to add a staff member
-|	2 to remove a staff member
-|	3 to edit a staff members information
-|	4 to get a list of all employees
+|	    [A] Add a destination       [E] Edit a destination          [B] Go back
 |
-|	0 to go back
-|
-/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+|       Destination list
++------+---------------------------------+-------------------------------+---------------+----------+---------------------------+
+|  ID  | Destination                     | Airport                       | Opening hours | Phone    | Manager                   |
++------+---------------------------------+-------------------------------+---------------+----------+---------------------------+
+|  D1  | Færeyjar                        | Faroe Islands Airport         | 8:00 - 24:00  | 9998888  | Bob Faroe                 |
+|  D2  | Grænland                        | Nuuk Air                      | 10:00 - 22:00 | 1349584  | Mr nuke                   |
+|  ..  | ...                             | ...                           | ...           | ...      | ...                       |
++------+---------------------------------+-------------------------------+---------------+----------+---------------------------+
 
-Input: ___
+Command: (INPUT)
 
+# [A] Add a destination
+    # ID Auto generate variable = int(n + 1) then make str("D"+(variable))
 
+	New destination country: (INPUT/str)
+	New destination airport: (INPUT/str)
+	New destination airport opening hours: (INPUT/str)
+	New destination phone number: (INPUT/int)
+	New destination manager: (INPUT/int)
 
-Tickets (Admin)
-/////////////////////////////////////////////////////////////////////////////////
-|
-|	Manage and view tickets
-|	
-|	Input
-|	1 to create a ticket
-|	2 to edit a ticket
-|	3 to view available reports
-|	4 to review reports
-|
-|	0 to go back
-|
-/////////////////////////////////////////////////////////////////////////////////
-
-Input: ___
-
-Destinations (Admin)
-/////////////////////////////////////////////////////////////////////////////////
-|
-|	Destinations
-|	
-|	Input
-|	1 to create a Destination
-|	2 to edit a Destination
-|	3 to view available Destinations
-|
-|
-|	0 to go back
-|
-/////////////////////////////////////////////////////////////////////////////////
-
-Input: ___
-
-
-Tickets (User)
-/////////////////////////////////////////////////////////////////////////////////
-|
-|	Tickets and reports	
-|
-|	Input
-|	1 to create a ticket
-|	2 to make a report
-|	3 to mark a report as complete
-|
-|	0 to go back
-|	
-/////////////////////////////////////////////////////////////////////////////////
-
-Input: ___
-
-
-
-Search
-/////////////////////////////////////////////////////////////////////////////////
-|
-|	Search for
-|	
-|	Input
-|	1 for estates
-|	2 for staff
-|	3 for tickets
-|       4 for destinations
-|	
-|      0 to go back
-|
-/////////////////////////////////////////////////////////////////////////////////
-
-Input: ___
-
-----
-
-Input keyword to search for: ___
-
-
-
-
-
-Add estate
-
-- ID/name of estate: ______________
-- Location: __________
-
-
-
-
-Remove estate
-
-- ID/name of estate: ____________
-
-
-
-
-Edit estate
-- Input estate to change: ___________
-  - (add estate function)
-
-
-
-List of estates
-/////////////////////////////////////////////////////////////////////////////////
-|
-|	Location	 Id	  Name
-|	--------------------------------------
-|	Iceland 	- 9B	- The place
-|	Faroe Islands	- 3D	- A place
-|	...
-|
-/////////////////////////////////////////////////////////////////////////////////
-
-
+# [E] Edit a destination
+    Edit destination with the ID: (INPUT/str)
+    # If ID does not exist in the destination list, raise error "No destination found with that ID!"    
+    # If ID does not exist, cancel command
+	
+	print ("If you do not wish to change a specific field, you can leave the input empty")
+	Change destination country to: (INPUT/str)
+	Change destination airport to: (INPUT/str)
+	Change destination airport opening hours to: (INPUT/str)
+	Change destination phone number: (INPUT/int)
+	Change destination manager to: (INPUT/str)
