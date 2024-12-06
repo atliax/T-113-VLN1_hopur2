@@ -7,12 +7,13 @@ from StorageLayer.staff_storage import StaffStorage
 from StorageLayer.ticket_storage import TicketStorage
 
 from Model import Property
+from Model import Destination
 
 class StorageAPI:
     def __init__(self):
         self.facility_storage = FacilityStorage("filename.json")
         self.contractor_storage = ContractorStorage("filename.json")
-        self.destination_storage = DestinationStorage("filename.json")
+        self.destination_storage = DestinationStorage("data/destinations.json")
         self.property_storage = PropertyStorage("data/properties.json")
         self.report_storage = ReportStorage("filename.json")
         self.staff_storage = StaffStorage("filename.json")
@@ -20,3 +21,6 @@ class StorageAPI:
 
     def get_all_properties(self) -> list[Property]:
         return self.property_storage.load_from_file(Property)
+    
+    def get_all_destinations(self) -> list[Destination]:
+        return self.destination_storage.load_from_file(Destination)

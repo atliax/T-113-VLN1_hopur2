@@ -278,3 +278,9 @@ Við ætlum að gera 3 mismunandi flokka af hlutum(destination, property, report
 Tókum eftir ósamræmi í happypath og uml diagram og var tekið á því og lagað.
 Það var sett JSON virkni með Models, er hægt að skrifa og lesa með þeirri virkni.
 Bættum við UI skjám í mikið af UI skránnar. Tökum fund á mrg um hvort við erum sátt með hvernig við erum að forrita þetta því það virðist vera mesta vandamálið hjá okkur hérna, náðum ekki einu af markmiðum dagsins.
+
+
+## 6.12.2024 - Föstudagur
+## Morgunfundur 8:30
+
+## Markmið Dagsins

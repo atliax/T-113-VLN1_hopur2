@@ -1,5 +1,8 @@
 from UILayer.base_screen import BaseScreen
 from UILayer import ui_consts
+from Model import Destination
+
+from prettytable import PrettyTable
 
 class DestinationScreen(BaseScreen):
     def __init__(self, ui):
@@ -9,6 +12,17 @@ class DestinationScreen(BaseScreen):
         self.clear_screen()
 
         print("Main menu > Destinations")
+
+        destinations : list[Destination] = self.ui.logic_api.get_all_destinations()
+
+        destination_table = PrettyTable()
+        destination_table.field_names = ["ID","Country","Airport","Phone_nr","Opening_hours","manager"]
+
+        for destination in destinations:
+            destination_table.add_row([destination.id, destination.country, destination.airport, destination.phone_nr, destination.opening_hours, destination.manager])
+
+        print(destination_table)
+
         print(ui_consts.SEPERATOR)
         print("|")
         print("|	[A] Add a destination		[E] Edit a destination			[B] Go back")
@@ -37,7 +51,7 @@ class DestinationScreen(BaseScreen):
 
         if cmd == "s":
             search = input("Search for: ")
-
+        
         if cmd == "b":
             return ui_consts.BACK
 
