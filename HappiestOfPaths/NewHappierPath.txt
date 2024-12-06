@@ -445,7 +445,7 @@ Command (INPUT)
 	New contractor address: (INPUT/str)
 
 # [R] Remove a contractor
-    Remove employee with the ID: (INPUT/str)
+    Remove contractor with the ID: (INPUT/str)
 	
 # [V] View contact info
     View the contact information of contractor with the ID: (INPUT/str)
@@ -453,10 +453,11 @@ Command (INPUT)
 	# If ID does not exist, cancel command
 	
     # *variable* = whatever the variable is named in the program
-    print ("Phone: " + *employee phone*)
-    print ("Address: " + *employee address*)
+            print(f"Name: {add_contractor}")
+            print(f"Phone: {add_phone}")
+            print(f"Address: {add_address}")
 
-# [E] Edit an employee
+# [E] Edit contractor
     Edit contractor with the ID: (INPUT/str)
     # If ID does not exist in the contractor list, raise error "No contractor found with that ID!"    
     # If ID does not exist, cancel command

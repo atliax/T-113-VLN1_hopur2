@@ -50,7 +50,7 @@ class StaffScreen(BaseScreen):
         if cmd == "e":
                 # If ID does not exist in the employee list, raise error "No employee found with that ID!"    
                 # If ID does not exist, cancel command
-            edit_with_id = input("Edit employee with the ID: ")
+            edit_with_id = input("Edit employee with the ID: ") # á eftir að implementa
                 #if nothing is input, the field will be left unchanged
             change_name = input("Change employey name to: ")
             change_address = input("Change employee address to: ")
@@ -64,7 +64,7 @@ class StaffScreen(BaseScreen):
         if cmd == "s":
                 # Example gamer, Nuuk
                 # Finnur allar línur tengdar gamer, nuuk
-            search = input("Search for: ")
+            search = input("Search for: ") # Sama search allstaðar á eftir að implementa
 
         # View contact info
         if cmd == "c":

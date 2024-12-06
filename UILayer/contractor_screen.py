@@ -34,23 +34,31 @@ class ContractorScreen(BaseScreen):
         # Remove a contractor
         if cmd == "r":
             rm_contractor = input("Remove contractor with ID: ")
+
+        # View contact info
+        if cmd == "v":
+            view = input("View the contact information of contractor with the ID: ")
+                # If ID does not exist in the contractor list, raise error "No contractor found with that ID!"    
+	            # If ID does not exist, cancel command
+            print(f"Name: {add_contractor}")
+            print(f"Phone: {add_phone}")
+            print(f"Address: {add_address}")
         
         # Edit contractor
         if cmd == "e":
             #If nothing is input, the name/loc will be unchanged
+            edit_id = input("Edit contractor with the ID: ") # Óklárað!
+                # If ID does not exist in the contractor list, raise error "No contractor found with that ID!"    
+                # If ID does not exist, cancel command
             change_contractor = input("Change contractor name to: ")
+            change_type = input("Change contractor type to: ")
+            change_contact = input("Change contractor contact to: ")
             change_phone = input("Change contractor phone number: ")
-            change_email = input("Change contractor email to: ")
-            change_title = input("Change contractor type to: ")
-            change_location = input("Change contractor location to: ")
+            change_location = input("Change contractor address to: ")
 
         # Search for contractor
         if cmd == "s":
-            search = input("Search for: ")
-        
-        if cmd == "rv":
-            contractor_id = input("Rate contractor with ID: ")
-            rating = input("Rating: (0.00 - 10.00): ")
+            search = input("Search for: ") # Sama search allstaðar á eftir að implementa
 
         if cmd == "b":
             return ui_consts.BACK
