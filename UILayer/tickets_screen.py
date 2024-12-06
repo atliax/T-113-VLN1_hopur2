@@ -22,8 +22,8 @@ class TicketsScreen(BaseScreen):
 
         # Add a ticket
         if cmd == "a":
-            # Go to "Main menu > Tickets > Ticket maker"
-            pass
+            return ui_consts.TICKETMAKER
+        
 
         # Remove a ticket
         if cmd == "r":
