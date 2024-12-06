@@ -9,7 +9,7 @@ class StaffManager:
 
     def authenticate_login(self,email,password):
         if email.upper() == 'BOSS' and password == 'Man':
-            self.logged_in_staff = Staff("1","A1","Dóttir Sigga Ísmanns","090488-2959","Grundargata 12", "555-5555", "867-5309", "siggi@nanair.is", "flubber","Yfirmaður rekstrarsviðs",True)
+            self.logged_in_staff = Staff("1","A1","Manager","090488-2959","Grundargata 12", "555-5555", "867-5309", "siggi@nanair.is", "flubber","Yfirmaður rekstrarsviðs",True)
             self.tmp_destination = Destination("A1","Ísland","Keflavík","555-5556","24/7",self.logged_in_staff.staffID)
             self.logged_in_staff.destinationID = self.tmp_destination.destinationID
             return True
