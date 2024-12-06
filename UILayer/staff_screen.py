@@ -17,7 +17,7 @@ class StaffScreen(BaseScreen):
         print("|")
         print(ui_consts.SEPERATOR)
 
-        cmd = input("Command: ")
+        cmd = input("Command: ").lower()
 
         if cmd == "a":
             new_employee = input("New employee name: ")

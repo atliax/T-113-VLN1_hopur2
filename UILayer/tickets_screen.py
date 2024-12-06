@@ -18,7 +18,7 @@ class TicketsScreen(BaseScreen):
         print("|")
         print(ui_consts.SEPERATOR)
 
-        cmd = input("Command: ")
+        cmd = input("Command: ").lower()
 
         # Add a ticket
         if cmd == "a":

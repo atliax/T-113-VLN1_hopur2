@@ -27,19 +27,19 @@ class MainMenuScreen(BaseScreen):
         print( "|")
         print(ui_consts.SEPERATOR)
 
-        cmd = input("Command: ").upper()
+        cmd = input("Command: ").lower()
 
-        if cmd == "P":
+        if cmd == "p":
             return ui_consts.PROPERTY
-        if cmd == "T":
+        if cmd == "t":
             return ui_consts.TICKET
-        if cmd == "S":
+        if cmd == "s":
             return ui_consts.STAFF
-        if cmd == "D":
+        if cmd == "d":
             return ui_consts.DESTINATION
-        if cmd == "L":
+        if cmd == "l":
             return ui_consts.LOGOUT
-        if cmd == "X":
+        if cmd == "x":
             return ui_consts.QUIT
 
         return self

@@ -11,7 +11,7 @@ class ContractorScreen(BaseScreen):
         print("Main menu > Contractors")
 
 
-        cmd = input("Command: ")
+        cmd = input("Command: ").lower()
 
         # Add a contractor
         if cmd == "a":

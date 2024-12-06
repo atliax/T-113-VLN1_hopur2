@@ -26,7 +26,7 @@ class PropertiesScreen(BaseScreen):
 
         # dæmi um prentun á hluta af töflu:
         #print(property_table.get_string(start=0, end=10))
-
+        print("|  Property list:")
         print(property_table)
 
         print(ui_consts.SEPERATOR)
@@ -36,7 +36,7 @@ class PropertiesScreen(BaseScreen):
         print("|	[V] View facilities")
         print("|")
         print(ui_consts.SEPERATOR)
-        print("|	Property list")
+        
 
 
         #print("|   ID   |                 Name               	|   Location   				|  Status  | Last report")

@@ -30,7 +30,7 @@ class DestinationScreen(BaseScreen):
         print("|")
         print(ui_consts.SEPERATOR)
 
-        cmd = input("Command: ")
+        cmd = input("Command: ").lower()
 
         # Add a destination
         if cmd == "a":
