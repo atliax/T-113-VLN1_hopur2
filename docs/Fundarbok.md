@@ -293,3 +293,17 @@ Bættum við UI skjám í mikið af UI skránnar. Tökum fund á mrg um hvort vi
 
 prófum þetta, það er 4/6 mæting, 2 heima sem vinna þaðan í gegnum discord.
 
+## 6.12.2024 - Föstudagur
+## Lokafundur 14:04
+
+Viðstaddir: Atli, Gísli og Hjörtur.
+Ritari: Atli
+
+Hjörtur og Gísli unnu í því að samræma forritið og happy path, bæta við skjáum sem vantaði ásamt breytingum á happy path eftir því sem við átti. Óli vann í storage layer. Atli uppfærði Model klasana og smíðaði json skrár með prufugögnunum ásamt því að aðstoða hina við að útfæra 3-laga virknina.
+
+## Staða markmiða dagsins
+1. Búið að stofna klasa fyrir alla skjái sem þarf ásamt skipunum sem hægt er að framkvæma á þeim. Ekki öll virkni komin.
+2. Model klasar passa við UML og 1/3 af dæmagögnum kominn í .json skrár.
+3. Destination mjakast, ekki alveg komið.
+4. Ennþá vantar uppá skilgreiningar á aðgerðum sem LogicAPI þarf að geta framkvæmt fyrir UILayerinn
+5. Happy path og UML eru samræmd.
