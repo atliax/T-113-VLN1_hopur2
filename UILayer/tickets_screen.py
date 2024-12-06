@@ -8,7 +8,7 @@ class TicketsScreen(BaseScreen):
     def render(self):
         self.clear_screen()
 
-        print("Main menu > Tickets")
+        print("Main Menu > Tickets")
         print(ui_consts.SEPERATOR)
         print("|")
         print("|	[A] Add a ticket		[E] Edit a ticket			[B] Go back")
@@ -35,7 +35,7 @@ class TicketsScreen(BaseScreen):
             # Go to "Main menu > Tickets > Ticket editor"
 
         # search
-        if cmd == "s":
+        if cmd == "s": # Sér search fyrir tickets!
             search = input("Search for: ")
 
         # View closed tickets

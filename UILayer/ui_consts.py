@@ -9,7 +9,7 @@ LOGIN = "login"
 MAIN_MENU = "main_menu"
 SPLASH = "splash"
 CONTRACTOR = "contractor"
-TICKETMAKER = "ticker_maker"
+FACILITY = "facilities"
 
 # Commands
 LOGOUT = "logout"

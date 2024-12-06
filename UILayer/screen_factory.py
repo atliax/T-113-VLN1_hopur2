@@ -6,6 +6,7 @@ from UILayer.staff_screen import StaffScreen
 from UILayer.destination_screen import DestinationScreen
 from UILayer.splash_screen import SplashScreen
 from UILayer.contractor_screen import ContractorScreen
+from UILayer.facilities_screen import FacilityScreen
 
 from UILayer import ui_consts
 
@@ -31,6 +32,8 @@ class ScreenFactory:
                 return DestinationScreen(self.ui)
             case ui_consts.CONTRACTOR:
                 return ContractorScreen(self.ui)
+            case ui_consts.FACILITY:
+                return FacilityScreen(self.ui)
 
 
         # TODO, other screens
