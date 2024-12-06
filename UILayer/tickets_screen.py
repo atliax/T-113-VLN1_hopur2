@@ -23,8 +23,8 @@ class TicketsScreen(BaseScreen):
         # Add a ticket
         if cmd == "a":
             # Auto ID kerfi ekki implementað
-            print(f"New ticket property ID: {MISSING}")
-            print(f"New ticket facility ID: {MISSING}")
+            print(f"New ticket property ID: {"MISSING"}")
+            print(f"New ticket facility ID: {"MISSING"}")
             new_ticket = input("New ticket title: ")
             new_description = input("New ticket description: ")
             new_priority = input("New ticket priority: ")
@@ -44,13 +44,13 @@ class TicketsScreen(BaseScreen):
 
         # Ticket details
         view = input("View the details")
-        print(f"Property: {MISSING}, Priority: {new_priority}")
-        print(f"Facility: {MISSING}, Status: {new_status}")
+        print(f"Property: {"MISSING"}, Priority: {new_priority}")
+        print(f"Facility: {"MISSING"}, Status: {new_status}")
         print(f"Title: {new_ticket}")
         print(f"Description: {new_description}")
         print(f"Date: {new_date}")
         # If a response is available from a manager
-        print(f"Response: {MISSING}")
+        print(f"Response: {"MISSING"}")
 
         # Edit ticket
         if cmd == "e":
@@ -103,12 +103,12 @@ class TicketsScreen(BaseScreen):
                 # If ID does not exist, cancel command
                 # If the ticket doesnt have a report raise error "This ticket doesn't have a report!"
                 # If the ticket doesn't have a report, cancel command      
-            print (f"Employee: {MISSING}")
-            print (MISSING)
-            print (MISSING)
-            print (MISSING)
-            print (MISSING)
-            print (MISSING)
+            print (f"Employee: {"MISSING"}")
+            print ("MISSING")
+            print ("MISSING")
+            print ("MISSING")
+            print ("MISSING")
+            print ("MISSING")
             	# print ("Employee: " + *Employee*)
                 # print (*Report*)
                 # print (*contractor/s hired*)
