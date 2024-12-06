@@ -12,6 +12,18 @@ class PropertiesScreen(BaseScreen):
         self.clear_screen()
 
         print("Main menu > Properties")
+        
+        properties : list[Property] = self.ui.logic_api.get_all_properties()
+
+        property_table = PrettyTable()
+        property_table.field_names = ["ID","Name","Location","Status","Destination"]
+
+        for property in properties:
+            property_table.add_row([property.id, property.name, property.location, property.status, property.destinationID])
+
+        print(property_table)
+
+        #print("Main menu > Properties")
         print(ui_consts.SEPERATOR)
         print("|")
         print("|	[A] Add a property		[E] Edit a property			[B] Go back")
@@ -22,15 +34,6 @@ class PropertiesScreen(BaseScreen):
         print(ui_consts.SEPERATOR)
         print("|	Property list")
 
-        properties : list[Property] = self.ui.logic_api.get_all_properties()
-
-        property_table = PrettyTable()
-        property_table.field_names = ["ID","Name","Location","Status","Destination"]
-
-        for property in properties:
-            property_table.add_row([property.id, property.name, property.location, property.status, property.destinationID])
-
-        print(property_table)
 
         #print("|   ID   |                 Name               	|   Location   				|  Status  | Last report")
         #print("----------------------------------------------------------------------------------------------------------------------")
