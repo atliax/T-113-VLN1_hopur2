@@ -12,7 +12,7 @@ class PropertiesScreen(BaseScreen):
         self.clear_screen()
 
         print("Main menu > Properties")
-        
+
         properties : list[Property] = self.ui.logic_api.get_all_properties()
 
         property_table = PrettyTable()
@@ -21,9 +21,14 @@ class PropertiesScreen(BaseScreen):
         for property in properties:
             property_table.add_row([property.id, property.name, property.location, property.status, property.destinationID])
 
+        # dæmi um prentun á töflu með ákveðinni breidd:
+        #property_table._min_table_width = 118
+
+        # dæmi um prentun á hluta af töflu:
+        #print(property_table.get_string(start=0, end=10))
+
         print(property_table)
 
-        #print("Main menu > Properties")
         print(ui_consts.SEPERATOR)
         print("|")
         print("|	[A] Add a property		[E] Edit a property			[B] Go back")
