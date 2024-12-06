@@ -647,7 +647,7 @@ Command: (INPUT)
 	New destination airport: (INPUT/str)
 	New destination airport opening hours: (INPUT/str)
 	New destination phone number: (INPUT/int)
-	New destination manager: (INPUT/int)
+	New destination manager: (INPUT/str)
 
 # [E] Edit a destination
     Edit destination with the ID: (INPUT/str)
