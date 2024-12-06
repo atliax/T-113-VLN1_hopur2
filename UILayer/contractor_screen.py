@@ -9,17 +9,27 @@ class ContractorScreen(BaseScreen):
         self.clear_screen()
 
         print("Main menu > Contractors")
-
+        print(ui_consts.SEPERATOR)
+        print("|")
+        print("|	[A] Add a contractor		[E] Edit a contractor			[B] Go back")
+        print("|	[R] Remove a contractor		[S] Search for")
+        print("|	[V] View contact info")
+        print("|")
+        print(ui_consts.SEPERATOR)
 
         cmd = input("Command: ").lower()
 
         # Add a contractor
         if cmd == "a":
+                # ID Auto generate variable = int(n + 1) then make str("C"+(variable))
+            print(f"New contractor destination ID: ")
+                # If ID does not exist in destination list, raise error "No destination found with that ID!"
+	            # Cancel command if destination ID is not found
             add_contractor = input("New contractor name: ")
-            add_phone = input("New contractor phone: ")
-            add_ssn = input("New contractor personal or company SSN: ")
             add_type = input("New contractor type: ")
-            add_location = input("New contractor location: ")
+            add_contact = input("New contractor contact (optional): ")
+            add_phone = int(input("New contractor phone: "))
+            add_address = input("New contractor address: ")
 
         # Remove a contractor
         if cmd == "r":

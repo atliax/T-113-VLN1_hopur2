@@ -351,8 +351,8 @@ Command: (INPUT)
 	New employee name: (INPUT/str)
     New employee ssn: (INPUT/int)
 	New employee address: (INPUT/str)
-	New employee phone: (INPUT/int)
-	New employee gsm: (INPUT/int)
+	New employee phone number: (INPUT/int)
+	New employee mobile number: (INPUT/int)
 	New employee email: (INPUT/str)
 	New employee password: (INPUT/str)
 	New employee job title: (INPUT/str)
@@ -372,9 +372,11 @@ Command: (INPUT)
 	# If ID does not exist, cancel command
 	
     # *variable* = whatever the variable is named in the program
-    print ("Phone: " + *employee phone*)
-    print ("GSM: " + *employee gsm*)
-    print ("Address: " + *employee address*)
+            print(f"Name: {new_employee}")
+            print(f"Email: {new_email}")
+            print(f"Phone number: {new_phone_nr}")
+            print(f"Mobile phone number: {new_gms}")
+            print(f"Address: {new_address}")
 
 
 # [E] Edit an employee
