@@ -6,7 +6,7 @@ from LogicLayer.report_manager import ReportManager
 from LogicLayer.staff_manager import StaffManager
 from LogicLayer.ticket_manager import TicketManager
 
-from Model import Property
+from Model import *
 
 class LogicAPI:
     def __init__(self, storage_api):
@@ -37,4 +37,6 @@ class LogicAPI:
         self.destination_manager.add_new_destination(new_destination)
         print(new_destination)
         return 
-
+    
+    def add_new_staff(self, new_staff:Staff):
+        self.staff_manager.add_new_staff(new_staff)

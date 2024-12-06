@@ -350,10 +350,10 @@ Command: (INPUT)
 	# Cancel command if destination ID is not found
 	
 	New employee name: (INPUT/str)
-    New employee ssn: (INPUT/int)
+    New employee ssn: (INPUT/str)
 	New employee address: (INPUT/str)
-	New employee phone number: (INPUT/int)
-	New employee mobile number: (INPUT/int)
+	New employee phone number: (INPUT/str)
+	New employee mobile number: (INPUT/str)
 	New employee email: (INPUT/str)
 	New employee password: (INPUT/str)
 	New employee job title: (INPUT/str)

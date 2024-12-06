@@ -1,9 +1,11 @@
+from StorageLayer.storage_api import StorageAPI
+
 from Model import Staff
 from Model import Destination
 
 class StaffManager:
     def __init__(self, storage_api):
-        self.storage_api = storage_api
+        self.storage_api : StorageAPI = storage_api
         self.logged_in_staff = None
         self.tmp_destination = None
 
@@ -28,3 +30,15 @@ class StaffManager:
     def logout(self):
         self.logged_in_staff = None
         pass
+
+    def add_new_staff(self, new_staff : Staff):
+        all_staff = self.storage_api.get_all_staff()
+        n = int(all_staff[len(all_staff)-1].staffID[1:])
+        n += 1
+        new_id = "S" + str(n)
+        new_staff.staffID = new_id
+
+        # validation
+
+        # ef í lagi:
+        self.storage_api.add_new_staff(new_staff)

@@ -24,5 +24,13 @@ class StorageAPI:
     def get_all_destinations(self) -> list[Destination]:
         return self.destination_storage.load_from_file()
 
+    def get_all_staff(self):
+        return self.staff_storage.load_from_file()
+
+    def add_new_staff(self,new_staff:Staff):
+        current_staff = self.staff_storage.load_from_file()
+        current_staff.append(new_staff)
+        self.staff_storage.save_to_file(current_staff)
+
     #def add_new_destination(self, new_destination_instance):
         #self.destination_storage

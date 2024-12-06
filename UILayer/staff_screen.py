@@ -1,5 +1,6 @@
 from UILayer.base_screen import BaseScreen
 from UILayer import ui_consts
+from Model import Staff
 
 class StaffScreen(BaseScreen):
     def __init__(self, ui):
@@ -22,15 +23,16 @@ class StaffScreen(BaseScreen):
         # Add an employee
         if cmd == "a":
             new_employee = input("New employee name: ")
-            new_ssn = int(input("New employee ssn: "))
+            new_ssn = (input("New employee ssn: "))
             new_address = input("New employee address: ")
-            new_phone_nr = int(input("New employee phone number: "))
-            new_gms = int(input("New employee mobile number: "))
+            new_phone_nr = (input("New employee phone number: "))
+            new_gsm = (input("New employee mobile number: "))
             new_email = input("New employee email: ")
             new_password = input("New employee password: ")
             new_title = input("New employee job title: ")
-            is_manager = input("Is the new employee a manager? y/n ")
-            
+            is_manager = input("Is the new employee a manager? y/n ").lower()
+            new_staff = Staff(None, None, new_employee, new_ssn, new_address, new_phone_nr, new_gsm, new_email, new_password, new_title, True if is_manager == "y" else False)
+            self.ui.logic_api.add_new_staff(new_staff)
 
         # Remove an employee
         if cmd == "r":
@@ -42,7 +44,7 @@ class StaffScreen(BaseScreen):
             print(f"Name: {new_employee}")
             print(f"Email: {new_email}")
             print(f"Phone number: {new_phone_nr}")
-            print(f"Mobile phone number: {new_gms}")
+            print(f"Mobile phone number: {new_gsm}")
             print(f"Address: {new_address}")
                 # If ID does not exist in the employee list, raise error "No employee found with that ID!"    
 	            # If ID does not exist, cancel command
