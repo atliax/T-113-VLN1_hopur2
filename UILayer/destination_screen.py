@@ -19,14 +19,13 @@ class DestinationScreen(BaseScreen):
         destination_table.field_names = ["ID","Country","Airport","Phone_nr","Opening_hours","manager"]
 
         for destination in destinations:
-            destination_table.add_row([destination.id, destination.country, destination.airport, destination.phone_nr, destination.opening_hours, destination.manager])
+            destination_table.add_row([destination.destinationID, destination.managerID, destination.country, destination.airport, destination.phone, destination.opening_hours])
 
         print(destination_table)
 
         print(ui_consts.SEPERATOR)
         print("|")
         print("|	[A] Add a destination		[E] Edit a destination			[B] Go back")
-        print("|	[R] Remove a destination	[S] Search for")
         print("|")
         print(ui_consts.SEPERATOR)
 
@@ -34,13 +33,12 @@ class DestinationScreen(BaseScreen):
 
         # Add a destination
         if cmd == "a":
-            new_dest = input("New destination: ")
-            new_airport = input("New destination airport: ")
-            new_opening_hours = input("New destination airport opening hours: ")
+            new_destination = ""
+            for _ in destination_table.field_names:
+                new_value = input(f"New {_}: ")
+                new_destination += new_value + ","
+            self.ui.logic_api.add_new_destination(new_destination)
 
-        # Remove destination
-        if cmd == "r":
-            remove = input("Remove destination with ID: ")
 
         # Edit destination
         if cmd == "e":
@@ -49,8 +47,6 @@ class DestinationScreen(BaseScreen):
             change_airport = input("Change destination airport: ")
             change_opening_hours = input("Change destination airport opening hours: ")
 
-        if cmd == "s":
-            search = input("Search for: ")
         
         if cmd == "b":
             return ui_consts.BACK

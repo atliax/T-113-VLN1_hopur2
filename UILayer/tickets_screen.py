@@ -97,7 +97,7 @@ class TicketsScreen(BaseScreen):
             cost = float(input("Total cost: "))
 
         # View a ticket report
-        if cmd == "vr"
+        #if cmd == "vr"
 
 
 

@@ -9,6 +9,7 @@ class Destination(BaseModel):
         self.phone = phone
         self.opening_hours = opening_hours
 
+    
 #TODO klára fallið
 
 
