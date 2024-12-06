@@ -3,7 +3,7 @@ class DestinationManager:
         self.storage_api = storage_api
 
     def get_all_destinations(self):
-        return self.storage_api.get_all_properties()
+        return self.storage_api.get_all_destinations()
 
 #   def __init__(self) -> None:
 #       self.properties_by_destination = self.load_properties()
