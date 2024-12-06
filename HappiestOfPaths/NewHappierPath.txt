@@ -329,7 +329,7 @@ Main menu > Staff
 |       [V] View contact info       [C] View contractors
 |
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-|	List of employees
+|	    List of employees
 +------+------------------------------------------+--------------------------+---------------------------+----------------------+
 | ID   | Name                                     | Job Title                | Destination               | SSN                  |
 +------+------------------------------------------+--------------------------+---------------------------+----------------------+
@@ -410,53 +410,66 @@ Command: (INPUT)
 Main menu > Staff > Contractors
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
-|	[A] Add a contractor		[E] Edit a contractor			[B] Go back
-|	[R] Remove a contractor		[S] Search for
-|	[RV] Review contractor
+|       [A] Add a contractor        [E] Edit a contractor           [B] Go back
+|       [R] Remove a contractor	    [S] Search for
+|       [V] View contact info
 |
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-|	List of contractors
-|   ID   | Rating | Name                 	 |  Phone  |     SSN      | Contractor type	|  Location 	   
----------------------------------------------------------------------------------------------------------------------------------
-|    1   |  4.09  | Example contractor 1	 | 8080808 |  1234567890  | Plumber		|  Location 1  
-|    2   |  9.10  | Example contractor 2   	 | 1231234 |  0987654321  | Plumber		|  Location 2  
-|    3   |  8.30  | Example contractor 3   	 | 4334590 |  1122334455  | Electrician		|  Location 3  
-|   ...  |  	  | ...                  	 |	   |      ...     |       ...		|      ...     
-|    n   |	  | Example Staff Member x 	 | 1234567 |  6677889900  | Job x		|  Location x  
-|
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+|       List of contractors
++------+----------------------------------+----------------------+--------------------------+--------------------------+--------+
+|  ID  | Name                             |  Type                | Destination              | Contact                  | Rating |
++------+----------------------------------+----------------------+--------------------------+--------------------------+--------+
+|  C1  | Bubbi byggir                     | Construction         | Bubba eyjar              | Bubbi jr                 |  10.0  |
+|  C2  | Joe Plumber                      | Plumber              | Færeyjar                 | Óli                      |  9.4   |
+|  ... | ...                              | ...                  | ...                      |                          |  ...   |
++------+----------------------------------+----------------------+--------------------------+--------------------------+--------+
 
 Command (INPUT)
 
-# Add
-# ID is auto generated
-New contractor name: (INPUT)
-New contractor phone: (INPUT)
-New contractor personal or company SSN: (INPUT)
-New contractor type: (INPUT)
-New contractor location: (INPUT)
+# RATING is average of ratings given on ticket reports, default N/A
 
-# Remove
-Remove contractor with id: (INPUT)
+# [A] Add a contractor
+    # ID Auto generate variable = int(n + 1) then make str("C"+(variable))
+	
+	New contractor destination ID:
+	# If ID does not exist in destination list, raise error "No destination found with that ID!"
+	# Cancel command if destination ID is not found
+	
+	New contractor name: (INPUT/str)
+	New contractor type: (INPUT/str)
+	New contractor contact (optional): (INPUT/str)
+	New contractor phone: (INPUT/int)
+	New contractor address: (INPUT/str)
 
-# Edit
-Edit contractor with the ID: (INPUT)
-# If nothing is input, the name/loc will be unchanged
-Change employee name to: (INPUT)
-Change employee phone number to: (INPUT)
-Change employee email to: (INPUT)
-Change employee job title to: (INPUT)
-Change employee location: (INPUT)
+# [R] Remove a contractor
+    Remove employee with the ID: (INPUT/str)
+	
+# [V] View contact info
+    View the contact information of contractor with the ID: (INPUT/str)
+    # If ID does not exist in the contractor list, raise error "No contractor found with that ID!"    
+	# If ID does not exist, cancel command
+	
+    # *variable* = whatever the variable is named in the program
+    print ("Phone: " + *employee phone*)
+    print ("Address: " + *employee address*)
 
-# Search
-Search for: (INPUT, MORE INPUTS)
-# Example
-# Search for: Gamer, Location 2
-# (Find all lines containing "Gamer" and "Location 2")
+# [E] Edit an employee
+    Edit contractor with the ID: (INPUT/str)
+    # If ID does not exist in the contractor list, raise error "No contractor found with that ID!"    
+    # If ID does not exist, cancel command
 
-# Review
-Rate contracter with ID:
-Rating (0.00 - 10.00): (INPUT)
+    print ("If you do not wish to change a specific field, you can leave the input empty")
+    Change contractor name to: (INPUT/str)
+	Change contractor type to: (INPUT/str)
+	Change contractor contact to: (INPUT/str)
+	Change contractor phone to: (INPUT/int)
+	Change contractor address to: (INPUT/str)
+	
+# [S] Search for
+    SAME AS Search for in "Main menu > Properties"
+
+# [B] Go back
+    Go back 1 menu
 
 
 
@@ -470,28 +483,35 @@ Rating (0.00 - 10.00): (INPUT)
 Main menu > Tickets
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
-|	[A] Create a ticket		[E] Edit a ticket			[B] Go back
-|	[R] Remove a ticket		[S] Search for				
-|	[V] View closed tickets		[RV] Review a ticket report
-|	[D] Ticket details
+|       [A] Add a ticket		[E] Edit a ticket			[B] Go back
+|       [R] Remove a ticket		[S] Search for				
+|       [V] View closed tickets		[RV] Review a ticket report
+|       [D] Ticket details
 |
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-|	List of tickets
-|  ID  |  Priority  | 		Title		|     Location     |      Status      |  Employee	   | Contractor		
----------------------------------------------------------------------------------------------------------------------------------
-|  36  |    High    |  Ticket Title 01		|  Location 1	   | Ready for review | Employee name 14   | Contractor 48		
-|  32  |    High    |  Ticket Title 02		|  Location 2	   |    In progress   | Employee name 9	   | 
-|  31  |   Medium   |  Ticket Title 03		|  Location 2	   |	   open	      | 		   |
-|  30  |    Low	    |  Ticket Title 04		|  Location 6	   |       open	      |			   |
-|  ..  |    ....    |  ...			|  ...		   |	   ....	      | ...		   |					
-|
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+|       List of tickets
++------+-------------------------+--------------------------+------------------------------------+----------+-------------------+
+|  ID  | Property                | Facility                 | Title                              | Priority | Status            |
++------+-------------------------+--------------------------+------------------------------------+----------+-------------------+
+|  T1  | Hotel Gumafjörður       | Herbergi 3C              | Broken sink :(                     | Medium   | Open              |
+|  T2  | Hotel Hotel Hotel       | Inngangur                | Broken door hinge                  | High     | Ready for review  |
+|  ..  | ...                     | ...                      | ...                                | ...      | ...               |
++------+-------------------------+--------------------------+------------------------------------+----------+-------------------+
 
 Command: (INPUT)
 
-# Create
-# ID is auto generated, status starts as open, employee starts empty until claimed
-Go to "Main menu > Tickets > Ticket maker"
+# [A] Add a ticket
+    # ID Auto generate variable = int(n + 1) then make str("T"+(variable))
+	
+	New ticket property ID:
+	# If ID does not exist in property list, raise error "No property found with that ID!"
+	# Cancel command if destination ID is not found
+	
+	New ticket facility ID:
+	# If ID does not exist in property list, raise error "No property found with that ID!"
+	# Cancel command if destination ID is not found
+	
+
 
 
 # Remove
@@ -537,7 +557,7 @@ Main menu > Tickets > Closed tickets
 |	[D] Ticket details		[VC] View contractors
 |
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-|	List of tickets
+|	    List of tickets
 |  ID  |  Priority  | 		Title		|     Location     |      Status      |  Employee	   | Contractor		
 ---------------------------------------------------------------------------------------------------------------------------------
 |  36  |    High    |  Ticket Title 01		|  Location 1	   | 	  closed      | Employee name 14   | Contractor 48		
@@ -550,45 +570,6 @@ Main menu > Tickets > Closed tickets
 
 Command: (INPUT)
 
-# Same as ticket menu
-
-
-
-
-
-
-
-
-
-
-
-Main menu > Tickets > Ticket maker
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-|
-|							Ticket (AUTO GEN ID)
-|	Auto repeat ticket: (INPUT NUM DAYS) #If 0 then it wont repeat	
-|	Title: _____________________________________________________________________________
-|	Priority: ____________		Location: __________________________________________
-|	Employee: ____________________________________________________    Status: __________
-|	Description: ___________________________________________________________________________________________
-|	Date (dd/mm/yyyy): __________________	
-|
-|	[C] Cancel			[F] Finish report
-|
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-Command: (INPUT)
-
-# Inputs loop until B or F is input
-# If F is input but a field is empty an error occurs
-# If nothing is input, the field will be unchanged
-New ticket title: (INPUT)
-new ticket description: (INPUT)
-New ticket location: (INPUT)
-New ticket employee (optional): input
-New ticket status (optional): (defaults to open unless changed)
-New ticket Priority: (INPUT)
-New ticket date: (INPUT)
 
 
 
