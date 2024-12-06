@@ -12,7 +12,7 @@ class StaffScreen(BaseScreen):
         print("Main Menu > Staff")
         print(ui_consts.SEPERATOR)
         print("|")
-        print("|	[A] Add an employee		[E] Edit a destination			[B] Go back")
+        print("|	[A] Add an employee		[E] Edit an employee			[B] Go back")
         print("|	[R] Remove an employee		[S] Search for")
         print("|	[V] View contact info		[C] View contractors")
         print("|")

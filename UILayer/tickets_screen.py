@@ -19,6 +19,9 @@ class TicketsScreen(BaseScreen):
         print(ui_consts.SEPERATOR)
 
         cmd = input("Command: ").lower()
+        # ÞAÐ VANTAR AÐ HAFA OPTION TIL AÐ OPNA LOKAÐA VERKSKÝRSLU
+
+
 
         # Add a ticket
         if cmd == "a":
