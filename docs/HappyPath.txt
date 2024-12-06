@@ -245,8 +245,8 @@ Command: (INPUT)
 
 # [S] Search for
     print ("What keyword would you like to search for?)
-    print ("You can combine keywords by following a word with ,"
-    print ("Example: (Grænland,Nuukstræti 4)
+    print ("You can combine keywords by following a word with ,")
+    print ("Example: (Grænland,Nuukstræti 4))
     Search for: (INPUT/str)
 
     # print out a new filtered list based on keywords input
@@ -521,7 +521,7 @@ Command: (INPUT)
 	New ticket description: (INPUT/str)
 	New ticket priority: (INPUT/str)
 	New ticket status: (INPUT/str)
-	New ticket open date: (INPUT/str)
+	New ticket date: (INPUT/str)
 	Recur every N days (0 = never): (INPUT/int)
 	# if recur > 0 set recurring = True otherwise False
 	
@@ -531,9 +531,7 @@ Command: (INPUT)
     # If ID does not exist, cancel command
 	
 # [V] View closed tickets
-    GoTo "Main menu > Tickets > Closed Tickets"
-	# Closed tickets menu is identical to tickets, just a different list.
-	# Remove "view closed tickets" command
+    # Gefur lista á closed tickets (virkar eins og search með fixed keyword)
 
 # [D] Ticket details
     View the details of ticket with the ID: (INPUT/str)
@@ -559,7 +557,7 @@ Command: (INPUT)
 	Change ticket description to: (INPUT/str)
 	Change ticket priority to: (INPUT/str)
 	Change ticket status to: (INPUT/str)
-	Change ticket open date to: (INPUT/str)
+	Change ticket date to: (INPUT/str)
 	Change if ticket should recur every N days (0 = never): (INPUT/int)
 	# if recur > 0 set recurring = True otherwise False
 

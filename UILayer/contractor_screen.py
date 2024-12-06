@@ -22,7 +22,7 @@ class ContractorScreen(BaseScreen):
         # Add a contractor
         if cmd == "a":
                 # ID Auto generate variable = int(n + 1) then make str("C"+(variable))
-            print(f"New contractor destination ID: ")
+            print(f"New contractor destination ID: ") # Ekki implementað
                 # If ID does not exist in destination list, raise error "No destination found with that ID!"
 	            # Cancel command if destination ID is not found
             add_contractor = input("New contractor name: ")

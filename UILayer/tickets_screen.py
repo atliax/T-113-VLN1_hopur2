@@ -13,8 +13,8 @@ class TicketsScreen(BaseScreen):
         print("|")
         print("|	[A] Add a ticket		[E] Edit a ticket			[B] Go back")
         print("|	[R] Remove a ticket		[S] Search for")
-        print("|	[V] View closed tickets		[RV] Review a ticket report")
-        print("|	[D] Ticket details")
+        print("|	[V] View closed tickets		[MR] Make a ticket report")
+        print("|	[D] Ticket details		[VR] View a ticket report")
         print("|")
         print(ui_consts.SEPERATOR)
 
@@ -22,35 +22,85 @@ class TicketsScreen(BaseScreen):
 
         # Add a ticket
         if cmd == "a":
-            return ui_consts.TICKETMAKER
-        
+            # Auto ID kerfi ekki implementað
+            print(f"New ticket property ID: {MISSING}")
+            print(f"New ticket facility ID: {MISSING}")
+            new_ticket = input("New ticket title: ")
+            new_description = input("New ticket description: ")
+            new_priority = input("New ticket priority: ")
+            new_status = input("New ticket status: ")
+            new_date = input("New ticket date: ")
+            new_recurring = int(input("Recur every N days (0 = never): "))
+                # If recur > 0 set recurring = True otherwise False
 
         # Remove a ticket
         if cmd == "r":
             remove_ticket = input("Remove ticket with ID: ")
 
-        # Edit ticket
-        if cmd == "e":
-            edit_ticket = input("Edit ticket with the ID: ")
-            # Go to "Main menu > Tickets > Ticket editor"
-
-        # search
-        if cmd == "s": # Sér search fyrir tickets!
-            search = input("Search for: ")
-
         # View closed tickets
         if cmd == "v":
-            # go to submenu "Main menu > Tickets > Closed tickets"
+            # Gefur lista á closed tickets (virkar eins og search með fixed keyword)
             pass
 
-        # Review
-        if cmd == "rv":
-            review = input("Review ticket with ID: ")
-        # go to submenu "Main menu > Tickets > Review report ticket: (TICKET ID)"
+        # Ticket details
+        view = input("View the details")
+        print(f"Property: {MISSING}, Priority: {new_priority}")
+        print(f"Facility: {MISSING}, Status: {new_status}")
+        print(f"Title: {new_ticket}")
+        print(f"Description: {new_description}")
+        print(f"Date: {new_date}")
+        # If a response is available from a manager
+        print(f"Response: {MISSING}")
 
-        if cmd == "d":
-            details = input("View ticket with ID: ")
-        # Go to "Main menu > Tickets > Ticket details"
+        # Edit ticket
+        if cmd == "e":
+                    # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"    
+                    # If ID does not exist, cancel command
+                print("If you do not wish to change a specific field, you can leave the input empty")
+                change_title = input("Change ticket title to: ")
+                change_description = input("Change ticket description to: ")
+                change_priority = input("Change ticket priority to: ")
+                change_status = input("Change ticket status: ")
+                change_date = input("Change ticket date to: ")
+                change_recurring = int(input("Change if ticket should recur every N days (0 = never): "))
+                # if recur > 0 set recurring = True otherwise False
+
+        # Search for
+        if cmd == "s":
+            print("You can search for a keyword and/or timeline, you can leave an input empty")
+            print("What keyword would you like to search for?")
+            print("You can combine keywords by following a word with ,")
+            print("Example: (Grænland,Nuukstræti 4)")
+            search = input("Search for: ")
+            
+            print("What timeline would ou like to search for?")
+            print("Start                End")
+            print("DD/MM/YYYY    DD/MM/YYYY")
+            search_from = input("Search from: ")
+                    # print out a new filtered list based on keywords input
+                    #GoTo "Main menu > Tickets > Filtered"
+                    # "Main menu > Tickets > Filtered" window and commands are identical to "Main menu > Tickets"
+                    # Just replace the normal tickets list with the filtered one
+        
+        # Make a ticket report
+        if cmd == "mr":
+            create_report = input("Make a report for ticket with the ID: ")
+                    # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"    
+                    # If ID does not exist, cancel command
+            employee = input("Employee writing report: ")
+            report = input("Report: ")
+            print("If applicable")
+            print("If there are multiple contractors, type + to seperate them (C1 + C2 + C3)")
+            id = input("ID of contractor/s hired")
+            review = input("Conractor/s review: ")
+            fee = float(input("Contractor/s fee: "))
+            cost = float(input("Total cost: "))
+
+        # View a ticket report
+        if cmd == "vr"
+
+
+
 
         if cmd == "b":
             return ui_consts.BACK
