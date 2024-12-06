@@ -13,7 +13,7 @@ class StorageAPI:
     def __init__(self):
         self.facility_storage = FacilityStorage("filename.json")
         self.contractor_storage = ContractorStorage("filename.json")
-        self.destination_storage = DestinationStorage("data/destinations.json")
+        self.destination_storage = DestinationStorage("testdata/destinations.json")
         self.property_storage = PropertyStorage("testdata/properties.json")
         self.report_storage = ReportStorage("filename.json")
         self.staff_storage = StaffStorage("filename.json")
