@@ -605,7 +605,7 @@ Command: (INPUT)
 	print (*contractor/s hired*)
 	print (*contractor review*)
 	print (*contractor fee*)
-	print (*total coast*)
+	print (*total cost*)
 	
 	Rate contractor/s: (INPUT/float)
 	Write a response (optional): (INPUT/str)

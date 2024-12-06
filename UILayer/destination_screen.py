@@ -16,7 +16,7 @@ class DestinationScreen(BaseScreen):
         destinations : list[Destination] = self.ui.logic_api.get_all_destinations()
 
         destination_table = PrettyTable()
-        destination_table.field_names = ["ID","Country","Airport","Phone_nr","Opening_hours","manager"]
+        destination_table.field_names = ["destinationID","managerID","Country","Airport", "phone", "Opening_hours"]
 
         for destination in destinations:
             destination_table.add_row([destination.destinationID, destination.managerID, destination.country, destination.airport, destination.phone, destination.opening_hours])
@@ -33,7 +33,6 @@ class DestinationScreen(BaseScreen):
 
         # Add a destination
         if cmd == "a":
-<<<<<<< HEAD
             new_destination = ""
             for _ in destination_table.field_names:
                 new_value = input(f"New {_}: ")
@@ -48,25 +47,6 @@ class DestinationScreen(BaseScreen):
             change_airport = input("Change destination airport: ")
             change_opening_hours = input("Change destination airport opening hours: ")
 
-=======
-            new_destination = input("New destination country: ")
-            new_airport = input("New destination airport: ")
-            new_opening_hours = input("New destination airport opening hours: ")
-            new_phone = int(input("New destination phone number: "))
-            new_manager = input("New destination manager: ")
-
-        # Edit destination
-        if cmd == "e":
-            edit_id = input("Edit destination with the ID: ")
-                # If ID does not exist in the destination list, raise error "No destination found with that ID!"    
-                 # If ID does not exist, cancel command
-            print("If you do not wish to change a specific field, you can leave the input empty")
-            change_destination = input("Change destination country to: ")
-            change_airport = input("Change destination airport to: ")
-            change_opening_hours = input("Change destination airport opening hours to: ")
-            change_number = int(input("Change destination phone number to: "))
-            change_manager = input("Change desination manager to: ")
->>>>>>> d9dead0da3241c97e86b1b30f86b4ba3a8b8806c
         
         if cmd == "b":
             return ui_consts.BACK
