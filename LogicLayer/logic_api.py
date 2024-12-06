@@ -29,3 +29,6 @@ class LogicAPI:
 
     def get_all_properties(self):
         return self.property_manager.get_all_properties()
+    
+    def get_all_destinations(self):
+        return self.destination_manager.get_all_destinations()
