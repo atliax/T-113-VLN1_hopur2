@@ -32,6 +32,8 @@ class ScreenFactory:
                 return DestinationScreen(self.ui)
             case ui_consts.CONTRACTOR:
                 return ContractorScreen(self.ui)
+            case ui_consts.TICKETMAKER:
+                return TicketmakerScreen(self.ui)
 
         # TODO, other screens
 
