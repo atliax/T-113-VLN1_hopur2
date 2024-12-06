@@ -22,7 +22,7 @@ class PropertiesScreen(BaseScreen):
             property_table.add_row([property.id, property.name, property.location, property.status, property.destinationID])
 
         # dæmi um prentun á töflu með ákveðinni breidd:
-        #property_table._min_table_width = 118
+        property_table._min_table_width = 118
 
         # dæmi um prentun á hluta af töflu:
         #print(property_table.get_string(start=0, end=10))
