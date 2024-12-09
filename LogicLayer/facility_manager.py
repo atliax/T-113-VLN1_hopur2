@@ -1,6 +1,6 @@
-from Model import Facility
-
 from StorageLayer import StorageAPI
+
+from Model import Facility
 
 class FacilityManager:
     def __init__(self, storage_api):
