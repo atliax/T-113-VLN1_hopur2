@@ -7,7 +7,7 @@ class Contractor(BaseModel):
         self.rating = rating
         self.name = name
         self.contact = contact
-        self.phone_nr = phone
+        self.phone = phone
         self.address = address
         self.opening_hours = opening_hours
         self.contractor_type = contractor_type
