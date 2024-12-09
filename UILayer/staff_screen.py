@@ -43,6 +43,12 @@ class StaffScreen(BaseScreen):
 
         # Add an employee
         if cmd == "a":
+            # SETJA INN PRETTYTABLE LISTA HÉR
+
+            new_destination = input("New employee destination ID: ")
+            # If ID does not exist in destination list, raise error "No destination found with that ID!"
+            # Cancel command if destination ID is not found
+
             new_employee = input("New employee name: ")
             new_ssn = (input("New employee ssn: "))
             new_address = input("New employee address: ")

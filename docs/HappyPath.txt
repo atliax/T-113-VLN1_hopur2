@@ -357,6 +357,7 @@ Command: (INPUT)
 	New employee email: (INPUT/str)
 	New employee password: (INPUT/str)
 	New employee job title: (INPUT/str)
+    New employee destination: (INPUT/str)
 	# If job title = "manager" or "boss" set isManager = True, otherwise False
 	
 	Is the new employee a manager? y/n: (INPUT/str) -> bool
