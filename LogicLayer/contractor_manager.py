@@ -1,3 +1,4 @@
+from StorageLayer.storage_api import StorageAPI
 from Model import Contractor
 
 class ContractorManager:
@@ -8,8 +9,8 @@ class ContractorManager:
         return self.storage_api.get_all_contractors()
 
     def add_new_contractor(self, new_contractor : Contractor):
-        all_contractor = self.storage_api.get_all_contractors()
-        n = int(all_contractor[len(all_contractor)-1].contractorID[1:])
+        all_contractors = self.storage_api.get_all_contractors()
+        n = int(all_contractors[len(all_contractors)-1].contractorID[1:])
         n += 1
         new_id = "C" + str(n)
         new_contractor.contractorID = new_id
