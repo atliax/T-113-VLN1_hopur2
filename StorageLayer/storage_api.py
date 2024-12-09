@@ -47,15 +47,6 @@ class StorageAPI:
     def add_new_facility(self, new_facility : Facility):
         self.facility_storage.add_new_facility(new_facility)
 
-    def get_all_contractors(self) -> list[Contractor]:
-        return self.contractor_storage.load_from_file()
-
-    
-    def add_new_contractor(self, new_contractor : Contractor):
-        self.contractor_storage.add_new_contractor(new_contractor)
-    def add_new_contractor(self, new_contractor : Contractor):
-        self.contractor_storage.add_new_contractor(new_contractor)
-
 #==========================================================================
 #--Properties--------------------------------------------------------------
 
@@ -72,3 +63,25 @@ class StorageAPI:
         pass
 
 #==========================================================================
+
+#==========================================================================
+# ----contractors----------------------------------------------------------   
+    def get_all_contractors(self):
+        return self.contractor_manager.get_all_contractors()
+    
+    def add_new_contractor(self, new_contractor: Contractor):
+        self.contractor_manager.add_new_contractor(new_contractor)
+
+    def remove_contractor(self, remove_id: str):
+        return self.contractor_manager.remove_contractor(remove_id)
+    
+    def edit_contractor(self):
+        pass
+
+    def contractor_search(self):
+        pass
+
+    def view_contractor_contact(self):
+        pass
+
+#---------------------------------------------------------------------------
