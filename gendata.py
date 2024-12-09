@@ -8,13 +8,13 @@ from StorageLayer.ticket_storage import TicketStorage
 
 from Model import *
 
-facility_storage = FacilityStorage("testdata/facilities.json", Facility)
-contractor_storage = ContractorStorage("testdata/contractors.json", Contractor)
-destination_storage = DestinationStorage("testdata/destinations.json", Destination)
-property_storage = PropertyStorage("testdata/properties.json", Property)
-report_storage = ReportStorage("testdata/reports.json", Report)
-staff_storage = StaffStorage("testdata/staff.json", Staff)
-ticket_storage = TicketStorage("testdata/tickets.json", Ticket)
+facility_storage = FacilityStorage("data/facilities.json", Facility)
+contractor_storage = ContractorStorage("data/contractors.json", Contractor)
+destination_storage = DestinationStorage("data/destinations.json", Destination)
+property_storage = PropertyStorage("data/properties.json", Property)
+report_storage = ReportStorage("data/reports.json", Report)
+staff_storage = StaffStorage("data/staff.json", Staff)
+ticket_storage = TicketStorage("data/tickets.json", Ticket)
 
 destinations = []
 properties = []
