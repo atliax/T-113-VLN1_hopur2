@@ -30,11 +30,10 @@ class FacilityScreen(BaseScreen):
                 # If ID does not exist in property list, raise error "No facility found with that ID!"
                 # If ID does not exist, cancel command
 
-                
+
         if cmd == "s":
-                # Example gamer, Nuuk
-                # Finnur allar línur tengdar gamer, nuuk
             search = input("Search for: ") # Sama search allstaðar nema á tickets
+            #eftir að implementa
 
         # View details
         if cmd == "v":
