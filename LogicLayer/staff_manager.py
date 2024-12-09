@@ -54,5 +54,8 @@ class StaffManager:
         # ef í lagi:
         self.storage_api.remove_staff(remove_id)
 
+    def edit_staff(self, edit_staff):
+        self.storage_api.edit_staff(edit_staff)
+
         
   
