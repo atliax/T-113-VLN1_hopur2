@@ -94,24 +94,29 @@ class StaffScreen(BaseScreen):
         if cmd == "e":
             staff_edit = None
             staff_attributes = ["destinationID","name", "ssn","address","phone_home","phone_gsm","email","password","job_title","is_manager"]
-            edit_with_id = input("Edit employee with the ID: ").upper()
-            #if nothing is input, the field will be left unchanged
-            for employee in staff:
-                if employee.staffID == edit_with_id:
-                    staff_edit = employee
-            if staff_edit is None:
-                print(f"No employee with the ID: '{edit_with_id}'")
-                input("Press anykey to continue")
-            else:
-                for attribute in staff_attributes:
-                    current_value = getattr(employee, attribute)
-                    new_value = input(f"New {attribute.capitalize()} (Current {current_value}): ").strip()
-                    if new_value:
-                        setattr(staff_edit,attribute,new_value)
-                self.ui.logic_api.edit_staff(staff)
-                # If ID does not exist in the employee list, raise error "No employee found with that ID!"
-                # If ID does not exist, cancel command
-                # If job title = "manager" or "boss" set isManager = True, otherwise False)
+            
+            while staff_edit is None:
+                edit_with_id = input("Edit employee with the ID: ").upper()
+                #if nothing is input, the field will be left unchanged
+                for employee in staff:
+                    if employee.staffID == edit_with_id:
+                        staff_edit = employee
+                        break
+
+                if staff_edit is None:
+                    print(f"No employee with the ID: '{edit_with_id}' Try again (B to cancel).")
+                if edit_with_id == "B":
+                    return ui_consts.CMD_BACK
+               
+            for attribute in staff_attributes:
+                current_value = getattr(employee, attribute)
+                new_value = input(f"New {attribute.capitalize()} (Current {current_value}): ").strip()
+                if new_value:
+                    setattr(staff_edit,attribute,new_value)
+            self.ui.logic_api.edit_staff(staff)
+            # If ID does not exist in the employee list, raise error "No employee found with that ID!"
+            # If ID does not exist, cancel command
+            # If job title = "manager" or "boss" set isManager = True, otherwise False)
 
         if cmd == "s":
                 # Example gamer, Nuuk
