@@ -18,13 +18,35 @@ class StorageAPI:
         self.staff_storage = StaffStorage("data/staff.json", Staff)
         self.ticket_storage = TicketStorage("data/tickets.json", Ticket)
 
+#==========================================================================
+#--Destinations------------------------------------------------------------
 
+    def get_all_destinations(self) -> list[Destination]:
+        return self.destination_storage.load_from_file()
+
+    def add_new_destination(self, new_destination : Destination):
+        self.destination_storage.add_new_destination(new_destination)
+
+    def edit_destination(self, destinations):
+        self.destination_storage.edit_destination(destinations)
+
+#==========================================================================
+#--Facilities--------------------------------------------------------------
+
+    def get_all_facilities(self) -> list[Facility]:
+        return self.facility_storage.load_from_file()
+    
+    def add_new_facility(self, new_facility : Facility) -> None:
+        self.facility_storage.add_new_facility(new_facility)
 
 #==========================================================================
 #--Properties--------------------------------------------------------------
 
    # def property_add(self):
     #    self.property_storage.property_add(new_property)
+
+    def get_all_properties(self) -> list[Property]:
+        return self.property_storage.load_from_file()
 
     def property_remove(self):
         pass
@@ -39,33 +61,35 @@ class StorageAPI:
         return self.property_storage.load_from_file()
     
 #==========================================================================
-#--Staff-------------------------------------------------------------------
+#--Staff--------------------------------------------------------------
+
+    def remove_staff(self, staffID) -> None:
+        self.staff_storage.remove_staff(staffID)
 
     def edit_staff(self, edit_staff):
         self.staff_storage.edit_staff(edit_staff)
-        return
     
     def get_all_staff(self) -> list[Staff]:
         return self.staff_storage.load_from_file()
 
-    def add_new_staff(self, new_staff : Staff):
+    def add_new_staff(self, new_staff : Staff) -> None:
         self.staff_storage.add_new_staff(new_staff)
     
     def remove_staff(self, remove_id):
         return self.staff_storage.remove_staff(remove_id)
 
 #==========================================================================
-#--Contractors-------------------------------------------------------------  
- 
-    def get_all_contractors(self):
-        return self.contractor_manager.get_all_contractors()
-    
-    def add_new_contractor(self, new_contractor: Contractor):
-        self.contractor_manager.add_new_contractor(new_contractor)
+# ----contractors----------------------------------------------------------   
 
-    def remove_contractor(self, remove_id: str):
-        return self.contractor_manager.remove_contractor(remove_id)
-    
+    #def get_all_contractors(self):
+    #    return self.contractor_manager.get_all_contractors()
+
+    #def add_new_contractor(self, new_contractor: Contractor):
+    #    self.contractor_manager.add_new_contractor(new_contractor)
+
+    #def remove_contractor(self, remove_id: str):
+    #    return self.contractor_manager.remove_contractor(remove_id)
+
     def edit_contractor(self):
         pass
 

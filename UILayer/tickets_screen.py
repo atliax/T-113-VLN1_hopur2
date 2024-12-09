@@ -1,14 +1,16 @@
 from UILayer.base_screen import BaseScreen
+
 from UILayer import ui_consts
 
 class TicketsScreen(BaseScreen):
-    def __init__(self, ui):
+    def __init__(self, ui) -> None:
         super().__init__(ui)
 
-    def render(self):
+    def run(self):
         self.clear_screen()
 
         print("Main Menu > Tickets")
+
         print(ui_consts.SEPERATOR)
         print("|")
         print("|	[A] Add a ticket		[E] Edit a ticket			[B] Go back")
@@ -20,8 +22,6 @@ class TicketsScreen(BaseScreen):
 
         cmd = input("Command: ").lower()
         # ÞAÐ VANTAR AÐ HAFA OPTION TIL AÐ OPNA LOKAÐA VERKSKÝRSLU
-
-
 
         # Add a ticket
         if cmd == "a":
@@ -58,7 +58,7 @@ class TicketsScreen(BaseScreen):
 
         # Edit ticket
         if cmd == "e":
-                    # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"    
+                    # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"
                     # If ID does not exist, cancel command
                 print("If you do not wish to change a specific field, you can leave the input empty")
                 change_title = input("Change ticket title to: ")
@@ -89,7 +89,7 @@ class TicketsScreen(BaseScreen):
         # Make a ticket report
         if cmd == "mr":
             create_report = input("Make a report for ticket with the ID: ")
-                    # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"    
+                    # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"
                     # If ID does not exist, cancel command
             employee = input("Employee writing report: ")
             report = input("Report: ")
@@ -103,7 +103,7 @@ class TicketsScreen(BaseScreen):
         # View a ticket report
         if cmd == "vr":
             view = input("View a report for ticket with the ID: ")
-                # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"    
+                # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"
                 # If ID does not exist, cancel command
                 # If the ticket doesnt have a report raise error "This ticket doesn't have a report!"
                 # If the ticket doesn't have a report, cancel command      
@@ -126,6 +126,6 @@ class TicketsScreen(BaseScreen):
                 # If "D" then ticket status == "Needs work"
 
         if cmd == "b":
-            return ui_consts.BACK
+            return ui_consts.CMD_BACK
 
         return self

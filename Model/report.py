@@ -1,7 +1,9 @@
 from Model.base_model import BaseModel
 
 class Report(BaseModel):
-    def __init__(self, reportID:str, staff:str, notes:str, cost:float, date:str, contractorID:str, contractor_review:str, contractor_rating:str, contractor_fee:str) -> None:
+    def __init__(self, reportID : str, staff : str, notes : str, cost : float, \
+                 date : str, contractorID : str, contractor_review : str, \
+                 contractor_rating : str, contractor_fee : str) -> None:
         self.reportID = reportID
         self.staff = staff
         self.notes = notes

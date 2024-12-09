@@ -1,12 +1,14 @@
 from UILayer.base_screen import BaseScreen
+
 from UILayer import ui_consts
 
 class SplashScreen(BaseScreen):
-    def __init__(self, ui):
+    def __init__(self, ui) -> None:
         super().__init__(ui)
 
-    def render(self):
+    def run(self):
         self.clear_screen()
+
         print("          ___           ___           ___                    ___                       ___     ")
         print("         /\\__\\         /\\  \\         /\\__\\                  /\\  \\          ___        /\\  \\    ")
         print("        /::|  |       /::\\  \\       /::|  |                /::\\  \\        /\\  \\      /::\\  \\   ")
@@ -19,5 +21,7 @@ class SplashScreen(BaseScreen):
         print("         /:/  /        /:/  /        /:/  /                 /:/  /      \\/__/        |:|  |    ")
         print("         \\/__/         \\/__/         \\/__/                  \\/__/                     \\|__|    ")
         print("")
+
         input("Press enter to continue.")
-        return ui_consts.LOGIN
+
+        return ui_consts.LOGIN_SCREEN

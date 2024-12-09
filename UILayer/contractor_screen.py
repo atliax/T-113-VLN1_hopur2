@@ -1,25 +1,28 @@
-from UILayer.base_screen import BaseScreen
-from UILayer import ui_consts
-from Model import Contractor
-from Model import Destination
 from prettytable import PrettyTable
 
+from UILayer.base_screen import BaseScreen
+
+from UILayer import ui_consts
+
+from Model import Contractor
+#from Model import Destination #needed?
+
 class ContractorScreen(BaseScreen):
-    def __init__(self, ui):
+    def __init__(self, ui) -> None:
         super().__init__(ui)
 
-    def render(self):
+    def run(self):
         self.clear_screen()
 
         print("Main menu > Contractors")
 
-        contractor : list[Contractor] = self.ui.logic_api.get_all_contractors()
+        contractors = self.ui.logic_api.get_all_contractors()
 
         contractor_table = PrettyTable()
         contractor_table.field_names = ["id", "name","type","destination","contact","rating"]
 
-        for contractor in contractor:
-            contractor_destination : Destination = self.ui.logic_api.get_destination_by_ID(contractor.destinationID)
+        for contractor in contractors:
+            contractor_destination = self.ui.logic_api.get_destination_by_ID(contractor.destinationID)
             if contractor_destination is not None:
                 contractor_destination_country = contractor_destination.country
             else:
@@ -28,9 +31,10 @@ class ContractorScreen(BaseScreen):
             contractor_table.add_row([contractor.contractorID, contractor.name, contractor.contractor_type, contractor_destination_country, contractor.contact, contractor.rating])
 
         contractor_table._min_table_width = ui_consts.TABLE_WIDTH
+
         print(contractor_table)
 
-        destinations : list[Destination] = self.ui.logic_api.get_all_destinations()
+        destinations = self.ui.logic_api.get_all_destinations()
 
         destination_table = PrettyTable()
         destination_table.field_names = ["Destination ID", "Country"]
@@ -65,7 +69,9 @@ class ContractorScreen(BaseScreen):
             add_phone = int(input("New contractor phone: "))
             add_address = input("New contractor address: ")
             add_opening_hours = (input("Add opening hours for contractor: "))
-            new_contractor = Contractor(new_destination ,None ,add_rating ,add_contractor ,add_contact ,add_phone, add_address ,add_opening_hours, add_type)
+
+            new_contractor = Contractor(None, new_destination, add_rating, add_contractor, add_contact, add_phone, add_address, add_opening_hours, add_type)
+
             self.ui.logic_api.add_new_contractor(new_contractor)
 
         # Remove a contractor
@@ -77,7 +83,7 @@ class ContractorScreen(BaseScreen):
         # View contact info
         if cmd == "v":
             view_contact_from_id = input("View the contact information of contractor with the ID: ")
-            # If ID does not exist in the contractor list, raise error "No contractor found with that ID!"    
+            # If ID does not exist in the contractor list, raise error "No contractor found with that ID!"
 	        # If ID does not exist, cancel command
             print(f"Name: {add_contractor}")
             print(f"Phone: {add_phone}")
@@ -87,7 +93,7 @@ class ContractorScreen(BaseScreen):
         if cmd == "e":
             #If nothing is input, the name/loc will be unchanged
             edit_id = input("Edit contractor with the ID: ") # Óklárað!
-                # If ID does not exist in the contractor list, raise error "No contractor found with that ID!"    
+                # If ID does not exist in the contractor list, raise error "No contractor found with that ID!"
                 # If ID does not exist, cancel command
             change_contractor = input("Change contractor name to: ")
             change_type = input("Change contractor type to: ")
@@ -103,6 +109,4 @@ class ContractorScreen(BaseScreen):
                 return "No contractor found with that ID!"
             
         if cmd == "b":
-            return ui_consts.BACK
-            
-
+            return ui_consts.CMD_BACK

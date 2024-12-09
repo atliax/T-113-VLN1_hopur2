@@ -1,7 +1,9 @@
 from Model.base_model import BaseModel
 
 class Staff(BaseModel):
-    def __init__(self, staffID:str, destinationID:str, name:str, ssn:str, address:str, phone_home:str, phone_gsm:str, email:str, password:str, job_title:str, is_manager:bool) -> None:
+    def __init__(self, staffID : str, destinationID : str, name : str, ssn : str, \
+                 address : str, phone_home : str, phone_gsm : str, email : str, \
+                 password : str, job_title : str, is_manager : bool) -> None:
         self.staffID = staffID
         self.destinationID = destinationID
         self.name = name

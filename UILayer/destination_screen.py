@@ -1,19 +1,21 @@
-from UILayer.base_screen import BaseScreen
-from UILayer import ui_consts
-from Model import Destination
-
 from prettytable import PrettyTable
 
+from UILayer.base_screen import BaseScreen
+
+from UILayer import ui_consts
+
+from Model import Destination
+
 class DestinationScreen(BaseScreen):
-    def __init__(self, ui):
+    def __init__(self, ui) -> None:
         super().__init__(ui)
 
-    def render(self):
+    def run(self):
         self.clear_screen()
 
         print("Main menu > Destinations")
 
-        destinations : list[Destination] = self.ui.logic_api.get_all_destinations()
+        destinations = self.ui.logic_api.get_all_destinations()
 
         destination_table = PrettyTable()
         destination_table.field_names = ["ID","managerID","Destination","Airport", "Phone", "Opening"]
@@ -52,7 +54,7 @@ class DestinationScreen(BaseScreen):
                     destination_edit = destination
             if destination_edit is None:
                 print("Destination not found")
-                input("Press any key to continue")
+                input("Press enter to continue")
             else:
                 for attribute in destination_attributes:
                     current_value = getattr(destination, attribute)
@@ -62,6 +64,6 @@ class DestinationScreen(BaseScreen):
                 self.ui.logic_api.edit_destinations(destinations)   
 
         if cmd == "b":
-            return ui_consts.BACK
+            return ui_consts.CMD_BACK
 
         return self

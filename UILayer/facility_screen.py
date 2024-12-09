@@ -1,38 +1,40 @@
+from prettytable import PrettyTable
+
 from UILayer.base_screen import BaseScreen
+
 from UILayer import ui_consts
 
 from Model import Facility
 
-from prettytable import PrettyTable
-
 class FacilityScreen(BaseScreen):
-    def __init__(self, ui):
+    def __init__(self, ui) -> None:
         super().__init__(ui)
 
-    def render(self):
+    def run(self):
         self.clear_screen()
 
         properties = self.ui.logic_api.get_all_properties()
+
         property_table = PrettyTable()
         property_table.field_names = ["ID","Name","Destination","Address","Sq meters","Rooms","Type"]
+
         for property in properties:
             property_table.add_row([property.propertyID, property.name, property.destinationID, property.address, property.square_meters, property.rooms, property.type])
 
-        # dæmi um prentun á töflu með ákveðinni breidd:
         property_table._min_table_width = ui_consts.TABLE_WIDTH
 
-        #print(property_table.get_string(start=0, end=10))
         print("|  Property list:")
         print(property_table)
-
         property_ID = input("View the facilities in property with ID: ")
         # If ID does not exist in property list, raise error "No property found with that ID!"
         # If ID does not exist, cancel command	
         # Print a list of facilities for property with input ID
 
-        facilities : list[Facility] = self.ui.logic_api.get_facilities_by_propertyID(property_ID)
+        facilities = self.ui.logic_api.get_facilities_by_propertyID(property_ID)
+
         facility_table = PrettyTable()
         facility_table.field_names = ["ID","Name","Description"]
+
         for facility in facilities:
             facility_table.add_row([facility.facilityID,facility.name,facility.description])
 
@@ -77,4 +79,6 @@ class FacilityScreen(BaseScreen):
             print(f"Facility description: {new_description}")
 
         if cmd == "b":
-            return ui_consts.BACK
+            return ui_consts.CMD_BACK
+
+        return self

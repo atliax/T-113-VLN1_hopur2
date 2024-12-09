@@ -1,7 +1,9 @@
 from Model.base_model import BaseModel
 
 class Property(BaseModel):
-    def __init__(self, propertyID:str, destinationID:str, name:str, address:str, square_meters:int, rooms:int, type:str) -> None:
+    def __init__(self, propertyID : str, destinationID : str, name : str, \
+                 address : str, square_meters : int, rooms : int, \
+                 type : str) -> None:
         self.propertyID = propertyID
         self.destinationID = destinationID
         self.name = name
@@ -9,4 +11,3 @@ class Property(BaseModel):
         self.square_meters = square_meters
         self.rooms = rooms
         self.type = type
-

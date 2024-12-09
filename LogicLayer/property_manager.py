@@ -3,14 +3,14 @@ from StorageLayer.storage_api import StorageAPI
 from Model import Property
 
 class PropertyManager:
-    def __init__(self, storage_api):
-        self.storage_api : StorageAPI = storage_api
+    def __init__(self, storage_api : StorageAPI):
+        self.storage_api = storage_api
 
-    def get_all_properties(self):
+    def get_all_properties(self) -> list[Property]:
         return self.storage_api.get_all_properties()
 
     # [A] Add a property
-    def property_add(self, new_property : Property):
+    def property_add(self, new_property : Property) -> None:
         all_properties = self.storage_api.get_all_properties()
         n = int(all_properties[len(all_properties)-1].propertyID[1:])
         n += 1
@@ -18,7 +18,6 @@ class PropertyManager:
         new_property.propertyID = new_id
 
         self.storage_api.property_add(new_property)
-
 
     # [R] Remove a property
     def property_remove():
