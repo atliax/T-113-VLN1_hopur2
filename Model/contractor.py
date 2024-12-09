@@ -12,4 +12,3 @@ class Contractor(BaseModel):
         self.opening_hours = opening_hours
         self.contractor_type = contractor_type
 
-    #TODO - klára föllin

@@ -1,6 +1,7 @@
 from UILayer.base_screen import BaseScreen
 from UILayer import ui_consts
 from Model import Staff
+from Model import Destination
 
 from prettytable import PrettyTable
 
@@ -19,7 +20,13 @@ class StaffScreen(BaseScreen):
         staff_table.field_names = ["id", "name","title","destination","ssn"]
 
         for employee in staff:
-            staff_table.add_row([employee.staffID, employee.name, employee.job_title, employee.destinationID, employee.ssn])
+            employee_destination : Destination = self.ui.logic_api.get_destination_by_ID(employee.destinationID)
+            if employee_destination is not None:
+                employee_destination_country = employee_destination.country
+            else:
+                employee_destination_country = "Not assigned"
+
+            staff_table.add_row([employee.staffID, employee.name, employee.job_title, employee_destination_country, employee.ssn])
 
         staff_table._min_table_width = ui_consts.TABLE_WIDTH
         print(staff_table)
@@ -36,6 +43,12 @@ class StaffScreen(BaseScreen):
 
         # Add an employee
         if cmd == "a":
+            # SETJA INN PRETTYTABLE LISTA HÉR
+
+            new_destination = input("New employee destination ID: ")
+            # If ID does not exist in destination list, raise error "No destination found with that ID!"
+            # Cancel command if destination ID is not found
+
             new_employee = input("New employee name: ")
             new_ssn = (input("New employee ssn: "))
             new_address = input("New employee address: ")

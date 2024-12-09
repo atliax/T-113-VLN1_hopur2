@@ -10,4 +10,3 @@ class Property(BaseModel):
         self.rooms = rooms
         self.type = type
 
-#TODO klára fallið

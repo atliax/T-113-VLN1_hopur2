@@ -13,5 +13,3 @@ class Staff(BaseModel):
         self.password = password
         self.job_title = job_title
         self.is_manager = is_manager
-
-#TODO klára fallið

@@ -14,4 +14,3 @@ class Ticket(BaseModel):
         self.recurring_days = recurring_days
         self.open_date = open_date
 
-#TODO klára fallið

@@ -11,5 +11,3 @@ class Report(BaseModel):
         self.contractor_review = contractor_review
         self.contractor_rating = contractor_rating
         self.contractor_fee = contractor_fee
-
-#TODO klára fallið

@@ -43,3 +43,6 @@ class LogicAPI:
 
     def get_all_staff(self):
         return self.staff_manager.get_all_staff()
+
+    def get_destination_by_ID(self, destinationID):
+        return self.destination_manager.get_destination_by_ID(destinationID)
