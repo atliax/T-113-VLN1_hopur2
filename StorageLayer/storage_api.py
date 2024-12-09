@@ -30,5 +30,5 @@ class StorageAPI:
     def add_new_staff(self, new_staff : Staff):
         self.staff_storage.add_new_staff(new_staff)
 
-    #def add_new_destination(self, new_destination_instance):
-        #self.destination_storage
+    def add_new_destination(self, new_destination : Destination):
+        self.destination_storage.add_new_destination(new_destination)
