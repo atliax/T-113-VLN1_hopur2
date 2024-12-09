@@ -52,7 +52,7 @@ class ContractorScreen(BaseScreen):
         if cmd == "a":
             print(destination_table)
 
-            new_destination = input("Enter destination ID for new contractor: ")
+            new_destination = input("Enter destination ID for new contractor: ").upper()
                 # ID Auto generate variable = int(n + 1) then make str("C"+(variable))
             #print(f"New contractor destination ID: ") # Ekki implementað
                 # If ID does not exist in destination list, raise error "No destination found with that ID!"
@@ -64,16 +64,15 @@ class ContractorScreen(BaseScreen):
             add_rating = float(input("Enter rating: "))
             add_phone = int(input("New contractor phone: "))
             add_address = input("New contractor address: ")
-            add_opening_hours = int(input("Add opening hours for contractor: "))
+            add_opening_hours = (input("Add opening hours for contractor: "))
             new_contractor = Contractor(new_destination ,None ,add_rating ,add_contractor ,add_contact ,add_phone, add_address ,add_opening_hours, add_type)
             self.ui.logic_api.add_new_contractor(new_contractor)
 
         # Remove a contractor
         if cmd == "r":
-            try:
-                remove_contractor = input("Remove contractor with ID: ")
-            except LookupError:
-                return "No contractor found with that ID!"
+            print(contractor_table)
+            remove_id = input("Remove employee with the ID: ").upper()
+            self.ui.logic_api.remove_contractor(remove_id)
 
         # View contact info
         if cmd == "v":

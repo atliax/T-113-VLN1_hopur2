@@ -16,7 +16,7 @@ class DestinationScreen(BaseScreen):
         destinations : list[Destination] = self.ui.logic_api.get_all_destinations()
 
         destination_table = PrettyTable()
-        destination_table.field_names = ["ID","managerID","Destination","Airport", "Phone", "Opening hours"]
+        destination_table.field_names = ["ID","managerID","Destination","Airport", "Phone", "Opening"]
 
         for destination in destinations:
             destination_table.add_row([destination.destinationID, destination.managerID, destination.country, destination.airport, destination.phone, destination.opening_hours])
@@ -44,17 +44,22 @@ class DestinationScreen(BaseScreen):
         # Edit destination
         if cmd == "e":
             # 
+            destination_edit = None
             destination_attributes = ["managerID", "country", "airport", "phone", "opening_hours"]
-            pick_destination = input("Type in the id of the destination you want to edit: ")
+            pick_destination = input("Type in the id of the destination you want to edit: ").upper()
             for destination in destinations:
                 if destination.destinationID == pick_destination:
                     destination_edit = destination
-            for attribute in destination_attributes:
-                current_value = getattr(destination, attribute)
-                new_value = input(f"New {attribute} (current: {current_value}): ").strip()
-                if new_value:
-                    setattr(destination_edit, attribute, new_value)   
-            self.ui.logic_api.edit_destinations(destinations)   
+            if destination_edit is None:
+                print("Destination not found")
+                input("Press any key to continue")
+            else:
+                for attribute in destination_attributes:
+                    current_value = getattr(destination, attribute)
+                    new_value = input(f"New {attribute} (current: {current_value}): ").strip()
+                    if new_value:
+                        setattr(destination_edit, attribute, new_value)   
+                self.ui.logic_api.edit_destinations(destinations)   
 
         if cmd == "b":
             return ui_consts.BACK
