@@ -52,7 +52,7 @@ class ContractorScreen(BaseScreen):
         if cmd == "a":
             print(destination_table)
 
-            new_destination = input("Enter destination ID for new contractor: ")
+            new_destination = input("Enter destination ID for new contractor: ").upper()
                 # ID Auto generate variable = int(n + 1) then make str("C"+(variable))
             #print(f"New contractor destination ID: ") # Ekki implementað
                 # If ID does not exist in destination list, raise error "No destination found with that ID!"
