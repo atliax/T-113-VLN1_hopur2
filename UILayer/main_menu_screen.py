@@ -6,7 +6,7 @@ class MainMenuScreen(BaseScreen):
     def __init__(self, ui):
         super().__init__(ui)
 
-    def render(self):
+    def run(self):
         self.clear_screen()
 
         logged_in_user : Staff = self.ui.logic_api.get_logged_in_staff()
@@ -29,17 +29,18 @@ class MainMenuScreen(BaseScreen):
 
         cmd = input("Command: ").lower()
 
-        if cmd == "p":
-            return ui_consts.PROPERTY
-        if cmd == "t":
-            return ui_consts.TICKET
-        if cmd == "s":
-            return ui_consts.STAFF
-        if cmd == "d":
-            return ui_consts.DESTINATION
-        if cmd == "l":
-            return ui_consts.LOGOUT
-        if cmd == "x":
-            return ui_consts.QUIT
-
-        return self
+        match cmd:
+            case "p":
+                return ui_consts.PROPERTY_SCREEN
+            case "t":
+                return ui_consts.TICKET_SCREEN
+            case "s":
+                return ui_consts.STAFF_SCREEN
+            case "d":
+                return ui_consts.DESTINATION_SCREEN
+            case "l":
+                return ui_consts.CMD_LOGOUT
+            case "x":
+                return ui_consts.CMD_QUIT
+            case _:
+                return self

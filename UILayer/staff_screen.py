@@ -1,26 +1,28 @@
+from prettytable import PrettyTable
+
 from UILayer.base_screen import BaseScreen
+
 from UILayer import ui_consts
+
 from Model import Staff
 from Model import Destination
 
-from prettytable import PrettyTable
-
 class StaffScreen(BaseScreen):
-    def __init__(self, ui):
+    def __init__(self, ui) -> None:
         super().__init__(ui)
 
-    def render(self):
+    def run(self):
         self.clear_screen()
 
         print("Main Menu > Staff")
 
-        staff : list[Staff] = self.ui.logic_api.get_all_staff()
+        staff = self.ui.logic_api.get_all_staff()
 
         staff_table = PrettyTable()
         staff_table.field_names = ["ID", "Name","Job title","Destination","SSN"]
 
         for employee in staff:
-            employee_destination : Destination = self.ui.logic_api.get_destination_by_ID(employee.destinationID)
+            employee_destination = self.ui.logic_api.get_destination_by_ID(employee.destinationID)
             if employee_destination is not None:
                 employee_destination_country = employee_destination.country
             else:
@@ -29,17 +31,16 @@ class StaffScreen(BaseScreen):
             staff_table.add_row([employee.staffID, employee.name, employee.job_title, employee_destination_country, employee.ssn])
         
         staff_table._min_table_width = ui_consts.TABLE_WIDTH
+
         print(staff_table)
 
-        destinations : list[Destination] = self.ui.logic_api.get_all_destinations()
+        destinations = self.ui.logic_api.get_all_destinations()
 
         destination_table = PrettyTable()
         destination_table.field_names = ["Destination ID","Country"]
 
         for destination in destinations:
             destination_table.add_row([destination.destinationID, destination.country])
-
-        
 
         print(ui_consts.SEPERATOR)
         print("|")
@@ -91,7 +92,6 @@ class StaffScreen(BaseScreen):
 	            # If ID does not exist, cancel command
 
         if cmd == "e":
-
             staff_edit = None
             staff_attributes = ["destinationID","name", "ssn","address","phone_home","phone_gsm","email","password","job_title","is_manager"]
             edit_with_id = input("Edit employee with the ID: ").upper()
@@ -101,7 +101,7 @@ class StaffScreen(BaseScreen):
                     staff_edit = employee
             if staff_edit is None:
                 print("PRUFA EKKI TIL")
-                input("ANYKEY")
+                input("ENTER")
             else:
                 for attribute in staff_attributes:
                     current_value = getattr(employee, attribute)
@@ -109,7 +109,7 @@ class StaffScreen(BaseScreen):
                     if new_value:
                         setattr(staff_edit,attribute,new_value)
                 self.ui.logic_api.edit_staff(staff)
-                # If ID does not exist in the employee list, raise error "No employee found with that ID!"    
+                # If ID does not exist in the employee list, raise error "No employee found with that ID!"
                 # If ID does not exist, cancel command
                 # If job title = "manager" or "boss" set isManager = True, otherwise False)
 
@@ -120,11 +120,10 @@ class StaffScreen(BaseScreen):
 
         # View contact info
         if cmd == "c":
-            return ui_consts.CONTRACTOR
+            return ui_consts.CONTRACTOR_SCREEN
             
         # Back
         if cmd == "b":
-            return ui_consts.BACK
-
+            return ui_consts.CMD_BACK
 
         return self

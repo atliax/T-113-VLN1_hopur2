@@ -9,23 +9,23 @@ class UIManager:
         self.running = True
         self.screen_factory = ScreenFactory(self)
         self.screen_stack = []
-        self.start_screen = self.screen_factory.create_screen(ui_consts.SPLASH)
+        self.start_screen = self.screen_factory.create_screen(ui_consts.SPLASH_SCREEN)
         self.current_screen = self.start_screen
 
     def run(self) -> None:
         while self.running:
-            next_screen = self.current_screen.render()
+            next_screen = self.current_screen.run()
 
             if isinstance(next_screen, str):
                 match next_screen:
-                    case ui_consts.QUIT:
-                        print("Exiting...")
+                    case ui_consts.CMD_QUIT:
+                        print(ui_consts.MSG_EXIT)
                         self.running = False
-                    case ui_consts.LOGOUT:
+                    case ui_consts.CMD_LOGOUT:
                         self.logic_api.logout()
                         self.screen_stack = []
                         self.current_screen = self.start_screen
-                    case ui_consts.BACK:
+                    case ui_consts.CMD_BACK:
                         self.pop_screen()
                     case _:
                         self.push_screen(self.screen_factory.create_screen(next_screen))

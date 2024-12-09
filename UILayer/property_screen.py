@@ -1,19 +1,21 @@
-from UILayer.base_screen import BaseScreen
-from UILayer import ui_consts
-from Model import Property
-
 from prettytable import PrettyTable
 
-class PropertiesScreen(BaseScreen):
-    def __init__(self, ui):
+from UILayer.base_screen import BaseScreen
+
+from UILayer import ui_consts
+
+from Model import Property
+
+class PropertyScreen(BaseScreen):
+    def __init__(self, ui) -> None:
         super().__init__(ui)
 
-    def render(self):
+    def run(self):
         self.clear_screen()
 
         print("Main menu > Properties")
 
-        properties : list[Property] = self.ui.logic_api.get_all_properties()
+        properties = self.ui.logic_api.get_all_properties()
 
         property_table = PrettyTable()
         property_table.field_names = ["ID","Name","Destination","Address","Sq meters","Rooms","Type"]
@@ -21,10 +23,8 @@ class PropertiesScreen(BaseScreen):
         for property in properties:
             property_table.add_row([property.propertyID, property.name, property.destinationID, property.address, property.square_meters, property.rooms, property.type])
 
-        # dæmi um prentun á töflu með ákveðinni breidd:
         property_table._min_table_width = ui_consts.TABLE_WIDTH
 
-        #print(property_table.get_string(start=0, end=10))
         print("|  Property list:")
         print(property_table)
 
@@ -41,7 +41,6 @@ class PropertiesScreen(BaseScreen):
 
         # [A] Add a property
         if cmd == "a":
-
             # Get property detail inputs from user 
             p_new_name = input("New property name: ")
             p_new_location = input("New property destionation ID: ")
@@ -60,10 +59,10 @@ class PropertiesScreen(BaseScreen):
         # [R] Remove a property
         if cmd == "r":
             remove_property = input("Remove a property that has the ID: ")
-        
+
         # [V] View facilities
         if cmd == "v":
-            return ui_consts.FACILITY
+            return ui_consts.FACILITY_SCREEN
 
 
         # [E] Edit a property 
@@ -92,8 +91,6 @@ class PropertiesScreen(BaseScreen):
 
         # [B] Go Back
         if cmd == "b":
-            return ui_consts.BACK
-    
-
+            return ui_consts.CMD_BACK
 
         return self

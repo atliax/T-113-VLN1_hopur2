@@ -1,13 +1,13 @@
 import os
-from UILayer import ui_consts
 
 class BaseScreen:
     def __init__(self, ui):
-        from UILayer import UIManager #lazy import for VSCode completion
+        from UILayer import UIManager #lazy import so VSCode can autocomplete
         self.ui : UIManager = ui
 
-    def clear_screen(self):
+    def clear_screen(self) -> None:
+        """Clears the terminal screen"""
         os.system('cls' if os.name == 'nt' else 'clear')
 
-    def render(self):
+    def run(self):
         raise NotImplementedError("Subclass needs to implement render()")

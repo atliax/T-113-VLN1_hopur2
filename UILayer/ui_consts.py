@@ -1,20 +1,23 @@
 # Constants to use in UI layer
 
 # Screens
-PROPERTY = "properties"
-STAFF = "staff"
-TICKET = "tickets"
-DESTINATION = "destinations"
-LOGIN = "login"
-MAIN_MENU = "main_menu"
-SPLASH = "splash"
-CONTRACTOR = "contractor"
-FACILITY = "facilities"
+PROPERTY_SCREEN = "properties"
+STAFF_SCREEN = "staff"
+TICKET_SCREEN = "tickets"
+DESTINATION_SCREEN = "destinations"
+LOGIN_SCREEN = "login"
+MAIN_MENU_SCREEN = "main_menu"
+SPLASH_SCREEN = "splash"
+CONTRACTOR_SCREEN = "contractor"
+FACILITY_SCREEN = "facilities"
 
 # Commands
-LOGOUT = "logout"
-BACK = "back"
-QUIT = "quit"
+CMD_LOGOUT = "logout"
+CMD_BACK = "back"
+CMD_QUIT = "quit"
+
+# Messages
+MSG_EXIT = "Exiting..."
 
 # Format
 SEPERATOR =  "//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////"

@@ -4,7 +4,7 @@ import os
 from Model import BaseModel
 
 class BaseStorage:
-    def __init__(self, filename, model_class : BaseModel):
+    def __init__(self, filename : str, model_class : BaseModel) -> None:
         self.filename = filename
         self.model_class = model_class
 

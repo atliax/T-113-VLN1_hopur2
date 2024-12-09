@@ -6,11 +6,11 @@ from UILayer.base_screen import BaseScreen
 from UILayer import ui_consts
 
 class LoginScreen(BaseScreen):
-    def __init__(self, ui):
+    def __init__(self, ui) -> None:
         super().__init__(ui)
         self.user_note = ""
 
-    def render(self):
+    def run(self):
         self.clear_screen()
 
         print(ui_consts.SEPERATOR)
@@ -27,7 +27,7 @@ class LoginScreen(BaseScreen):
         print("")
 
         if self.user_note != "":
-            print(self.user_note)
+            print("\n" + self.user_note)
 
         # email = input("Username: ")
         # password = getpass("Password: ")
@@ -38,7 +38,7 @@ class LoginScreen(BaseScreen):
 
         if self.ui.logic_api.authenticate_login(email,password):
             self.user_note = ""
-            return ui_consts.MAIN_MENU
+            return ui_consts.MAIN_MENU_SCREEN
         else:
-            self.user_note = "invalid username or password."
+            self.user_note = "Invalid username or password."
             return self
