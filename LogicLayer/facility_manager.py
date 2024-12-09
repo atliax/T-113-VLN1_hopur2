@@ -8,7 +8,7 @@ class FacilityManager:
     def get_all_facilities(self):
         return self.storage_api.get_all_facilities()
 
-    def add__new_facility(self, new_facility : Staff):
+    def add__new_facility(self, new_facility : Facility):
         all_facilities = self.storage_api.get_all_facilities()
         n = int(all_facilities[len(all_facilities)-1].facilityID[1:])
         n += 1
