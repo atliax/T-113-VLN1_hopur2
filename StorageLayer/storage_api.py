@@ -35,3 +35,12 @@ class StorageAPI:
 
     def remove_staff(self, remove_id):
         return self.staff_storage.remove_staff(remove_id)
+    
+    def get_all_facilities(self) -> list[Facility]:
+        return self.facility_storage.load_from_file()
+    
+    def add_new_facility(self, new_facility : Facility):
+        self.facility_storage.add_new_facility(new_facility)
+
+    def get_all_contractors(self) -> list[Contractor]:
+        return self.contractor_storage.load_from_file()
