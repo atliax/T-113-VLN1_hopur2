@@ -32,13 +32,11 @@ class StorageAPI:
 
     def add_new_destination(self, new_destination : Destination):
         self.destination_storage.add_new_destination(new_destination)
-<<<<<<< HEAD
         return
 
     def edit_destination(self, destinations):
         self.destination_storage.edit_destination(destinations)
         return
-=======
 
     def remove_staff(self, remove_id):
         return self.staff_storage.remove_staff(remove_id)
@@ -53,4 +51,3 @@ class StorageAPI:
         return self.contractor_storage.load_from_file()
 
     
->>>>>>> 9ad80514a5bbd02d2bc8cbb3fec45f153a2ea7c6
