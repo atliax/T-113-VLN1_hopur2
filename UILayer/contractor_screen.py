@@ -16,7 +16,7 @@ class ContractorScreen(BaseScreen):
         contractor : list[Contractor] = self.ui.logic_api.get_all_contractors()
 
         contractor_table = PrettyTable()
-        contractor_table.field_names = ["id", "name","title","destination","rating"]
+        contractor_table.field_names = ["id", "name","type","destination","rating"]
 
         for contractor in contractor:
             contractor_destination : Destination = self.ui.logic_api.get_destination_by_ID(contractor.destinationID)
@@ -25,7 +25,7 @@ class ContractorScreen(BaseScreen):
             else:
                 contractor_destination_country = "Not assigned"
 
-            contractor_table.add_row([contractor.contractorID, contractor.name, contractor.job_title, contractor_destination_country, contractor.rating])
+            contractor_table.add_row([contractor.contractorID, contractor.name, contractor.contractor_type, contractor_destination_country, contractor.rating])
 
         contractor_table._min_table_width = ui_consts.TABLE_WIDTH
         print(contractor_table)

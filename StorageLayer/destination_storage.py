@@ -10,3 +10,7 @@ class DestinationStorage(BaseStorage):
         current_destinations = self.load_from_file()
         current_destinations.append(new_destination)
         self.save_to_file(current_destinations)
+
+    def edit_destination(self, destinations):
+        self.save_to_file(destinations)
+        
