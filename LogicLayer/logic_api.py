@@ -101,3 +101,21 @@ class LogicAPI:
 
     def get_facilities_by_propertyID(self,propertyID):
         return self.facility_manager.get_facilities_by_propertyID(propertyID)
+    
+
+    def add_new_facility(self,new_facility: Facility):
+        self.facility_manager.add_new_facility(new_facility)
+    
+    def remove_facility(self, remove_id: str):
+        return self.facility_manager.remove_facility(remove_id)
+    
+    def facility_search(self):
+        pass
+
+    def edit_facilities(self):
+        pass
+
+    def get_all_facilities(self):
+        return self.facility_manager.get_all_facilities()
+    
+    

@@ -316,4 +316,10 @@ Ritari: Eva
 Við ætlum að halda áfram að setja dæmagögn í .json skrár
 Halda áfram að vinna í virkni fyrir alla skjái forritsins. Erum byrjuð á staff, property, contractors og facility
 Klára destinations 
-Ætlum að skipta með okkur verkum, flestir eru að vinna í virkninni. Ætlum að sjá hvernig okkur miðar og taka stöðuna í lok dags.
+Ætlum að skipta með okkur verkum, flestir eru að vinna í virkninni. Ætlum að sjá hvernig okkur miðar og taka stöðuna í lok dags. 
+
+## 9. Des kl 17.05
+öll dæmagögn komin í .json skrár. Dagurinn fór að mestu í að vinna í logic layer. staff og destinations eru næstum klár.Virknin er komin, má fínpússa betur. Má skoða manager virkni og Það á eftir að útfæra search function. Hin eru langt komin, nema tickets er eftir. Eva vann í facilities, Óli í destinations, Hjörtur í staff, Daníel í contractors og Gísli í properties. Atli var að vinna með dæmagögn og í virkninni með okkur öllum
+
+## Markmið morgundagsins
+Komast sem lengst með að klára virkni á öllum skjám sem við erum byrjuð á. Byrja á virkni inn í tickets.  Uppfæra happy path í samræmi við facilities og properties. 
