@@ -82,3 +82,17 @@ class LogicAPI:
     
     def add_new_contractor(self, new_contractor: Contractor):
         self.contractor_manager.add_new_contractor(new_contractor)
+
+    def remove_contractor(self, remove_id: str):
+        return self.contractor_manager.remove_contractor(remove_id)
+    
+    def edit_contractor(self):
+        pass
+
+    def contractor_search(self):
+        pass
+
+    def view_contractor_contact(self):
+        pass
+
+#---------------------------------------------------------------------------
