@@ -70,7 +70,7 @@ class PropertiesScreen(BaseScreen):
             return ui_consts.FACILITY
 
 
-         # [E] Edit a property 
+        # [E] Edit a property 
         if cmd == "e":
             edit_property = input("Edit property with the ID: ") # If nothing is input, the field will be left unchanged
                 # If ID does not exist in property list, raise error "No property found with that ID!"

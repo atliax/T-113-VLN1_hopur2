@@ -17,6 +17,9 @@ class PropertyManager:
         new_id = "P" + str(n)
         new_property.propertyID = new_id
 
+        self.storage_api.property_add(new_property)
+
+
     # [R] Remove a property
     def property_remove():
         pass
