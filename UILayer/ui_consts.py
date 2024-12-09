@@ -8,7 +8,7 @@ DESTINATION_SCREEN = "destinations"
 LOGIN_SCREEN = "login"
 MAIN_MENU_SCREEN = "main_menu"
 SPLASH_SCREEN = "splash"
-CONTRACTOR_SCREEN = "contractor"
+CONTRACTOR_SCREEN = "contractors"
 FACILITY_SCREEN = "facilities"
 
 # Commands

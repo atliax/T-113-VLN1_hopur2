@@ -9,7 +9,7 @@ class MainMenuScreen(BaseScreen):
     def run(self):
         self.clear_screen()
 
-        logged_in_user : Staff = self.ui.logic_api.get_logged_in_staff()
+        logged_in_user = self.ui.logic_api.get_logged_in_staff()
 
         print("Main Menu")
         print(ui_consts.SEPERATOR)
