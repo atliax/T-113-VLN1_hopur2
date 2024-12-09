@@ -1,8 +1,10 @@
+from StorageLayer import StorageAPI
+
 from Model import Destination
 
 class DestinationManager:
     def __init__(self, storage_api):
-        self.storage_api = storage_api
+        self.storage_api : StorageAPI = storage_api
 
     def get_all_destinations(self):
         return self.storage_api.get_all_destinations()

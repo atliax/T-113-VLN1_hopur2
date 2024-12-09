@@ -25,7 +25,8 @@ class LogicAPI:
         self.staff_manager.logout()
 
 
-    #Destinations
+#==========================================================================
+#--Destinations--------------------------------------------------------------
 
     def get_all_destinations(self):
         return self.destination_manager.get_all_destinations()
@@ -66,6 +67,7 @@ class LogicAPI:
         pass
 
 #==========================================================================
+#--Staff--------------------------------------------------------------
 
     def get_all_staff(self):
         return self.staff_manager.get_all_staff()
@@ -75,8 +77,14 @@ class LogicAPI:
 
     def remove_staff(self, remove_id):
         return self.staff_manager.remove_staff(remove_id)
+    
+    def edit_staff(self,staff) -> None:
+        self.staff_manager.edit_staff(staff)
+        return
+
 #==========================================================================
 # ----contractors----------------------------------------------------------   
+
     def get_all_contractors(self):
         return self.contractor_manager.get_all_contractors()
     
@@ -86,8 +94,8 @@ class LogicAPI:
     def remove_contractor(self, remove_id: str):
         return self.contractor_manager.remove_contractor(remove_id)
     
-    def edit_contractor(self):
-        pass
+    def edit_contractor(self, contractor: str):
+        self.contractor_manager.edit_contractor(contractor)
 
     def contractor_search(self):
         pass

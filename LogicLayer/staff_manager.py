@@ -56,6 +56,7 @@ class StaffManager:
 
     def edit_staff(self, edit_staff):
         self.storage_api.edit_staff(edit_staff)
+        return
 
         
   

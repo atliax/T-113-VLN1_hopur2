@@ -91,17 +91,26 @@ class StaffScreen(BaseScreen):
 	            # If ID does not exist, cancel command
 
         if cmd == "e":
+
+            staff_edit = None
+            staff_attributes = ["destinationID","name", "ssn","address","phone_home","phone_gsm","email","password","job_title","is_manager"]
+            edit_with_id = input("Edit employee with the ID: ").upper()
+            #if nothing is input, the field will be left unchanged
+            for employee in staff:
+                if employee.staffID == edit_with_id:
+                    staff_edit = employee
+            if staff_edit is None:
+                print("PRUFA EKKI TIL")
+                input("ANYKEY")
+            else:
+                for attribute in staff_attributes:
+                    current_value = getattr(employee, attribute)
+                    new_value = input(f"new {attribute} (Current {current_value}): ").strip()
+                    if new_value:
+                        setattr(staff_edit,attribute,new_value)
+                self.ui.logic_api.edit_staff(staff)
                 # If ID does not exist in the employee list, raise error "No employee found with that ID!"    
                 # If ID does not exist, cancel command
-            edit_with_id = input("Edit employee with the ID: ") # á eftir að implementa
-                #if nothing is input, the field will be left unchanged
-            change_name = input("Change employey name to: ")
-            change_address = input("Change employee address to: ")
-            change_number = int(input("Change employee phone number to: "))
-            change_mobile = int(input("Change employee mobile phone number to: "))
-            change_email = input("Change employee email to: ")
-            change_pass = input("Change employee password to: ")
-            change_title = input("Change employee job title to: ")
                 # If job title = "manager" or "boss" set isManager = True, otherwise False)
 
         if cmd == "s":
