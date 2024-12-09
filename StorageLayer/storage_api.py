@@ -10,13 +10,13 @@ from Model import *
 
 class StorageAPI:
     def __init__(self):
-        self.facility_storage = FacilityStorage("testdata/facilities.json", Facility)
-        self.contractor_storage = ContractorStorage("testdata/contractors.json", Contractor)
-        self.destination_storage = DestinationStorage("testdata/destinations.json", Destination)
-        self.property_storage = PropertyStorage("testdata/properties.json", Property)
-        self.report_storage = ReportStorage("testdata/reports.json", Report)
-        self.staff_storage = StaffStorage("testdata/staff.json", Staff)
-        self.ticket_storage = TicketStorage("testdata/tickets.json", Ticket)
+        self.facility_storage = FacilityStorage("data/facilities.json", Facility)
+        self.contractor_storage = ContractorStorage("data/contractors.json", Contractor)
+        self.destination_storage = DestinationStorage("data/destinations.json", Destination)
+        self.property_storage = PropertyStorage("data/properties.json", Property)
+        self.report_storage = ReportStorage("data/reports.json", Report)
+        self.staff_storage = StaffStorage("data/staff.json", Staff)
+        self.ticket_storage = TicketStorage("data/tickets.json", Ticket)
 
     def get_all_properties(self) -> list[Property]:
         return self.property_storage.load_from_file()
