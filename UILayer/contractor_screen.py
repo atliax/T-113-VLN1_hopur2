@@ -47,16 +47,19 @@ class ContractorScreen(BaseScreen):
 	            # Cancel command if destination ID is not found
             add_contractor = input("New contractor name: ")
             add_type = input("New contractor type: ")
+            add_destinationID = input("New destinationID: ")
             add_contact = input("New contractor contact (optional): ")
+            add_rating = float(input("Enter rating: "))
             add_phone = int(input("New contractor phone: "))
             add_address = input("New contractor address: ")
-            new_contractor = Contractor(None, add_contractor, add_type, add_contact, add_phone, add_address)
+            add_opening_hours = int(input("Add opening hours for contractor: "))
+            new_contractor = Contractor(None, add_contractor,add_type , add_destinationID , add_contact,add_rating, add_phone, add_address, add_opening_hours)
             self.ui.logic_api.add_new_contractor(new_contractor)
 
         # Remove a contractor
         if cmd == "r":
             try:
-                rm_contractor = input("Remove contractor with ID: ")
+                remove_contractor = input("Remove contractor with ID: ")
             except LookupError:
                 return "No contractor found with that ID!"
 
