@@ -27,9 +27,19 @@ class StaffScreen(BaseScreen):
                 employee_destination_country = "Not assigned"
 
             staff_table.add_row([employee.staffID, employee.name, employee.job_title, employee_destination_country, employee.ssn])
-
+        
         staff_table._min_table_width = ui_consts.TABLE_WIDTH
         print(staff_table)
+
+        destinations : list[Destination] = self.ui.logic_api.get_all_destinations()
+
+        destination_table = PrettyTable()
+        destination_table.field_names = ["ID","Country"]
+
+        for destination in destinations:
+            destination_table.add_row([destination.destinationID, destination.country])
+
+        
 
         print(ui_consts.SEPERATOR)
         print("|")
@@ -43,9 +53,9 @@ class StaffScreen(BaseScreen):
 
         # Add an employee
         if cmd == "a":
-            # SETJA INN PRETTYTABLE LISTA HÉR
+            print(destination_table)
 
-            new_destination = input("New employee destination ID: ")
+            new_destination = input("Enter destination ID for new employee: ")
             # If ID does not exist in destination list, raise error "No destination found with that ID!"
             # Cancel command if destination ID is not found
 

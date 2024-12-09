@@ -41,6 +41,9 @@ class LogicAPI:
     def add_new_staff(self, new_staff:Staff):
         self.staff_manager.add_new_staff(new_staff)
 
+    def property_add(self, new_property:Property):
+        self.property_manager.property_add(new_property)
+
     def get_all_staff(self):
         return self.staff_manager.get_all_staff()
 
