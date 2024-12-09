@@ -1,4 +1,2 @@
 {"destinationID": "D1", "contractorID": "C1", "rating": "4.4", "name": "B\u00f6rnunar\u00fej\u00f3nusta \u00cdsmannsins", "contact": "Mamma \u00edsmannsins", "phone": "+299 85 45 58", "address": "Inuit 3", "opening_hours": "21:00 - 23:00 alla daga", "contractor_type": "Penetrator"}
-{"destinationID": "ATLI AX", "contractorID": "C2", "rating": "hja m\u00f6mmu", "name": 10.0, "contact": "ATLI AX", "phone": "X", "address": "M\u00f6kunarstr\u00e6ti 69", "opening_hours": 19, "contractor_type": "Breeder"}
-{"destinationID": "hja m\u00f6mmu", "contractorID": "C3", "rating": 10.0, "name": "ATLIAX", "contact": "X", "phone": 696969, "address": "m\u00f6kunarstr\u00e6ti 69", "opening_hours": 18, "contractor_type": "breeder"}
-{"destinationID": "d1", "contractorID": "C4", "rating": 10.0, "name": "AtliAX", "contact": "hjam\u00f6mmu", "phone": 696969, "address": "m\u00f6kunarstr\u00e6ti 69", "opening_hours": 19, "contractor_type": "breeder"}
+{"destinationID": "D2", "contractorID": "C2", "rating": 10.0, "name": "Eva", "contact": "", "phone": 898989, "address": "mamma", "opening_hours": "10-23", "contractor_type": "Hitman"}

@@ -112,7 +112,6 @@ destinations.append(Destination('D3','S7','Svalbarði','Longyearbyen','PHONE','2
 properties.append(Property('P26','D3','Vei BnB','Vei 217, Longyearbyen, Svalbarði', 150, 4, 'Einbýlishús'))
 properties.append(Property('P27','D3','Hótel Akúla','Longyearbyen Harbor 1, Longyearbyen, Svalbarði',5000,80,'Kafbátur'))
 
-staff.append(Staff('sID','dID','name','ssn','address','phone','gsm','email','passw','job_title','ismanager'))
 staff.append(Staff('S7','D3','Jan Jacobsen','231265-4549','Vei 230 12, Longyearbyen, Svalbard','+47 92 09 77 00','+354 777 1337','jan.jacobsen@nanair.is','JanJac23!','Yfirmaður rekstrarsviðs',True))
 staff.append(Staff('S8','D3','Jacob Yxa','190482-7479','Vei 224 3B, Longyearbyen, Svalbard','+47 92 09 77 01','+354 777 1338','jacob.yxa@nanair.is','JacYxa14$','Starfsmaður',False))
 staff.append(Staff('S9','D3','Nanna Daema','250185-1239','Ivan Starostin st. 109, Barantsburg, Svalbard','+47 92 09 77 02','+354 777 1339','nanna.daema@nanair.is','NanDae12$','Starfsmaður',False))
