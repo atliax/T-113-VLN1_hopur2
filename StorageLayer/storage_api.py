@@ -44,3 +44,5 @@ class StorageAPI:
 
     def get_all_contractors(self) -> list[Contractor]:
         return self.contractor_storage.load_from_file()
+
+    
