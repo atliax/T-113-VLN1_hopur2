@@ -75,6 +75,10 @@ class LogicAPI:
 
     def remove_staff(self, remove_id):
         return self.staff_manager.remove_staff(remove_id)
-    
+#==========================================================================
+# ----contractors----------------------------------------------------------   
     def get_all_contractors(self):
         return self.contractor_manager.get_all_contractors()
+    
+    def add_new_contractor(self, new_contractor: Contractor):
+        self.contractor_manager.add_new_contractor(new_contractor)

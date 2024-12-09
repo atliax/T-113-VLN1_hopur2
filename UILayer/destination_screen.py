@@ -16,7 +16,7 @@ class DestinationScreen(BaseScreen):
         destinations : list[Destination] = self.ui.logic_api.get_all_destinations()
 
         destination_table = PrettyTable()
-        destination_table.field_names = ["destinationID","managerID","country","airport", "phone", "opening_hours"]
+        destination_table.field_names = ["ID","managerID","Destination","Airport", "Phone", "Opening hours"]
 
         for destination in destinations:
             destination_table.add_row([destination.destinationID, destination.managerID, destination.country, destination.airport, destination.phone, destination.opening_hours])
@@ -33,25 +33,27 @@ class DestinationScreen(BaseScreen):
 
         # Add a destination
         if cmd == "a":
+            destination_attributes = ["managerID", "country", "airport", "phone", "opening_hours"]
             new_destination = ""
-            for _ in destination_table.field_names:
-                new_value = input(f"New {_}: ")
+            for attribute in destination_attributes:
+                new_value = input(f"New {attribute}: ")
                 new_destination += new_value + ","
             self.ui.logic_api.add_new_destination(new_destination)
 
 
         # Edit destination
         if cmd == "e":
-            # loops through the destination list, 
+            # 
+            destination_attributes = ["managerID", "country", "airport", "phone", "opening_hours"]
             pick_destination = input("Type in the id of the destination you want to edit: ")
             for destination in destinations:
                 if destination.destinationID == pick_destination:
                     destination_edit = destination
-            for field in destination_table.field_names[1:]:
-                current_value = getattr(destination, field)
-                new_value = input(f"New {field} (current: {current_value}): ").strip()
+            for attribute in destination_attributes:
+                current_value = getattr(destination, attribute)
+                new_value = input(f"New {attribute} (current: {current_value}): ").strip()
                 if new_value:
-                    setattr(destination_edit, field, new_value)   
+                    setattr(destination_edit, attribute, new_value)   
             self.ui.logic_api.edit_destinations(destinations)   
 
         if cmd == "b":

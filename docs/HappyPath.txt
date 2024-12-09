@@ -203,7 +203,9 @@ Command: (INPUT)
 
     # ID Auto generate variable = int(n + 1) then make str("P"+(variable))
     Mew property name: (INPUT/str)
-    New property destination: (INPUT/str)
+    New property destination ID: (INPUT/str)
+	# If ID does not exist in destination list, raise error "No destination found with that ID!"
+	# Cancel command if destination ID is not found
     New property address: (INPUT/str)
     New property square meters: (INPUT/int)
     New property number of rooms: (INPUT/int)
@@ -357,7 +359,6 @@ Command: (INPUT)
 	New employee email: (INPUT/str)
 	New employee password: (INPUT/str)
 	New employee job title: (INPUT/str)
-    New employee destination: (INPUT/str)
 	# If job title = "manager" or "boss" set isManager = True, otherwise False
 	
 	Is the new employee a manager? y/n: (INPUT/str) -> bool
