@@ -34,7 +34,7 @@ class StaffScreen(BaseScreen):
         destinations : list[Destination] = self.ui.logic_api.get_all_destinations()
 
         destination_table = PrettyTable()
-        destination_table.field_names = ["ID","Country"]
+        destination_table.field_names = ["Destination ID","Country"]
 
         for destination in destinations:
             destination_table.add_row([destination.destinationID, destination.country])
@@ -68,7 +68,7 @@ class StaffScreen(BaseScreen):
             new_password = input("New employee password: ")
             new_title = input("New employee job title: ")
             is_manager = input("Is the new employee a manager? y/n ").lower()
-            new_staff = Staff(None, None, new_employee, new_ssn, new_address, new_phone_nr, new_gsm, new_email, new_password, new_title, True if is_manager == "y" else False)
+            new_staff = Staff(None, new_destination, new_employee, new_ssn, new_address, new_phone_nr, new_gsm, new_email, new_password, new_title, True if is_manager == "y" else False)
             self.ui.logic_api.add_new_staff(new_staff)
 
         # Remove an employee
