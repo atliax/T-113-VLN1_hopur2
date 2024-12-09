@@ -1,9 +1,9 @@
 from Model.base_model import BaseModel
 
 class Contractor(BaseModel):
-    def __init__(self, contractorID:str, destinationID:str, rating:float, name:str, contact:str, phone:str, address:str, opening_hours:str, contractor_type:str) -> None:
-        self.contractorID = contractorID
+    def __init__(self, destinationID:str, contractorID:str, rating:float, name:str, contact:str, phone:str, address:str, opening_hours:str, contractor_type:str) -> None:
         self.destinationID = destinationID
+        self.contractorID = contractorID
         self.rating = rating
         self.name = name
         self.contact = contact
