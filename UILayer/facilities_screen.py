@@ -30,6 +30,11 @@ class FacilityScreen(BaseScreen):
                 # If ID does not exist in property list, raise error "No facility found with that ID!"
                 # If ID does not exist, cancel command
 
+
+        if cmd == "s":
+            search = input("Search for: ") # Sama search allstaðar nema á tickets
+            #eftir að implementa
+
         # View details
         if cmd == "v":
             view = input("View the details of facility with the ID: ")
