@@ -42,7 +42,7 @@ class DestinationScreen(BaseScreen):
 
         # Edit destination
         if cmd == "e":
-            #if nothing is input, the name/loc will be unchanged
+            # loops through the destination list, 
             pick_destination = input("Type in the id of the destination you want to edit: ")
             for destination in destinations:
                 if destination.destinationID == pick_destination:
@@ -56,5 +56,5 @@ class DestinationScreen(BaseScreen):
 
         if cmd == "b":
             return ui_consts.BACK
-        
+
         return self

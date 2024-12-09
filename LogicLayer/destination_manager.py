@@ -16,6 +16,7 @@ class DestinationManager:
     def edit_destination(self, destinations):
         self.storage_api.edit_destination(destinations)
         return
+    
     def get_destination_by_ID(self, destinationID):
         all_destinations : list[Destination] = self.storage_api.get_all_destinations()
         for destination in all_destinations:

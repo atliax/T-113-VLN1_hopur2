@@ -8,7 +8,6 @@ class PropertyManager:
 
     def get_all_properties(self):
         return self.storage_api.get_all_properties()
-    
 
     # [A] Add a property
     def property_add(self, new_property : Property):
