@@ -70,10 +70,9 @@ class ContractorScreen(BaseScreen):
 
         # Remove a contractor
         if cmd == "r":
-            try:
-                remove_contractor = input("Remove contractor with ID: ")
-            except LookupError:
-                return "No contractor found with that ID!"
+            print(contractor_table)
+            remove_id = input("Remove employee with the ID: ").upper()
+            self.ui.logic_api.remove_contractor(remove_id)
 
         # View contact info
         if cmd == "v":
