@@ -9,3 +9,8 @@ class ContractorStorage(BaseStorage):
         current_contractor = self.load_from_file()
         current_contractor.append(new_contractor)
         self.save_to_file(current_contractor)
+
+    def remove_contractor(self, current_contractor : Contractor):
+        current_contractor = self.load_from_file()
+        current_contractor.remove(current_contractor)
+        
