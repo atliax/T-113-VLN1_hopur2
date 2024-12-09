@@ -63,10 +63,6 @@ class PropertiesScreen(BaseScreen):
         
         # [V] View facilities
         if cmd == "v":
-            view = input("View the facilities in property with ID: ")
-                # If ID does not exist in property list, raise error "No property found with that ID!"
-                # If ID does not exist, cancel command	
-                # Print a list of facilities for property with input ID
             return ui_consts.FACILITY
 
 

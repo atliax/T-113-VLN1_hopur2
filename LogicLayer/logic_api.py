@@ -82,3 +82,8 @@ class LogicAPI:
     
     def add_new_contractor(self, new_contractor: Contractor):
         self.contractor_manager.add_new_contractor(new_contractor)
+
+# facilities
+
+    def get_facilities_by_propertyID(self,propertyID):
+        return self.facility_manager.get_facilities_by_propertyID(propertyID)
