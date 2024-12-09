@@ -59,7 +59,8 @@ class PropertiesScreen(BaseScreen):
 
         # [R] Remove a property
         if cmd == "r":
-            remove_property = input("Remove a property that has the ID: ")
+            remove_id = input("Remove a property that has the ID: ").upper()
+            self.ui.logic_api.property_remove(remove_id)
         
         # [V] View facilities
         if cmd == "v":

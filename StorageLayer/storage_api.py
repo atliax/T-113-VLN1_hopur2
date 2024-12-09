@@ -51,9 +51,8 @@ class StorageAPI:
     def property_add(self, new_property: Property) -> None:
         self.property_storage.property_add(new_property)
 
-
-    def property_remove(self):
-        pass
+    def property_remove(self, propertyID) -> None:
+        self.property_storage.property_remove(propertyID)
 
     def property_edit(self):
         pass

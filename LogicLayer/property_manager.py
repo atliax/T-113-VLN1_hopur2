@@ -20,8 +20,8 @@ class PropertyManager:
         self.storage_api.property_add(new_property)
 
     # [R] Remove a property
-    def property_remove():
-        pass
+    def property_remove(self, propertyID : str):
+        self.storage_api.property_remove(propertyID)
 
     # [E] Edit a property
     def property_edit():
