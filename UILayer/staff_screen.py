@@ -55,7 +55,7 @@ class StaffScreen(BaseScreen):
         if cmd == "a":
             print(destination_table)
 
-            new_destination = input("Enter destination ID for new employee: ")
+            new_destination = input("Enter destination ID for new employee: ").upper()
             # If ID does not exist in destination list, raise error "No destination found with that ID!"
             # Cancel command if destination ID is not found
 
@@ -100,12 +100,12 @@ class StaffScreen(BaseScreen):
                 if employee.staffID == edit_with_id:
                     staff_edit = employee
             if staff_edit is None:
-                print("PRUFA EKKI TIL")
-                input("ANYKEY")
+                print(f"No employee with the ID: '{edit_with_id}'")
+                input("Press anykey to continue")
             else:
                 for attribute in staff_attributes:
                     current_value = getattr(employee, attribute)
-                    new_value = input(f"new {attribute} (Current {current_value}): ").strip()
+                    new_value = input(f"New {attribute.capitalize()} (Current {current_value}): ").strip()
                     if new_value:
                         setattr(staff_edit,attribute,new_value)
                 self.ui.logic_api.edit_staff(staff)
