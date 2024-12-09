@@ -76,23 +76,17 @@ class ContractorScreen(BaseScreen):
 
         # View contact info
         if cmd == "v":
-            try:
-                view = input("View the contact information of contractor with the ID: ")
-            except LookupError:
-                return "No contractor found with that ID!"
-                # If ID does not exist in the contractor list, raise error "No contractor found with that ID!"    
-	            # If ID does not exist, cancel command
+            view_contact_from_id = input("View the contact information of contractor with the ID: ")
+            # If ID does not exist in the contractor list, raise error "No contractor found with that ID!"    
+	        # If ID does not exist, cancel command
             print(f"Name: {add_contractor}")
             print(f"Phone: {add_phone}")
             print(f"Address: {add_address}")
         
         # Edit contractor
         if cmd == "e":
-            try:
             #If nothing is input, the name/loc will be unchanged
-                edit_id = input("Edit contractor with the ID: ") # Óklárað!
-            except LookupError:
-                return "No contractor found with that ID!"
+            edit_id = input("Edit contractor with the ID: ") # Óklárað!
                 # If ID does not exist in the contractor list, raise error "No contractor found with that ID!"    
                 # If ID does not exist, cancel command
             change_contractor = input("Change contractor name to: ")
