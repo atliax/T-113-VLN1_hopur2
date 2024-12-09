@@ -17,7 +17,7 @@ class StaffScreen(BaseScreen):
         staff : list[Staff] = self.ui.logic_api.get_all_staff()
 
         staff_table = PrettyTable()
-        staff_table.field_names = ["id", "name","title","destination","ssn"]
+        staff_table.field_names = ["ID", "Name","Job title","Destination","SSN"]
 
         for employee in staff:
             employee_destination : Destination = self.ui.logic_api.get_destination_by_ID(employee.destinationID)
@@ -65,6 +65,9 @@ class StaffScreen(BaseScreen):
             new_phone_nr = (input("New employee phone number: "))
             new_gsm = (input("New employee mobile number: "))
             new_email = input("New employee email: ")
+            while "@" and "." not in new_email:
+                print("Invalid email address")
+                new_email = input("New employee email: ")
             new_password = input("New employee password: ")
             new_title = input("New employee job title: ")
             is_manager = input("Is the new employee a manager? y/n ").lower()
@@ -73,7 +76,7 @@ class StaffScreen(BaseScreen):
 
         # Remove an employee
         if cmd == "r":
-            remove_id = input("Remove employee with the ID: ")
+            remove_id = input("Remove employee with the ID: ").upper()
             self.ui.logic_api.remove_staff(remove_id)
 
         # View contact info

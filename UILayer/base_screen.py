@@ -3,7 +3,8 @@ from UILayer import ui_consts
 
 class BaseScreen:
     def __init__(self, ui):
-        self.ui = ui
+        from UILayer import UIManager #lazy import for VSCode completion
+        self.ui : UIManager = ui
 
     def clear_screen(self):
         os.system('cls' if os.name == 'nt' else 'clear')

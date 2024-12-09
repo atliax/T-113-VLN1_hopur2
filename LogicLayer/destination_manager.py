@@ -8,6 +8,10 @@ class DestinationManager:
         return self.storage_api.get_all_destinations()
 
     def add_new_destination(self, new_destination):
+        all_destinations = self.get_all_destinations()
+        n = int(len(all_destinations))+1
+        new_id = "D" + str(n)
+        new_destination = f"{new_id}, {new_destination}"
         new_destination = new_destination.split(",")
         new_destination_instance = Destination(new_destination[0],new_destination[1],new_destination[2],new_destination[3],new_destination[4],new_destination[5])
         self.storage_api.add_new_destination(new_destination_instance)
