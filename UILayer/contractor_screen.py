@@ -16,7 +16,7 @@ class ContractorScreen(BaseScreen):
         contractor : list[Contractor] = self.ui.logic_api.get_all_contractors()
 
         contractor_table = PrettyTable()
-        contractor_table.field_names = ["id", "name","type","destination","rating"]
+        contractor_table.field_names = ["id", "name","type","destination","contact","rating"]
 
         for contractor in contractor:
             contractor_destination : Destination = self.ui.logic_api.get_destination_by_ID(contractor.destinationID)
@@ -25,7 +25,7 @@ class ContractorScreen(BaseScreen):
             else:
                 contractor_destination_country = "Not assigned"
 
-            contractor_table.add_row([contractor.contractorID, contractor.name, contractor.contractor_type, contractor_destination_country, contractor.rating])
+            contractor_table.add_row([contractor.contractorID, contractor.name, contractor.contractor_type, contractor_destination_country, contractor.contact, contractor.rating])
 
         contractor_table._min_table_width = ui_consts.TABLE_WIDTH
         print(contractor_table)
@@ -47,14 +47,19 @@ class ContractorScreen(BaseScreen):
 	            # Cancel command if destination ID is not found
             add_contractor = input("New contractor name: ")
             add_type = input("New contractor type: ")
+            add_destinationID = input("New destinationID: ")
             add_contact = input("New contractor contact (optional): ")
+            add_rating = float(input("Enter rating: "))
             add_phone = int(input("New contractor phone: "))
             add_address = input("New contractor address: ")
+            add_opening_hours = int(input("Add opening hours for contractor: "))
+            new_contractor = Contractor(None, add_contractor,add_type , add_destinationID , add_contact,add_rating, add_phone, add_address, add_opening_hours)
+            self.ui.logic_api.add_new_contractor(new_contractor)
 
         # Remove a contractor
         if cmd == "r":
             try:
-                rm_contractor = input("Remove contractor with ID: ")
+                remove_contractor = input("Remove contractor with ID: ")
             except LookupError:
                 return "No contractor found with that ID!"
 

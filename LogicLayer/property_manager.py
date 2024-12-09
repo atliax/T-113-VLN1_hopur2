@@ -8,7 +8,6 @@ class PropertyManager:
 
     def get_all_properties(self):
         return self.storage_api.get_all_properties()
-    
 
     # [A] Add a property
     def property_add(self, new_property : Property):
@@ -17,6 +16,9 @@ class PropertyManager:
         n += 1
         new_id = "P" + str(n)
         new_property.propertyID = new_id
+
+        self.storage_api.property_add(new_property)
+
 
     # [R] Remove a property
     def property_remove():

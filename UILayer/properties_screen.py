@@ -24,7 +24,6 @@ class PropertiesScreen(BaseScreen):
         # dæmi um prentun á töflu með ákveðinni breidd:
         property_table._min_table_width = ui_consts.TABLE_WIDTH
 
-        # dæmi um prentun á hluta af töflu:
         #print(property_table.get_string(start=0, end=10))
         print("|  Property list:")
         print(property_table)
@@ -36,29 +35,33 @@ class PropertiesScreen(BaseScreen):
         print("|	[V] View facilities")
         print("|")
         print(ui_consts.SEPERATOR)
-        print("|")
-        print(ui_consts.SEPERATOR)
         print("")
 
         cmd = input("Command: ").lower()
 
-        # Add a property
-        if cmd == "a": 
-            new_property_name = input("New property name: ")
-            new_location = input("New property destionation ID: ")
-            new_address = input("New property address: ")
-            new_square = int(input("New property square meters: "))
-            new_number_rooms = int(input("New property number of rooms: "))
-            new_type = input("New property type: ")
-            new_property = Property(None, new_property_name, new_location, new_address, new_square, new_number_rooms, new_type)
+        # [A] Add a property
+        if cmd == "a":
+
+            # Get property detail inputs from user 
+            p_new_name = input("New property name: ")
+            p_new_location = input("New property destionation ID: ")
+            p_new_address = input("New property address: ")
+            p_new_square = int(input("New property square meters: "))
+            p_new_roomnum = int(input("New property number of rooms: "))
+            p_new_type = input("New property type: ")
+
+            # construct property
+            new_property = Property(None, p_new_name, p_new_location, p_new_address, p_new_square, p_new_roomnum, p_new_type)
+            
+            # Send property to logic api
             self.ui.logic_api.property_add(new_property)
 
 
-        # Remove a property
+        # [R] Remove a property
         if cmd == "r":
             remove_property = input("Remove a property that has the ID: ")
         
-        # View facilities
+        # [V] View facilities
         if cmd == "v":
             view = input("View the facilities in property with ID: ")
                 # If ID does not exist in property list, raise error "No property found with that ID!"
@@ -67,7 +70,7 @@ class PropertiesScreen(BaseScreen):
             return ui_consts.FACILITY
 
 
-         # Edit a property 
+        # [E] Edit a property 
         if cmd == "e":
             edit_property = input("Edit property with the ID: ") # If nothing is input, the field will be left unchanged
                 # If ID does not exist in property list, raise error "No property found with that ID!"
@@ -80,7 +83,7 @@ class PropertiesScreen(BaseScreen):
             change_rooms = int(input("Change property number of rooms to: "))
             change_property_type = input("Change property type to: ")
 
-        # Search for
+        # [S] Search for
         if cmd == "s":
             print("What keyword would you like to search for?")
             print("You can combine keywords by following a word with ,")
@@ -91,7 +94,7 @@ class PropertiesScreen(BaseScreen):
                 # "Main menu > Properties > Filtered" window and commands are identical to "Main menu > Properties"
                 # Just replace the normal properties list with the filtered one
 
-        # Go Back
+        # [B] Go Back
         if cmd == "b":
             return ui_consts.BACK
     
