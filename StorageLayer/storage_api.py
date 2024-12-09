@@ -38,3 +38,6 @@ class StorageAPI:
     
     def add_new_facility(self, new_facility : Facility):
         self.facility_storage.add_new_facility(new_facility)
+
+    def get_all_contractors(self) -> list[Contractor]:
+        return self.contractor_storage.load_from_file()
