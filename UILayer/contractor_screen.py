@@ -19,7 +19,7 @@ class ContractorScreen(BaseScreen):
         contractor_table.field_names = ["id", "name","title","destination","rating"]
 
         for contractor in contractor:
-            contractor_destination : Destination = self.ui.storeage_api.get_destination_by_ID(contractor.destinationID)
+            contractor_destination : Destination = self.ui.logic_api.get_destination_by_ID(contractor.destinationID)
             if contractor_destination is not None:
                 contractor_destination_country = contractor_destination.country
             else:
