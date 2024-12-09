@@ -10,3 +10,5 @@ class StaffStorage(BaseStorage):
         current_staff = self.load_from_file()
         current_staff.append(new_staff)
         self.save_to_file(current_staff)
+
+    
