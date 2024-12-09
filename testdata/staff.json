@@ -6,3 +6,4 @@
 {"staffID": "S6", "destinationID": null, "name": "J\u00f3rmundur Georg", "ssn": "210377-3099", "address": "G\u00f6tustr\u00e6ti 4", "phone_home": "58-12345", "phone_gsm": "85-12345", "email": "dominos@dominos.is", "password": "pizza", "job_title": "Flatb\u00f6kuskapari", "is_manager": true}
 {"staffID": "S7", "destinationID": null, "name": "Eva D\u00eds", "ssn": "121292-2129", "address": "grafarholt 1", "phone_home": "662-7720", "phone_gsm": "213", "email": "evad@bla.is", "password": "1234", "job_title": "R\u00e6stit\u00e6knir", "is_manager": false}
 {"staffID": "S8", "destinationID": null, "name": "Giblib", "ssn": "12345", "address": "ae 2", "phone_home": "", "phone_gsm": "112", "email": "emia", "password": "1234", "job_title": "meistari", "is_manager": true}
+{"staffID": "S9", "destinationID": null, "name": "b", "ssn": "b", "address": "b", "phone_home": "b", "phone_gsm": "bb", "email": "", "password": "b", "job_title": "b", "is_manager": false}

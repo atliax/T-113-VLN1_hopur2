@@ -49,3 +49,6 @@ class LogicAPI:
 
     def get_destination_by_ID(self, destinationID):
         return self.destination_manager.get_destination_by_ID(destinationID)
+
+    def get_all_contractors(self):
+        return self.contractor_manager.get_all_contractors()
