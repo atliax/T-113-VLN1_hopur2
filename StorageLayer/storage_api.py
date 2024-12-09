@@ -10,13 +10,13 @@ from Model import *
 
 class StorageAPI:
     def __init__(self):
-        self.facility_storage = FacilityStorage("testdata/facilities.json", Facility)
-        self.contractor_storage = ContractorStorage("testdata/contractors.json", Contractor)
-        self.destination_storage = DestinationStorage("testdata/destinations.json", Destination)
-        self.property_storage = PropertyStorage("testdata/properties.json", Property)
-        self.report_storage = ReportStorage("testdata/reports.json", Report)
-        self.staff_storage = StaffStorage("testdata/staff.json", Staff)
-        self.ticket_storage = TicketStorage("testdata/tickets.json", Ticket)
+        self.facility_storage = FacilityStorage("data/facilities.json", Facility)
+        self.contractor_storage = ContractorStorage("data/contractors.json", Contractor)
+        self.destination_storage = DestinationStorage("data/destinations.json", Destination)
+        self.property_storage = PropertyStorage("data/properties.json", Property)
+        self.report_storage = ReportStorage("data/reports.json", Report)
+        self.staff_storage = StaffStorage("data/staff.json", Staff)
+        self.ticket_storage = TicketStorage("data/tickets.json", Ticket)
 
     def get_all_properties(self) -> list[Property]:
         return self.property_storage.load_from_file()
@@ -32,8 +32,25 @@ class StorageAPI:
 
     def add_new_destination(self, new_destination : Destination):
         self.destination_storage.add_new_destination(new_destination)
+<<<<<<< HEAD
         return
 
     def edit_destination(self, destinations):
         self.destination_storage.edit_destination(destinations)
         return
+=======
+
+    def remove_staff(self, remove_id):
+        return self.staff_storage.remove_staff(remove_id)
+    
+    def get_all_facilities(self) -> list[Facility]:
+        return self.facility_storage.load_from_file()
+    
+    def add_new_facility(self, new_facility : Facility):
+        self.facility_storage.add_new_facility(new_facility)
+
+    def get_all_contractors(self) -> list[Contractor]:
+        return self.contractor_storage.load_from_file()
+
+    
+>>>>>>> 9ad80514a5bbd02d2bc8cbb3fec45f153a2ea7c6

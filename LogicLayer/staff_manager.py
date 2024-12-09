@@ -1,5 +1,6 @@
 from StorageLayer.storage_api import StorageAPI
 
+import json
 from Model import Staff
 from Model import Destination
 
@@ -24,6 +25,9 @@ class StaffManager:
 
         return False
     
+    def get_all_staff(self):
+        return self.storage_api.get_all_staff()
+    
     def get_logged_in_staff(self) -> Staff:
         return self.logged_in_staff
 
@@ -42,3 +46,13 @@ class StaffManager:
 
         # ef í lagi:
         self.storage_api.add_new_staff(new_staff)
+
+    def remove_staff(self, remove_id: str):
+
+        # validation
+        
+        # ef í lagi:
+        self.storage_api.remove_staff(remove_id)
+
+        
+  

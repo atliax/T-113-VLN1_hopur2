@@ -16,13 +16,13 @@ class PropertiesScreen(BaseScreen):
         properties : list[Property] = self.ui.logic_api.get_all_properties()
 
         property_table = PrettyTable()
-        property_table.field_names = ["ID","Name","Address","Rooms","Destination"]
+        property_table.field_names = ["ID","Name","Destination","Address","Sq meters","Rooms","Type"]
 
         for property in properties:
-            property_table.add_row([property.propertyID, property.name, property.address, property.rooms, property.destinationID])
+            property_table.add_row([property.propertyID, property.name, property.destinationID, property.address, property.square_meters, property.rooms, property.type])
 
         # dæmi um prentun á töflu með ákveðinni breidd:
-        property_table._min_table_width = 118
+        property_table._min_table_width = ui_consts.TABLE_WIDTH
 
         # dæmi um prentun á hluta af töflu:
         #print(property_table.get_string(start=0, end=10))
@@ -36,17 +36,6 @@ class PropertiesScreen(BaseScreen):
         print("|	[V] View facilities")
         print("|")
         print(ui_consts.SEPERATOR)
-        
-
-
-        #print("|   ID   |                 Name               	|   Location   				|  Status  | Last report")
-        #print("----------------------------------------------------------------------------------------------------------------------")
-        #print("|    1   |  Example Property a                	|  Location a  				| Good	   |  dd/mm/yyyy")
-        #print("|    2   |  Example Property b                	|  Location b  				| Normal   |  dd/mm/yyyy")
-        #print("|    3   |  Example Property c   		|  Location b  				| Bad	   |  dd/mm/yyyy")
-        #print("|   ...  |  ...                               	|      ...     				| ...	   |  ")
-        #print("|    n   |  Example Property n                	|  Location n  				|	   |")
-
         print("|")
         print(ui_consts.SEPERATOR)
         print("")
@@ -55,12 +44,15 @@ class PropertiesScreen(BaseScreen):
 
         # Add a property
         if cmd == "a": 
-            new_property = input("New property name: ")
-            new_location = input("New property destionation: ")
+            new_property_name = input("New property name: ")
+            new_location = input("New property destionation ID: ")
             new_address = input("New property address: ")
             new_square = int(input("New property square meters: "))
             new_number_rooms = int(input("New property number of rooms: "))
             new_type = input("New property type: ")
+            new_property = Property(None, new_property_name, new_location, new_address, new_square, new_number_rooms, new_type)
+            self.ui.logic_api.property_add(new_property)
+
 
         # Remove a property
         if cmd == "r":

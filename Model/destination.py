@@ -10,6 +10,5 @@ class Destination(BaseModel):
         self.opening_hours = opening_hours
 
     
-#TODO klára fallið
 
 

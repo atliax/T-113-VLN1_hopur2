@@ -307,3 +307,13 @@ Hjörtur og Gísli unnu í því að samræma forritið og happy path, bæta vi�
 3. Destination mjakast, ekki alveg komið.
 4. Ennþá vantar uppá skilgreiningar á aðgerðum sem LogicAPI þarf að geta framkvæmt fyrir UILayerinn
 5. Happy path og UML eru samræmd.
+
+## 9. Des 2024 Morgunfundur 8.30
+## Markmið dagsins:
+Allir meðlimir viðstaddir. 
+Ritari: Eva
+## Markmið dagsins 
+Við ætlum að halda áfram að setja dæmagögn í .json skrár
+Halda áfram að vinna í virkni fyrir alla skjái forritsins. Erum byrjuð á staff, property, contractors og facility
+Klára destinations 
+Ætlum að skipta með okkur verkum, flestir eru að vinna í virkninni. Ætlum að sjá hvernig okkur miðar og taka stöðuna í lok dags.

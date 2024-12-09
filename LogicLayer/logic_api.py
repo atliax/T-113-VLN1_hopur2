@@ -46,3 +46,18 @@ class LogicAPI:
     
     def add_new_staff(self, new_staff:Staff):
         self.staff_manager.add_new_staff(new_staff)
+
+    def property_add(self, new_property:Property):
+        self.property_manager.property_add(new_property)
+
+    def get_all_staff(self):
+        return self.staff_manager.get_all_staff()
+
+    def get_destination_by_ID(self, destinationID):
+        return self.destination_manager.get_destination_by_ID(destinationID)
+
+    def remove_staff(self, remove_id):
+        return self.staff_manager.remove_staff(remove_id)
+    
+    def get_all_contractors(self):
+        return self.contractor_manager.get_all_contractors()

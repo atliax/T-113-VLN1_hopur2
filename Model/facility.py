@@ -7,7 +7,6 @@ class Facility(BaseModel):
         self.name = name
         self.description = description
 
-#TODO klára fallið
 
 
 

@@ -1,6 +1,9 @@
 from UILayer.base_screen import BaseScreen
 from UILayer import ui_consts
 from Model import Staff
+from Model import Destination
+
+from prettytable import PrettyTable
 
 class StaffScreen(BaseScreen):
     def __init__(self, ui):
@@ -10,6 +13,34 @@ class StaffScreen(BaseScreen):
         self.clear_screen()
 
         print("Main Menu > Staff")
+
+        staff : list[Staff] = self.ui.logic_api.get_all_staff()
+
+        staff_table = PrettyTable()
+        staff_table.field_names = ["id", "name","title","destination","ssn"]
+
+        for employee in staff:
+            employee_destination : Destination = self.ui.logic_api.get_destination_by_ID(employee.destinationID)
+            if employee_destination is not None:
+                employee_destination_country = employee_destination.country
+            else:
+                employee_destination_country = "Not assigned"
+
+            staff_table.add_row([employee.staffID, employee.name, employee.job_title, employee_destination_country, employee.ssn])
+        
+        staff_table._min_table_width = ui_consts.TABLE_WIDTH
+        print(staff_table)
+
+        destinations : list[Destination] = self.ui.logic_api.get_all_destinations()
+
+        destination_table = PrettyTable()
+        destination_table.field_names = ["ID","Country"]
+
+        for destination in destinations:
+            destination_table.add_row([destination.destinationID, destination.country])
+
+        
+
         print(ui_consts.SEPERATOR)
         print("|")
         print("|	[A] Add an employee		[E] Edit an employee			[B] Go back")
@@ -22,6 +53,12 @@ class StaffScreen(BaseScreen):
 
         # Add an employee
         if cmd == "a":
+            print(destination_table)
+
+            new_destination = input("Enter destination ID for new employee: ")
+            # If ID does not exist in destination list, raise error "No destination found with that ID!"
+            # Cancel command if destination ID is not found
+
             new_employee = input("New employee name: ")
             new_ssn = (input("New employee ssn: "))
             new_address = input("New employee address: ")
@@ -36,7 +73,8 @@ class StaffScreen(BaseScreen):
 
         # Remove an employee
         if cmd == "r":
-            remove_employee = input("Remove employee with the ID: ")
+            remove_id = input("Remove employee with the ID: ")
+            self.ui.logic_api.remove_staff(remove_id)
 
         # View contact info
         if cmd == "v":
