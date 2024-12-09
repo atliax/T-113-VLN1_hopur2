@@ -18,11 +18,11 @@ class ContractorManager:
 
         self.storage_api.add_new_contractor(new_contractor)
 
-    def remove_contractor(self):
-        pass
+    def remove_contractor(self, remove_id: str):
+        self.storage_api.remove_contractor(remove_id)
 
-    def edit_contractor(self):
-        pass
+    def edit_contractor(self, edit_contractor: str):
+        self.storage_api.edit_contractor(edit_contractor)
 
     def search_contractor(self):
         pass

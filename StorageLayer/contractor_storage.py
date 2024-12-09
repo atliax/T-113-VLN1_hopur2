@@ -18,3 +18,5 @@ class ContractorStorage(BaseStorage):
                 new_contractor_list.append(contractor)
         self.save_to_file(new_contractor_list)
         
+    def edit_contractor(self, edit_contractor: str):
+        self.save_to_file(edit_contractor)
