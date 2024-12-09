@@ -29,6 +29,15 @@ class ContractorScreen(BaseScreen):
 
         contractor_table._min_table_width = ui_consts.TABLE_WIDTH
         print(contractor_table)
+
+        destinations : list[Destination] = self.ui.logic_api.get_all_destinations()
+
+        destination_table = PrettyTable()
+        destination_table.field_names = ["Destination ID", "Country"]
+
+        for destination in destinations:
+            destination_table.add_row([destination.destinationID, destination.country])
+
         print(ui_consts.SEPERATOR)
         print("|")
         print("|	[A] Add a contractor		[E] Edit a contractor			[B] Go back")
@@ -41,19 +50,22 @@ class ContractorScreen(BaseScreen):
 
         # Add a contractor
         if cmd == "a":
+            print(destination_table)
+
+            new_destination = input("Enter destination ID for new contractor: ")
                 # ID Auto generate variable = int(n + 1) then make str("C"+(variable))
-            print(f"New contractor destination ID: ") # Ekki implementað
+            #print(f"New contractor destination ID: ") # Ekki implementað
                 # If ID does not exist in destination list, raise error "No destination found with that ID!"
 	            # Cancel command if destination ID is not found
             add_contractor = input("New contractor name: ")
             add_type = input("New contractor type: ")
-            add_destinationID = input("New destinationID: ")
+            #add_destinationID = input("New destinationID: ")
             add_contact = input("New contractor contact (optional): ")
             add_rating = float(input("Enter rating: "))
             add_phone = int(input("New contractor phone: "))
             add_address = input("New contractor address: ")
             add_opening_hours = int(input("Add opening hours for contractor: "))
-            new_contractor = Contractor(None, add_contractor,add_type , add_destinationID , add_contact,add_rating, add_phone, add_address, add_opening_hours)
+            new_contractor = Contractor(new_destination ,None ,add_rating ,add_contractor ,add_contact ,add_phone, add_address ,add_opening_hours, add_type)
             self.ui.logic_api.add_new_contractor(new_contractor)
 
         # Remove a contractor
