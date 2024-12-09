@@ -75,7 +75,7 @@ class StaffScreen(BaseScreen):
                 # If ID does not exist, cancel command
             edit_with_id = input("Edit employee with the ID: ") # á eftir að implementa
                 #if nothing is input, the field will be left unchanged
-            change_name = input("Change employey name to: ")
+            change_name = input("Change employee name to: ")
             change_address = input("Change employee address to: ")
             change_number = int(input("Change employee phone number to: "))
             change_mobile = int(input("Change employee mobile phone number to: "))
