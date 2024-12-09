@@ -50,9 +50,5 @@ class StorageAPI:
     def get_all_contractors(self) -> list[Contractor]:
         return self.contractor_storage.load_from_file()
 
-<<<<<<< HEAD
-    
-=======
     def add_new_contractor(self, new_contractor : Contractor):
         self.contractor_storage.add_new_contractor(new_contractor)
->>>>>>> 911f8e54168eb3272d94eb94823e452f7818ce7f
