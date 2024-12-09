@@ -50,6 +50,8 @@ class ContractorScreen(BaseScreen):
             add_contact = input("New contractor contact (optional): ")
             add_phone = int(input("New contractor phone: "))
             add_address = input("New contractor address: ")
+            new_contractor = Contractor(None, add_contractor, add_type, add_contact, add_phone, add_address)
+            self.ui.logic_api.add_new_contractor(new_contractor)
 
         # Remove a contractor
         if cmd == "r":
