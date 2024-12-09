@@ -49,3 +49,6 @@ class LogicAPI:
 
     def get_destination_by_ID(self, destinationID):
         return self.destination_manager.get_destination_by_ID(destinationID)
+
+    def remove_staff(self, remove_id):
+        return self.staff_manager.remove_staff(remove_id)

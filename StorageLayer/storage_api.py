@@ -32,3 +32,6 @@ class StorageAPI:
 
     def add_new_destination(self, new_destination : Destination):
         self.destination_storage.add_new_destination(new_destination)
+
+    def remove_staff(self, remove_id):
+        return self.staff_storage.remove_staff(remove_id)

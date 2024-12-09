@@ -73,7 +73,8 @@ class StaffScreen(BaseScreen):
 
         # Remove an employee
         if cmd == "r":
-            remove_employee = input("Remove employee with the ID: ")
+            remove_id = input("Remove employee with the ID: ")
+            self.ui.logic_api.remove_staff(remove_id)
 
         # View contact info
         if cmd == "v":
