@@ -13,11 +13,17 @@ class DestinationManager:
         self.storage_api.add_new_destination(new_destination_instance)
         return
     
+<<<<<<< HEAD
+    def edit_destination(self, destinations):
+        self.storage_api.edit_destination(destinations)
+        return
+=======
     def get_destination_by_ID(self, destinationID):
         all_destinations : list[Destination] = self.storage_api.get_all_destinations()
         for destination in all_destinations:
             if destination.destinationID == destinationID:
                 return destination
+>>>>>>> 9ad80514a5bbd02d2bc8cbb3fec45f153a2ea7c6
 
 #   def __init__(self) -> None:
 #       self.properties_by_destination = self.load_properties()

@@ -55,7 +55,7 @@ class ContractorScreen(BaseScreen):
         if cmd == "r":
             try:
                 rm_contractor = input("Remove contractor with ID: ")
-            except ValueError:
+            except LookupError:
                 return "No contractor found with that ID!"
 
         # View contact info
