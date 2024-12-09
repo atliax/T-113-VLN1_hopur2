@@ -18,6 +18,9 @@ class StaffStorage(BaseStorage):
             if staff.staffID != remove_id:
                 new_staff_list.append(staff)
         self.save_to_file(new_staff_list)
+    
+    def edit_staff(self, edit_staff):
+        self.save_to_file(edit_staff)
         
         
 
