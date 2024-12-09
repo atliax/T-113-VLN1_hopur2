@@ -25,7 +25,7 @@ class ContractorScreen(BaseScreen):
             else:
                 contractor_destination_country = "Not assigned"
 
-            contractor_table.add_row([contractor.contractorID, contractor.name, contractor.type, contractor_destination_country, contractor.rating])
+            contractor_table.add_row([contractor.contractorID, contractor.name, contractor.contractor_type, contractor_destination_country, contractor.rating])
 
         contractor_table._min_table_width = ui_consts.TABLE_WIDTH
         print(contractor_table)
