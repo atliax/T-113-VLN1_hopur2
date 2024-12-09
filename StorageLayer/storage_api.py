@@ -32,3 +32,9 @@ class StorageAPI:
 
     def add_new_destination(self, new_destination : Destination):
         self.destination_storage.add_new_destination(new_destination)
+    
+    def get_all_facilities(self) -> list[Facility]:
+        return self.facility_storage.load_from_file()
+    
+    def add_new_facility(self, new_facility : Facility):
+        self.facility_storage.add_new_facility(new_facility)
