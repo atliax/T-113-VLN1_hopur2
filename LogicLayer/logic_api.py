@@ -24,19 +24,25 @@ class LogicAPI:
     def logout(self):
         self.staff_manager.logout()
 
-    def get_logged_in_staff(self):
-        return self.staff_manager.get_logged_in_staff()
 
-    def get_all_properties(self):
-        return self.property_manager.get_all_properties()
-    
+    #Destinations
+
     def get_all_destinations(self):
         return self.destination_manager.get_all_destinations()
     
     def add_new_destination(self, new_destination : str) -> None:
         self.destination_manager.add_new_destination(new_destination)
-        print(new_destination)
         return 
+
+    def edit_destinations(self, destinations) -> None:
+        self.destination_manager.edit_destination(destinations)
+        return
+
+    def get_logged_in_staff(self):
+        return self.staff_manager.get_logged_in_staff()
+
+    def get_all_properties(self):
+        return self.property_manager.get_all_properties()
     
     def add_new_staff(self, new_staff:Staff):
         self.staff_manager.add_new_staff(new_staff)
