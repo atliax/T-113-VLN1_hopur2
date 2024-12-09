@@ -40,20 +40,20 @@ class LogicAPI:
 #==========================================================================
 #--Properties--------------------------------------------------------------
 
+    def get_all_properties(self) -> list[Property]:
+        return self.property_manager.get_all_properties()
+
     def property_add(self, new_property : Property) -> None:
         self.property_manager.property_add(new_property)
 
-    def property_remove(self):
-        pass
+    def property_remove(self, propertyID : str) -> None:
+        self.property_manager.property_remove(propertyID)
 
-    def property_edit(self):
-        pass
+    def property_edit(self, property : Property) -> None:
+        self.property_manager.property_edit(property)
 
     def property_search(self):
         pass
-
-    def get_all_properties(self) -> list[Property]:
-        return self.property_manager.get_all_properties()
 
 #==========================================================================
 #--Staff--------------------------------------------------------------

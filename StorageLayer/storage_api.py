@@ -48,6 +48,10 @@ class StorageAPI:
     def get_all_properties(self) -> list[Property]:
         return self.property_storage.load_from_file()
 
+    def property_add(self, new_property: Property) -> None:
+        self.property_storage.property_add(new_property)
+
+
     def property_remove(self):
         pass
 
@@ -56,9 +60,6 @@ class StorageAPI:
 
     def property_search(self):
         pass
-
-    def get_all_properties(self) -> list[Property]:
-        return self.property_storage.load_from_file()
     
 #==========================================================================
 #--Staff--------------------------------------------------------------
