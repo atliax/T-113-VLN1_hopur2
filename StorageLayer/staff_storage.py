@@ -19,5 +19,6 @@ class StaffStorage(BaseStorage):
                 new_staff_list.append(staff)
         self.save_to_file(new_staff_list)
         
+        
 
     
