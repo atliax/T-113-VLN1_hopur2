@@ -24,7 +24,7 @@ contractors = []
 
 # ------------------------------- Nuuk, Grænland: ------------------------------
 
-destinations.append(Destination('D1','S1','Greenland','Nuuk','+299 33 21 65','06:00 - 23:30 alla daga'))
+destinations.append(Destination('D1','S1','Grænland','Nuuk','+299 33 21 65','06:00 - 23:30 alla daga'))
 
 #64-3900 -> P1
 properties.append(Property('P1','D1','iGloo-Ville móttökubygging','Aalisartut Aqqutaa 47, Nuuk 3900',0,0,'Móttaka'))
