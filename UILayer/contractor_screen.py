@@ -64,7 +64,7 @@ class ContractorScreen(BaseScreen):
             add_rating = float(input("Enter rating: "))
             add_phone = int(input("New contractor phone: "))
             add_address = input("New contractor address: ")
-            add_opening_hours = int(input("Add opening hours for contractor: "))
+            add_opening_hours = (input("Add opening hours for contractor: "))
             new_contractor = Contractor(new_destination ,None ,add_rating ,add_contractor ,add_contact ,add_phone, add_address ,add_opening_hours, add_type)
             self.ui.logic_api.add_new_contractor(new_contractor)
 
