@@ -24,6 +24,9 @@ class StaffManager:
 
         return False
     
+    def get_all_staff(self):
+        return self.storage_api.get_all_staff()
+    
     def get_logged_in_staff(self) -> Staff:
         return self.logged_in_staff
 

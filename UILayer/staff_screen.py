@@ -2,6 +2,8 @@ from UILayer.base_screen import BaseScreen
 from UILayer import ui_consts
 from Model import Staff
 
+from prettytable import PrettyTable
+
 class StaffScreen(BaseScreen):
     def __init__(self, ui):
         super().__init__(ui)
@@ -10,6 +12,18 @@ class StaffScreen(BaseScreen):
         self.clear_screen()
 
         print("Main Menu > Staff")
+
+        staff : list[Staff] = self.ui.logic_api.get_all_staff()
+
+        staff_table = PrettyTable()
+        staff_table.field_names = ["id", "name","title","destination","ssn"]
+
+        for employee in staff:
+            staff_table.add_row([employee.staffID, employee.name, employee.job_title, employee.destinationID, employee.ssn])
+
+        staff_table._min_table_width = ui_consts.TABLE_WIDTH
+        print(staff_table)
+
         print(ui_consts.SEPERATOR)
         print("|")
         print("|	[A] Add an employee		[E] Edit an employee			[B] Go back")
