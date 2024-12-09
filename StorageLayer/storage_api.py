@@ -32,3 +32,8 @@ class StorageAPI:
 
     def add_new_destination(self, new_destination : Destination):
         self.destination_storage.add_new_destination(new_destination)
+        return
+
+    def edit_destination(self, destinations):
+        self.destination_storage.edit_destination(destinations)
+        return

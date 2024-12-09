@@ -16,7 +16,7 @@ class DestinationScreen(BaseScreen):
         destinations : list[Destination] = self.ui.logic_api.get_all_destinations()
 
         destination_table = PrettyTable()
-        destination_table.field_names = ["destinationID","managerID","Country","Airport", "phone", "Opening_hours"]
+        destination_table.field_names = ["destinationID","managerID","country","airport", "phone", "opening_hours"]
 
         for destination in destinations:
             destination_table.add_row([destination.destinationID, destination.managerID, destination.country, destination.airport, destination.phone, destination.opening_hours])
@@ -43,12 +43,18 @@ class DestinationScreen(BaseScreen):
         # Edit destination
         if cmd == "e":
             #if nothing is input, the name/loc will be unchanged
-            change_dest = input("Change destination: ")
-            change_airport = input("Change destination airport: ")
-            change_opening_hours = input("Change destination airport opening hours: ")
+            pick_destination = input("Type in the id of the destination you want to edit: ")
+            for destination in destinations:
+                if destination.destinationID == pick_destination:
+                    destination_edit = destination
+            for field in destination_table.field_names[1:]:
+                current_value = getattr(destination, field)
+                new_value = input(f"New {field} (current: {current_value}): ").strip()
+                if new_value:
+                    setattr(destination_edit, field, new_value)   
+            self.ui.logic_api.edit_destinations(destinations)   
 
-        
         if cmd == "b":
             return ui_consts.BACK
-
+        
         return self

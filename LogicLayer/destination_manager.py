@@ -12,6 +12,10 @@ class DestinationManager:
         new_destination_instance = Destination(new_destination[0],new_destination[1],new_destination[2],new_destination[3],new_destination[4],new_destination[5])
         self.storage_api.add_new_destination(new_destination_instance)
         return
+    
+    def edit_destination(self, destinations):
+        self.storage_api.edit_destination(destinations)
+        return
 
 #   def __init__(self) -> None:
 #       self.properties_by_destination = self.load_properties()
