@@ -126,3 +126,6 @@ class LogicAPI:
 
     def staff_remove(self, staffID : str) -> None:
         self.staff_manager.staff_remove(staffID)
+
+    def staff_get_by_ID(self, staffID : str) -> Staff:
+        return self.staff_manager.staff_get_by_ID(staffID)

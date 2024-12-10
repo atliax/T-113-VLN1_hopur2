@@ -54,3 +54,6 @@ class StaffManager:
 
     def staff_edit(self, edited_staff):
         self.storage_api.staff_edit(edited_staff)
+
+    def staff_get_by_ID(self, staffID : str) -> Staff:
+        return self.storage_api.staff_get_by_ID(staffID)
