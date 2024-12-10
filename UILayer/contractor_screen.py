@@ -96,7 +96,7 @@ class ContractorScreen(BaseScreen):
         # Remove a contractor
         if cmd == "r":
             print(contractor_table)
-            remove_id = input("Remove employee with the ID: ").upper()
+            remove_id = input("Remove contractor with the ID: ").upper()
             self.ui.logic_api.contractor_remove(remove_id)
 
         # View contact info
