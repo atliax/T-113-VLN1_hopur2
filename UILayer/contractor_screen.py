@@ -102,12 +102,7 @@ class ContractorScreen(BaseScreen):
 
         # View contact info
         if cmd == "v":
-            view_contact_from_id = input("View the contact information of contractor with the ID: ")
-            # If ID does not exist in the contractor list, raise error "No contractor found with that ID!"
-	        # If ID does not exist, cancel command
-            print(f"Name: {add_contractor}")
-            print(f"Phone: {add_phone}")
-            print(f"Address: {add_address}")
+            return ui_consts.CONTRACTOR_SCREEN
 
         # Edit contractor
         if cmd == "e":
@@ -118,7 +113,7 @@ class ContractorScreen(BaseScreen):
                 edit_with_id = input("Edit contractor with the ID: ").upper()
                 #if nothing is input, the field will be left unchanged
                 for contractor in contractors:
-                    if contractor.contractorID == edit_with_id:
+                    if contractor.ID == edit_with_id:
                         contractor_edit = contractor
                         break
 
