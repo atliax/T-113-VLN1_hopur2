@@ -33,7 +33,7 @@ class StaffScreen(BaseScreen):
         staff_table.field_names = ["ID", "Name","Job title","Destination","SSN"]
 
         for employee in staff:
-            employee_destination = self.ui.logic_api.destination_get_by_ID(employee.destinationID)
+            employee_destination = self.ui.logic_api.destination_get_by_ID(employee.destinationID.upper())
             if employee_destination is not None:
                 employee_destination_country = employee_destination.country
             else:
