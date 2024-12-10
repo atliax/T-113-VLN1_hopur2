@@ -110,7 +110,7 @@ class PropertyScreen(BaseScreen):
             property_attributes = ["name","address","square_meters","rooms", "type"]
 
             while property_edit is None:
-                edit_with_id = input("Edit employee with the ID: ").upper()
+                edit_with_id = input("Edit property with the ID: ").upper()
                 #if nothing is input, the field will be left unchanged
                 for item_property in properties:
                     if item_property.propertyID == edit_with_id:
