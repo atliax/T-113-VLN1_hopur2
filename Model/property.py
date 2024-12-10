@@ -1,10 +1,10 @@
 from Model.base_model import BaseModel
 
 class Property(BaseModel):
-    def __init__(self, propertyID : str, destinationID : str, name : str, \
+    def __init__(self, ID : str, destinationID : str, name : str, \
                  address : str, square_meters : int, rooms : int, \
                  type : str) -> None:
-        self.propertyID = propertyID
+        self.ID = ID
         self.destinationID = destinationID
         self.name = name
         self.address = address

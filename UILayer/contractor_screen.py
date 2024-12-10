@@ -38,7 +38,7 @@ class ContractorScreen(BaseScreen):
             else:
                 contractor_destination_country = "Not assigned"
 
-            contractor_table.add_row([contractor.contractorID, contractor.name, contractor.contractor_type, contractor_destination_country, contractor.contact, contractor.rating])
+            contractor_table.add_row([contractor.ID, contractor.name, contractor.contractor_type, contractor_destination_country, contractor.contact, contractor.rating])
 
         contractor_table._min_table_width = ui_consts.TABLE_WIDTH
 
@@ -63,7 +63,7 @@ class ContractorScreen(BaseScreen):
         destination_table.field_names = ["Destination ID", "Country"]
 
         for destination in destinations:
-            destination_table.add_row([destination.destinationID, destination.country])
+            destination_table.add_row([destination.ID, destination.country])
 
         if cmd == "n":
             self.current_page += 1

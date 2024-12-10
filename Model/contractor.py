@@ -1,10 +1,10 @@
 from Model.base_model import BaseModel
 
 class Contractor(BaseModel):
-    def __init__(self, contractorID : str, destinationID : str, rating : float, \
+    def __init__(self, ID : str, destinationID : str, rating : float, \
                  name : str, contact : str, phone : str, address : str, \
                  opening_hours : str, contractor_type : str) -> None:
-        self.contractorID = contractorID
+        self.ID = ID
         self.destinationID = destinationID
         self.rating = rating
         self.name = name

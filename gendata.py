@@ -1,20 +1,14 @@
-from StorageLayer.facility_storage import FacilityStorage
-from StorageLayer.contractor_storage import ContractorStorage
-from StorageLayer.destination_storage import DestinationStorage
-from StorageLayer.property_storage import PropertyStorage
-from StorageLayer.report_storage import ReportStorage
-from StorageLayer.staff_storage import StaffStorage
-from StorageLayer.ticket_storage import TicketStorage
+from StorageLayer.storage_manager import StorageManager
 
 from Model import *
 
-facility_storage = FacilityStorage("data/facilities.json", Facility)
-contractor_storage = ContractorStorage("data/contractors.json", Contractor)
-destination_storage = DestinationStorage("data/destinations.json", Destination)
-property_storage = PropertyStorage("data/properties.json", Property)
-report_storage = ReportStorage("data/reports.json", Report)
-staff_storage = StaffStorage("data/staff.json", Staff)
-ticket_storage = TicketStorage("data/tickets.json", Ticket)
+facility_storage = StorageManager("data/facilities.json", Facility)
+contractor_storage = StorageManager("data/contractors.json", Contractor)
+destination_storage = StorageManager("data/destinations.json", Destination)
+property_storage = StorageManager("data/properties.json", Property)
+report_storage = StorageManager("data/reports.json", Report)
+staff_storage = StorageManager("data/staff.json", Staff)
+ticket_storage = StorageManager("data/tickets.json", Ticket)
 
 destinations = []
 properties = []

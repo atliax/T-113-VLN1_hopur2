@@ -13,14 +13,14 @@ class StaffManager:
     def authenticate_login(self, email : str, password : str) -> bool:
         if email.upper() == 'BOSS' and password == 'Man':
             self.logged_in_staff = Staff("S0", "D0", "Manager", "090488-2959", "Grundargata 12", "555-5555", "867-5309", "siggi@nanair.is", "flubber", "Yfirmaður rekstrarsviðs", True)
-            self.tmp_destination = Destination("D0", "Ísland", "Keflavík", "555-5556", "24/7", self.logged_in_staff.staffID)
-            self.logged_in_staff.destinationID = self.tmp_destination.destinationID
+            self.tmp_destination = Destination("D0", "Ísland", "Keflavík", "555-5556", "24/7", self.logged_in_staff.ID)
+            self.logged_in_staff.destinationID = self.tmp_destination.ID
             return True
 
         if email.upper() == 'PLEB' and password == '1234':
             self.logged_in_staff = Staff("S0", "D0", "Jón afi", "120488-2959", "Grundargata 14", "555-5555", "867-5309", "siggi@nanair.is", "flubber", "Starfsmaður", False)
-            self.tmp_destination = Destination("D0", "Ísland", "Keflavík", "555-5556", "24/7", self.logged_in_staff.staffID)
-            self.logged_in_staff.destinationID = self.tmp_destination.destinationID
+            self.tmp_destination = Destination("D0", "Ísland", "Keflavík", "555-5556", "24/7", self.logged_in_staff.ID)
+            self.logged_in_staff.destinationID = self.tmp_destination.ID
             return True
 
         return False
@@ -36,10 +36,10 @@ class StaffManager:
 
     def staff_add(self, new_staff : Staff) -> None:
         all_staff = self.storage_api.staff_get_all()
-        n = int(all_staff[len(all_staff)-1].staffID[1:])
+        n = int(all_staff[len(all_staff)-1].ID[1:])
         n += 1
         new_id = "S" + str(n)
-        new_staff.staffID = new_id
+        new_staff.ID = new_id
 
         # validation
 

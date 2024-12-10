@@ -32,7 +32,7 @@ class PropertyScreen(BaseScreen):
         property_table.field_names = ["ID","Name","Destination","Address","Sq meters","Rooms","Type"]
 
         for item in properties:
-            property_table.add_row([item.propertyID, item.name, item.destinationID, item.address, item.square_meters, item.rooms, item.type])
+            property_table.add_row([item.ID, item.name, item.destinationID, item.address, item.square_meters, item.rooms, item.type])
 
         property_table._min_table_width = ui_consts.TABLE_WIDTH
 
@@ -44,7 +44,7 @@ class PropertyScreen(BaseScreen):
         destination_table.field_names = ["Destination ID","Country","Airport"]
 
         for destination in destinations:
-            destination_table.add_row([destination.destinationID, destination.country, destination.airport])
+            destination_table.add_row([destination.ID, destination.country, destination.airport])
 
         if self.current_page < 0:
             self.current_page = 0
@@ -113,7 +113,7 @@ class PropertyScreen(BaseScreen):
                 edit_with_id = input("Edit property with the ID: ").upper()
                 #if nothing is input, the field will be left unchanged
                 for item_property in properties:
-                    if item_property.propertyID == edit_with_id:
+                    if item_property.ID == edit_with_id:
                         property_edit = item_property
                         break
 

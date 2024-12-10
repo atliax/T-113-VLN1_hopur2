@@ -1,9 +1,9 @@
 from Model.base_model import BaseModel
 
 class Destination(BaseModel):
-    def __init__(self, destinationID : str, managerID : str, country : str, \
+    def __init__(self, ID : str, managerID : str, country : str, \
                  airport : str, phone : str, opening_hours : str) -> None:
-        self.destinationID = destinationID
+        self.ID = ID
         self.managerID = managerID
         self.country = country
         self.airport = airport
