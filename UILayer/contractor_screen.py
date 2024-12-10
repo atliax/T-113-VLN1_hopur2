@@ -105,15 +105,15 @@ class ContractorScreen(BaseScreen):
             contact_by_id = None
             
             while contact_by_id is None:
-                view_contact = input("View the contact information of contractor with the ID: ")
+                view_contact = input("View the contact information of contractor with the ID: ").upper()
                 
                 for contractor in contractors:
                     if contractor.ID == view_contact:
-                        contact_by_id = self.ui.logic_api.contractor_get_by_ID(view_contact.upper())
+                        contact_by_id = self.ui.logic_api.contractor_get_by_ID(view_contact)
                         break
 
                 if contact_by_id is None:
-                    print(f"No contractor with the ID: '{view_contact}', Try again (B to cancel).")
+                    print(f"No contractor with the ID: '{view_contact}', Try again (B to cancel).\n")
 
             contact_by_id_table = PrettyTable()
             contact_by_id_table.field_names = ["ID","Name","Type","Destination","Contact","rating"]
