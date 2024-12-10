@@ -1,1 +1,7 @@
 {"ID": "C1", "destinationID": "D1", "rating": 4.4, "name": "B\u00f6rnunar\u00fej\u00f3nusta \u00cdsmannsins", "contact": "Mamma \u00edsmannsins", "phone": "+299 85 45 58", "address": "Inuit 3", "opening_hours": "21:00 - 23:00 alla daga", "contractor_type": "Penetrator"}
+{"ID": "C2", "destinationID": "D2", "rating": "120", "name": "EvA cOOl", "contact": "NoContact", "phone": "7778877", "address": "NoAddress", "opening_hours": "23/7", "contractor_type": "Hitman Pro"}
+{"ID": "C3", "destinationID": "D2", "rating": 100000.0, "name": "Atli", "contact": "fr\u00e6ndi \u00edsmannsins", "phone": "6666666", "address": "Afkv\u00e6misstr\u00e6ti 69", "opening_hours": "24/7", "contractor_type": "Breeder"}
+{"ID": "C4", "destinationID": "D1", "rating": 420.0, "name": "oli", "contact": "69", "phone": "112", "address": "mor\u00f0gata 4", "opening_hours": "24/7", "contractor_type": "Ass assassin"}
+{"ID": "C5", "destinationID": "D2", "rating": 69.0, "name": "Giblib", "contact": "coolguy@hackingyourass.com", "phone": "7377372", "address": "Megab\u00e6t 12", "opening_hours": "24/8", "contractor_type": "H4ck3r"}
+{"ID": "C6", "destinationID": "D3", "rating": 1.0, "name": "Dan\u00edel", "contact": "Sonur \u00edsmannsins", "phone": "8277363", "address": "simpagata 8", "opening_hours": "5-7", "contractor_type": "Simp"}
+{"ID": "C7", "destinationID": "D2", "rating": 5.0, "name": "Gylfi", "contact": "8277361", "phone": "9237161", "address": "HR-gata 8", "opening_hours": "24/7", "contractor_type": "kennari"}
