@@ -50,7 +50,7 @@ class StorageManager:
         filtered_items = []
         for item in current_items:
             for attribute_value in list(item.__dict__.values()):
-                if search_string in str(attribute_value):
+                if search_string.lower() in str(attribute_value).lower():
                     filtered_items.append(item)
                     break
 

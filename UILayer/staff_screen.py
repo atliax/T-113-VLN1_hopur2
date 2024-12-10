@@ -169,6 +169,10 @@ class StaffScreen(BaseScreen):
                 # Example gamer, Nuuk
                 # Finnur allar línur tengdar gamer, nuuk
             search = input("Search for: ") # Sama search allstaðar nema á tickets
+            bla = self.ui.logic_api.staff_search(search)
+            for bl in bla:
+                print(bl.toJson())
+            input()
 
         # View contact info
         if cmd == "c":
