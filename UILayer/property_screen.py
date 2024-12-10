@@ -123,15 +123,15 @@ class PropertyScreen(BaseScreen):
                 if edit_with_id == "B":
                     return ui_consts.CMD_BACK
             
-                print(destination_table)
-                new_destinationID = input("New destination ID: ").upper()
-                setattr(property_edit, "destinationID", new_destinationID)
-                
-                for attribute in property_attributes:
-                    current_value = getattr(property_edit, attribute)
-                    new_value = input(f"New {attribute.capitalize()} (Current {current_value}): ").strip()
-                    if new_value:
-                        setattr(property_edit,attribute,new_value)
+            print(destination_table)
+            new_destinationID = input("New destination ID: ").upper()
+            setattr(property_edit, "destinationID", new_destinationID)
+            
+            for attribute in property_attributes:
+                current_value = getattr(property_edit, attribute)
+                new_value = input(f"New {attribute.capitalize()} (Current {current_value}): ").strip()
+                if new_value:
+                    setattr(property_edit,attribute,new_value)
 
             self.ui.logic_api.property_edit(property_edit)
 
