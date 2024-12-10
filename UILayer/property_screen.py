@@ -15,7 +15,7 @@ class PropertyScreen(BaseScreen):
 
         print("Main menu > Properties")
 
-        properties = self.ui.logic_api.get_all_properties()
+        properties = self.ui.logic_api.property_get_all()
 
         property_table = PrettyTable()
         property_table.field_names = ["ID","Name","Destination","Address","Sq meters","Rooms","Type"]
@@ -50,8 +50,8 @@ class PropertyScreen(BaseScreen):
             p_new_type = input("New property type: ")
 
             # construct property
-            new_property = Property(None, p_new_name, p_new_destination, p_new_address, p_new_square_mtrs, p_new_roomnum, p_new_type)
-            
+            new_property = Property(None, p_new_destination, p_new_name, p_new_address, p_new_square_mtrs, p_new_roomnum, p_new_type)
+
             # Send property to logic api
             self.ui.logic_api.property_add(new_property)
 
@@ -64,7 +64,6 @@ class PropertyScreen(BaseScreen):
         # [V] View facilities
         if cmd == "v":
             return ui_consts.FACILITY_SCREEN
-
 
         # [E] Edit a property 
         if cmd == "e":

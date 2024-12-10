@@ -6,13 +6,13 @@ class StaffStorage(BaseStorage):
     def __init__(self, filename, model_class) -> None:
         super().__init__(filename, model_class)
 
-    def add_new_staff(self, new_staff : Staff) -> None:
+    def staff_add(self, new_staff : Staff) -> None:
         current_staff = self.load_from_file()
         current_staff.append(new_staff)
         self.save_to_file(current_staff)
 
-    def remove_staff(self, staffID: str) -> None:
-        current_staff: list[Staff] = self.load_from_file()
+    def staff_remove(self, staffID : str) -> None:
+        current_staff : list[Staff] = self.load_from_file()
 
         updated_staff = []
         for staff in current_staff:
@@ -21,5 +21,27 @@ class StaffStorage(BaseStorage):
 
         self.save_to_file(updated_staff)
     
-    def edit_staff(self, edit_staff):
-        self.save_to_file(edit_staff)
+    def staff_edit(self, edited_staff : Staff) -> None:
+        current_staff : list[Staff] = self.load_from_file()
+
+        updated_staff = []
+        for staff in current_staff:
+            if staff.staffID == edited_staff.staffID:
+                updated_staff.append(edited_staff)
+            else:
+                updated_staff.append(staff)
+
+        self.save_to_file(updated_staff)
+
+    def staff_get_all(self) -> list[Staff]:
+        return self.load_from_file()
+
+    def staff_get_by_ID(self, staffID : str) -> Staff:
+        current_staff : list[Staff] = self.load_from_file()
+
+        for staff in current_staff:
+            if staff.staffID == staffID:
+                return staff
+
+    def staff_search(self, search_string : str) -> list[Staff]:
+        return []

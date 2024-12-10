@@ -13,7 +13,7 @@ class FacilityScreen(BaseScreen):
     def run(self):
         self.clear_screen()
 
-        properties = self.ui.logic_api.get_all_properties()
+        properties = self.ui.logic_api.property_get_all()
 
         property_table = PrettyTable()
         property_table.field_names = ["ID","Name","Destination","Address","Sq meters","Rooms","Type"]
@@ -30,7 +30,7 @@ class FacilityScreen(BaseScreen):
         # If ID does not exist, cancel command	
         # Print a list of facilities for property with input ID
 
-        facilities = self.ui.logic_api.get_facilities_by_propertyID(property_ID)
+        facilities = self.ui.logic_api.facility_get_by_propertyID(property_ID)
 
         facility_table = PrettyTable()
         facility_table.field_names = ["ID","Name","Description"]
@@ -64,7 +64,6 @@ class FacilityScreen(BaseScreen):
             remove = input("Remove facility that has the ID: ") # Klára þegar skjalakerfi er klárt
                 # If ID does not exist in property list, raise error "No facility found with that ID!"
                 # If ID does not exist, cancel command
-
 
         if cmd == "s":
             search = input("Search for: ") # Sama search allstaðar nema á tickets

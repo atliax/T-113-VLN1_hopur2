@@ -6,6 +6,8 @@ from StorageLayer.report_storage import ReportStorage
 from StorageLayer.staff_storage import StaffStorage
 from StorageLayer.ticket_storage import TicketStorage
 
+# TODO: skoða sameiningu á storage klösum í einn
+
 from Model import *
 
 class StorageAPI:
@@ -19,105 +21,148 @@ class StorageAPI:
         self.ticket_storage = TicketStorage("data/tickets.json", Ticket)
 
 #==========================================================================
+# ----contractors----------------------------------------------------------   
+
+    def contractor_get_all(self):
+        return self.contractor_storage.contractor_get_all()
+
+    def contractor_add(self, new_contractor : Contractor) -> None:
+        self.contractor_storage.contractor_add(new_contractor)
+
+    def contractor_remove(self, contractorID : str) -> None:
+        self.contractor_storage.contractor_remove(contractorID)
+
+    def contractor_edit(self, edited_contractor : Contractor) -> None:
+        self.contractor_storage.contractor_edit(edited_contractor)
+
+    def contractor_search(self, search_string : str) -> list[Contractor]:
+        return self.contractor_storage.contractor_search(search_string)
+
+    def contractor_get_by_ID(self, contractorID : str) -> Contractor:
+        return self.contractor_storage.contractor_get_by_ID(contractorID)
+
+#==========================================================================
 #--Destinations------------------------------------------------------------
 
-    def get_all_destinations(self) -> list[Destination]:
-        return self.destination_storage.load_from_file()
+    def destination_add(self, new_destination : Destination) -> None:
+        self.destination_storage.destination_add(new_destination)
 
-    def add_new_destination(self, new_destination : Destination):
-        self.destination_storage.add_new_destination(new_destination)
+    def destination_remove(self, destinationID : str) -> None:
+        self.destination_storage.destination_remove(destinationID)
 
-    def edit_destination(self, destinations):
-        self.destination_storage.edit_destination(destinations)
+    def destination_edit(self, edited_destination) -> None:
+        self.destination_storage.destination_edit(edited_destination)
+
+    def destination_get_all(self) -> list[Destination]:
+        return self.destination_storage.destination_get_all()
+
+    def destination_get_by_ID(self, destinationID : str) -> Destination:
+        return self.destination_storage.destination_get_by_ID(destinationID)
+
+    def destination_search(self, search_string : str) -> list[Destination]:
+        return self.destination_search(search_string)
 
 #==========================================================================
 #--Facilities--------------------------------------------------------------
 
-    def get_all_facilities(self) -> list[Facility]:
-        return self.facility_storage.load_from_file()
-    
-    def add_new_facility(self, new_facility : Facility) -> None:
-        self.facility_storage.add_new_facility(new_facility)
+    def facility_add(self, new_facility : Facility) -> None:
+        self.facility_storage.facility_add(new_facility)
+
+    def facility_remove(self, facilityID : str) -> None:
+        self.facility_storage.facility_remove(facilityID)
+
+    def facility_edit(self, edited_facility : Facility) -> None:
+        self.facility_storage.facility_edit(edited_facility)
+
+    def facility_get_all(self) -> list[Facility]:
+        return self.facility_storage.facility_get_all()
+
+    def facility_get_by_ID(self, facilityID : str) -> Facility:
+        return self.facility_storage.facility_get_by_ID(facilityID)
+
+    def facility_search(self, search_string : str) -> list[Facility]:
+        return self.facility_storage.facility_search(search_string)
 
 #==========================================================================
 #--Properties--------------------------------------------------------------
 
-   # def property_add(self):
-    #    self.property_storage.property_add(new_property)
-
-    def get_all_properties(self) -> list[Property]:
-        return self.property_storage.load_from_file()
-
-    def property_add(self, new_property: Property) -> None:
+    def property_add(self, new_property : Property) -> None:
         self.property_storage.property_add(new_property)
 
-    def property_remove(self, propertyID) -> None:
+    def property_remove(self, propertyID : str) -> None:
         self.property_storage.property_remove(propertyID)
 
-    def property_edit(self):
-        pass
+    def property_edit(self, edited_property : Property) -> None:
+        self.property_storage.property_edit(edited_property)
 
-    def property_search(self):
-        pass
-    
-#==========================================================================
-#--Staff--------------------------------------------------------------
+    def property_get_all(self) -> list[Property]:
+        return self.property_storage.property_get_all()
 
-    def remove_staff(self, staffID) -> None:
-        self.staff_storage.remove_staff(staffID)
+    def property_get_by_ID(self, propertyID : str) -> Property:
+        return self.property_storage.property_get_by_ID(propertyID)
 
-    def edit_staff(self, edit_staff):
-        self.staff_storage.edit_staff(edit_staff)
-    
-    def get_all_staff(self) -> list[Staff]:
-        return self.staff_storage.load_from_file()
-
-    def add_new_staff(self, new_staff : Staff) -> None:
-        self.staff_storage.add_new_staff(new_staff)
-    
-    def remove_staff(self, remove_id):
-        return self.staff_storage.remove_staff(remove_id)
+    def property_search(self, search_string : str) -> list[Property]:
+        return self.property_storage.property_search(search_string)
 
 #==========================================================================
-# ----contractors----------------------------------------------------------   
+#--Reports-----------------------------------------------------------------
 
-    #def get_all_contractors(self):
-    #    return self.contractor_manager.get_all_contractors()
+    def report_add(self, new_report : Report) -> None:
+        self.report_storage.report_add(new_report)
 
-    #def add_new_contractor(self, new_contractor: Contractor):
-    #    self.contractor_manager.add_new_contractor(new_contractor)
+    def report_remove(self, reportID : str) -> None:
+        self.report_storage.report_remove(reportID)
 
-    #def remove_contractor(self, remove_id: str):
-    #    return self.contractor_manager.remove_contractor(remove_id)
+    def report_edit(self, edited_report : Report) -> None:
+        self.report_storage.report_edit(edited_report)
 
-    def edit_contractor(self):
-        pass
+    def report_get_all(self) -> list[Report]:
+        return self.report_storage.report_get_all()
 
-    def contractor_search(self):
-        pass
+    def report_get_by_ID(self, reportID : str) -> Report:
+        return self.report_storage.report_get_by_ID(reportID)
 
-    def view_contractor_contact(self):
-        pass
+    def report_search(self, search_string : str) -> list[Report]:
+        return self.report_storage.report_search(search_string)
 
 #==========================================================================
-#--Destinations------------------------------------------------------------ 
+#--Staff-------------------------------------------------------------------
 
-    def get_all_destinations(self) -> list[Destination]:
-        return self.destination_storage.load_from_file()
+    def staff_add(self, new_staff : Staff) -> None:
+        self.staff_storage.staff_add(new_staff)
 
-    def add_new_destination(self, new_destination : Destination):
-        self.destination_storage.add_new_destination(new_destination)
-        return
+    def staff_remove(self, staffID : str) -> None:
+        self.staff_storage.staff_remove(staffID)
 
-    def edit_destination(self, destinations):
-        self.destination_storage.edit_destination(destinations)
-        return
+    def staff_edit(self, edited_staff : Staff):
+        self.staff_storage.staff_edit(edited_staff)
     
+    def staff_get_all(self) -> list[Staff]:
+        return self.staff_storage.staff_get_all()
+
+    def staff_get_by_ID(self, staffID : str) -> Staff:
+        return self.staff_storage.staff_get_by_ID(staffID)
+
+    def staff_search(self, search_string : str) -> list[Staff]:
+        return self.staff_storage.staff_search(search_string)
+
 #==========================================================================
-#--Facilities--------------------------------------------------------------
+#--Tickets-----------------------------------------------------------------
 
-    def get_all_facilities(self) -> list[Facility]:
-        return self.facility_storage.load_from_file()
+    def ticket_add(self, new_ticket : Ticket) -> None:
+        self.ticket_storage.ticket_add(new_ticket)
+
+    def ticket_remove(self, ticketID : str) -> None:
+        self.ticket_storage.ticket_remove(ticketID)
+
+    def ticket_edit(self, edited_ticket : Ticket):
+        self.ticket_storage.ticket_edit(edited_ticket)
     
-    def add_new_facility(self, new_facility : Facility):
-        self.facility_storage.add_new_facility(new_facility)
+    def ticket_get_all(self) -> list[Ticket]:
+        return self.ticket_storage.ticket_get_all()
+
+    def ticket_get_by_ID(self, ticketID : str) -> Ticket:
+        return self.ticket_storage.ticket_get_by_ID(ticketID)
+
+    def ticket_search(self, search_string : str) -> list[Ticket]:
+        return self.ticket_storage.ticket_search(search_string)

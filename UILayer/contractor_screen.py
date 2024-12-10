@@ -16,13 +16,13 @@ class ContractorScreen(BaseScreen):
 
         print("Main menu > Contractors")
 
-        contractors = self.ui.logic_api.get_all_contractors()
+        contractors = self.ui.logic_api.contractor_get_all()
 
         contractor_table = PrettyTable()
         contractor_table.field_names = ["id", "name","type","destination","contact","rating"]
 
         for contractor in contractors:
-            contractor_destination = self.ui.logic_api.get_destination_by_ID(contractor.destinationID)
+            contractor_destination = self.ui.logic_api.destination_get_by_ID(contractor.destinationID)
             if contractor_destination is not None:
                 contractor_destination_country = contractor_destination.country
             else:
@@ -34,7 +34,7 @@ class ContractorScreen(BaseScreen):
 
         print(contractor_table)
 
-        destinations = self.ui.logic_api.get_all_destinations()
+        destinations = self.ui.logic_api.destination_get_all()
 
         destination_table = PrettyTable()
         destination_table.field_names = ["Destination ID", "Country"]
@@ -66,19 +66,19 @@ class ContractorScreen(BaseScreen):
             #add_destinationID = input("New destinationID: ")
             add_contact = input("New contractor contact (optional): ")
             add_rating = float(input("Enter rating: "))
-            add_phone = int(input("New contractor phone: "))
+            add_phone = input("New contractor phone: ")
             add_address = input("New contractor address: ")
             add_opening_hours = (input("Add opening hours for contractor: "))
 
             new_contractor = Contractor(None, new_destination, add_rating, add_contractor, add_contact, add_phone, add_address, add_opening_hours, add_type)
 
-            self.ui.logic_api.add_new_contractor(new_contractor)
+            self.ui.logic_api.contractor_add(new_contractor)
 
         # Remove a contractor
         if cmd == "r":
             print(contractor_table)
             remove_id = input("Remove employee with the ID: ").upper()
-            self.ui.logic_api.remove_contractor(remove_id)
+            self.ui.logic_api.contractor_remove(remove_id)
 
         # View contact info
         if cmd == "v":
@@ -88,7 +88,7 @@ class ContractorScreen(BaseScreen):
             print(f"Name: {add_contractor}")
             print(f"Phone: {add_phone}")
             print(f"Address: {add_address}")
-        
+
         # Edit contractor
         if cmd == "e":
             #If nothing is input, the name/loc will be unchanged
@@ -107,6 +107,6 @@ class ContractorScreen(BaseScreen):
                 search = input("Search for: ") # Sama search allstaðar á eftir að implementa
             except LookupError:
                 return "No contractor found with that ID!"
-            
+
         if cmd == "b":
             return ui_consts.CMD_BACK

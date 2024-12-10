@@ -19,29 +19,74 @@ class LogicAPI:
         self.ticket_manager = TicketManager(storage_api)
 
 #==========================================================================
-#--Destinations--------------------------------------------------------------
+# --Contractors------------------------------------------------------------
 
-    def get_all_destinations(self) -> list[Destination]:
+    def contractor_get_all(self) -> list[Contractor]:
+        return self.contractor_manager.contractor_get_all()
+
+    def contractor_add(self, new_contractor : Contractor) -> None:
+        self.contractor_manager.contractor_add(new_contractor)
+
+    def contractor_remove(self, contractorID : str) -> None:
+        self.contractor_manager.contractor_remove(contractorID)
+
+    def contractor_edit(self, edited_contractor : Contractor) -> None:
+        self.contractor_manager.contractor_edit(edited_contractor)
+
+    def contractor_search(self, search_string : str) -> list[Contractor]:
+        return self.contractor_manager.contractor_search(search_string)
+
+    #def view_contractor_contact(self):
+    #    pass
+
+#==========================================================================
+#--Destinations------------------------------------------------------------
+
+    def destination_get_all(self) -> list[Destination]:
         """Returns a list of all available destinations"""
-        return self.destination_manager.get_all_destinations()
-    
-    def add_new_destination(self, new_destination : str) -> None:
+        return self.destination_manager.destination_get_all()
+
+    def destination_add(self, new_destination : str) -> None:
         """Adds a new destination"""
-        self.destination_manager.add_new_destination(new_destination)
+        self.destination_manager.destination_add(new_destination)
 
-    def edit_destinations(self, destinations) -> None:
+    def destination_edit(self, edited_destination : Destination) -> None:
         """Modifies a destination"""
-        self.destination_manager.edit_destination(destinations)
+        self.destination_manager.destination_edit(edited_destination)
 
-    def get_destination_by_ID(self, destinationID : str) -> Destination:
+    def destination_get_by_ID(self, destinationID : str) -> Destination:
         """Returns a destination with a matching destinationID if it exists"""
-        return self.destination_manager.get_destination_by_ID(destinationID)
+        return self.destination_manager.destination_get_by_ID(destinationID)
+
+#==========================================================================
+# --Facilities-------------------------------------------------------------
+
+    def facility_add(self, new_facility : Facility):
+        self.facility_manager.facility_add(new_facility)
+
+    def facility_remove(self, remove_id: str):
+        return self.facility_manager.facility_remove(remove_id)
+
+    def facility_edit(self, edited_facility : Facility):
+        self.facility_manager.facility_edit(edited_facility)
+
+    def facility_get_all(self) -> list[Facility]:
+        return self.facility_manager.facility_get_all()
+
+    def facility_get_by_propertyID(self, propertyID : str) -> list[Facility]:
+        return self.facility_manager.facility_get_by_propertyID(propertyID)
+
+    def facility_search(self, search_string : str) -> list[Facility]:
+        return self.facility_manager.facility_search(search_string)
+
+    #def view_facilites(self):
+    #    pass
 
 #==========================================================================
 #--Properties--------------------------------------------------------------
 
-    def get_all_properties(self) -> list[Property]:
-        return self.property_manager.get_all_properties()
+    def property_get_all(self) -> list[Property]:
+        return self.property_manager.property_get_all()
 
     def property_add(self, new_property : Property) -> None:
         self.property_manager.property_add(new_property)
@@ -52,11 +97,11 @@ class LogicAPI:
     def property_edit(self, property : Property) -> None:
         self.property_manager.property_edit(property)
 
-    def property_search(self):
-        pass
+    def property_search(self, search_string : str) -> list[Property]:
+        return self.property_manager.property_search(search_string)
 
 #==========================================================================
-#--Staff--------------------------------------------------------------
+#--Staff-------------------------------------------------------------------
 
     def authenticate_login(self, email : str, password : str) -> bool:
         """Attempts to log in using a specified email/password combination"""
@@ -70,59 +115,14 @@ class LogicAPI:
         """Returns the currently logged in staff member"""
         return self.staff_manager.get_logged_in_staff()
 
-    def get_all_staff(self) -> list[Staff]:
-        return self.staff_manager.get_all_staff()
+    def staff_get_all(self) -> list[Staff]:
+        return self.staff_manager.staff_get_all()
 
-    def add_new_staff(self, new_staff : Staff) -> None:
-        self.staff_manager.add_new_staff(new_staff)
+    def staff_add(self, new_staff : Staff) -> None:
+        self.staff_manager.staff_add(new_staff)
 
-    def edit_staff(self, staff : Staff) -> None:
-        self.staff_manager.edit_staff(staff)
+    def staff_edit(self, edited_staff : Staff) -> None:
+        self.staff_manager.staff_edit(edited_staff)
 
-    def remove_staff(self, staffID : str) -> None:
-        self.staff_manager.remove_staff(staffID)
-
-#==========================================================================
-# ----contractors----------------------------------------------------------   
-
-    def get_all_contractors(self) -> list[Contractor]:
-        return self.contractor_manager.get_all_contractors()
-    
-    def add_new_contractor(self, new_contractor : Contractor) -> None:
-        self.contractor_manager.add_new_contractor(new_contractor)
-
-    def remove_contractor(self, contractorID : str) -> None:
-        self.contractor_manager.remove_contractor(contractorID)
-    
-    def edit_contractor(self, contractor: str) -> None:
-        self.contractor_manager.edit_contractor(contractor)
-
-    def contractor_search(self):
-        pass
-
-    def view_contractor_contact(self):
-        pass
-
-#==========================================================================
-# ----facilities-----------------------------------------------------------
-
-    def get_facilities_by_propertyID(self, propertyID : str) -> list[Facility]:
-        return self.facility_manager.get_facilities_by_propertyID(propertyID)
-
-    def add_new_facility(self,new_facility: Facility):
-        self.facility_manager.add_new_facility(new_facility)
-    
-    def remove_facility(self, remove_id: str):
-        return self.facility_manager.remove_facility(remove_id)
-    
-    def facility_search(self):
-        pass
-
-    def edit_facilities(self):
-        pass
-
-    def get_all_facilities(self) -> list[Facility]:
-        return self.facility_manager.get_all_facilities()
-
-    def view_facilites(self):
-        pass
+    def staff_remove(self, staffID : str) -> None:
+        self.staff_manager.staff_remove(staffID)

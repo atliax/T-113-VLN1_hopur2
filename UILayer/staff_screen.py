@@ -16,25 +16,25 @@ class StaffScreen(BaseScreen):
 
         print("Main Menu > Staff")
 
-        staff = self.ui.logic_api.get_all_staff()
+        staff = self.ui.logic_api.staff_get_all()
 
         staff_table = PrettyTable()
         staff_table.field_names = ["ID", "Name","Job title","Destination","SSN"]
 
         for employee in staff:
-            employee_destination = self.ui.logic_api.get_destination_by_ID(employee.destinationID)
+            employee_destination = self.ui.logic_api.destination_get_by_ID(employee.destinationID)
             if employee_destination is not None:
                 employee_destination_country = employee_destination.country
             else:
                 employee_destination_country = "Not assigned"
 
             staff_table.add_row([employee.staffID, employee.name, employee.job_title, employee_destination_country, employee.ssn])
-        
+
         staff_table._min_table_width = ui_consts.TABLE_WIDTH
 
         print(staff_table)
 
-        destinations = self.ui.logic_api.get_all_destinations()
+        destinations = self.ui.logic_api.destination_get_all()
 
         destination_table = PrettyTable()
         destination_table.field_names = ["Destination ID","Country"]
@@ -71,14 +71,20 @@ class StaffScreen(BaseScreen):
                 new_email = input("New employee email: ")
             new_password = input("New employee password: ")
             new_title = input("New employee job title: ")
-            is_manager = input("Is the new employee a manager? y/n ").lower()
-            new_staff = Staff(None, new_destination, new_employee, new_ssn, new_address, new_phone_nr, new_gsm, new_email, new_password, new_title, True if is_manager == "y" else False)
-            self.ui.logic_api.add_new_staff(new_staff)
+            new_is_manager = input("Is the new employee a manager? y/n ").lower()
+            if new_is_manager == "y":
+                is_manager = True
+            else:
+                is_manager = False
+
+            new_staff = Staff(None, new_destination, new_employee, new_ssn, new_address, new_phone_nr, new_gsm, new_email, new_password, new_title, is_manager)
+
+            self.ui.logic_api.staff_add(new_staff)
 
         # Remove an employee
         if cmd == "r":
             remove_id = input("Remove employee with the ID: ").upper()
-            self.ui.logic_api.remove_staff(remove_id)
+            self.ui.logic_api.staff_remove(remove_id)
 
         # View contact info
         if cmd == "v":
@@ -94,7 +100,7 @@ class StaffScreen(BaseScreen):
         if cmd == "e":
             staff_edit = None
             staff_attributes = ["destinationID","name", "ssn","address","phone_home","phone_gsm","email","password","job_title","is_manager"]
-            
+
             while staff_edit is None:
                 edit_with_id = input("Edit employee with the ID: ").upper()
                 #if nothing is input, the field will be left unchanged
@@ -105,15 +111,22 @@ class StaffScreen(BaseScreen):
 
                 if staff_edit is None:
                     print(f"No employee with the ID: '{edit_with_id}' Try again (B to cancel).")
+
                 if edit_with_id == "B":
                     return ui_consts.CMD_BACK
                
             for attribute in staff_attributes:
-                current_value = getattr(employee, attribute)
+                current_value = getattr(staff_edit, attribute)
                 new_value = input(f"New {attribute.capitalize()} (Current {current_value}): ").strip()
                 if new_value:
                     setattr(staff_edit,attribute,new_value)
-            self.ui.logic_api.edit_staff(staff)
+
+            if staff_edit.is_manager == "y":
+                staff_edit.is_manager = True
+            else:
+                staff_edit.is_manager = False
+
+            self.ui.logic_api.staff_edit(staff_edit)
             # If ID does not exist in the employee list, raise error "No employee found with that ID!"
             # If ID does not exist, cancel command
             # If job title = "manager" or "boss" set isManager = True, otherwise False)
@@ -126,7 +139,7 @@ class StaffScreen(BaseScreen):
         # View contact info
         if cmd == "c":
             return ui_consts.CONTRACTOR_SCREEN
-            
+
         # Back
         if cmd == "b":
             return ui_consts.CMD_BACK

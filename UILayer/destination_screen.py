@@ -15,7 +15,7 @@ class DestinationScreen(BaseScreen):
 
         print("Main menu > Destinations")
 
-        destinations = self.ui.logic_api.get_all_destinations()
+        destinations = self.ui.logic_api.destination_get_all()
 
         destination_table = PrettyTable()
         destination_table.field_names = ["ID","managerID","Destination","Airport", "Phone", "Opening"]
@@ -36,12 +36,12 @@ class DestinationScreen(BaseScreen):
         # Add a destination
         if cmd == "a":
             destination_attributes = ["managerID", "country", "airport", "phone", "opening_hours"]
-            new_destination = ""
+            new_destination = []
             for attribute in destination_attributes:
                 new_value = input(f"New {attribute}: ")
-                new_destination += new_value + ","
-            self.ui.logic_api.add_new_destination(new_destination)
-
+                new_destination.append(new_value)
+            tmp = Destination(None,new_destination[0],new_destination[1],new_destination[2],new_destination[3],new_destination[4])
+            self.ui.logic_api.destination_add(tmp)
 
         # Edit destination
         if cmd == "e":
@@ -57,11 +57,11 @@ class DestinationScreen(BaseScreen):
                 input("Press enter to continue")
             else:
                 for attribute in destination_attributes:
-                    current_value = getattr(destination, attribute)
+                    current_value = getattr(destination_edit, attribute)
                     new_value = input(f"New {attribute} (current: {current_value}): ").strip()
                     if new_value:
-                        setattr(destination_edit, attribute, new_value)   
-                self.ui.logic_api.edit_destinations(destinations)   
+                        setattr(destination_edit, attribute, new_value)
+                self.ui.logic_api.destination_edit(destination_edit)
 
         if cmd == "b":
             return ui_consts.CMD_BACK

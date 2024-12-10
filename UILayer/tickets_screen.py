@@ -76,7 +76,7 @@ class TicketsScreen(BaseScreen):
             print("You can combine keywords by following a word with ,")
             print("Example: (Grænland,Nuukstræti 4)")
             search = input("Search for: ")
-            
+
             print("What timeline would ou like to search for?")
             print("Start                End")
             print("DD/MM/YYYY    DD/MM/YYYY")
@@ -85,7 +85,7 @@ class TicketsScreen(BaseScreen):
                     #GoTo "Main menu > Tickets > Filtered"
                     # "Main menu > Tickets > Filtered" window and commands are identical to "Main menu > Tickets"
                     # Just replace the normal tickets list with the filtered one
-        
+
         # Make a ticket report
         if cmd == "mr":
             create_report = input("Make a report for ticket with the ID: ")
