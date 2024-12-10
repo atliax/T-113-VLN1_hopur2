@@ -11,6 +11,7 @@ from Model import Property
 class FacilityScreen(BaseScreen):
     def __init__(self, ui) -> None:
         super().__init__(ui)
+        self.current_page = -1
 
     def run(self):
         self.clear_screen()
@@ -61,14 +62,14 @@ class FacilityScreen(BaseScreen):
             f_new_name = input("New facility name: ")
             f_new_description = input("New facility description: ")
 
-            new_facility= Facility(None, f_new_name, f_new_description)
+            new_facility= Facility(None, property_ID, f_new_name, f_new_description)
 
             self.ui.logic_api.facility_add(new_facility)
 
 
         # Remove a facility
         if cmd == "r":
-            remove = input("Remove facility that has the ID: ") # Klára þegar skjalakerfi er klárt
+            remove_id = input("Remove facility that has the ID: ") # Klára þegar skjalakerfi er klárt
                 # If ID does not exist in property list, raise error "No facility found with that ID!"
                 # If ID does not exist, cancel command
             self.ui.logic_api.facility_remove(remove_id)
