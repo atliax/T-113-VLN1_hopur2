@@ -57,3 +57,6 @@ class StaffManager:
 
     def staff_get_by_ID(self, staffID : str) -> Staff:
         return self.storage_api.staff_get_by_ID(staffID)
+
+    def staff_search(self, search_string : str) -> list[Staff]:
+        return self.storage_api.staff_search(search_string)

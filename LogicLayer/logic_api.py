@@ -129,3 +129,6 @@ class LogicAPI:
 
     def staff_get_by_ID(self, staffID : str) -> Staff:
         return self.staff_manager.staff_get_by_ID(staffID)
+
+    def staff_search(self, search_string : str) -> list[Staff]:
+        return self.staff_manager.staff_search(search_string)
