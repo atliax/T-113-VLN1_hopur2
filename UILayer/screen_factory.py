@@ -34,7 +34,3 @@ class ScreenFactory:
                 return StaffScreen(self.ui)
             case ui_consts.TICKET_SCREEN:
                 return TicketScreen(self.ui)
-
-        # TODO, other screens?
-
-        #error when unknown screen?
