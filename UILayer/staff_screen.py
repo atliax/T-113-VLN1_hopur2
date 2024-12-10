@@ -174,9 +174,8 @@ class StaffScreen(BaseScreen):
             # If ID does not exist, cancel command
             # If job title = "manager" or "boss" set isManager = True, otherwise False)
 
+        # Search
         if cmd == "s":
-                # Example gamer, Nuuk
-                # Finnur allar línur tengdar gamer, nuuk
             search = input("Search for: ") 
             
             search_staff = self.ui.logic_api.staff_search(search)
@@ -184,8 +183,9 @@ class StaffScreen(BaseScreen):
             search_staff_table = PrettyTable()
             search_staff_table.field_names = ["ID","Name","Job title","Destination","SSN"]
 
+            
+
             for unit in search_staff:
-                # print(unit.toJson())
                 search_staff_table.add_row([unit.ID,unit.name,unit.job_title,unit.destinationID,unit.ssn])
 
             print(search_staff_table) 
