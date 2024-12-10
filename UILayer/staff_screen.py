@@ -149,7 +149,7 @@ class StaffScreen(BaseScreen):
                         break
 
                 if staff_edit is None:
-                    print(f"No employee with the ID: '{edit_with_id}' Try again (B to cancel).")
+                    print(f"No employee with the ID: '{edit_with_id}' Try again (B to cancel).").upper()
 
                 if edit_with_id == "B":
                     return ui_consts.CMD_BACK
@@ -177,10 +177,18 @@ class StaffScreen(BaseScreen):
         if cmd == "s":
                 # Example gamer, Nuuk
                 # Finnur allar línur tengdar gamer, nuuk
-            search = input("Search for: ") # Sama search allstaðar nema á tickets
-            bla = self.ui.logic_api.staff_search(search)
-            for bl in bla:
-                print(bl.toJson())
+            search = input("Search for: ") 
+            
+            search_staff = self.ui.logic_api.staff_search(search)
+
+            search_staff_table = PrettyTable()
+            search_staff_table.field_names = ["ID","Name","Job title","Destination","SSN"]
+
+            for unit in search_staff:
+                # print(unit.toJson())
+                search_staff_table.add_row([unit.ID,unit.name,unit.job_title,unit.destinationID,unit.ssn])
+
+            print(search_staff_table) 
             input()
 
         # View contact info
