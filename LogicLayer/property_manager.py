@@ -29,8 +29,22 @@ class PropertyManager:
 
     # [S] Search for
     def property_search(self, search_string : str) -> list[Property]:
-        return self.storage_api.property_search(search_string)
+        all_properties : list[Property] = self.storage_api.property_get_all()
+        filtered_properties = []
+        for item in all_properties:
+            found = False
+            for attribute_value in list(item.__dict__.values()):
+                if search_string.lower() in str(attribute_value).lower():
+                    filtered_properties.append(item)
+                    found = True
+                    break
 
+            if not found:
+                property_destination = self.storage_api.destination_get_by_ID(item.destinationID)
+                if search_string.lower() in property_destination.country.lower():
+                    filtered_properties.append(item)
+
+        return filtered_properties
     # [V] View facilities
     #def view_facilities():
     #    pass
