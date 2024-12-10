@@ -52,7 +52,8 @@ class ContractorScreen(BaseScreen):
 
         print(f"|  Contractor list (Page {self.current_page+1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page")
-        print(contractor_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
+        if total_pages != 0:
+            print(contractor_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
 
         print("")
         cmd = input("Command: ").lower()
@@ -96,7 +97,7 @@ class ContractorScreen(BaseScreen):
         # Remove a contractor
         if cmd == "r":
             print(contractor_table)
-            remove_id = input("Remove employee with the ID: ").upper()
+            remove_id = input("Remove contractor with the ID: ").upper()
             self.ui.logic_api.contractor_remove(remove_id)
 
         # View contact info

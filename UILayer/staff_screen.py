@@ -53,7 +53,8 @@ class StaffScreen(BaseScreen):
 
         print(f"|  Staff list (Page {self.current_page+1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page")
-        print(staff_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
+        if total_pages != 0:
+            print(staff_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
 
         print("")
         cmd = input("Command: ").lower()
