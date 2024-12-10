@@ -28,17 +28,24 @@ class FacilityManager:
         # ef í lagi:
         self.storage_api.facility_remove(facilityID)
 
-
     def facility_get_all(self) -> list[Facility]:
         return self.storage_api.facility_get_all()
 
     def facility_get_by_ID(self, facilityID : str) -> Facility:
         return self.storage_api.facility_get_by_ID(facilityID)
     
-
     # [S] to search for a facility
     def facility_search(self, search_string : str):
-        return self.storage_api.facility_search(search_string)
+        all_facilities : list[Facility] = self.facility_get_by_propertyID(self.selected_property)
+
+        filteded_facilities = []
+        for facility in all_facilities:
+            for attribute_value in list(facility.__dict__.values()):
+                if search_string.lower() in str(attribute_value).lower():
+                    filteded_facilities.append(facility)
+                    break
+
+        return filteded_facilities
 
     # [E] to edit a facility
     def facility_edit(self, edited_facility : Facility):

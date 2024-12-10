@@ -330,3 +330,9 @@ Viðstaddir:Hjörtur, Gísli, Óli, Atli
 ## Markmið Dagsins
 Dagurinn í gær gekk mjög vel og við unnum aðeins heima í þessu verkefni, sérstaklega Atli sem samrændi kóðann og fór yfir storage layer.
 Við ætlum að skipta upp verkefnum í eftirfarandi: Atli ætlar að endurskipuleggja Storage layer. Hjörtur ætlar að klára view contacts og search functionið í staff screen. Gísli ætlar að implementa remove property í property screen og edit property. Óli ætlar að athuga með að setja Manager names í stað fyrir IDs í destination töflu, lagfæra hvernig hegðun er á þegar það finnst ekki destinationID. Taka eina yfirferð á því og færa yfir í annað.
+
+
+## Lokafundur
+Daníel og Eva komu rétt eftir morgunfundinn. Dagurinn í dag gekk mjög vel, náðum að klára mikið. Staff, destinations og properties er nánast tilbúið, facilities er eitthvað eftir. Allt storage layerið var endurskipulagt og þjöppuðum því saman í örfáar skrár. settum einnig pages í UI listann þannig það er ekki lengur scroll heldur bara next page og previous page.
+
+það sem er eftir er tickets, klára facilities og splitta functionality á appinu miðað við hvort það sé manager eða peasant sem er að nota það og setja try/except eða einhverskonar villuboð sem eru raised.
