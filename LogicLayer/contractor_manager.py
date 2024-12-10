@@ -26,3 +26,6 @@ class ContractorManager:
 
     def contractor_get_all(self) -> list[Contractor]:
         return self.storage_api.contractor_get_all()
+
+    def contractor_get_by_ID(self, contractorID : str) -> Contractor:
+        return self.storage_api.contractor_get_by_ID(contractorID)
