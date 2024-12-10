@@ -21,6 +21,11 @@ class SplashScreen(BaseScreen):
         print("         /:/  /        /:/  /        /:/  /                 /:/  /      \\/__/        |:|  |    ")
         print("         \\/__/         \\/__/         \\/__/                  \\/__/                     \\|__|    ")
         print("")
+        print("")
+        print("")
+        print("")
+        print("")
+        print("")
 
         input("Press enter to continue.")
 

@@ -113,7 +113,7 @@ class StaffScreen(BaseScreen):
             contact_by_id = self.ui.logic_api.staff_get_by_ID(view_contact)
             contact_by_id_table = PrettyTable()
             contact_by_id_table.field_names = ["ID","Name","Phone Nr.","Mobile Phone Nr.","Address"]
-            contact_by_id_table.add_row([employee.ID,employee.name,employee.phone_home,employee.phone_gsm,employee.address])
+            contact_by_id_table.add_row([contact_by_id.ID,contact_by_id.name,contact_by_id.phone_home,contact_by_id.phone_gsm,contact_by_id.address])
             print(contact_by_id_table)
             # print(contact_by_id.toJson())
             input()
