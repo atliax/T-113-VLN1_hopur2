@@ -12,7 +12,7 @@ class PropertyStorage(BaseStorage):
         self.save_to_file(current_properties)
 
     def property_remove(self, propertyID : str) -> None:
-        current_properties : list[Property] = self.load_from_file()
+        current_properties = self.load_from_file()
 
         updated_properties = []
         for property in current_properties:
