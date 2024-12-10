@@ -200,6 +200,8 @@ facilities.append(Facility('F108','P27','Hótel Akúla Leik/æfingasalur og gufu
 facilities.append(Facility('F109','P27','Hótel Akúla Móttaka',''))
 facilities.append(Facility('F110','P27','Hótel Akúla Kjarnakljúfur',''))
 
+facilities.append(Facility('F111','P1','iGloo-Ville móttaka',''))
+
 # -------------------------- write to the actual files -------------------------
 
 destination_storage.save_to_file(destinations)

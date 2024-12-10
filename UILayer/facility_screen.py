@@ -16,36 +16,7 @@ class FacilityScreen(BaseScreen):
     def run(self):
         self.clear_screen()
 
-        properties = self.ui.logic_api.property_get_all()
-
-        property_table = PrettyTable()
-        property_table.field_names = ["ID","Name","Destination","Address","Sq meters","Rooms","Type"]
-
-        for property in properties:
-            property_table.add_row([property.ID, property.name, property.destinationID, property.address, property.square_meters, property.rooms, property.type])
-
-        property_table._min_table_width = ui_consts.TABLE_WIDTH
-
-        print("|  Property list:")
-        print(property_table)
-        property_ID = input("View the facilities in property with ID: ").upper()
-        # If ID does not exist in property list, raise error "No property found with that ID!"
-        # If ID does not exist, cancel command	
-        # Print a list of facilities for property with input ID
-
-        facilities = self.ui.logic_api.facility_get_by_propertyID(property_ID)
-
-        facility_table = PrettyTable()
-        facility_table.field_names = ["ID","Name","Description"]
-
-        for facility in facilities:
-            facility_table.add_row([facility.ID,facility.name,facility.description])
-
-        facility_table._min_table_width = ui_consts.TABLE_WIDTH
-
         print("Main Menu > Properties > Facilities")
-
-        print(facility_table)
 
         print(ui_consts.SEPERATOR)
         print("|")
@@ -55,6 +26,21 @@ class FacilityScreen(BaseScreen):
         print("|")
         print(ui_consts.SEPERATOR)
 
+        propertyID = self.ui.logic_api.facility_get_selected_property()
+
+        facilities = self.ui.logic_api.facility_get_by_propertyID(propertyID)
+
+        facility_table = PrettyTable()
+        facility_table.field_names = ["ID","Name","Description"]
+
+        for facility in facilities:
+            facility_table.add_row([facility.ID,facility.name,facility.description])
+
+        facility_table._min_table_width = ui_consts.TABLE_WIDTH
+
+        print(facility_table)
+
+        print("")
         cmd = input("Command: ").lower()
 
         # Add a facility
@@ -62,7 +48,7 @@ class FacilityScreen(BaseScreen):
             f_new_name = input("New facility name: ")
             f_new_description = input("New facility description: ")
 
-            new_facility= Facility(None, property_ID, f_new_name, f_new_description)
+            new_facility= Facility(None, propertyID, f_new_name, f_new_description)
 
             self.ui.logic_api.facility_add(new_facility)
 

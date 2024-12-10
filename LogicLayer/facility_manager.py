@@ -5,6 +5,13 @@ from Model import Facility
 class FacilityManager:
     def __init__(self, storage_api : StorageAPI) -> None:
         self.storage_api = storage_api
+        self.selected_property = None
+
+    def set_selected_property(self, propertyID) -> None:
+        self.selected_property = propertyID
+
+    def get_selected_property(self) -> str:
+        return self.selected_property
 
     def facility_add(self, new_facility : Facility) -> None:
         all_facilities = self.storage_api.facility_get_all()

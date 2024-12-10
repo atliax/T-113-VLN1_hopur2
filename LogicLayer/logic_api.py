@@ -81,7 +81,12 @@ class LogicAPI:
 
     def facility_get_by_ID(self, facilityID : str) -> Facility:
         return self.facility_manager.facility_get_by_ID(facilityID)
-    #    pass
+
+    def facility_set_selected_property(self, propertyID : str) -> None:
+        self.facility_manager.set_selected_property(propertyID)
+
+    def facility_get_selected_property(self) -> str:
+        return self.facility_manager.get_selected_property()
 
 #==========================================================================
 #--Properties--------------------------------------------------------------

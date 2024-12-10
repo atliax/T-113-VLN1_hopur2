@@ -96,6 +96,10 @@ class PropertyScreen(BaseScreen):
 
         # [V] View facilities
         if cmd == "v":
+            # If ID does not exist in property list, raise error "No property found with that ID!"
+            # If ID does not exist, cancel command	
+            property_ID = input("View the facilities in property with ID: ").upper()
+            self.ui.logic_api.facility_set_selected_property(property_ID)
             return ui_consts.FACILITY_SCREEN
 
         # [E] Edit a property 
