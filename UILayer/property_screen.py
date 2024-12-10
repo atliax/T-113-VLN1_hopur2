@@ -32,7 +32,13 @@ class PropertyScreen(BaseScreen):
         property_table.field_names = ["ID","Name","Destination","Address","Sq meters","Rooms","Type"]
 
         for item in properties:
-            property_table.add_row([item.ID, item.name, item.destinationID, item.address, item.square_meters, item.rooms, item.type])
+            property_destination = self.ui.logic_api.destination_get_by_ID(item.destinationID.upper())
+            if property_destination is not None:
+                property_destination_country = property_destination.country
+            else:
+                property_destination_country = "Not assigned"
+
+            property_table.add_row([item.ID, item.name, property_destination_country, item.address, item.square_meters, item.rooms, item.type])
 
         property_table._min_table_width = ui_consts.TABLE_WIDTH
 
@@ -96,7 +102,7 @@ class PropertyScreen(BaseScreen):
         if cmd == "e":
              
             property_edit = None
-            property_attributes = ["name","address","square_meters","rooms", "type"]
+            property_attributes = ["destinationID","name","address","square_meters","rooms", "type"]
 
             while property_edit is None:
                 edit_with_id = input("Edit property with the ID: ").upper()
@@ -113,8 +119,6 @@ class PropertyScreen(BaseScreen):
                     return ui_consts.CMD_BACK
             
             print(destination_table)
-            new_destinationID = input("New destination ID: ").upper()
-            setattr(property_edit, "destinationID", new_destinationID)
             
             for attribute in property_attributes:
                 current_value = getattr(property_edit, attribute)
