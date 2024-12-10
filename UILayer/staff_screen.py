@@ -33,7 +33,7 @@ class StaffScreen(BaseScreen):
         staff_table.field_names = ["ID", "Name","Job title","Destination","SSN"]
 
         for employee in staff:
-            employee_destination = self.ui.logic_api.destination_get_by_ID(employee.destinationID)
+            employee_destination = self.ui.logic_api.destination_get_by_ID(employee.destinationID.upper())
             if employee_destination is not None:
                 employee_destination_country = employee_destination.country
             else:
@@ -113,7 +113,7 @@ class StaffScreen(BaseScreen):
             contact_by_id = self.ui.logic_api.staff_get_by_ID(view_contact)
             contact_by_id_table = PrettyTable()
             contact_by_id_table.field_names = ["ID","Name","Phone Nr.","Mobile Phone Nr.","Address"]
-            contact_by_id_table.add_row([employee.ID,employee.name,employee.phone_home,employee.phone_gsm,employee.address])
+            contact_by_id_table.add_row([contact_by_id.ID,contact_by_id.name,contact_by_id.phone_home,contact_by_id.phone_gsm,contact_by_id.address])
             print(contact_by_id_table)
             # print(contact_by_id.toJson())
             input()
