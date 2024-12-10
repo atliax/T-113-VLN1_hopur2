@@ -134,14 +134,26 @@ class PropertyScreen(BaseScreen):
 
         # [S] Search for
         if cmd == "s":
-            print("What keyword would you like to search for?")
-            print("You can combine keywords by following a word with ,")
-            print("Example: (Grænland,Nuukstræti 4)")
-            p_search = input("Search for: ")       # Sama search fyrir alla skjái
-                # print out a new filtered list based on keywords input
-                # GoTo "Main menu > Properties > Filtered"
-                # "Main menu > Properties > Filtered" window and commands are identical to "Main menu > Properties"
-                # Just replace the normal properties list with the filtered one
+            search = input("Search for: ") 
+            
+            search_property = self.ui.logic_api.property_search(search)
+            
+
+            search_property_table = PrettyTable()
+            search_property_table.field_names = ["ID","Name","Destination","Address","Sq meters","Rooms","Type"]
+
+            
+
+            for item in search_property:
+                unit_destination = self.ui.logic_api.destination_get_by_ID(item.destinationID.upper())
+                if unit_destination is not None:
+                    unit_destination_country = unit_destination.country
+                else:
+                    unit_destination_country = "Not assigned"
+                search_property_table.add_row([item.ID, item.name, unit_destination_country, item.address, item.square_meters, item.rooms, item.type])
+
+            print(search_property_table) 
+            input()
 
         # [B] Go Back
         if cmd == "b":
