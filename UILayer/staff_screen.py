@@ -108,9 +108,11 @@ class StaffScreen(BaseScreen):
 
         # View contact info
         if cmd == "v":
-            staff_attributes = ["name", "ssn","address","phone_home","phone_gsm","email","password","job_title","is_manager"]
+            view_contact = input("View the contact information of employee with the ID: ").upper()
+            contact_by_id = self.ui.logic_api.staff_get_by_ID(view_contact)
+            print(contact_by_id.toJson())
+            input()
 
-            view = input("View the contact information of employee with the ID: ")
                 # print(f"Name: {new_employee}")
                 # print(f"Email: {new_email}")
                 # print(f"Phone number: {new_phone_nr}")
