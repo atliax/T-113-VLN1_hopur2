@@ -13,7 +13,7 @@ class DestinationScreen(BaseScreen):
     def run(self):
         self.clear_screen()
 
-        print("Main menu > Destinations")
+        print("Main Menu > Destinations")
 
         destinations = self.ui.logic_api.destination_get_all()
 

@@ -16,7 +16,7 @@ class PropertyScreen(BaseScreen):
     def run(self):
         self.clear_screen()
 
-        print("Main menu > Properties")
+        print("Main Menu > Properties")
 
         print(ui_consts.SEPERATOR)
         print("|")
