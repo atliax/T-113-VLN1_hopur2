@@ -64,8 +64,8 @@ class LogicAPI:
     def facility_add(self, new_facility : Facility):
         self.facility_manager.facility_add(new_facility)
 
-    def facility_remove(self, remove_id: str):
-        return self.facility_manager.facility_remove(remove_id)
+    def facility_remove(self, facilityID : str):
+        return self.facility_manager.facility_remove(facilityID)
 
     def facility_edit(self, edited_facility : Facility):
         self.facility_manager.facility_edit(edited_facility)

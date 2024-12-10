@@ -16,7 +16,7 @@ class ContractorScreen(BaseScreen):
     def run(self):
         self.clear_screen()
 
-        print("Main menu > Contractors")
+        print("Main Menu > Staff > Contractors")
 
         print(ui_consts.SEPERATOR)
         print("|")
@@ -29,7 +29,7 @@ class ContractorScreen(BaseScreen):
         contractors = self.ui.logic_api.contractor_get_all()
 
         contractor_table = PrettyTable()
-        contractor_table.field_names = ["id", "name","type","destination","contact","rating"]
+        contractor_table.field_names = ["ID", "Name","Type","Destination","Contact","Rating"]
 
         for contractor in contractors:
             contractor_destination = self.ui.logic_api.destination_get_by_ID(contractor.destinationID)
