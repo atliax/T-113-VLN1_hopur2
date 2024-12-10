@@ -98,6 +98,7 @@ class StaffScreen(BaseScreen):
 	            # If ID does not exist, cancel command
 
         if cmd == "e":
+            print(destination_table)
             staff_edit = None
             staff_attributes = ["name", "ssn","address","phone_home","phone_gsm","email","password","job_title","is_manager"]
 
