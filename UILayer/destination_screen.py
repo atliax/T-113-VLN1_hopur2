@@ -27,10 +27,10 @@ class DestinationScreen(BaseScreen):
         destinations = self.ui.logic_api.destination_get_all()
 
         destination_table = PrettyTable()
-        destination_table.field_names = ["ID","managerID","Destination","Airport", "Phone", "Opening"]
+        destination_table.field_names = ["ID", "Destination","Airport", "Opening hours", "Phone", "Manager"]
 
         for destination in destinations:
-            destination_table.add_row([destination.ID, destination.managerID, destination.country, destination.airport, destination.phone, destination.opening_hours])
+            destination_table.add_row([destination.ID, destination.country, destination.airport, destination.opening_hours, destination.phone, destination.managerID])
 
         destination_table._min_table_width = ui_consts.TABLE_WIDTH
 
@@ -68,23 +68,27 @@ class DestinationScreen(BaseScreen):
 
         # Edit destination
         if cmd == "e":
-            # 
             destination_edit = None
             destination_attributes = ["managerID", "country", "airport", "phone", "opening_hours"]
-            pick_destination = input("Type in the id of the destination you want to edit: ").upper()
-            for destination in destinations:
-                if destination.ID == pick_destination:
-                    destination_edit = destination
-            if destination_edit is None:
-                print("Destination not found")
-                input("Press enter to continue")
-            else:
-                for attribute in destination_attributes:
-                    current_value = getattr(destination_edit, attribute)
-                    new_value = input(f"New {attribute} (current: {current_value}): ").strip()
-                    if new_value:
-                        setattr(destination_edit, attribute, new_value)
-                self.ui.logic_api.destination_edit(destination_edit)
+
+            while destination_edit is None:
+                pick_destination = input("Type in the id of the destination you want to edit: ").upper()
+                if pick_destination == "B":
+                    return self
+                
+                for destination in destinations:
+                    if destination.ID == pick_destination.upper():
+                        destination_edit = destination
+
+                if destination_edit:
+                    for attribute in destination_attributes:
+                        current_value = getattr(destination_edit, attribute)
+                        new_value = input(f"New {attribute} (current: {current_value}): ").strip()
+                        if new_value:
+                            setattr(destination_edit, attribute, new_value)
+                    self.ui.logic_api.destination_edit(destination_edit)
+                else:
+                    print("Destination not found, try again or b to return")
 
         if cmd == "b":
             return ui_consts.CMD_BACK
