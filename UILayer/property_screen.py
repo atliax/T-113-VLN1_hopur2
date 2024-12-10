@@ -54,7 +54,8 @@ class PropertyScreen(BaseScreen):
 
         print(f"|  Property list (Page {self.current_page+1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page")
-        print(property_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
+        if total_pages != 0:
+            print(property_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
 
         print("")
         cmd = input("Command: ").lower()
@@ -123,15 +124,15 @@ class PropertyScreen(BaseScreen):
                 if edit_with_id == "B":
                     return ui_consts.CMD_BACK
             
-                print(destination_table)
-                new_destinationID = input("New destination ID: ").upper()
-                setattr(property_edit, "destinationID", new_destinationID)
-                
-                for attribute in property_attributes:
-                    current_value = getattr(property_edit, attribute)
-                    new_value = input(f"New {attribute.capitalize()} (Current {current_value}): ").strip()
-                    if new_value:
-                        setattr(property_edit,attribute,new_value)
+            print(destination_table)
+            new_destinationID = input("New destination ID: ").upper()
+            setattr(property_edit, "destinationID", new_destinationID)
+            
+            for attribute in property_attributes:
+                current_value = getattr(property_edit, attribute)
+                new_value = input(f"New {attribute.capitalize()} (Current {current_value}): ").strip()
+                if new_value:
+                    setattr(property_edit,attribute,new_value)
 
             self.ui.logic_api.property_edit(property_edit)
 
