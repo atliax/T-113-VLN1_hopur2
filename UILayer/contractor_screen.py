@@ -16,7 +16,7 @@ class ContractorScreen(BaseScreen):
     def run(self):
         self.clear_screen()
 
-        print("Main menu > Contractors")
+        print("Main Menu > Staff > Contractors")
 
         print(ui_consts.SEPERATOR)
         print("|")
@@ -29,7 +29,7 @@ class ContractorScreen(BaseScreen):
         contractors = self.ui.logic_api.contractor_get_all()
 
         contractor_table = PrettyTable()
-        contractor_table.field_names = ["id", "name","type","destination","contact","rating"]
+        contractor_table.field_names = ["ID", "Name","Type","Destination","Contact","Rating"]
 
         for contractor in contractors:
             contractor_destination = self.ui.logic_api.destination_get_by_ID(contractor.destinationID)
@@ -105,8 +105,8 @@ class ContractorScreen(BaseScreen):
             view_contact = input("View the contact information of contractor with the ID: ").upper()
             contact_by_id = self.ui.logic_api.contractor_get_by_ID(view_contact)
             contact_by_id_table = PrettyTable()
-            contact_by_id_table.field_names = ["ID","Name","Type","Destination ID","Contact","rating"]
-            contact_by_id_table.add_row([contact_by_id.ID,contact_by_id.name,contact_by_id.contractor_type,contact_by_id.destinationID,contact_by_id.contact,contact_by_id.rating])
+            contact_by_id_table.field_names = ["ID","Name","Type","Destination","Contact","rating"]
+            contact_by_id_table.add_row([contact_by_id.ID,contact_by_id.name,contact_by_id.contractor_type,self.ui.logic_api.destination_get_by_ID(contact_by_id.destinationID).country,contact_by_id.contact,contact_by_id.rating])
             print(contact_by_id_table)
             # print(contact_by_id.toJson())
             input()
