@@ -1,27 +1,27 @@
-{"propertyID": "P1", "destinationID": "D1", "name": "iGloo-Ville m\u00f3tt\u00f6kubygging", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 0, "rooms": 0, "type": "M\u00f3ttaka"}
-{"propertyID": "P2", "destinationID": "D1", "name": "iGloo-Ville 1", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
-{"propertyID": "P3", "destinationID": "D1", "name": "iGloo-Ville 2", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
-{"propertyID": "P4", "destinationID": "D1", "name": "iGloo-Ville 3", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
-{"propertyID": "P5", "destinationID": "D1", "name": "iGloo-Ville 4", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
-{"propertyID": "P6", "destinationID": "D1", "name": "iGloo-Ville 5", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
-{"propertyID": "P7", "destinationID": "D1", "name": "iGloo-Ville 6", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
-{"propertyID": "P8", "destinationID": "D1", "name": "iGloo-Ville 7", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
-{"propertyID": "P9", "destinationID": "D1", "name": "iGloo-Ville 8", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
-{"propertyID": "P10", "destinationID": "D1", "name": "iGloo-Ville 9", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
-{"propertyID": "P11", "destinationID": "D1", "name": "iGloo-Ville 10", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
-{"propertyID": "P12", "destinationID": "D2", "name": "Sk\u00e1ki\u00f0", "address": "Sk\u00e1ki\u00f0 15, 100, T\u00f3rshavn", "square_meters": "100", "rooms": "3", "type": "Ra\u00f0h\u00fas"}
-{"propertyID": "P13", "destinationID": "D2", "name": "Sk\u00e1ki\u00f0", "address": "Sk\u00e1ki\u00f0 15, 100, T\u00f3rshavn", "square_meters": "100", "rooms": "3", "type": "Ra\u00f0h\u00fas"}
-{"propertyID": "P14", "destinationID": "D2", "name": "Sk\u00e1ki\u00f0", "address": "Sk\u00e1ki\u00f0 15, 100, T\u00f3rshavn", "square_meters": "100", "rooms": "3", "type": "Ra\u00f0h\u00fas"}
-{"propertyID": "P15", "destinationID": "D2", "name": "Svalbar\u00f0svegur guesthouse", "address": "Svalbar\u00f0svegur 22, 100, T\u00f3rshavn", "square_meters": "200", "rooms": "5", "type": "Einb\u00fdlish\u00fas"}
-{"propertyID": "P16", "destinationID": "D2", "name": "DirtGlooVille 1", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
-{"propertyID": "P17", "destinationID": "D2", "name": "DirtGlooVille 2", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
-{"propertyID": "P18", "destinationID": "D2", "name": "DirtGlooVille 3", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
-{"propertyID": "P19", "destinationID": "D2", "name": "DirtGlooVille 4", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
-{"propertyID": "P20", "destinationID": "D2", "name": "DirtGlooVille 5", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
-{"propertyID": "P21", "destinationID": "D2", "name": "DirtGlooVille 6", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
-{"propertyID": "P22", "destinationID": "D2", "name": "DirtGlooVille 7", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
-{"propertyID": "P23", "destinationID": "D2", "name": "DirtGlooVille 8", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
-{"propertyID": "P24", "destinationID": "D2", "name": "DirtGlooVille 9", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
-{"propertyID": "P25", "destinationID": "D2", "name": "DirtGlooVille 10", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
-{"propertyID": "P26", "destinationID": "D3", "name": "Vei BnB", "address": "Vei 217, Longyearbyen, Svalbar\u00f0i", "square_meters": 150, "rooms": 4, "type": "Einb\u00fdlish\u00fas"}
-{"propertyID": "P27", "destinationID": "D3", "name": "H\u00f3tel Ak\u00fala", "address": "Longyearbyen Harbor 1, Svalbar\u00f0i", "square_meters": 5000, "rooms": 80, "type": "Kafb\u00e1tur"}
+{"ID": "P1", "destinationID": "D1", "name": "iGloo-Ville m\u00f3tt\u00f6kubygging", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 0, "rooms": 0, "type": "M\u00f3ttaka"}
+{"ID": "P2", "destinationID": "D1", "name": "iGloo-Ville 1", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
+{"ID": "P3", "destinationID": "D1", "name": "iGloo-Ville 2", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
+{"ID": "P4", "destinationID": "D1", "name": "iGloo-Ville 3", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
+{"ID": "P5", "destinationID": "D1", "name": "iGloo-Ville 4", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
+{"ID": "P6", "destinationID": "D1", "name": "iGloo-Ville 5", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
+{"ID": "P7", "destinationID": "D1", "name": "iGloo-Ville 6", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
+{"ID": "P8", "destinationID": "D1", "name": "iGloo-Ville 7", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
+{"ID": "P9", "destinationID": "D1", "name": "iGloo-Ville 8", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
+{"ID": "P10", "destinationID": "D1", "name": "iGloo-Ville 9", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
+{"ID": "P11", "destinationID": "D1", "name": "iGloo-Ville 10", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
+{"ID": "P12", "destinationID": "D2", "name": "Sk\u00e1ki\u00f0", "address": "Sk\u00e1ki\u00f0 15, 100, T\u00f3rshavn", "square_meters": "100", "rooms": "3", "type": "Ra\u00f0h\u00fas"}
+{"ID": "P13", "destinationID": "D2", "name": "Sk\u00e1ki\u00f0", "address": "Sk\u00e1ki\u00f0 15, 100, T\u00f3rshavn", "square_meters": "100", "rooms": "3", "type": "Ra\u00f0h\u00fas"}
+{"ID": "P14", "destinationID": "D2", "name": "Sk\u00e1ki\u00f0", "address": "Sk\u00e1ki\u00f0 15, 100, T\u00f3rshavn", "square_meters": "100", "rooms": "3", "type": "Ra\u00f0h\u00fas"}
+{"ID": "P15", "destinationID": "D2", "name": "Svalbar\u00f0svegur guesthouse", "address": "Svalbar\u00f0svegur 22, 100, T\u00f3rshavn", "square_meters": "200", "rooms": "5", "type": "Einb\u00fdlish\u00fas"}
+{"ID": "P16", "destinationID": "D2", "name": "DirtGlooVille 1", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
+{"ID": "P17", "destinationID": "D2", "name": "DirtGlooVille 2", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
+{"ID": "P18", "destinationID": "D2", "name": "DirtGlooVille 3", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
+{"ID": "P19", "destinationID": "D2", "name": "DirtGlooVille 4", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
+{"ID": "P20", "destinationID": "D2", "name": "DirtGlooVille 5", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
+{"ID": "P21", "destinationID": "D2", "name": "DirtGlooVille 6", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
+{"ID": "P22", "destinationID": "D2", "name": "DirtGlooVille 7", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
+{"ID": "P23", "destinationID": "D2", "name": "DirtGlooVille 8", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
+{"ID": "P24", "destinationID": "D2", "name": "DirtGlooVille 9", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
+{"ID": "P25", "destinationID": "D2", "name": "DirtGlooVille 10", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
+{"ID": "P26", "destinationID": "D3", "name": "Vei BnB", "address": "Vei 217, Longyearbyen, Svalbar\u00f0i", "square_meters": 150, "rooms": 4, "type": "Einb\u00fdlish\u00fas"}
+{"ID": "P27", "destinationID": "D3", "name": "H\u00f3tel Ak\u00fala", "address": "Longyearbyen Harbor 1, Svalbar\u00f0i", "square_meters": 5000, "rooms": 80, "type": "Kafb\u00e1tur"}

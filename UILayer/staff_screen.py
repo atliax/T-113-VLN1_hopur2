@@ -39,7 +39,7 @@ class StaffScreen(BaseScreen):
             else:
                 employee_destination_country = "Not assigned"
 
-            staff_table.add_row([employee.staffID, employee.name, employee.job_title, employee_destination_country, employee.ssn])
+            staff_table.add_row([employee.ID, employee.name, employee.job_title, employee_destination_country, employee.ssn])
 
         staff_table._min_table_width = ui_consts.TABLE_WIDTH
 
@@ -53,7 +53,8 @@ class StaffScreen(BaseScreen):
 
         print(f"|  Staff list (Page {self.current_page+1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page")
-        print(staff_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
+        if total_pages != 0:
+            print(staff_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
 
         print("")
         cmd = input("Command: ").lower()
@@ -64,7 +65,7 @@ class StaffScreen(BaseScreen):
         destination_table.field_names = ["Destination ID","Country","Airport"]
 
         for destination in destinations:
-            destination_table.add_row([destination.destinationID, destination.country, destination.airport])
+            destination_table.add_row([destination.ID, destination.country, destination.airport])
 
         if cmd == "n":
             self.current_page += 1
@@ -108,9 +109,11 @@ class StaffScreen(BaseScreen):
 
         # View contact info
         if cmd == "v":
-            staff_attributes = ["name", "ssn","address","phone_home","phone_gsm","email","password","job_title","is_manager"]
+            view_contact = input("View the contact information of employee with the ID: ").upper()
+            contact_by_id = self.ui.logic_api.staff_get_by_ID(view_contact)
+            print(contact_by_id.toJson())
+            input()
 
-            view = input("View the contact information of employee with the ID: ")
                 # print(f"Name: {new_employee}")
                 # print(f"Email: {new_email}")
                 # print(f"Phone number: {new_phone_nr}")
@@ -122,13 +125,13 @@ class StaffScreen(BaseScreen):
         if cmd == "e":
             
             staff_edit = None
-            staff_attributes = ["name", "ssn","address","phone_home","phone_gsm","email","password","job_title","is_manager"]
+            staff_attributes = ["destinationID","name", "ssn","address","phone_home","phone_gsm","email","password","job_title","is_manager"]
 
             while staff_edit is None:
                 edit_with_id = input("Edit employee with the ID: ").upper()
                 #if nothing is input, the field will be left unchanged
                 for employee in staff:
-                    if employee.staffID == edit_with_id:
+                    if employee.ID == edit_with_id:
                         staff_edit = employee
                         break
 
@@ -139,8 +142,8 @@ class StaffScreen(BaseScreen):
                     return ui_consts.CMD_BACK
             
             print(destination_table)
-            new_destinationID = input("New destination ID: ").upper()
-            setattr(staff_edit, "destinationID", new_destinationID)
+            # new_destinationID = input("New destination ID: ").upper()
+            # setattr(staff_edit, "destinationID", new_destinationID)
             
             for attribute in staff_attributes:
                 current_value = getattr(staff_edit, attribute)
