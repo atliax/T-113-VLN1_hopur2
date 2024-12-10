@@ -1,4 +1,4 @@
-{"propertyID": "P1", "destinationID": "D1", "name": "iGloo-Ville m\u00f3tt\u00f6kubygging", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 0, "rooms": 0, "type": "M\u00f3ttaka"}
+{"propertyID": "P1", "destinationID": "1", "name": "1", "address": "1", "square_meters": "1", "rooms": "1", "type": "1"}
 {"propertyID": "P2", "destinationID": "D1", "name": "iGloo-Ville 1", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
 {"propertyID": "P3", "destinationID": "D1", "name": "iGloo-Ville 2", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
 {"propertyID": "P4", "destinationID": "D1", "name": "iGloo-Ville 3", "address": "Aalisartut Aqqutaa 47, Nuuk 3900", "square_meters": 35, "rooms": 1, "type": "Snj\u00f3h\u00fas"}
@@ -25,3 +25,4 @@
 {"propertyID": "P25", "destinationID": "D2", "name": "DirtGlooVille 10", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
 {"propertyID": "P26", "destinationID": "D3", "name": "Vei BnB", "address": "Vei 217, Longyearbyen, Svalbar\u00f0i", "square_meters": 150, "rooms": 4, "type": "Einb\u00fdlish\u00fas"}
 {"propertyID": "P27", "destinationID": "D3", "name": "H\u00f3tel Ak\u00fala", "address": "Longyearbyen Harbor 1, Svalbar\u00f0i", "square_meters": 5000, "rooms": 80, "type": "Kafb\u00e1tur"}
+{"propertyID": "P28", "destinationID": "ds", "name": "d3", "address": "ds", "square_meters": 30, "rooms": 2, "type": "proo"}
