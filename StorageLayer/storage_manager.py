@@ -44,17 +44,15 @@ class StorageManager:
             if item.ID == ID:
                 return item
 
-    def search(self, search_string : str) -> list[BaseModel]:
-        current_items = self.load_from_file()
-
-        filtered_items = []
-        for item in current_items:
-            for attribute_value in list(item.__dict__.values()):
-                if search_string.lower() in str(attribute_value).lower():
-                    filtered_items.append(item)
-                    break
-
-        return filtered_items
+    #def search(self, search_string : str) -> list[BaseModel]:
+    #    current_items = self.load_from_file()
+    #    filtered_items = []
+    #    for item in current_items:
+    #        for attribute_value in list(item.__dict__.values()):
+    #            if search_string.lower() in str(attribute_value).lower():
+    #                filtered_items.append(item)
+    #                break
+    #    return filtered_items
 
     def load_from_file(self) -> list[BaseModel]:
         ret = []
