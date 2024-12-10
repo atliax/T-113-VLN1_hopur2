@@ -37,4 +37,13 @@ class FacilityManager:
     def facility_edit(self, edited_facility : Facility):
         self.storage_api.facility_edit(edited_facility)
 
+    def facility_get_by_propertyID(self, propertyID : str) -> list[Facility]:
+        all_facilities = self.storage_api.facility_get_all()
+
+        filtered_facilities = []
+
+        for facility in all_facilities:
+            if facility.propertyID == propertyID:
+                filtered_facilities.append(facility)
+
         return filtered_facilities

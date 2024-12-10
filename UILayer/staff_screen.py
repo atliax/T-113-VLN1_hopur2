@@ -111,7 +111,11 @@ class StaffScreen(BaseScreen):
         if cmd == "v":
             view_contact = input("View the contact information of employee with the ID: ").upper()
             contact_by_id = self.ui.logic_api.staff_get_by_ID(view_contact)
-            print(contact_by_id.toJson())
+            contact_by_id_table = PrettyTable()
+            contact_by_id_table.field_names = ["ID","Name","Phone Nr.","Mobile Phone Nr.","Address"]
+            contact_by_id_table.add_row([employee.ID,employee.name,employee.phone_home,employee.phone_gsm,employee.address])
+            print(contact_by_id_table)
+            # print(contact_by_id.toJson())
             input()
 
                 # print(f"Name: {new_employee}")
@@ -147,7 +151,7 @@ class StaffScreen(BaseScreen):
             
             for attribute in staff_attributes:
                 current_value = getattr(staff_edit, attribute)
-                new_value = input(f"New {attribute.capitalize()} (Current {current_value}): ").strip()
+                new_value = input(f"New {attribute.capitalize()} (Current: {current_value}): ").strip()
                 if new_value:
                     setattr(staff_edit,attribute,new_value)
 
