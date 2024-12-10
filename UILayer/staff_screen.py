@@ -186,7 +186,12 @@ class StaffScreen(BaseScreen):
             
 
             for unit in search_staff:
-                search_staff_table.add_row([unit.ID,unit.name,unit.job_title,unit.destinationID,unit.ssn])
+                unit_destination = self.ui.logic_api.destination_get_by_ID(unit.destinationID.upper())
+                if unit_destination is not None:
+                    unit_destination.country = unit_destination.country
+                else:
+                    unit_destination.country = "Not assigned"
+                search_staff_table.add_row([unit.ID,unit.name,unit.job_title,unit_destination.country,unit.ssn])
 
             print(search_staff_table) 
             input()
