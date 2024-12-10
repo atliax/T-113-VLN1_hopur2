@@ -102,8 +102,8 @@ class ContractorScreen(BaseScreen):
 
         # View contact info
         if cmd == "v":
-            view_contact = input("View the contact information of employee with the ID: ").upper()
-            contact_by_id = self.ui.logic_api.staff_get_by_ID(view_contact)
+            view_contact = input("View the contact information of contractor with the ID: ").upper()
+            contact_by_id = self.ui.logic_api.contractor_get_by_ID(view_contact)
             contact_by_id_table = PrettyTable()
             contact_by_id_table.field_names = ["ID","Name","Type","Destination ID","Contact","rating"]
             contact_by_id_table.add_row([contractor.ID,contractor.name,contractor.contractor_type,contractor.destinationID,contractor.contact,contractor.rating])

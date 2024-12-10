@@ -36,8 +36,8 @@ class LogicAPI:
     def contractor_search(self, search_string : str) -> list[Contractor]:
         return self.contractor_manager.contractor_search(search_string)
 
-    #def view_contractor_contact(self):
-    #    pass
+    def contractor_get_by_ID(self, contractorID : str) -> Contractor:
+        return self.contractor_manager.contractor_get_by_ID(contractorID)
 
 #==========================================================================
 #--Destinations------------------------------------------------------------
