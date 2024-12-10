@@ -59,4 +59,19 @@ class StaffManager:
         return self.storage_api.staff_get_by_ID(staffID)
 
     def staff_search(self, search_string : str) -> list[Staff]:
-        return self.storage_api.staff_search(search_string)
+        all_staff : list[Staff] = self.storage_api.staff_get_all()
+        filtered_staff = []
+        for staff in all_staff:
+            found = False
+            for attribute_value in list(staff.__dict__.values()):
+                if search_string.lower() in str(attribute_value).lower():
+                    filtered_staff.append(staff)
+                    found = True
+                    break
+
+            if not found:
+                staff_destination = self.storage_api.destination_get_by_ID(staff.destinationID)
+                if search_string.lower() in staff_destination.country.lower():
+                    filtered_staff.append(staff)
+
+        return filtered_staff

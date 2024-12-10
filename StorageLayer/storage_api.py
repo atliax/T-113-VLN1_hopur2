@@ -4,9 +4,9 @@ from Model import *
 
 class StorageAPI:
     def __init__(self):
-        self.facility_storage = StorageManager("data/facilities.json", Facility)
         self.contractor_storage = StorageManager("data/contractors.json", Contractor)
         self.destination_storage = StorageManager("data/destinations.json", Destination)
+        self.facility_storage = StorageManager("data/facilities.json", Facility)
         self.property_storage = StorageManager("data/properties.json", Property)
         self.report_storage = StorageManager("data/reports.json", Report)
         self.staff_storage = StorageManager("data/staff.json", Staff)
@@ -14,9 +14,6 @@ class StorageAPI:
 
 #==========================================================================
 # ----contractors----------------------------------------------------------   
-
-    def contractor_get_all(self):
-        return self.contractor_storage.get_all()
 
     def contractor_add(self, new_contractor : Contractor) -> None:
         self.contractor_storage.add(new_contractor)
@@ -27,8 +24,8 @@ class StorageAPI:
     def contractor_edit(self, edited_contractor : Contractor) -> None:
         self.contractor_storage.edit(edited_contractor)
 
-    def contractor_search(self, search_string : str) -> list[Contractor]:
-        return self.contractor_storage.search(search_string)
+    def contractor_get_all(self):
+        return self.contractor_storage.get_all()
 
     def contractor_get_by_ID(self, contractorID : str) -> Contractor:
         return self.contractor_storage.get_by_ID(contractorID)
@@ -51,9 +48,6 @@ class StorageAPI:
     def destination_get_by_ID(self, destinationID : str) -> Destination:
         return self.destination_storage.get_by_ID(destinationID)
 
-    def destination_search(self, search_string : str) -> list[Destination]:
-        return self.search(search_string)
-
 #==========================================================================
 #--Facilities--------------------------------------------------------------
 
@@ -71,9 +65,6 @@ class StorageAPI:
 
     def facility_get_by_ID(self, facilityID : str) -> Facility:
         return self.facility_storage.get_by_ID(facilityID)
-
-    def facility_search(self, search_string : str) -> list[Facility]:
-        return self.facility_storage.search(search_string)
 
 #==========================================================================
 #--Properties--------------------------------------------------------------
@@ -93,9 +84,6 @@ class StorageAPI:
     def property_get_by_ID(self, propertyID : str) -> Property:
         return self.property_storage.get_by_ID(propertyID)
 
-    def property_search(self, search_string : str) -> list[Property]:
-        return self.property_storage.search(search_string)
-
 #==========================================================================
 #--Reports-----------------------------------------------------------------
 
@@ -113,9 +101,6 @@ class StorageAPI:
 
     def report_get_by_ID(self, reportID : str) -> Report:
         return self.report_storage.get_by_ID(reportID)
-
-    def report_search(self, search_string : str) -> list[Report]:
-        return self.report_storage.search(search_string)
 
 #==========================================================================
 #--Staff-------------------------------------------------------------------
@@ -135,9 +120,6 @@ class StorageAPI:
     def staff_get_by_ID(self, staffID : str) -> Staff:
         return self.staff_storage.get_by_ID(staffID)
 
-    def staff_search(self, search_string : str) -> list[Staff]:
-        return self.staff_storage.search(search_string)
-
 #==========================================================================
 #--Tickets-----------------------------------------------------------------
 
@@ -155,6 +137,3 @@ class StorageAPI:
 
     def ticket_get_by_ID(self, ticketID : str) -> Ticket:
         return self.ticket_storage.get_by_ID(ticketID)
-
-    def ticket_search(self, search_string : str) -> list[Ticket]:
-        return self.ticket_storage.search(search_string)
