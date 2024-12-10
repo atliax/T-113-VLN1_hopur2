@@ -159,10 +159,23 @@ class ContractorScreen(BaseScreen):
 
         # Search for contractor
         if cmd == "s":
-            try:
-                search = input("Search for: ") # Sama search allstaðar á eftir að implementa
-            except LookupError:
-                return "No contractor found with that ID!"
+            search = input("Search for: ") 
+
+            search_contractor = self.ui.logic_api.contractor_search(search)
+            
+            search_contractor_table = PrettyTable()
+            search_contractor_table.field_names = ["ID","Name","type","Country","Contact","Rating"]
+
+            for unit in search_contractor:
+                unit_destination = self.ui.logic_api.destination_get_by_ID(unit.destinationID.upper())
+                if unit_destination is not None:
+                    unit_destination.country = unit_destination.country
+                else:
+                    unit_destination.country = "Not assigned"
+                search_contractor_table.add_row([unit.ID,unit.name,unit.contractor_type,unit_destination.country,unit.contact,unit.rating])
+            print(search_contractor_table)
+            input()
+
 
         if cmd == "b":
             return ui_consts.CMD_BACK
