@@ -28,7 +28,7 @@ class FacilityScreen(BaseScreen):
 
         print("|  Property list:")
         print(property_table)
-        property_ID = input("View the facilities in property with ID: ")
+        property_ID = input("View the facilities in property with ID: ").upper()
         # If ID does not exist in property list, raise error "No property found with that ID!"
         # If ID does not exist, cancel command	
         # Print a list of facilities for property with input ID
@@ -69,7 +69,7 @@ class FacilityScreen(BaseScreen):
 
         # Remove a facility
         if cmd == "r":
-            remove_id = input("Remove facility that has the ID: ") # Klára þegar skjalakerfi er klárt
+            remove_id = input("Remove facility that has the ID: ").upper() # Klára þegar skjalakerfi er klárt
                 # If ID does not exist in property list, raise error "No facility found with that ID!"
                 # If ID does not exist, cancel command
             self.ui.logic_api.facility_remove(remove_id)
@@ -80,16 +80,19 @@ class FacilityScreen(BaseScreen):
 
         # View details
         if cmd == "v":
-            view = input("View the details of facility with the ID: ")
+            view_facility = input("View the details of facility with the ID: ").upper()
+            facility_by_id = self.ui.logic_api.facility_get_by_ID(view_facility)
+            facility_by_id_table = PrettyTable()
+            facility_by_id_table.field_names = ["ID","Name","Description"]
+            facility_by_id_table.add_row([facility_by_id.ID,facility_by_id.name,facility_by_id.description])
                 # If ID does not exist in property list, raise error "No facility found with that ID!"
                 # If ID does not exist, cancel command	
-            print(f"Facility name: {f_new_name}")
-            print(f"Facility description: {f_new_description}")
-
+            print(facility_by_id_table)
+            input()
         # Edit a facility
 
         if cmd == "e":
-            f_edit_facility = input("Edit the facility with the ID:")
+            f_edit_facility = input("Edit the facility with the ID:").upper()
             # If ID does not exist in facility list, raise error "No facility found with that ID!"
             #If ID does not exist, cancel command, á eftir að implementa
             print("If you do not wish to change a specific field you can leave the input empty")

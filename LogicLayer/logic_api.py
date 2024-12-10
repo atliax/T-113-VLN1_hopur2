@@ -79,7 +79,8 @@ class LogicAPI:
     def facility_search(self, search_string : str) -> list[Facility]:
         return self.facility_manager.facility_search(search_string)
 
-    #def view_facilites(self):
+    def facility_get_by_ID(self, facilityID : str) -> Facility:
+        return self.facility_manager.facility_get_by_ID(facilityID)
     #    pass
 
 #==========================================================================
