@@ -22,7 +22,22 @@ class ContractorManager:
         self.storage_api.contractor_edit(edited_contractor)
 
     def contractor_search(self, search_string : str) -> list[Contractor]:
-        return self.storage_api.contractor_search(search_string)
+        all_contractors : list[Contractor] = self.storage_api.contractor_get_all()
+        filtered_contractors = []
+        for contractor in all_contractors:
+            found = False
+            for attribute_value in list(contractor.__dict__.values()):
+                if search_string.lower() in str(attribute_value).lower():
+                    filtered_contractors.append(contractor)
+                    found = True
+                    break
+
+            if not found:
+                contractor_destination = self.storage_api.destination_get_by_ID(contractor.destinationID)
+                if search_string.lower() in contractor_destination.country.lower():
+                    filtered_contractors.append(contractor)
+
+        return filtered_contractors
 
     def contractor_get_all(self) -> list[Contractor]:
         return self.storage_api.contractor_get_all()
