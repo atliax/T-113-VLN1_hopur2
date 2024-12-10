@@ -16,7 +16,7 @@ class PropertyScreen(BaseScreen):
     def run(self):
         self.clear_screen()
 
-        print("Main menu > Properties")
+        print("Main Menu > Properties")
 
         print(ui_consts.SEPERATOR)
         print("|")
@@ -36,6 +36,7 @@ class PropertyScreen(BaseScreen):
 
         property_table._min_table_width = ui_consts.TABLE_WIDTH
 
+        total_pages = math.ceil(len(properties) / 10)
 
         destinations = self.ui.logic_api.destination_get_all()
 
@@ -48,7 +49,8 @@ class PropertyScreen(BaseScreen):
         if self.current_page < 0:
             self.current_page = 0
 
-        total_pages = math.ceil(len(properties)/10)
+        if self.current_page > (total_pages - 1):
+            self.current_page = (total_pages - 1)
 
         print(f"|  Property list (Page {self.current_page+1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page")
@@ -88,13 +90,9 @@ class PropertyScreen(BaseScreen):
 
         if cmd == "n":
             self.current_page += 1
-            if self.current_page > (total_pages-1):
-                self.current_page = total_pages-1
 
         if cmd == "p":
             self.current_page -= 1
-            if self.current_page < 0:
-                self.current_page = 0
 
         # [R] Remove a property
         if cmd == "r":

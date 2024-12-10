@@ -323,3 +323,10 @@ Klára destinations
 
 ## Markmið morgundagsins
 Komast sem lengst með að klára virkni á öllum skjám sem við erum byrjuð á. Byrja á virkni inn í tickets.  Uppfæra happy path í samræmi við facilities og properties. 
+
+## 10. Des kl 9:00
+Viðstaddir:Hjörtur, Gísli, Óli, Atli
+
+## Markmið Dagsins
+Dagurinn í gær gekk mjög vel og við unnum aðeins heima í þessu verkefni, sérstaklega Atli sem samrændi kóðann og fór yfir storage layer.
+Við ætlum að skipta upp verkefnum í eftirfarandi: Atli ætlar að endurskipuleggja Storage layer. Hjörtur ætlar að klára view contacts og search functionið í staff screen. Gísli ætlar að implementa remove property í property screen og edit property. Óli ætlar að athuga með að setja Manager names í stað fyrir IDs í destination töflu, lagfæra hvernig hegðun er á þegar það finnst ekki destinationID. Taka eina yfirferð á því og færa yfir í annað.
