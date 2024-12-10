@@ -1,3 +1,5 @@
+import math
+
 from prettytable import PrettyTable
 
 from UILayer.base_screen import BaseScreen
@@ -10,11 +12,20 @@ from Model import Destination
 class StaffScreen(BaseScreen):
     def __init__(self, ui) -> None:
         super().__init__(ui)
+        self.current_page = -1
 
     def run(self):
         self.clear_screen()
 
         print("Main Menu > Staff")
+
+        print(ui_consts.SEPERATOR)
+        print("|")
+        print("|	[A] Add an employee		[E] Edit an employee			[B] Go back")
+        print("|	[R] Remove an employee		[S] Search for")
+        print("|	[V] View contact info		[C] View contractors")
+        print("|")
+        print(ui_consts.SEPERATOR)
 
         staff = self.ui.logic_api.staff_get_all()
 
@@ -32,7 +43,20 @@ class StaffScreen(BaseScreen):
 
         staff_table._min_table_width = ui_consts.TABLE_WIDTH
 
-        print(staff_table)
+        total_pages = math.ceil(len(staff) / 10)
+
+        if self.current_page < 0:
+            self.current_page = 0
+
+        if self.current_page > (total_pages - 1):
+            self.current_page = (total_pages - 1)
+
+        print(f"|  Staff list (Page {self.current_page+1}/{total_pages}):")
+        print("|  [N] Next page    [P] Previous page")
+        print(staff_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
+
+        print("")
+        cmd = input("Command: ").lower()
 
         destinations = self.ui.logic_api.destination_get_all()
 
@@ -42,15 +66,11 @@ class StaffScreen(BaseScreen):
         for destination in destinations:
             destination_table.add_row([destination.destinationID, destination.country, destination.airport])
 
-        print(ui_consts.SEPERATOR)
-        print("|")
-        print("|	[A] Add an employee		[E] Edit an employee			[B] Go back")
-        print("|	[R] Remove an employee		[S] Search for")
-        print("|	[V] View contact info		[C] View contractors")
-        print("|")
-        print(ui_consts.SEPERATOR)
+        if cmd == "n":
+            self.current_page += 1
 
-        cmd = input("Command: ").lower()
+        if cmd == "p":
+            self.current_page -= 1
 
         # Add an employee
         if cmd == "a":
