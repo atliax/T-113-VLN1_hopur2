@@ -179,6 +179,7 @@ class StaffScreen(BaseScreen):
             search = input("Search for: ") 
             
             search_staff = self.ui.logic_api.staff_search(search)
+            
 
             search_staff_table = PrettyTable()
             search_staff_table.field_names = ["ID","Name","Job title","Destination","SSN"]

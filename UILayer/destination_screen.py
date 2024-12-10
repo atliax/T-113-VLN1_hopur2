@@ -85,6 +85,7 @@ class DestinationScreen(BaseScreen):
                         destination_edit = destination
 
                 if destination_edit:
+                    print ("Leave empty if you wish to not change ")
                     for attribute in destination_attributes:
                         current_value = getattr(destination_edit, attribute)
                         new_value = input(f"New {attribute} (current: {current_value}): ").strip()

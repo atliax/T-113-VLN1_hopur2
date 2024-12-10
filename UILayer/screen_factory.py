@@ -1,7 +1,7 @@
 from UILayer.login_screen import LoginScreen
 from UILayer.main_menu_screen import MainMenuScreen
 from UILayer.property_screen import PropertyScreen
-from UILayer.tickets_screen import TicketsScreen
+from UILayer.ticket_screen import TicketScreen
 from UILayer.staff_screen import StaffScreen
 from UILayer.destination_screen import DestinationScreen
 from UILayer.splash_screen import SplashScreen
@@ -33,7 +33,7 @@ class ScreenFactory:
             case ui_consts.STAFF_SCREEN:
                 return StaffScreen(self.ui)
             case ui_consts.TICKET_SCREEN:
-                return TicketsScreen(self.ui)
+                return TicketScreen(self.ui)
 
         # TODO, other screens?
 
