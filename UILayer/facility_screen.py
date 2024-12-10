@@ -1,3 +1,5 @@
+import math
+
 from prettytable import PrettyTable
 
 from UILayer.base_screen import BaseScreen
@@ -5,7 +7,6 @@ from UILayer.base_screen import BaseScreen
 from UILayer import ui_consts
 
 from Model import Facility
-
 from Model import Property
 
 class FacilityScreen(BaseScreen):
@@ -38,10 +39,27 @@ class FacilityScreen(BaseScreen):
 
         facility_table._min_table_width = ui_consts.TABLE_WIDTH
 
-        print(facility_table)
+        total_pages = math.ceil(len(facilities) / 10)
+
+        if self.current_page < 0:
+            self.current_page = 0
+
+        if self.current_page > (total_pages - 1):
+            self.current_page = (total_pages - 1)
+
+        print(f"|  Facility list (Page {self.current_page+1}/{total_pages}):")
+        print("|  [N] Next page    [P] Previous page")
+        if total_pages != 0:
+            print(facility_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
 
         print("")
         cmd = input("Command: ").lower()
+
+        if cmd == "n":
+            self.current_page += 1
+
+        if cmd == "p":
+            self.current_page -= 1
 
         # Add a facility
         if cmd == "a":
