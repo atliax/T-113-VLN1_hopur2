@@ -1,3 +1,5 @@
+import math
+
 from prettytable import PrettyTable
 
 from UILayer.base_screen import BaseScreen
@@ -9,11 +11,18 @@ from Model import Destination
 class DestinationScreen(BaseScreen):
     def __init__(self, ui) -> None:
         super().__init__(ui)
+        self.current_page = -1
 
     def run(self):
         self.clear_screen()
 
         print("Main Menu > Destinations")
+
+        print(ui_consts.SEPERATOR)
+        print("|")
+        print("|	[A] Add a destination		[E] Edit a destination			[B] Go back")
+        print("|")
+        print(ui_consts.SEPERATOR)
 
         destinations = self.ui.logic_api.destination_get_all()
 
@@ -23,15 +32,28 @@ class DestinationScreen(BaseScreen):
         for destination in destinations:
             destination_table.add_row([destination.destinationID, destination.managerID, destination.country, destination.airport, destination.phone, destination.opening_hours])
 
-        print(destination_table)
+        destination_table._min_table_width = ui_consts.TABLE_WIDTH
 
-        print(ui_consts.SEPERATOR)
-        print("|")
-        print("|	[A] Add a destination		[E] Edit a destination			[B] Go back")
-        print("|")
-        print(ui_consts.SEPERATOR)
+        total_pages = math.ceil(len(destinations) / 10)
 
+        if self.current_page < 0:
+            self.current_page = 0
+
+        if self.current_page > (total_pages - 1):
+            self.current_page = (total_pages - 1)
+
+        print(f"|  Destination list (Page {self.current_page+1}/{total_pages}):")
+        print("|  [N] Next page    [P] Previous page")
+        print(destination_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
+
+        print("")
         cmd = input("Command: ").lower()
+
+        if cmd == "n":
+            self.current_page += 1
+
+        if cmd == "p":
+            self.current_page -= 1
 
         # Add a destination
         if cmd == "a":
