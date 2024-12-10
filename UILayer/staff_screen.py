@@ -109,8 +109,17 @@ class StaffScreen(BaseScreen):
 
         # View contact info
         if cmd == "v":
-            view_contact = input("View the contact information of employee with the ID: ").upper()
-            contact_by_id = self.ui.logic_api.staff_get_by_ID(view_contact)
+            contact_by_id = None
+
+            while contact_by_id is None:
+                view_contact = input("View the contact information of employee with the ID: ").upper()
+
+                for employee in staff:
+                    if employee.ID == view_contact:
+                        contact_by_id = self.ui.logic_api.staff_get_by_ID(view_contact)
+                if contact_by_id is None:
+                    print(f"No employee with the ID: '{view_contact}', Try again (B to cancel).\n")
+
             contact_by_id_table = PrettyTable()
             contact_by_id_table.field_names = ["ID","Name","Phone Nr.","Mobile Phone Nr.","Address"]
             contact_by_id_table.add_row([contact_by_id.ID,contact_by_id.name,contact_by_id.phone_home,contact_by_id.phone_gsm,contact_by_id.address])
@@ -169,6 +178,10 @@ class StaffScreen(BaseScreen):
                 # Example gamer, Nuuk
                 # Finnur allar línur tengdar gamer, nuuk
             search = input("Search for: ") # Sama search allstaðar nema á tickets
+            bla = self.ui.logic_api.staff_search(search)
+            for bl in bla:
+                print(bl.toJson())
+            input()
 
         # View contact info
         if cmd == "c":
