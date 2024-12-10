@@ -45,7 +45,14 @@ class StorageManager:
                 return item
 
     def search(self, search_string : str) -> list[BaseModel]:
-        return []
+        search_strings = search_string.split('+')
+        current_items = self.load_from_file()
+
+        filtered_items = []
+        for item in current_items:
+            pass
+
+        return filtered_items
 
     def load_from_file(self) -> list[BaseModel]:
         ret = []
