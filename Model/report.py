@@ -1,10 +1,10 @@
 from Model.base_model import BaseModel
 
 class Report(BaseModel):
-    def __init__(self, reportID : str, staff : str, notes : str, cost : float, \
+    def __init__(self, ID : str, staff : str, notes : str, cost : float, \
                  date : str, contractorID : str, contractor_review : str, \
                  contractor_rating : str, contractor_fee : str) -> None:
-        self.reportID = reportID
+        self.ID = ID
         self.staff = staff
         self.notes = notes
         self.cost = cost

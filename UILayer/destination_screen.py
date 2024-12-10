@@ -30,7 +30,7 @@ class DestinationScreen(BaseScreen):
         destination_table.field_names = ["ID","managerID","Destination","Airport", "Phone", "Opening"]
 
         for destination in destinations:
-            destination_table.add_row([destination.destinationID, destination.managerID, destination.country, destination.airport, destination.phone, destination.opening_hours])
+            destination_table.add_row([destination.ID, destination.managerID, destination.country, destination.airport, destination.phone, destination.opening_hours])
 
         destination_table._min_table_width = ui_consts.TABLE_WIDTH
 
@@ -72,7 +72,7 @@ class DestinationScreen(BaseScreen):
             destination_attributes = ["managerID", "country", "airport", "phone", "opening_hours"]
             pick_destination = input("Type in the id of the destination you want to edit: ").upper()
             for destination in destinations:
-                if destination.destinationID == pick_destination:
+                if destination.ID == pick_destination:
                     destination_edit = destination
             if destination_edit is None:
                 print("Destination not found")

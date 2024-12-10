@@ -11,10 +11,10 @@ class DestinationManager:
 
     def destination_add(self, new_destination : Destination) -> None:
         all_destinations = self.destination_get_all()
-        n = int(all_destinations[len(all_destinations)-1].destinationID[1:])
+        n = int(all_destinations[len(all_destinations)-1].ID[1:])
         n += 1
         new_id = "D" + str(n)
-        new_destination.destinationID = new_id
+        new_destination.ID = new_id
         #new_destination = f"{new_id}, {new_destination}"
         #new_destination = new_destination.split(",")
         #new_destination_instance = Destination(new_destination[0],new_destination[1],new_destination[2],new_destination[3],new_destination[4],new_destination[5])

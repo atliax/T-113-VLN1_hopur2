@@ -8,10 +8,10 @@ class FacilityManager:
 
     def facility_add(self, new_facility : Facility) -> None:
         all_facilities = self.storage_api.facility_get_all()
-        n = int(all_facilities[len(all_facilities)-1].facilityID[1:])
+        n = int(all_facilities[len(all_facilities)-1].ID[1:])
         n += 1
         new_id = "F" + str(n)
-        new_facility.facilityID = new_id
+        new_facility.ID = new_id
 
         self.storage_api.facility_add(new_facility)
 

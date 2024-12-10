@@ -19,7 +19,7 @@ class FacilityScreen(BaseScreen):
         property_table.field_names = ["ID","Name","Destination","Address","Sq meters","Rooms","Type"]
 
         for property in properties:
-            property_table.add_row([property.propertyID, property.name, property.destinationID, property.address, property.square_meters, property.rooms, property.type])
+            property_table.add_row([property.ID, property.name, property.destinationID, property.address, property.square_meters, property.rooms, property.type])
 
         property_table._min_table_width = ui_consts.TABLE_WIDTH
 
@@ -36,7 +36,7 @@ class FacilityScreen(BaseScreen):
         facility_table.field_names = ["ID","Name","Description"]
 
         for facility in facilities:
-            facility_table.add_row([facility.facilityID,facility.name,facility.description])
+            facility_table.add_row([facility.ID,facility.name,facility.description])
 
         facility_table._min_table_width = ui_consts.TABLE_WIDTH
 

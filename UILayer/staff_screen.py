@@ -39,7 +39,7 @@ class StaffScreen(BaseScreen):
             else:
                 employee_destination_country = "Not assigned"
 
-            staff_table.add_row([employee.staffID, employee.name, employee.job_title, employee_destination_country, employee.ssn])
+            staff_table.add_row([employee.ID, employee.name, employee.job_title, employee_destination_country, employee.ssn])
 
         staff_table._min_table_width = ui_consts.TABLE_WIDTH
 
@@ -64,7 +64,7 @@ class StaffScreen(BaseScreen):
         destination_table.field_names = ["Destination ID","Country","Airport"]
 
         for destination in destinations:
-            destination_table.add_row([destination.destinationID, destination.country, destination.airport])
+            destination_table.add_row([destination.ID, destination.country, destination.airport])
 
         if cmd == "n":
             self.current_page += 1
@@ -130,7 +130,7 @@ class StaffScreen(BaseScreen):
                 edit_with_id = input("Edit employee with the ID: ").upper()
                 #if nothing is input, the field will be left unchanged
                 for employee in staff:
-                    if employee.staffID == edit_with_id:
+                    if employee.ID == edit_with_id:
                         staff_edit = employee
                         break
 

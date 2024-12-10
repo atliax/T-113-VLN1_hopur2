@@ -8,10 +8,10 @@ class ContractorManager:
 
     def contractor_add(self, new_contractor : Contractor) -> None:
         all_contractors = self.storage_api.contractor_get_all()
-        n = int(all_contractors[len(all_contractors)-1].contractorID[1:])
+        n = int(all_contractors[len(all_contractors)-1].ID[1:])
         n += 1
         new_id = "C" + str(n)
-        new_contractor.contractorID = new_id
+        new_contractor.ID = new_id
 
         self.storage_api.contractor_add(new_contractor)
 

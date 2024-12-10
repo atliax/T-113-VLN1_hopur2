@@ -1,9 +1,9 @@
 from Model.base_model import BaseModel
 
 class Facility(BaseModel):
-    def __init__(self, facilityID : str, propertyID : str, name : str, \
+    def __init__(self, ID : str, propertyID : str, name : str, \
                  description : str) -> None:
-        self.facilityID = facilityID
+        self.ID = ID
         self.propertyID = propertyID
         self.name = name
         self.description = description
