@@ -88,12 +88,14 @@ class StaffScreen(BaseScreen):
 
         # View contact info
         if cmd == "v":
+            staff_attributes = ["name", "ssn","address","phone_home","phone_gsm","email","password","job_title","is_manager"]
+
             view = input("View the contact information of employee with the ID: ")
-            print(f"Name: {new_employee}")
-            print(f"Email: {new_email}")
-            print(f"Phone number: {new_phone_nr}")
-            print(f"Mobile phone number: {new_gsm}")
-            print(f"Address: {new_address}")
+                # print(f"Name: {new_employee}")
+                # print(f"Email: {new_email}")
+                # print(f"Phone number: {new_phone_nr}")
+                # print(f"Mobile phone number: {new_gsm}")
+                # print(f"Address: {new_address}")
                 # If ID does not exist in the employee list, raise error "No employee found with that ID!"    
 	            # If ID does not exist, cancel command
 
