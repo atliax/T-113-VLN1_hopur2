@@ -102,7 +102,14 @@ class ContractorScreen(BaseScreen):
 
         # View contact info
         if cmd == "v":
-            return ui_consts.CONTRACTOR_SCREEN
+            view_contact = input("View the contact information of contractor with the ID: ").upper()
+            contact_by_id = self.ui.logic_api.contractor_get_by_ID(view_contact)
+            contact_by_id_table = PrettyTable()
+            contact_by_id_table.field_names = ["ID","Name","Type","Destination ID","Contact","rating"]
+            contact_by_id_table.add_row([contact_by_id.ID,contact_by_id.name,contact_by_id.contractor_type,contact_by_id.destinationID,contact_by_id.contact,contact_by_id.rating])
+            print(contact_by_id_table)
+            # print(contact_by_id.toJson())
+            input()
 
         # Edit contractor
         if cmd == "e":
