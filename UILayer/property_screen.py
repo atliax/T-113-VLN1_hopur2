@@ -66,20 +66,8 @@ class PropertyScreen(BaseScreen):
             p_new_name = input("New property name: ")
             p_new_destination = input("New property destionation ID: ")
             p_new_address = input("New property address: ")
-            has_int = False
-            while has_int == False:
-                try:
-                    p_new_square_mtrs = int(input("New property square meters: "))
-                    has_int = True
-                except:
-                    print("Error: Please input an integer")
-            has_int = False
-            while has_int == False:
-                try:
-                    p_new_roomnum = int(input("New property number of rooms: "))
-                    has_int = True
-                except:
-                    print("Error: Please input an integer")
+            p_new_square_mtrs = (input("New property square meters: "))
+            p_new_roomnum = (input("New property number of rooms: "))
             p_new_type = input("New property type: ")
 
             # construct property
