@@ -37,10 +37,10 @@ class StaffScreen(BaseScreen):
         destinations = self.ui.logic_api.destination_get_all()
 
         destination_table = PrettyTable()
-        destination_table.field_names = ["Destination ID","Country"]
+        destination_table.field_names = ["Destination ID","Country","Airport"]
 
         for destination in destinations:
-            destination_table.add_row([destination.destinationID, destination.country])
+            destination_table.add_row([destination.destinationID, destination.country, destination.airport])
 
         print(ui_consts.SEPERATOR)
         print("|")
@@ -98,7 +98,7 @@ class StaffScreen(BaseScreen):
 	            # If ID does not exist, cancel command
 
         if cmd == "e":
-            print(destination_table)
+            
             staff_edit = None
             staff_attributes = ["name", "ssn","address","phone_home","phone_gsm","email","password","job_title","is_manager"]
 
@@ -116,6 +116,7 @@ class StaffScreen(BaseScreen):
                 if edit_with_id == "B":
                     return ui_consts.CMD_BACK
             
+            print(destination_table)
             new_destinationID = input("New destination ID: ").upper()
             setattr(staff_edit, "destinationID", new_destinationID)
             
