@@ -124,7 +124,7 @@ class StaffScreen(BaseScreen):
         if cmd == "e":
             
             staff_edit = None
-            staff_attributes = ["name", "ssn","address","phone_home","phone_gsm","email","password","job_title","is_manager"]
+            staff_attributes = ["destinationID","name", "ssn","address","phone_home","phone_gsm","email","password","job_title","is_manager"]
 
             while staff_edit is None:
                 edit_with_id = input("Edit employee with the ID: ").upper()
@@ -141,8 +141,8 @@ class StaffScreen(BaseScreen):
                     return ui_consts.CMD_BACK
             
             print(destination_table)
-            new_destinationID = input("New destination ID: ").upper()
-            setattr(staff_edit, "destinationID", new_destinationID)
+            # new_destinationID = input("New destination ID: ").upper()
+            # setattr(staff_edit, "destinationID", new_destinationID)
             
             for attribute in staff_attributes:
                 current_value = getattr(staff_edit, attribute)
