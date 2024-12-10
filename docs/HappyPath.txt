@@ -247,8 +247,6 @@ Command: (INPUT)
 
 # [S] Search for
     print ("What keyword would you like to search for?)
-    print ("You can combine keywords by following a word with ,")
-    print ("Example: (Grænland,Nuukstræti 4))
     Search for: (INPUT/str)
 
     # print out a new filtered list based on keywords input
@@ -566,8 +564,6 @@ Command: (INPUT)
 # [S] Search for
 	print ("You can search for a keyword and/or timeline, you can leave an input empty")
     print ("What keyword would you like to search for?)
-    print ("You can combine keywords by following a word with ,"
-    print ("Example: (Grænland,Nuukstræti 4)
     Search for: (INPUT/str)
 	
 	print ("What timeline would you like to search for?)
