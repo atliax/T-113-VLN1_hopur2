@@ -30,7 +30,8 @@ class DestinationScreen(BaseScreen):
         destination_table.field_names = ["ID", "Destination","Airport", "Opening hours", "Phone", "Manager"]
 
         for destination in destinations:
-            destination_table.add_row([destination.ID, destination.country, destination.airport, destination.opening_hours, destination.phone, destination.managerID])
+            destinanation_manager_id = self.ui.logic_api.staff_get_by_ID(destination.managerID)
+            destination_table.add_row([destination.ID, destination.country, destination.airport, destination.opening_hours, destination.phone, destinanation_manager_id.name])
 
         destination_table._min_table_width = ui_consts.TABLE_WIDTH
 
