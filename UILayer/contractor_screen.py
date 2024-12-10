@@ -113,7 +113,7 @@ class ContractorScreen(BaseScreen):
                         break
 
                 if contact_by_id is None:
-                    print(f"No contractor with the ID: '{view_contact}', Try again (B to cancel).\n")
+                    print(f"No contractor with the ID: '{view_contact}'")
 
             contact_by_id_table = PrettyTable()
             contact_by_id_table.field_names = ["ID","Name","Type","Destination","Contact","rating"]
