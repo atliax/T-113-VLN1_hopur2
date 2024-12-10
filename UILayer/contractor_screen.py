@@ -97,7 +97,7 @@ class ContractorScreen(BaseScreen):
         if cmd == "r":
             print(contractor_table)
             remove_id = input("Remove employee with the ID: ").upper()
-            self.ui.logic_api.contractor_remove(remove_id)
+            self.ui.logic_api.staff_remove(remove_id)
 
         # View contact info
         if cmd == "v":
@@ -110,15 +110,38 @@ class ContractorScreen(BaseScreen):
 
         # Edit contractor
         if cmd == "e":
-            #If nothing is input, the name/loc will be unchanged
-            edit_id = input("Edit contractor with the ID: ") # Óklárað!
-                # If ID does not exist in the contractor list, raise error "No contractor found with that ID!"
-                # If ID does not exist, cancel command
-            change_contractor = input("Change contractor name to: ")
-            change_type = input("Change contractor type to: ")
-            change_contact = input("Change contractor contact to: ")
-            change_phone = input("Change contractor phone number: ")
-            change_location = input("Change contractor address to: ")
+            contractor_edit = None
+            contractor_attributes = ["rating","name","contact","phone","opening_hours","contractor_type"]
+           
+            while contractor_edit is None:
+                edit_with_id = input("Edit contractor with the ID: ").upper()
+                #if nothing is input, the field will be left unchanged
+                for contractor in contractors:
+                    if contractor.contractorID == edit_with_id:
+                        contractor_edit = contractor
+                        break
+
+                if contractor_edit is None:
+                    print(f"No contractor with the ID: '{edit_with_id}' Try again (B to cancel).")
+
+                if edit_with_id == "B":
+                    return ui_consts.CMD_BACK
+
+            print(destination_table)
+            new_destinationID = input("New destination ID: ").upper()
+            setattr(contractor_edit, "destinationID", new_destinationID)
+            
+            for attribute in contractor_attributes:
+                current_value = getattr(contractor_edit, attribute)
+                new_value = input(f"New {attribute.capitalize()} (Current {current_value}): ").strip()
+                if new_value:
+                    setattr(contractor_edit,attribute,new_value)
+
+
+            self.ui.logic_api.contractor_edit(contractor_edit)
+            # If ID does not exist in the employee list, raise error "No employee found with that ID!"
+            # If ID does not exist, cancel command
+            # If job title = "manager" or "boss" set isManager = True, otherwise False)
 
         # Search for contractor
         if cmd == "s":
