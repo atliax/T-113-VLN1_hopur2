@@ -45,12 +45,14 @@ class StorageManager:
                 return item
 
     def search(self, search_string : str) -> list[BaseModel]:
-        search_strings = search_string.split('+')
         current_items = self.load_from_file()
 
         filtered_items = []
         for item in current_items:
-            pass
+            for attribute_value in list(item.__dict__.values()):
+                if search_string in str(attribute_value):
+                    filtered_items.append(item)
+                    break
 
         return filtered_items
 
