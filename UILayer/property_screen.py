@@ -1,3 +1,5 @@
+import math
+
 from prettytable import PrettyTable
 
 from UILayer.base_screen import BaseScreen
@@ -9,11 +11,20 @@ from Model import Property
 class PropertyScreen(BaseScreen):
     def __init__(self, ui) -> None:
         super().__init__(ui)
+        self.current_page = -1
 
     def run(self):
         self.clear_screen()
 
         print("Main menu > Properties")
+
+        print(ui_consts.SEPERATOR)
+        print("|")
+        print("|	[A] Add a property		[E] Edit a property			[B] Go back")
+        print("|	[R] Remove a property		[S] Search for")
+        print("|	[V] View facilities")
+        print("|")
+        print(ui_consts.SEPERATOR)
 
         properties = self.ui.logic_api.property_get_all()
 
@@ -25,18 +36,15 @@ class PropertyScreen(BaseScreen):
 
         property_table._min_table_width = ui_consts.TABLE_WIDTH
 
-        print("|  Property list:")
-        print(property_table)
+        if self.current_page < 0:
+            self.current_page = 0
 
-        print(ui_consts.SEPERATOR)
-        print("|")
-        print("|	[A] Add a property		[E] Edit a property			[B] Go back")
-        print("|	[R] Remove a property		[S] Search for")
-        print("|	[V] View facilities")
-        print("|")
-        print(ui_consts.SEPERATOR)
+        total_pages = math.ceil(len(properties)/10)
+
+        print(f"|  Property list (Page {self.current_page+1}/{total_pages}):")
+        print(property_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
+
         print("")
-
         cmd = input("Command: ").lower()
 
         # [A] Add a property
@@ -55,6 +63,15 @@ class PropertyScreen(BaseScreen):
             # Send property to logic api
             self.ui.logic_api.property_add(new_property)
 
+        if cmd == "n":
+            self.current_page += 1
+            if self.current_page > (total_pages-1):
+                self.current_page = total_pages-1
+
+        if cmd == "p":
+            self.current_page -= 1
+            if self.current_page < 0:
+                self.current_page = 0
 
         # [R] Remove a property
         if cmd == "r":
