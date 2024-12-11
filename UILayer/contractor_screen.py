@@ -166,7 +166,13 @@ class ContractorScreen(BaseScreen):
                 contact_by_id_table.field_names = ["ID","Name","Type","Destination","Contact","rating"]
 
                 try:
-                    contact_by_id_table.add_row([contact_by_id.ID,contact_by_id.name,contact_by_id.contractor_type,self.ui.logic_api.destination_get_by_ID(contact_by_id.destinationID).country,contact_by_id.contact,contact_by_id.rating])
+                    contractor_destination = self.ui.logic_api.destination_get_by_ID(contact_by_id.destinationID)
+                    if contractor_destination is None:
+                        contractor_country = "Not Assigned"
+                    else:
+                        contractor_country = contractor_destination.country
+                        
+                    contact_by_id_table.add_row([contact_by_id.ID,contact_by_id.name,contact_by_id.contractor_type,contractor_country,contact_by_id.contact,contact_by_id.rating])
                     print(contact_by_id_table)
                     input("Press enter to continue.")
                 except Exception as e:
