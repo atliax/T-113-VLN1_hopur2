@@ -79,8 +79,9 @@ class TicketScreen(BaseScreen):
             # Remove a ticket
             case "r":
                 remove_ticket = input("Remove ticket with ID: ")
+                self.ui.logic_api.ticket_remove(remove_ticket)
+                
             # View closed tickets
-            
             case "v":
                 # Gefur lista á closed tickets (virkar eins og search með fixed keyword)
                 pass
