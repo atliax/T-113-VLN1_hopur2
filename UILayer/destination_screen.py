@@ -20,7 +20,12 @@ class DestinationScreen(BaseScreen):
 
         print(ui_consts.SEPERATOR)
         print("|")
-        print("|	[A] Add a destination		[E] Edit a destination			[B] Go back")
+
+        if self.ui.logic_api.is_manager_logged_in():
+            print("|	[A] Add a destination		[E] Edit a destination			[B] Go back")
+        else:
+            print("|	[B] Go back")
+
         print("|")
         print(ui_consts.SEPERATOR)
 
@@ -64,35 +69,43 @@ class DestinationScreen(BaseScreen):
                 self.current_page -= 1
             # Add a destination
             case "a":
-                destination_attributes = ["managerID", "country", "airport", "phone", "opening_hours"]
-                new_destination = []
-                for attribute in destination_attributes:
-                    new_value = input(f"New {attribute}: ")
-                    new_destination.append(new_value)
-                tmp = Destination(None,new_destination[0],new_destination[1],new_destination[2],new_destination[3],new_destination[4])
-                self.ui.logic_api.destination_add(tmp)
+                if self.ui.logic_api.is_manager_logged_in():
+                    destination_attributes = ["managerID", "country", "airport", "phone", "opening_hours"]
+                    new_destination = []
+                    for attribute in destination_attributes:
+                        new_value = input(f"New {attribute}: ")
+                        new_destination.append(new_value)
+                    tmp = Destination(None,new_destination[0],new_destination[1],new_destination[2],new_destination[3],new_destination[4])
+                    self.ui.logic_api.destination_add(tmp)
+                else:
+                    print("You don't have permission to do that.")
+                    input("Press enter to continue.")
             # Edit destination
             case "e":
-                destination_edit = None
-                destination_attributes = ["managerID", "country", "airport", "phone", "opening_hours"]
+                if self.ui.logic_api.is_manager_logged_in():
+                    destination_edit = None
+                    destination_attributes = ["managerID", "country", "airport", "phone", "opening_hours"]
 
-                while destination_edit is None:
-                    pick_destination = input("Type in the id of the destination you want to edit: ").upper()
-                    if pick_destination == "B":
-                        return self
+                    while destination_edit is None:
+                        pick_destination = input("Type in the id of the destination you want to edit: ").upper()
+                        if pick_destination == "B":
+                            return self
 
-                    destination_edit = self.ui.logic_api.destination_get_by_ID(pick_destination)
+                        destination_edit = self.ui.logic_api.destination_get_by_ID(pick_destination)
 
-                    if destination_edit is not None:
-                        print ("Leave empty if you wish to not change ")
-                        for attribute in destination_attributes:
-                            current_value = getattr(destination_edit, attribute)
-                            new_value = input(f"New {attribute} (current: {current_value}): ").strip()
-                            if new_value:
-                                setattr(destination_edit, attribute, new_value)
-                        self.ui.logic_api.destination_edit(destination_edit)
-                    else:
-                        print("Destination not found, try again (B to return)")
+                        if destination_edit is not None:
+                            print ("Leave empty if you wish to not change ")
+                            for attribute in destination_attributes:
+                                current_value = getattr(destination_edit, attribute)
+                                new_value = input(f"New {attribute} (current: {current_value}): ").strip()
+                                if new_value:
+                                    setattr(destination_edit, attribute, new_value)
+                            self.ui.logic_api.destination_edit(destination_edit)
+                        else:
+                            print("Destination not found, try again (B to return)")
+                else:
+                    print("You don't have permission to do that.")
+                    input("Press enter to continue.")
             # Go back
             case "b":
                 return ui_consts.CMD_BACK
