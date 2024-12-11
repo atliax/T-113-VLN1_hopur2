@@ -6,7 +6,6 @@ facility_storage = StorageManager("data/facilities.json", Facility)
 contractor_storage = StorageManager("data/contractors.json", Contractor)
 destination_storage = StorageManager("data/destinations.json", Destination)
 property_storage = StorageManager("data/properties.json", Property)
-report_storage = StorageManager("data/reports.json", Report)
 staff_storage = StorageManager("data/staff.json", Staff)
 ticket_storage = StorageManager("data/tickets.json", Ticket)
 
@@ -203,7 +202,15 @@ facilities.append(Facility('F110','P27','Hótel Akúla Kjarnakljúfur',''))
 
 facilities.append(Facility('F111','P1','iGloo-Ville móttaka',''))
 
-tickets.append(Ticket("T1","F1",None,"P2","Pronto!","Generic ticket title", "Generic ticket description", "Open", False, 0, "09/12/2024"))
+#tickets.append(Ticket("T1","F1",None,"P2","Pronto!","Generic ticket title", "Generic ticket description", "Open", False, 0, "09/12/2024"))
+tickets.append(Ticket("T1","F1","P2","Pronto!","Generic ticket title", "description kemur hér", True, "New", False, 0, "09/12/2024", "S1", "report kemur hér", 5000, "C1", "Stóð sig vel, allar óléttar, enginn vökvi fór til spillis.", 9.8, 1500))
+
+#    def __init__(self, ID : str, facilityID : str,
+#                 propertyID : str, priority : str, title : str, description : str, \
+#                 open : bool, status : str, recurring : bool, recurring_days : int, \
+#                 open_date : str, staffID : str, report : str, cost : int, 
+#                 contractorID : str, contractor_review : str, contractor_rating : float,
+#                 contractor_fee : int) -> None:
 
 # -------------------------- write to the actual files -------------------------
 

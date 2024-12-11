@@ -3,7 +3,7 @@ from Model.base_model import BaseModel
 class Ticket(BaseModel):
     def __init__(self, ID : str, facilityID : str,
                  propertyID : str, priority : str, title : str, description : str, \
-                 status : str, recurring : bool, recurring_days : int, \
+                 open : bool, status : str, recurring : bool, recurring_days : int, \
                  open_date : str, staffID : str, report : str, cost : int, 
                  contractorID : str, contractor_review : str, contractor_rating : float,
                  contractor_fee : int) -> None:
@@ -13,12 +13,11 @@ class Ticket(BaseModel):
         self.priority = priority
         self.title = title
         self.description = description
+        self.open = open
         self.status = status
         self.recurring = recurring
         self.recurring_days = recurring_days
         self.open_date = open_date
-
-        #var í Report:
         self.staffID = staffID
         self.report = report
         self.cost = cost
