@@ -65,7 +65,11 @@ class TicketScreen(BaseScreen):
         print("")
         cmd = input("Command: ").lower()
 
-        # ÞAÐ VANTAR AÐ HAFA OPTION TIL AÐ OPNA LOKAÐA VERKSKÝRSLU
+        properties = self.ui.logic_api.property_get_all()
+        property_table = PrettyTable()
+        property_table.field_names = ["Property ID","Name","Destination","Type"]
+        for property in properties:
+            property_table.add_row([property.ID, property.name,property.destinationID,property.type])
 
         match cmd:
             
@@ -76,12 +80,13 @@ class TicketScreen(BaseScreen):
                 self.current_page -= 1
             
             case "a":   # Add a ticket
-                # Auto ID kerfi ekki implementað
+                print(property_table)
                 #print(f"New ticket property ID: {}")
-                new_ticket_facility_ID = input("facility ID of report: ")
+                new_ticket_facility_ID = input("property ID of report: ")
+                tmp = self.ui.logic_api.property_get_by_ID
+                new_property_id = input("Property ID of report?")
                 new_ticket = input("New ticket title: ")
                 new_description = input("New ticket description: ")
-                new_property_id = input("Property ID of report?")
                 new_priority = input("New ticket priority: ")
                 new_status = input("New ticket status: ")
                 new_date = input("New ticket date: ")
