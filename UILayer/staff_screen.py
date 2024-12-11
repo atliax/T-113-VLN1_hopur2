@@ -134,7 +134,7 @@ class StaffScreen(BaseScreen):
                     staff_edit = self.ui.logic_api.staff_get_by_ID(edit_with_id)
 
                     if staff_edit is None:
-                        print(f"No employee with the ID: '{edit_with_id}' Try again (B to cancel).").upper()
+                        print(f"No employee with the ID: '{edit_with_id}' Try again (B to cancel).")
 
                     if edit_with_id == "B":
                         return ui_consts.CMD_BACK
