@@ -113,7 +113,7 @@ class TicketScreen(BaseScreen):
                     if edit_ticket == "B":
                         return self
                     
-                    edit_ticket = self.ui.logic_api._get_by_ID(pick_ticket)
+                    edit_ticket = self.ui.logic_api.ticket_get_by_ID(pick_ticket)
 
                     if edit_ticket is not None:
                         print ("Leave empty if you wish to not change ")
@@ -122,7 +122,7 @@ class TicketScreen(BaseScreen):
                             new_value = input(f"New {attribute} (current: {current_value}): ").strip()
                             if new_value:
                                 setattr(edit_ticket, attribute, new_value)
-                        self.ui.logic_api._edit(edit_ticket)
+                        self.ui.logic_api.ticket_edit(edit_ticket)
 
                     else:
                         print("Destination not found, try again or b to return")
