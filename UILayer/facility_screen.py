@@ -75,8 +75,11 @@ class FacilityScreen(BaseScreen):
             # Add a facility
             case "a":
                 if self.ui.logic_api.is_manager_logged_in():
-                    f_new_name = input("New facility name: ")
+                    while (f_new_name := input("New facility name: ")) == "":
+                        print("Facility name can't be empty.")
+
                     f_new_description = input("New facility description: ")
+
                     new_facility = Facility(None, propertyID, f_new_name, f_new_description)
                     self.ui.logic_api.facility_add(new_facility)
                 else:
