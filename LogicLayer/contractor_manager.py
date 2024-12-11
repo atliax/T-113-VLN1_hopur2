@@ -34,8 +34,9 @@ class ContractorManager:
 
             if not found:
                 contractor_destination = self.storage_api.destination_get_by_ID(contractor.destinationID)
-                if search_string.lower() in contractor_destination.country.lower():
-                    filtered_contractors.append(contractor)
+                if contractor_destination is not None:
+                    if search_string.lower() in contractor_destination.country.lower():
+                        filtered_contractors.append(contractor)
 
         return filtered_contractors
 
