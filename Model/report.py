@@ -13,3 +13,8 @@ class Report(BaseModel):
         self.contractor_review = contractor_review
         self.contractor_rating = contractor_rating
         self.contractor_fee = contractor_fee
+
+
+    def print_stats(self):
+        for attribute, value in self.__dict__.items():
+            print (attribute, "=", value)
