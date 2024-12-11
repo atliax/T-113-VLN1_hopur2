@@ -344,8 +344,11 @@ Viðstaddir: Hjörtur!, Gísli, Atli, Óli, Daníel
 Eva gerði virkni fyrir facilities og Atli setti það inn áðan fyrir hana þar sem var git vesen.
 Koma fulla virkni á tickets. Skoða input validation(villuboð eða try/except) og skoða það allt meira. Ætlum að skoða user validation(BOSS eða plebbi). Óli ætlar að reyna virkja Tickets, Hjörtur líka. Daníel ætlar að setja input validation. Gísli ætlar að bug hunta og fara yfir skýrslu. Atli ætlar að skoða user validation.
 
-Ætlum á fund með TA og spurja um Einkunnagjöf fyrir ein heill og hvernig það virkar. Og spyrja um Ui layer logic og hvort það sé í lagi. 
+Ætlum á fund með TA og spurja um Einkunnagjöf fyrir ein heill og hvernig það virkar. Og spyrja um Ui layer logic og hvort það sé í lagi.Spyrja um listun og hvort það þurfi að vera sér filter fyrir allt eða hvort það sé hægt að leita í öllu í einu. 
+Eru lágmarks fjöldi nonfunctional requirements. Er þessi fundarbók nóg.
 
-Spyrja um listun og hvort það þurfi að vera sér filter fyrir allt eða hvort það sé hægt að leita í öllu í einu. 
+## lokafundur 
+Eva kom rétt eftir morgunfund. 
+Gísli fór yfir state diagrams og endurgerði það í raun og veru. Daníel byrjaður á input validation og voru 2 screens búnir að einhverju leyti. Atli náði að setja user validation í gang, virkar. Þarf að útfæra það yfir allt appið og að setja í gang, er off eins og er, til að pödduleit sé léttari. Óli/Hjörtur náðu að setja Ui virkni á Tickets, þarf að laga logicið til að virka betur í því. Eva og gísli fóru yfir skýrsluna betur og samrændu hana aðeins betur allavega. Þetta var lengsti dagurinn okkar hingað til. 
 
-Eru lágmarks fjöldi nonfunctional requirements. Er þessi fundarbók nóg, er 
+Fyrir Morgundaginn þá þurfum við í raun og veru bara að klára forritið og dumpa einhverjum kröfum ef þess þarf. Verðum að reyna að hafa fósturdag til að vinna í  skýrslunni og fínpússa allt saman, við erum að renna út á tíma.
