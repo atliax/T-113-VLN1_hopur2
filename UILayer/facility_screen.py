@@ -71,39 +71,64 @@ class FacilityScreen(BaseScreen):
             case "a":
                 f_new_name = input("New facility name: ")
                 f_new_description = input("New facility description: ")
-
                 new_facility = Facility(None, propertyID, f_new_name, f_new_description)
-
                 self.ui.logic_api.facility_add(new_facility)
             # Remove a facility
             case "r":
-                remove_id = input("Remove facility that has the ID: ").upper() # Klára þegar skjalakerfi er klárt
-                # If ID does not exist in property list, raise error "No facility found with that ID!"
-                # If ID does not exist, cancel command
-                self.ui.logic_api.facility_remove(remove_id)
+                remove_id = input("Remove facility that has the ID (B to cancel): ").strip().upper()
+
+                if remove_id == "B":
+                    return self
+
+                facility_to_remove = self.ui.logic_api.facility_get_by_ID(remove_id)
+
+                if facility_to_remove is not None:
+                    self.ui.logic_api.facility_remove(remove_id)
+                else:
+                    print(f"No facility found with the ID: '{remove_id}'.")
             # Search for
             case "s":
-                search = input("Search for: ") # Sama search allstaðar nema á tickets
-                #eftir að implementa
+                self.active_search_filter = input("Search for: ")
             # View details
             case "v":
-                view_facility = input("View the details of facility with the ID: ").upper()
+                view_facility = input("View the details of facility with the ID (B to cancel): ").strip().upper()
+
+                if view_facility == "B":
+                    return self
+
                 facility_by_id = self.ui.logic_api.facility_get_by_ID(view_facility)
-                facility_by_id_table = PrettyTable()
-                facility_by_id_table.field_names = ["ID","Name","Description"]
-                facility_by_id_table.add_row([facility_by_id.ID,facility_by_id.name,facility_by_id.description])
-                # If ID does not exist in property list, raise error "No facility found with that ID!"
-                # If ID does not exist, cancel command	
-                print(facility_by_id_table)
+
+                if facility_by_id is None:
+                    print(f"No facility with the ID: '{view_facility}'.")
+                else:
+                    facility_by_id_table = PrettyTable()
+                    facility_by_id_table.field_names = ["ID", "Name", "Description"]
+                    facility_by_id_table.add_row([facility_by_id.ID, facility_by_id.name, facility_by_id.description])
+                    print(facility_by_id_table)
+
                 input("Press enter to continue.")
             # Edit a facility
             case "e":
-                f_edit_facility = input("Edit the facility with the ID:").upper()
-                # If ID does not exist in facility list, raise error "No facility found with that ID!"
-                #If ID does not exist, cancel command, á eftir að implementa
-                print("If you do not wish to change a specific field you can leave the input empty")
-                f_change_name = input("Change facility name to: ")
-                f_change_description = input("Change facility description to: ")
+                f_edit_facility = input("Edit the facility with the ID (B to cancel): ").strip().upper()
+
+                if f_edit_facility == "B":
+                    return ui_consts.CMD_BACK
+
+                facility_edit = self.ui.logic_api.facility_get_by_ID(f_edit_facility)
+
+                if facility_edit is None:
+                    print(f"No facility with the ID: '{f_edit_facility}'.")
+
+                editable_attributes = ["name", "description"]
+
+                for attribute in editable_attributes:
+                    current_value = getattr(facility_edit, attribute)
+                    new_value = input(f"New {attribute.capitalize()} (Current: {current_value}): ").strip()
+
+                    if new_value:
+                        setattr(facility_edit, attribute, new_value)
+
+                self.ui.logic_api.facility_edit(facility_edit)
             # Go back
             case "b":
                 return ui_consts.CMD_BACK
