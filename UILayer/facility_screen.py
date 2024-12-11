@@ -68,22 +68,17 @@ class FacilityScreen(BaseScreen):
                 self.ui.logic_api.facility_add(new_facility)
             # Remove a facility
             case "r":
-                removing_facility = True  
+                remove_id = input("Remove facility that has the ID (B to cancel): ").strip().upper()
 
-                while removing_facility:
-                    remove_id = input("Remove facility that has the ID (B to cancel): ").strip().upper()
+                if remove_id == "B":
+                    return self
 
-                    if remove_id == "B":
-                        print("Facility removal canceled.")
-                        removing_facility = False 
-                        continue
+                facility_to_remove = self.ui.logic_api.facility_get_by_ID(remove_id)
 
-                    facility_to_remove = self.ui.logic_api.facility_get_by_ID(remove_id)
-
-                    if facility_to_remove is not None:
-                        self.ui.logic_api.facility_remove(remove_id)
-                    else:
-                        print(f"No facility found with the ID: '{remove_id}'. Please try again (B to cancel).")
+                if facility_to_remove is not None:
+                    self.ui.logic_api.facility_remove(remove_id)
+                else:
+                    print(f"No facility found with the ID: '{remove_id}'.")
             # Search for
             case "s":
                 search = input("Search for: ").strip()
