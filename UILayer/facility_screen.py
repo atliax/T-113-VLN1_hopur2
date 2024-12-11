@@ -21,9 +21,14 @@ class FacilityScreen(BaseScreen):
 
         print(ui_consts.SEPERATOR)
         print("|")
-        print("|	[A] Add a facility		[E] Edit a facility			[B] Go back")
-        print("|	[R] Remove a facility		[S] Search for")
-        print("|	[V] View details")
+
+        if self.ui.logic_api.is_manager_logged_in():
+            print("|	[A] Add a facility		[E] Edit a facility			[B] Go back")
+            print("|	[R] Remove a facility		[S] Search for")
+            print("|	[V] View details")
+        else:
+            print("|	[V] View details		[S] Search for				[B] Go back")
+
         print("|")
         print(ui_consts.SEPERATOR)
 
@@ -69,23 +74,31 @@ class FacilityScreen(BaseScreen):
                 self.current_page -= 1
             # Add a facility
             case "a":
-                f_new_name = input("New facility name: ")
-                f_new_description = input("New facility description: ")
-                new_facility = Facility(None, propertyID, f_new_name, f_new_description)
-                self.ui.logic_api.facility_add(new_facility)
+                if self.ui.logic_api.is_manager_logged_in():
+                    f_new_name = input("New facility name: ")
+                    f_new_description = input("New facility description: ")
+                    new_facility = Facility(None, propertyID, f_new_name, f_new_description)
+                    self.ui.logic_api.facility_add(new_facility)
+                else:
+                    print("You don't have permission to do that.")
+                    input("Press enter to continue.")
             # Remove a facility
             case "r":
-                remove_id = input("Remove facility that has the ID (B to cancel): ").strip().upper()
+                if self.ui.logic_api.is_manager_logged_in():
+                    remove_id = input("Remove facility that has the ID (B to cancel): ").strip().upper()
 
-                if remove_id == "B":
-                    return self
+                    if remove_id == "B":
+                        return self
 
-                facility_to_remove = self.ui.logic_api.facility_get_by_ID(remove_id)
+                    facility_to_remove = self.ui.logic_api.facility_get_by_ID(remove_id)
 
-                if facility_to_remove is not None:
-                    self.ui.logic_api.facility_remove(remove_id)
+                    if facility_to_remove is not None:
+                        self.ui.logic_api.facility_remove(remove_id)
+                    else:
+                        print(f"No facility found with the ID: '{remove_id}'.")
+                        input("Press enter to continue.")
                 else:
-                    print(f"No facility found with the ID: '{remove_id}'.")
+                    print("You don't have permission to do that.")
                     input("Press enter to continue.")
             # Search for
             case "s":
@@ -110,26 +123,30 @@ class FacilityScreen(BaseScreen):
                 input("Press enter to continue.")
             # Edit a facility
             case "e":
-                f_edit_facility = input("Edit the facility with the ID (B to cancel): ").strip().upper()
+                if self.ui.logic_api.is_manager_logged_in():
+                    f_edit_facility = input("Edit the facility with the ID (B to cancel): ").strip().upper()
 
-                if f_edit_facility == "B":
-                    return ui_consts.CMD_BACK
+                    if f_edit_facility == "B":
+                        return ui_consts.CMD_BACK
 
-                facility_edit = self.ui.logic_api.facility_get_by_ID(f_edit_facility)
+                    facility_edit = self.ui.logic_api.facility_get_by_ID(f_edit_facility)
 
-                if facility_edit is None:
-                    print(f"No facility with the ID: '{f_edit_facility}'.")
+                    if facility_edit is None:
+                        print(f"No facility with the ID: '{f_edit_facility}'.")
 
-                editable_attributes = ["name", "description"]
+                    editable_attributes = ["name", "description"]
 
-                for attribute in editable_attributes:
-                    current_value = getattr(facility_edit, attribute)
-                    new_value = input(f"New {attribute.capitalize()} (Current: {current_value}): ").strip()
+                    for attribute in editable_attributes:
+                        current_value = getattr(facility_edit, attribute)
+                        new_value = input(f"New {attribute.capitalize()} (Current: {current_value}): ").strip()
 
-                    if new_value:
-                        setattr(facility_edit, attribute, new_value)
+                        if new_value:
+                            setattr(facility_edit, attribute, new_value)
 
-                self.ui.logic_api.facility_edit(facility_edit)
+                    self.ui.logic_api.facility_edit(facility_edit)
+                else:
+                    print("You don't have permission to do that.")
+                    input("Press enter to continue.")
             # Go back
             case "b":
                 return ui_consts.CMD_BACK
