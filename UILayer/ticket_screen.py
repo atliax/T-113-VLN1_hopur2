@@ -160,58 +160,7 @@ class TicketScreen(BaseScreen):
                 self.active_search_filter = input("Search for: ")
                 # "Main menu > Tickets > Filtered" window and commands are identical to "Main menu > Tickets"
             
-            # Make a ticket report
 
-            case "mr":
-                create_report = input("Make a report for ticket with the ID: ")
-                # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"
-                # If ID does not exist, cancel command
-                employee = input("Employee writing report: ")
-                notes = input("Report: ")
-                print("If applicable")
-                print("If there are multiple contractors, type + to seperate them (C1 + C2 + C3)")
-                contracter_id = input("ID of contractor/s hired")
-                contractor_rating = input("")
-                contractor_fee = float(input("Contractor/s fee: "))
-                date = int(input("Is it wednesday? "))
-                cost = float(input("Total cost: "))
-                contractor_review = input("")
-
-                new_report = Report(create_report, employee, notes, cost, date, contracter_id, contractor_review, contractor_rating, contractor_fee)
-                self.ui.logic_api.report_add(new_report)
-
-            # View a ticket report
-            case "vr":
-                
-                view = input("View a report for ticket with the ID: ")
-                view_report = self.ui.logic_api.get_reportID()
-                view_report.print_stats()
-                
-                #for attribute, value in view.__dict__.items():
-                    #print (attribute, "=", value)
-
-                # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"
-                # If ID does not exist, cancel command
-                # If the ticket doesnt have a report raise error "This ticket doesn't have a report!"
-                # If the ticket doesn't have a report, cancel command      
-                print (f"Employee: {"MISSING"}")
-                print ("MISSING")
-                print ("MISSING")
-                print ("MISSING")
-                print ("MISSING")
-                print ("MISSING")
-            	# # print ("Employee: " + *Employee*)
-                # # print (*Report*)
-                # # print (*contractor/s hired*)
-                # # print (*contractor review*)
-                # # print (*contractor fee*)
-                # # print (*total coast*)
-                # rate = input("Rate contractor/s: ")
-                # respone = input("Write a response (optional): ")
-                # accept = input("Accept or decline (A/D): ")
-                # # If "A" then ticket status == "Closed"
-                # # If "D" then ticket status == "Needs work"
-            # Go back
             case "b":
                 return ui_consts.CMD_BACK
 
