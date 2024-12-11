@@ -99,8 +99,13 @@ class PropertyScreen(BaseScreen):
                 # If ID does not exist in property list, raise error "No property found with that ID!"
                 # If ID does not exist, cancel command	
                 property_ID = input("View the facilities in property with ID: ").upper()
-                self.ui.logic_api.facility_set_selected_property(property_ID)
-                return ui_consts.FACILITY_SCREEN
+                check = self.ui.logic_api.property_get_by_ID(property_ID)
+                if check is not None:
+                    self.ui.logic_api.facility_set_selected_property(property_ID)
+                    return ui_consts.FACILITY_SCREEN
+                else:
+                    print(f"No property with ID '{property_ID}' exists.")
+                    input("Press enter to continue.")
             # [E] Edit a property 
             case "e":
                 property_edit = None
