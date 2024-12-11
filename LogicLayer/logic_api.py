@@ -2,7 +2,6 @@ from LogicLayer.facility_manager import FacilityManager
 from LogicLayer.contractor_manager import ContractorManager
 from LogicLayer.destination_manager import DestinationManager
 from LogicLayer.property_manager import PropertyManager
-from LogicLayer.report_manager import ReportManager
 from LogicLayer.staff_manager import StaffManager
 from LogicLayer.ticket_manager import TicketManager
 
@@ -14,7 +13,6 @@ class LogicAPI:
         self.contractor_manager = ContractorManager(storage_api)
         self.destination_manager = DestinationManager(storage_api)
         self.property_manager = PropertyManager(storage_api)
-        self.report_manager = ReportManager(storage_api)
         self.staff_manager = StaffManager(storage_api)
         self.ticket_manager = TicketManager(storage_api)
 
@@ -55,7 +53,7 @@ class LogicAPI:
         self.destination_manager.destination_edit(edited_destination)
 
     def destination_get_by_ID(self, destinationID : str) -> Destination:
-     #Returns a destination with a matching destinationID if it exists
+        """Returns a destination with a matching destinationID if it exists"""
         return self.destination_manager.destination_get_by_ID(destinationID)
 
 #==========================================================================
@@ -168,24 +166,3 @@ class LogicAPI:
 
     def ticket_search(self, search_string : str) -> list[Ticket]:
         return self.ticket_manager.ticket_search(search_string)
-
-#==========================================================================
-#--Reports-----------------------------------------------------------------
-
-    def report_get_all(self) -> list[Report]:
-        return self.report_manager.report_get_all()
-
-    def report_get_by_ID(self, reportID : str) -> Report:
-        return self.report_manager.report_get_by_ID(reportID)
-
-    def report_add(self, new_report : Report) -> None:
-        self.report_manager.report_add(new_report)
-
-    def report_edit(self, edited_report : Report) -> None:
-        self.report_manager.report_edit(edited_report)
-
-    def report_remove(self, reportID : str) -> None:
-        self.report_manager.report_remove(reportID)
-
-    def report_search(self, search_string : str) -> list[Report]:
-        return self.report_manager.report_search(search_string)

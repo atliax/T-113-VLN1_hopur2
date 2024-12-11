@@ -8,7 +8,6 @@ class StorageAPI:
         self.destination_storage = StorageManager("data/destinations.json", Destination)
         self.facility_storage = StorageManager("data/facilities.json", Facility)
         self.property_storage = StorageManager("data/properties.json", Property)
-        self.report_storage = StorageManager("data/reports.json", Report)
         self.staff_storage = StorageManager("data/staff.json", Staff)
         self.ticket_storage = StorageManager("data/tickets.json", Ticket)
 
@@ -83,24 +82,6 @@ class StorageAPI:
 
     def property_get_by_ID(self, propertyID : str) -> Property:
         return self.property_storage.get_by_ID(propertyID)
-
-#==========================================================================
-#--Reports-----------------------------------------------------------------
-
-    def report_add(self, new_report : Report) -> None:
-        self.report_storage.add(new_report)
-
-    def report_remove(self, reportID : str) -> None:
-        self.report_storage.remove(reportID)
-
-    def report_edit(self, edited_report : Report) -> None:
-        self.report_storage.edit(edited_report)
-
-    def report_get_all(self) -> list[Report]:
-        return self.report_storage.get_all()
-
-    def report_get_by_ID(self, reportID : str) -> Report:
-        return self.report_storage.get_by_ID(reportID)
 
 #==========================================================================
 #--Staff-------------------------------------------------------------------
