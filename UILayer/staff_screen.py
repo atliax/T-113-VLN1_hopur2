@@ -137,9 +137,9 @@ class StaffScreen(BaseScreen):
                     contact_by_id = self.ui.logic_api.staff_get_by_ID(view_contact)
 
                     if contact_by_id is None:
-                        print(f"No employee with the ID: '{view_contact}', try again (B to return).")
+                        print(f"No employee with the ID: '{view_contact}', try again (B to cancel).")
                     if view_contact == "B":
-                        return ui_consts.CMD_BACK
+                        return self
 
                 contact_by_id_table = PrettyTable()
                 contact_by_id_table.field_names = ["ID","Name","Phone Nr.","Mobile Phone Nr.","Address"]
