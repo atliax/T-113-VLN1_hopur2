@@ -79,7 +79,6 @@ class TicketScreen(BaseScreen):
             case "a":   # Add a ticket
                 # Auto ID kerfi ekki implementað
                 #print(f"New ticket property ID: {}")
-
                 new_ticket_facility_ID = input("facility ID of report: ")
                 new_ticket = input("New ticket title: ")
                 new_description = input("New ticket description: ")
@@ -88,9 +87,10 @@ class TicketScreen(BaseScreen):
                 new_status = input("New ticket status: ")
                 new_date = input("New ticket date: ")
                 new_recurring = int(input("Recur every N days (0 = never): "))
-                # If recur > 0 set recurring = True otherwise False
+                new_ticket = Ticket(None, new_ticket_facility_ID, None, new_property_id, new_priority, new_ticket, new_description, new_status, None, new_recurring , new_date )
+                self.ui.logic_api.ticket_add(new_ticket)
+                # If recur > 0 set recurring = True otherwise False, needs logic for this. 
 
-           
             case "r":    # Remove a ticket
                 remove_ticket = input("Remove ticket with ID: ")
                 self.ui.logic_api.ticket_remove(remove_ticket)
