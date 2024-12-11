@@ -39,13 +39,13 @@ class FacilityScreen(BaseScreen):
         else:
             facility_list = self.ui.logic_api.facility_get_by_propertyID(propertyID)
 
-        all_facilities_table = PrettyTable()
-        all_facilities_table.field_names = ["ID","Name","Description"]
+        facilities_table = PrettyTable()
+        facilities_table.field_names = ["ID","Name","Description"]
 
         for facility in facility_list:
-            all_facilities_table.add_row([facility.ID,facility.name,facility.description])
+            facilities_table.add_row([facility.ID,facility.name,facility.description])
 
-        all_facilities_table._min_table_width = ui_consts.TABLE_WIDTH
+        facilities_table._min_table_width = ui_consts.TABLE_WIDTH
 
         total_pages = math.ceil(len(facility_list) / 10)
 
@@ -62,7 +62,7 @@ class FacilityScreen(BaseScreen):
             print(f"|  Active search filter: '{self.active_search_filter}'")
 
         if total_pages != 0:
-            print(all_facilities_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
+            print(facilities_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
 
         print("")
         cmd = input("Command: ").lower()
