@@ -123,7 +123,7 @@ class StaffScreen(BaseScreen):
                     contact_by_id = self.ui.logic_api.staff_get_by_ID(view_contact)
 
                     if contact_by_id is None:
-                        print(f"No employee with the ID: '{view_contact}', Try again (B to cancel).")
+                        print(f"No employee with the ID: '{view_contact}', try again (B to return).")
                     if view_contact == "B":
                         return ui_consts.CMD_BACK
 
@@ -143,7 +143,7 @@ class StaffScreen(BaseScreen):
                     staff_edit = self.ui.logic_api.staff_get_by_ID(edit_with_id)
 
                     if staff_edit is None:
-                        print(f"No employee with the ID: '{edit_with_id}' Try again (B to cancel).")
+                        print(f"No employee with the ID: '{edit_with_id}' try again (B to return).")
 
                     if edit_with_id == "B":
                         return ui_consts.CMD_BACK

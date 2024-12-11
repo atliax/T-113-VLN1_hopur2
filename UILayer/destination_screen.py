@@ -92,7 +92,7 @@ class DestinationScreen(BaseScreen):
                                 setattr(destination_edit, attribute, new_value)
                         self.ui.logic_api.destination_edit(destination_edit)
                     else:
-                        print("Destination not found, try again or b to return")
+                        print("Destination not found, try again (B to return)")
             # Go back
             case "b":
                 return ui_consts.CMD_BACK
