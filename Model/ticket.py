@@ -1,13 +1,14 @@
 from Model.base_model import BaseModel
 
 class Ticket(BaseModel):
-    def __init__(self, ID : str, facilityID : str, reportID : str, \
+    def __init__(self, ID : str, facilityID : str,
                  propertyID : str, priority : str, title : str, description : str, \
                  status : str, recurring : bool, recurring_days : int, \
-                 open_date : str) -> None:
+                 open_date : str, staffID : str, report : str, cost : int, 
+                 contractorID : str, contractor_review : str, contractor_rating : float,
+                 contractor_fee : int) -> None:
         self.ID = ID
         self.facilityID = facilityID
-        self.reportID = reportID
         self.propertyID = propertyID
         self.priority = priority
         self.title = title
@@ -16,3 +17,12 @@ class Ticket(BaseModel):
         self.recurring = recurring
         self.recurring_days = recurring_days
         self.open_date = open_date
+
+        #var í Report:
+        self.staffID = staffID
+        self.report = report
+        self.cost = cost
+        self.contractorID = contractorID
+        self.contractor_review = contractor_review
+        self.contractor_rating = contractor_rating
+        self.contractor_fee = contractor_fee
