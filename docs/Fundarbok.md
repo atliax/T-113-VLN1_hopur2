@@ -344,4 +344,4 @@ Viðstaddir: Hjörtur!, Gísli, Atli, Óli, Daníel
 Eva gerði virkni fyrir facilities og Atli setti það inn áðan fyrir hana þar sem var git vesen.
 Koma fulla virkni á tickets. Skoða input validation(villuboð eða try/except) og skoða það allt meira. Ætlum að skoða user validation(BOSS eða plebbi). Óli ætlar að reyna virkja Tickets, Hjörtur líka. Daníel ætlar að setja input validation. Gísli ætlar að bug hunta og fara yfir skýrslu. Atli ætlar að skoða user validation.
 
-Ætlum á fund með TA og spurja um Einkunnagjöf fyrir ein heill og hvernig það virkar. Og spyrja um Ui layer logic og hvort það sé í lagi.
+Ætlum á fund með TA og spurja um Einkunnagjöf fyrir ein heill og hvernig það virkar. Og spyrja um Ui layer logic og hvort það sé í lagi. Spyrja um listun og hvort það þurfi að vera sér filter fyrir allt eða hvort það sé hægt að leita í öllu í einu. Eru lágmarks fjöldi nonfunctional requirements

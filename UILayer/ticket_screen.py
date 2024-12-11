@@ -12,6 +12,7 @@ class TicketScreen(BaseScreen):
     def __init__(self, ui) -> None:
         super().__init__(ui)
         self.current_page = -1
+        self.active_search_filter = ""
 
     def run(self):
         self.clear_screen()
@@ -27,19 +28,24 @@ class TicketScreen(BaseScreen):
         print("|")
         print(ui_consts.SEPERATOR)
 
-        all_tickets = self.ui.logic_api.ticket_get_all()
+        all_tickets = self.ui.logic_api.ticket_get_all() # fyrir edit og view og svona, mögulega ekki sniðugt
+
+        if self.active_search_filter:
+            ticket_list = self.ui.logic_api.ticket_search(self.active_search_filter)
+        else:
+            ticket_list = self.ui.logic_api.ticket_get_all()
 
         all_tickets_table = PrettyTable()
         all_tickets_table.field_names = ["ID", "Property", "Facility", "Title", "Priority", "Status"]
 
-        for ticket in all_tickets:
+        for ticket in ticket_list:
             ticket_property = self.ui.logic_api.property_get_by_ID(ticket.propertyID)
             ticket_facility = self.ui.logic_api.facility_get_by_ID(ticket.facilityID)
             all_tickets_table.add_row([ticket.ID, ticket_property.name, ticket_facility.name, ticket.title, ticket.priority, ticket.status])
 
         all_tickets_table._min_table_width = ui_consts.TABLE_WIDTH
 
-        total_pages = math.ceil(len(all_tickets) / 10)
+        total_pages = math.ceil(len(ticket_list) / 10)
 
         if self.current_page < 0:
             self.current_page = 0
@@ -50,11 +56,15 @@ class TicketScreen(BaseScreen):
         print(f"|  Ticket list (Page {self.current_page + 1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page")
 
+        if self.active_search_filter:
+            print(f"|  Active search filter: '{self.active_search_filter}'")
+
         if total_pages != 0:
             print(all_tickets_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
 
         print("")
         cmd = input("Command: ").lower()
+
         # ÞAÐ VANTAR AÐ HAFA OPTION TIL AÐ OPNA LOKAÐA VERKSKÝRSLU
 
         match cmd:
@@ -131,20 +141,8 @@ class TicketScreen(BaseScreen):
                 # # if recur > 0 set recurring = True otherwise False
             # Search for
             case "s":
-                print("You can search for a keyword and/or timeline, you can leave an input empty")
-                print("What keyword would you like to search for?")
-                print("You can combine keywords by following a word with ,")
-                print("Example: (Grænland,Nuukstræti 4)")
-                search = input("Search for: ")
-
-                print("What timeline would ou like to search for?")
-                print("Start                End")
-                print("DD/MM/YYYY    DD/MM/YYYY")
-                search_from = input("Search from: ")
-                # print out a new filtered list based on keywords input
-                #GoTo "Main menu > Tickets > Filtered"
+                self.active_search_filter = input("Search for: ")
                 # "Main menu > Tickets > Filtered" window and commands are identical to "Main menu > Tickets"
-                # Just replace the normal tickets list with the filtered one
             # Make a ticket report
             case "mr":
                 create_report = input("Make a report for ticket with the ID: ")
