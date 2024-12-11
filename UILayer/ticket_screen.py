@@ -71,6 +71,9 @@ class TicketScreen(BaseScreen):
         for property in properties:
             property_table.add_row([property.ID, property.name,property.destinationID,property.type])
 
+
+
+
         match cmd:
             
             case "n":   # Next page:
@@ -81,17 +84,28 @@ class TicketScreen(BaseScreen):
             
             case "a":   # Add a ticket
                 print(property_table)
-                #print(f"New ticket property ID: {}")
-                new_ticket_facility_ID = input("property ID of report: ")
-                tmp = self.ui.logic_api.property_get_by_ID
-                new_property_id = input("Property ID of report?")
-                new_ticket = input("New ticket title: ")
+                new_property_id = input("property ID of report: ").upper()
+                tmp = self.ui.logic_api.facility_get_by_propertyID(new_property_id)
+                facility_table = PrettyTable()
+                facility_table.field_names = ["ID","Name","Description"]
+                for facility in tmp:
+                    facility_table.add_row([facility.ID,facility.name,facility.description])
+                print(facility_table)  
+                new_ticket_facility_id = input("ID of facility: ").upper()
+                new_ticket_title = input("New ticket title: ")
                 new_description = input("New ticket description: ")
                 new_priority = input("New ticket priority: ")
                 new_status = input("New ticket status: ")
                 new_date = input("New ticket date: ")
                 new_recurring = int(input("Recur every N days (0 = never): "))
-                new_ticket = Ticket(None, new_ticket_facility_ID, None, new_property_id, new_priority, new_ticket, new_description, new_status, None, new_recurring , new_date )
+                new_staff = input("New ticket staff ID: ")
+                new_report = input("REPORT placeholder: ")
+                new_cost = float(input("Cost: placerholder "))
+                new_contr_id = input("Enter contractor ID: placeholder ")
+                new_contr_review = input("Contractor review: placeholder ")
+                new_contr_rating = float(input("Contractor rating: placeholder "))
+                new_contr_fee = float(input("Contractor fee: placeholder "))
+                new_ticket = Ticket(None, new_ticket_facility_id, new_property_id, new_priority, new_ticket_title, new_description,None, new_status, None, new_recurring , new_date, new_staff,new_report, new_cost, new_contr_id, new_contr_review, new_contr_rating, new_contr_fee )
                 self.ui.logic_api.ticket_add(new_ticket)
                 # If recur > 0 set recurring = True otherwise False, needs logic for this. 
 
@@ -118,11 +132,17 @@ class TicketScreen(BaseScreen):
                         return ui_consts.CMD_BACK
                     
                 ticket_by_id_table = PrettyTable()
-                ticket_by_id_table.field_names = ["ID","Name","Priority","Status","Property","Facility","Description","Open Date"]
-                ticket_by_id_table.add_row([ticket_by_id.ID,ticket_by_id.title,ticket_by_id.priority,ticket_by_id.status,ticket_by_id.propertyID,ticket_by_id.facilityID,ticket_by_id.description,ticket_by_id.open_date])
+                ticket_by_id_table.field_names = ["ID","Name","Priority","Status","Property","Facility","Description","Open Date","Employee"]
+                ticket_by_id_table.add_row([ticket_by_id.ID,ticket_by_id.title,ticket_by_id.priority,ticket_by_id.status,ticket_by_id.propertyID,ticket_by_id.facilityID,ticket_by_id.description,ticket_by_id.open_date,ticket_by_id.staffID])
                 print(ticket_by_id_table)
+                print()
+                
+                total_cost = ticket_by_id.cost + ticket_by_id.contractor_fee
+                ticket_by_id_table_2 = PrettyTable()
+                ticket_by_id_table_2.field_names = ["Report","Cost","Contractor","Contractor Review", "Contractor Rating", "Contractor Fee","Total Cost"]
+                ticket_by_id_table_2.add_row([ticket_by_id.report,ticket_by_id.cost,ticket_by_id.contractorID,ticket_by_id.contractor_review,ticket_by_id.contractor_rating,ticket_by_id.contractor_fee,total_cost])
+                print(ticket_by_id_table_2)
                 input()
-
 
             case "e":    # Edit ticket
                 # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"
