@@ -87,32 +87,44 @@ class TicketScreen(BaseScreen):
                 new_status = input("New ticket status: ")
                 new_date = input("New ticket date: ")
                 new_recurring = int(input("Recur every N days (0 = never): "))
+<<<<<<< Updated upstream
                 new_ticket = Ticket(None, new_ticket_facility_ID, None, new_property_id, new_priority, new_ticket, new_description, new_status, None, new_recurring , new_date )
                 self.ui.logic_api.ticket_add(new_ticket)
 
                 # If recur > 0 set recurring = True otherwise False, needs logic for this. 
+=======
+                # If recur > 0 set recurring = True otherwise False
+>>>>>>> Stashed changes
 
             # Remove a ticket
             case "r":
                 remove_ticket = input("Remove ticket with ID: ")
                 self.ui.logic_api.ticket_remove(remove_ticket)
-                
+
             # View closed tickets
             case "v":
                 # Gefur lista á closed tickets (virkar eins og search með fixed keyword)
                 pass
 
             case "d":   # Ticket details
-                view = input("Type in ID of ticket for details: ").upper()
-                for ticket in all_tickets:
-                    if view == ticket.ID:
-                        view_ticket = ticket
-                print(f"Property: {view_ticket.propertyID}, Priority: {view_ticket.priority}")
-                print(f"Facility: {view_ticket.facilityID}, Status: {view_ticket.status}")
-                print(f"Title: {view_ticket.title}")
-                print(f"Description: {view_ticket.description}")
-                print(f"Date: {view_ticket.open_date}")
-                input("Click anything to move")
+                ticket_by_id = None
+
+                while ticket_by_id is None:
+                    view_ticket = input("Type in ID of ticket for details: ").upper()
+
+                    ticket_by_id = self.ui.logic_api.ticket_get_by_ID(view_ticket)
+
+                    if ticket_by_id is None:
+                        print(f"No ticket with the ID: '{view_ticket}', try again (B to return).")
+                    if view_ticket == "B":
+                        return ui_consts.CMD_BACK
+                    
+                ticket_by_id_table = PrettyTable()
+                ticket_by_id_table.field_names = ["ID","Name","Priority","Status","Property","Facility","Description","Open Date"]
+                ticket_by_id_table.add_row([ticket_by_id.ID,ticket_by_id.title,ticket_by_id.priority,ticket_by_id.status,ticket_by_id.propertyID,ticket_by_id.facilityID,ticket_by_id.description,ticket_by_id.open_date])
+                print(ticket_by_id_table)
+                input()
+
 
             case "e":    # Edit ticket
                 # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"
@@ -142,7 +154,7 @@ class TicketScreen(BaseScreen):
                         self.ui.logic_api.ticket_edit(edit_ticket)
 
                     else:
-                        print("Destination not found, try again or b to return")
+                        print("Destination not found, try again (B to return)")
 
                 # # if recur > 0 set recurring = True otherwise False
 
