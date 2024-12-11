@@ -58,7 +58,7 @@ class ContractorScreen(BaseScreen):
         print("|  [N] Next page    [P] Previous page")
 
         if self.active_search_filter:
-            print(f"|   Active search filter: '{self.active_search_filter}'")
+            print(f"|  Active search filter: '{self.active_search_filter}'")
 
         if total_pages != 0:
             print(contractor_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
