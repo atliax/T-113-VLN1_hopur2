@@ -80,7 +80,8 @@ class StaffManager:
 
             if not found:
                 staff_destination = self.storage_api.destination_get_by_ID(staff.destinationID)
-                if search_string.lower() in staff_destination.country.lower():
-                    filtered_staff.append(staff)
+                if staff_destination is not None:
+                    if search_string.lower() in staff_destination.country.lower():
+                        filtered_staff.append(staff)
 
         return filtered_staff

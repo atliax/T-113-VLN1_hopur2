@@ -44,8 +44,9 @@ class PropertyManager:
 
             if not found:
                 property_destination = self.storage_api.destination_get_by_ID(item.destinationID)
-                if search_string.lower() in property_destination.country.lower():
-                    filtered_properties.append(item)
+                if property_destination is not None:
+                    if search_string.lower() in property_destination.country.lower():
+                        filtered_properties.append(item)
 
         return filtered_properties
     # [V] View facilities
