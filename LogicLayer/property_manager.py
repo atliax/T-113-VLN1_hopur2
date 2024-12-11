@@ -9,6 +9,9 @@ class PropertyManager:
     def property_get_all(self) -> list[Property]:
         return self.storage_api.property_get_all()
 
+    def property_get_by_ID(self, propertyID : str) -> Property:
+        return self.storage_api.property_get_by_ID(propertyID)
+
     # [A] Add a property
     def property_add(self, new_property : Property) -> None:
         all_properties = self.storage_api.property_get_all()

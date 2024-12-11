@@ -15,6 +15,7 @@ properties = []
 staff = []
 facilities = []
 contractors = []
+tickets = []
 
 # ------------------------------- Nuuk, Grænland: ------------------------------
 
@@ -202,6 +203,8 @@ facilities.append(Facility('F110','P27','Hótel Akúla Kjarnakljúfur',''))
 
 facilities.append(Facility('F111','P1','iGloo-Ville móttaka',''))
 
+tickets.append(Ticket("T1","F1",None,"P2","Pronto!","Generic ticket title", "Generic ticket description", "Open", False, 0, "09/12/2024"))
+
 # -------------------------- write to the actual files -------------------------
 
 destination_storage.save_to_file(destinations)
@@ -209,3 +212,4 @@ property_storage.save_to_file(properties)
 staff_storage.save_to_file(staff)
 facility_storage.save_to_file(facilities)
 contractor_storage.save_to_file(contractors)
+ticket_storage.save_to_file(tickets)

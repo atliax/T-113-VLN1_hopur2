@@ -1,5 +1,5 @@
 from UILayer.base_screen import BaseScreen
-from Model import Staff
+
 from UILayer import ui_consts
 
 class MainMenuScreen(BaseScreen):
@@ -42,5 +42,5 @@ class MainMenuScreen(BaseScreen):
                 return ui_consts.CMD_LOGOUT
             case "x":
                 return ui_consts.CMD_QUIT
-            case _:
-                return self
+
+        return self

@@ -1,5 +1,4 @@
 from getpass import getpass
-from UILayer import ui_consts
 
 from UILayer.base_screen import BaseScreen
 

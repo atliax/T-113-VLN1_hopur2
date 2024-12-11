@@ -94,6 +94,9 @@ class LogicAPI:
     def property_get_all(self) -> list[Property]:
         return self.property_manager.property_get_all()
 
+    def property_get_by_ID(self, propertyID : str) -> Property:
+        return self.property_manager.property_get_by_ID(propertyID)
+
     def property_add(self, new_property : Property) -> None:
         self.property_manager.property_add(new_property)
 
@@ -138,3 +141,24 @@ class LogicAPI:
 
     def staff_search(self, search_string : str) -> list[Staff]:
         return self.staff_manager.staff_search(search_string)
+
+#==========================================================================
+#--Tickets-----------------------------------------------------------------
+
+    def ticket_get_all(self) -> list[Ticket]:
+        return self.ticket_manager.ticket_get_all()
+
+    def ticket_get_by_ID(self, ticketID : str) -> Ticket:
+        return self.ticket_manager.ticket_get_by_ID(ticketID)
+
+    def ticket_add(self, new_ticket : Ticket) -> None:
+        self.ticket_manager.ticket_add(new_ticket)
+
+    def ticket_edit(self, edited_ticket : Ticket) -> None:
+        self.ticket_manager.ticket_edit(edited_ticket)
+
+    def ticket_remove(self, ticketID : str) -> None:
+        self.ticket_manager.ticket_remove(ticketID)
+
+    def ticket_search(self, search_string : str) -> list[Ticket]:
+        return self.ticket_manager.ticket_search(search_string)
