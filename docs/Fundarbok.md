@@ -336,3 +336,12 @@ Við ætlum að skipta upp verkefnum í eftirfarandi: Atli ætlar að endurskipu
 Daníel og Eva komu rétt eftir morgunfundinn. Dagurinn í dag gekk mjög vel, náðum að klára mikið. Staff, destinations og properties er nánast tilbúið, facilities er eitthvað eftir. Allt storage layerið var endurskipulagt og þjöppuðum því saman í örfáar skrár. settum einnig pages í UI listann þannig það er ekki lengur scroll heldur bara next page og previous page.
 
 það sem er eftir er tickets, klára facilities og splitta functionality á appinu miðað við hvort það sé manager eða peasant sem er að nota það og setja try/except eða einhverskonar villuboð sem eru raised.
+
+## 11 Des Morgunfundur
+Viðstaddir: Hjörtur!, Gísli, Atli, Óli, Daníel
+
+## markmið dagsins
+Eva gerði virkni fyrir facilities og Atli setti það inn áðan fyrir hana þar sem var git vesen.
+Koma fulla virkni á tickets. Skoða input validation(villuboð eða try/except) og skoða það allt meira. Ætlum að skoða user validation(BOSS eða plebbi). Óli ætlar að reyna virkja Tickets, Hjörtur líka. Daníel ætlar að setja input validation. Gísli ætlar að bug hunta og fara yfir skýrslu. Atli ætlar að skoða user validation.
+
+Ætlum á fund með TA og spurja um Einkunnagjöf fyrir ein heill og hvernig það virkar. Og spyrja um Ui layer logic og hvort það sé í lagi.

@@ -12,6 +12,7 @@ class PropertyScreen(BaseScreen):
     def __init__(self, ui) -> None:
         super().__init__(ui)
         self.current_page = -1
+        self.active_search_filter = ""
 
     def run(self):
         self.clear_screen()
@@ -26,12 +27,15 @@ class PropertyScreen(BaseScreen):
         print("|")
         print(ui_consts.SEPERATOR)
 
-        all_properties = self.ui.logic_api.property_get_all()
+        if self.active_search_filter:
+            property_list = self.ui.logic_api.property_search(self.active_search_filter)
+        else:
+            property_list = self.ui.logic_api.property_get_all()
 
-        all_properties_table = PrettyTable()
-        all_properties_table.field_names = ["ID","Name","Destination","Address","Sq meters","Rooms","Type"]
+        property_table = PrettyTable()
+        property_table.field_names = ["ID","Name","Destination","Address","Sq meters","Rooms","Type"]
 
-        for property in all_properties:
+        for property in property_list:
             property_destination = self.ui.logic_api.destination_get_by_ID(property.destinationID.upper())
 
             if property_destination is not None:
@@ -39,11 +43,11 @@ class PropertyScreen(BaseScreen):
             else:
                 property_destination_country = "Not assigned"
 
-            all_properties_table.add_row([property.ID, property.name, property_destination_country, property.address, property.square_meters, property.rooms, property.type])
+            property_table.add_row([property.ID, property.name, property_destination_country, property.address, property.square_meters, property.rooms, property.type])
 
-        all_properties_table._min_table_width = ui_consts.TABLE_WIDTH
+        property_table._min_table_width = ui_consts.TABLE_WIDTH
 
-        total_pages = math.ceil(len(all_properties) / 10)
+        total_pages = math.ceil(len(property_list) / 10)
 
         if self.current_page < 0:
             self.current_page = 0
@@ -54,8 +58,11 @@ class PropertyScreen(BaseScreen):
         print(f"|  Property list (Page {self.current_page+1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page")
 
+        if self.active_search_filter:
+            print(f"|  Active search filter: '{self.active_search_filter}'")
+
         if total_pages != 0:
-            print(all_properties_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
+            print(property_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
 
         print("")
         cmd = input("Command: ").lower()
@@ -99,8 +106,13 @@ class PropertyScreen(BaseScreen):
                 # If ID does not exist in property list, raise error "No property found with that ID!"
                 # If ID does not exist, cancel command	
                 property_ID = input("View the facilities in property with ID: ").upper()
-                self.ui.logic_api.facility_set_selected_property(property_ID)
-                return ui_consts.FACILITY_SCREEN
+                check = self.ui.logic_api.property_get_by_ID(property_ID)
+                if check is not None:
+                    self.ui.logic_api.facility_set_selected_property(property_ID)
+                    return ui_consts.FACILITY_SCREEN
+                else:
+                    print(f"No property with ID '{property_ID}' exists.")
+                    input("Press enter to continue.")
             # [E] Edit a property 
             case "e":
                 property_edit = None
@@ -131,25 +143,7 @@ class PropertyScreen(BaseScreen):
                 self.ui.logic_api.property_edit(property_edit)
             # [S] Search for
             case "s":
-                search = input("Search for: ") 
-            
-                search_property = self.ui.logic_api.property_search(search)
-
-                search_property_table = PrettyTable()
-                search_property_table.field_names = ["ID","Name","Destination","Address","Sq meters","Rooms","Type"]
-
-                for property in search_property:
-                    unit_destination = self.ui.logic_api.destination_get_by_ID(property.destinationID.upper())
-
-                    if unit_destination is not None:
-                        unit_destination_country = unit_destination.country
-                    else:
-                        unit_destination_country = "Not assigned"
-
-                    search_property_table.add_row([property.ID, property.name, unit_destination_country, property.address, property.square_meters, property.rooms, property.type])
-
-                print(search_property_table) 
-                input("Press enter to continue.")
+                self.active_search_filter = input("Search for: ") 
             # [B] Go Back
             case "b":
                 return ui_consts.CMD_BACK

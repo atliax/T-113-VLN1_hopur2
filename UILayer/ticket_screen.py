@@ -80,31 +80,54 @@ class TicketScreen(BaseScreen):
             case "r":
                 remove_ticket = input("Remove ticket with ID: ")
             # View closed tickets
+            
             case "v":
                 # Gefur lista á closed tickets (virkar eins og search með fixed keyword)
                 pass
-            # Ticket details
-            case "d":
-                view = input("View the details")
-                print(f"Property: {"MISSING"}, Priority: {new_priority}")
-                print(f"Facility: {"MISSING"}, Status: {new_status}")
-                print(f"Title: {new_ticket}")
-                print(f"Description: {new_description}")
-                print(f"Date: {new_date}")
-                # If a response is available from a manager
-                print(f"Response: {"MISSING"}")
-            # Edit ticket
-            case "e":
+
+            case "d":   # Ticket details
+                view = input("Type in ID of ticket for details: ").upper()
+                for ticket in all_tickets:
+                    if view == ticket.ID:
+                        view_ticket = ticket
+                print(f"Property: {view_ticket.propertyID}, Priority: {view_ticket.priority}")
+                print(f"Facility: {view_ticket.facilityID}, Status: {view_ticket.status}")
+                print(f"Title: {view_ticket.title}")
+                print(f"Description: {view_ticket.description}")
+                print(f"Date: {view_ticket.open_date}")
+                input("Click anything to move")
+
+            case "e":    # Edit ticket
                 # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"
                 # If ID does not exist, cancel command
+                for ticket in all_tickets:
+                    if ticket == ticket.ID:
+                        edit_ticket = ticket
+                        
                 print("If you do not wish to change a specific field, you can leave the input empty")
-                change_title = input("Change ticket title to: ")
-                change_description = input("Change ticket description to: ")
-                change_priority = input("Change ticket priority to: ")
-                change_status = input("Change ticket status: ")
-                change_date = input("Change ticket date to: ")
-                change_recurring = int(input("Change if ticket should recur every N days (0 = never): "))
-                # if recur > 0 set recurring = True otherwise False
+                edit_ticket = None
+                ticket_attributes = ["ID", "facilityID", "reportID", "propertyID", "priority", "title", "description", "status", "recurring", "recurring_days", "open_date"]
+
+                while edit_ticket is None:
+                    pick_ticket = input("Type in ID of ticket to edit: ").upper()
+                    if edit_ticket == "B":
+                        return self
+                    
+                    edit_ticket = self.ui.logic_api.ticket_get_by_ID(pick_ticket)
+
+                    if edit_ticket is not None:
+                        print ("Leave empty if you wish to not change ")
+                        for attribute in ticket_attributes:
+                            current_value = getattr(edit_ticket, attribute)
+                            new_value = input(f"New {attribute} (current: {current_value}): ").strip()
+                            if new_value:
+                                setattr(edit_ticket, attribute, new_value)
+                        self.ui.logic_api.ticket_edit(edit_ticket)
+
+                    else:
+                        print("Destination not found, try again or b to return")
+
+                # # if recur > 0 set recurring = True otherwise False
             # Search for
             case "s":
                 print("You can search for a keyword and/or timeline, you can leave an input empty")
