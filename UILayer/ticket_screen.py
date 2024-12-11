@@ -80,11 +80,12 @@ class TicketScreen(BaseScreen):
             case "r":
                 remove_ticket = input("Remove ticket with ID: ")
             # View closed tickets
+            
             case "v":
                 # Gefur lista á closed tickets (virkar eins og search með fixed keyword)
                 pass
-            # Ticket details
-            case "d":
+
+            case "d":   # Ticket details
                 view = input("Type in ID of ticket for details: ").upper()
                 for ticket in all_tickets:
                     if view == ticket.ID:
@@ -95,11 +96,10 @@ class TicketScreen(BaseScreen):
                 print(f"Description: {view_ticket.description}")
                 print(f"Date: {view_ticket.open_date}")
                 input("Click anything to move")
-            # Edit ticket
-            case "e":
+
+            case "e":    # Edit ticket
                 # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"
                 # If ID does not exist, cancel command
-                
                 for ticket in all_tickets:
                     if ticket == ticket.ID:
                         edit_ticket = ticket
@@ -127,12 +127,6 @@ class TicketScreen(BaseScreen):
                     else:
                         print("Destination not found, try again or b to return")
 
-                # change_title = input("Change ticket title to: ")
-                # change_description = input("Change ticket description to: ")
-                # change_priority = input("Change ticket priority to: ")
-                # change_status = input("Change ticket status: ")
-                # change_date = input("Change ticket date to: ")
-                # change_recurring = int(input("Change if ticket should recur every N days (0 = never): "))
                 # # if recur > 0 set recurring = True otherwise False
             # Search for
             case "s":
