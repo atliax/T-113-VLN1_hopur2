@@ -88,7 +88,6 @@ class StaffScreen(BaseScreen):
                 new_destination = input("Enter destination ID for new employee: ").upper()
                 # If ID does not exist in destination list, raise error "No destination found with that ID!"
                 # Cancel command if destination ID is not found
-
                 new_employee = input("New employee name: ")
                 new_ssn = (input("New employee ssn: "))
                 new_address = input("New employee address: ")

@@ -168,3 +168,17 @@ class LogicAPI:
 
     def ticket_search(self, search_string : str) -> list[Ticket]:
         return self.ticket_manager.ticket_search(search_string)
+
+#==========================================================================
+#--Reports-----------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
