@@ -172,13 +172,20 @@ class LogicAPI:
 #==========================================================================
 #--Reports-----------------------------------------------------------------
 
+    def report_get_all(self) -> list[Report]:
+        return self.report_manager.report_get_all()
 
+    def report_get_by_ID(self, reportID : str) -> Report:
+        return self.report_manager.report_get_by_ID(reportID)
 
+    def report_add(self, new_report : Report) -> None:
+        self.report_manager.report_add(new_report)
 
+    def report_edit(self, edited_report : Report) -> None:
+        self.report_manager.report_edit(edited_report)
 
+    def report_remove(self, reportID : str) -> None:
+        self.report_manager.report_remove(reportID)
 
-
-
-
-
-
+    def report_search(self, search_string : str) -> list[Report]:
+        return self.report_manager.report_search(search_string)
