@@ -91,35 +91,59 @@ class StaffScreen(BaseScreen):
             case "a":
                 if self.ui.logic_api.is_manager_logged_in():
                     print(destination_table)
+                    while True:
+                        try:
+                            new_destination = input("Enter destination ID for new employee (B to go back): ").upper()
+                            
+                            if new_destination == "B":
+                                return ui_consts.CMD_BACK  
 
-                    new_destination = input("Enter destination ID for new employee: ").upper()
-                    # If ID does not exist in destination list, raise error "No destination found with that ID!"
-                    # Cancel command if destination ID is not found
+                            
+                            if not self.ui.logic_api.destination_get_by_ID(new_destination):
+                                raise ValueError(f"No destination found with the ID: '{new_destination}'")
+                            break  
 
+                        except ValueError as e:
+                            print(e)
+                            print("Please try again or type 'B' to go back.")
+
+                    
                     new_employee = input("New employee name: ")
-                    new_ssn = (input("New employee ssn: "))
+                    new_ssn = input("New employee SSN: ")
+                    while not new_ssn.isdigit():
+                        print("SSN can only contain numbers.")
+                        new_ssn = input("New employee SSN: ")
                     new_address = input("New employee address: ")
-                    new_phone_nr = (input("New employee phone number: "))
-                    new_gsm = (input("New employee mobile number: "))
+                    new_phone_nr = input("New employee phone number: ").replace(" ", "").replace("-", "")
+                    while not (new_phone_nr.startswith("+") and new_phone_nr[1:].isdigit() or new_phone_nr.isdigit()):
+                        print("Phone number must contain only numbers or start with a single '+' followed by numbers.")
+                        new_phone_nr = input("New employee phone number: ").replace(" ", "").replace("-", "")
+                    new_gsm = input("New employee mobile number: ").replace(" ", "").replace("-", "")
+                    while not (new_gsm.startswith("+") and new_gsm[1:].isdigit() or new_gsm.isdigit()):
+                        print("Mobile number must contain only numbers or start with a single '+' followed by numbers.")
+                        new_gsm = input("New employee mobile number: ").replace(" ", "").replace("-", "")
                     new_email = input("New employee email: ")
-                    while "@" and "." not in new_email:
-                        print("Invalid email address")
+                    while "@" not in new_email or "." not in new_email:
+                        print("Invalid email address.")
                         new_email = input("New employee email: ")
                     new_password = input("New employee password: ")
                     new_title = input("New employee job title: ")
                     new_is_manager = input("Is the new employee a manager? y/n ").lower()
-                    if new_is_manager == "y":
-                        is_manager = True
-                    else:
-                        is_manager = False
+                    is_manager = new_is_manager == "y"
 
-                    new_staff = Staff(None, new_destination, new_employee, new_ssn, new_address, new_phone_nr, new_gsm, new_email, new_password, new_title, is_manager)
+                    
+                    new_staff = Staff(
+                        None, new_destination, new_employee, new_ssn, new_address,
+                        new_phone_nr, new_gsm, new_email, new_password, new_title, is_manager
+                    )
 
+                    
                     self.ui.logic_api.staff_add(new_staff)
                 else:
                     print("You don't have permission to do that.")
                     input("Press enter to continue.")
-            # Remove an employee
+
+            #[R] to remove staff
             case "r":
                 if self.ui.logic_api.is_manager_logged_in():
                     remove_id = input("Remove employee with the ID: ").upper()
@@ -127,7 +151,7 @@ class StaffScreen(BaseScreen):
                 else:
                     print("You don't have permission to do that.")
                     input("Press enter to continue.")
-            # View contact info
+            #[V] to view details
             case "v":
                 contact_by_id = None
 
@@ -146,46 +170,62 @@ class StaffScreen(BaseScreen):
                 contact_by_id_table.add_row([contact_by_id.ID,contact_by_id.name,contact_by_id.phone_home,contact_by_id.phone_gsm,contact_by_id.address])
                 print(contact_by_id_table)
                 input("Press enter to continue.")
-            # Edit an employee
+            # [E] to Edit an employee
             case "e":
                 if self.ui.logic_api.is_manager_logged_in():
                     staff_edit = None
-                    staff_attributes = ["destinationID","name","address","phone_home","phone_gsm","email","password","job_title","is_manager"]
+                    staff_attributes = ["destinationID", "name", "address", "phone_home", "phone_gsm", "email", "password", "job_title", "is_manager"]
 
                     while staff_edit is None:
                         edit_with_id = input("Edit employee with the ID: ").upper()
+
+                        if edit_with_id == "B":
+                            return ui_consts.CMD_BACK
+                        
+                            # First display the available destinations
+                        print(destination_table)
 
                         staff_edit = self.ui.logic_api.staff_get_by_ID(edit_with_id)
 
                         if staff_edit is None:
                             print(f"No employee with the ID: '{edit_with_id}' try again (B to return).")
 
-                        if edit_with_id == "B":
-                            return ui_consts.CMD_BACK
-
-                    # First display the available destinations
-                    print(destination_table)
-
-                    # Then get the new info from the user
-                    # if nothing is input, the field will be left unchanged
+                    
+                    print(f"Editing details for employee ID: {edit_with_id}")
+                    
                     for attribute in staff_attributes:
-                        current_value = getattr(staff_edit, attribute)
+                        current_value = getattr(staff_edit, attribute, None)
                         new_value = input(f"New {attribute.capitalize()} (Current: {current_value}): ").strip()
-                        if new_value:
-                            setattr(staff_edit,attribute,new_value)
+                        if not new_value:
+                            continue
+                    
+                        if attribute in ["phone_home", "phone_gsm"]:
+                            while not ((new_value.startswith('+') and new_value[1:].isdigit()) or new_value.isdigit()):
+                                print(f"{attribute.capitalize()} must contain only numbers or start with '+' followed by numbers.")
+                                new_value = input(f"New {attribute.capitalize()} (Current: {current_value}): ").strip()
+                      
+                        elif attribute == "email":
+                            while "@" not in new_value or "." not in new_value:
+                                print("Invalid email address.")
+                                new_value = input(f"New {attribute.capitalize()} (Current: {current_value}): ").strip()
+                        
+                        elif attribute == "is_manager":
+                            new_value = new_value.lower()
+                            while new_value not in ["y", "n"]:
+                                print("Invalid input. Enter 'y' for yes or 'n' for no.")
+                                new_value = input(f"New {attribute.capitalize()} (Current: {current_value}): ").strip().lower()
+                            new_value = True if new_value == "y" else False
+                        
+                        
+                        setattr(staff_edit, attribute, new_value)
 
-                    if staff_edit.is_manager == "y":
-                        staff_edit.is_manager = True
-                    else:
-                        staff_edit.is_manager = False
-
+                    
                     self.ui.logic_api.staff_edit(staff_edit)
-                    # If ID does not exist in the employee list, raise error "No employee found with that ID!"
-                    # If ID does not exist, cancel command
-                    # If job title = "manager" or "boss" set isManager = True, otherwise False)
+                    print(f"Updated details for employee ID: {edit_with_id}")
                 else:
                     print("You don't have permission to do that.")
                     input("Press enter to continue.")
+
             # Search for
             case "s":
                 self.active_search_filter = input("Search for: ") 
