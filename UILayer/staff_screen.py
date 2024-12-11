@@ -135,7 +135,7 @@ class StaffScreen(BaseScreen):
             # Edit an employee
             case "e":
                 staff_edit = None
-                staff_attributes = ["destinationID","name", "ssn","address","phone_home","phone_gsm","email","password","job_title","is_manager"]
+                staff_attributes = ["destinationID","name","address","phone_home","phone_gsm","email","password","job_title","is_manager"]
 
                 while staff_edit is None:
                     edit_with_id = input("Edit employee with the ID: ").upper()

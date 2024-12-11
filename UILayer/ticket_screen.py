@@ -87,14 +87,7 @@ class TicketScreen(BaseScreen):
                 new_status = input("New ticket status: ")
                 new_date = input("New ticket date: ")
                 new_recurring = int(input("Recur every N days (0 = never): "))
-<<<<<<< Updated upstream
-                new_ticket = Ticket(None, new_ticket_facility_ID, None, new_property_id, new_priority, new_ticket, new_description, new_status, None, new_recurring , new_date )
-                self.ui.logic_api.ticket_add(new_ticket)
-
-                # If recur > 0 set recurring = True otherwise False, needs logic for this. 
-=======
                 # If recur > 0 set recurring = True otherwise False
->>>>>>> Stashed changes
 
             # Remove a ticket
             case "r":
