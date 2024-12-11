@@ -85,14 +85,16 @@ class TicketScreen(BaseScreen):
                 pass
             # Ticket details
             case "d":
-                view = input("View the details")
-                print(f"Property: {"MISSING"}, Priority: {new_priority}")
-                print(f"Facility: {"MISSING"}, Status: {new_status}")
-                print(f"Title: {new_ticket}")
-                print(f"Description: {new_description}")
-                print(f"Date: {new_date}")
-                # If a response is available from a manager
-                print(f"Response: {"MISSING"}")
+                view = input("Type in ID of ticket for details: ").upper()
+                for ticket in all_tickets:
+                    if view == ticket.ID:
+                        view_ticket = ticket
+                print(f"Property: {view_ticket.propertyID}, Priority: {view_ticket.priority}")
+                print(f"Facility: {view_ticket.facilityID}, Status: {view_ticket.status}")
+                print(f"Title: {view_ticket.title}")
+                print(f"Description: {view_ticket.description}")
+                print(f"Date: {view_ticket.open_date}")
+                input("Click anything to move")
             # Edit ticket
             case "e":
                 # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"
