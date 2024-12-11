@@ -1,7 +1,6 @@
 from StorageLayer.storage_api import StorageAPI
 
-from Model import Staff
-from Model import Destination
+from Model import Staff, Destination
 
 class StaffManager:
     def __init__(self, storage_api : StorageAPI):

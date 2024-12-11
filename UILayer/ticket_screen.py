@@ -6,8 +6,7 @@ from UILayer.base_screen import BaseScreen
 
 from UILayer import ui_consts
 
-from Model import Ticket
-from Model import Report
+from Model import Ticket, Report
 
 class TicketScreen(BaseScreen):
     def __init__(self, ui) -> None:
