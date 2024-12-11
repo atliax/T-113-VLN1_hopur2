@@ -165,9 +165,6 @@ class ContractorScreen(BaseScreen):
                 contact_by_id_table = PrettyTable()
                 contact_by_id_table.field_names = ["ID","Name","Type","Destination","Contact","rating"]
 
-                if  destinationID is None:
-                    destinationID = "Not assigned"
-
                 try:
                     contact_by_id_table.add_row([contact_by_id.ID,contact_by_id.name,contact_by_id.contractor_type,self.ui.logic_api.destination_get_by_ID(contact_by_id.destinationID).country,contact_by_id.contact,contact_by_id.rating])
                     print(contact_by_id_table)
