@@ -68,24 +68,30 @@ class TicketScreen(BaseScreen):
         # ÞAÐ VANTAR AÐ HAFA OPTION TIL AÐ OPNA LOKAÐA VERKSKÝRSLU
 
         match cmd:
-            # Next page:
-            case "n":
+            
+            case "n":   # Next page:
                 self.current_page += 1
-            # Previous page:
-            case "p":
+            
+            case "p":   # Previous page:
                 self.current_page -= 1
-            # Add a ticket
-            case "a":
+            
+            case "a":   # Add a ticket
                 # Auto ID kerfi ekki implementað
-                print(f"New ticket property ID: {"MISSING"}")
-                print(f"New ticket facility ID: {"MISSING"}")
+                #print(f"New ticket property ID: {}")
+
+                new_ticket_facility_ID = input("facility ID of report: ")
                 new_ticket = input("New ticket title: ")
                 new_description = input("New ticket description: ")
+                new_property_id = input("Property ID of report?")
                 new_priority = input("New ticket priority: ")
                 new_status = input("New ticket status: ")
                 new_date = input("New ticket date: ")
                 new_recurring = int(input("Recur every N days (0 = never): "))
-                # If recur > 0 set recurring = True otherwise False
+                new_ticket = Ticket(None, new_ticket_facility_ID, None, new_property_id, new_priority, new_ticket, new_description, new_status, None, new_recurring , new_date )
+                self.ui.logic_api.ticket_add(new_ticket)
+
+                # If recur > 0 set recurring = True otherwise False, needs logic for this. 
+
             # Remove a ticket
             case "r":
                 remove_ticket = input("Remove ticket with ID: ")
@@ -139,10 +145,11 @@ class TicketScreen(BaseScreen):
                         print("Destination not found, try again or b to return")
 
                 # # if recur > 0 set recurring = True otherwise False
-            # Search for
-            case "s":
+
+            case "s":    # Search for
                 self.active_search_filter = input("Search for: ")
                 # "Main menu > Tickets > Filtered" window and commands are identical to "Main menu > Tickets"
+            
             # Make a ticket report
             case "mr":
                 create_report = input("Make a report for ticket with the ID: ")
