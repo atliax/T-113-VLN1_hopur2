@@ -12,6 +12,7 @@ class StaffScreen(BaseScreen):
     def __init__(self, ui) -> None:
         super().__init__(ui)
         self.current_page = -1
+        self.active_search_filter = ""
 
     def run(self):
         self.clear_screen()
@@ -26,12 +27,15 @@ class StaffScreen(BaseScreen):
         print("|")
         print(ui_consts.SEPERATOR)
 
-        all_staff = self.ui.logic_api.staff_get_all()
+        if self.active_search_filter:
+            staff_list = self.ui.logic_api.staff_search(self.active_search_filter)
+        else:
+            staff_list = self.ui.logic_api.staff_get_all()
 
-        all_staff_table = PrettyTable()
-        all_staff_table.field_names = ["ID", "Name","Job title","Destination","SSN"]
+        staff_table = PrettyTable()
+        staff_table.field_names = ["ID", "Name","Job title","Destination","SSN"]
 
-        for employee in all_staff:
+        for employee in staff_list:
             employee_destination = self.ui.logic_api.destination_get_by_ID(employee.destinationID.upper())
 
             if employee_destination is not None:
@@ -39,11 +43,11 @@ class StaffScreen(BaseScreen):
             else:
                 employee_destination_country = "Not assigned"
 
-            all_staff_table.add_row([employee.ID, employee.name, employee.job_title, employee_destination_country, employee.ssn])
+            staff_table.add_row([employee.ID, employee.name, employee.job_title, employee_destination_country, employee.ssn])
 
-        all_staff_table._min_table_width = ui_consts.TABLE_WIDTH
+        staff_table._min_table_width = ui_consts.TABLE_WIDTH
 
-        total_pages = math.ceil(len(all_staff) / 10)
+        total_pages = math.ceil(len(staff_list) / 10)
 
         if self.current_page < 0:
             self.current_page = 0
@@ -54,8 +58,11 @@ class StaffScreen(BaseScreen):
         print(f"|  Staff list (Page {self.current_page+1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page")
 
+        if self.active_search_filter:
+            print(f"|   Active search filter: '{self.active_search_filter}'")
+
         if total_pages != 0:
-            print(all_staff_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
+            print(staff_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
 
         print("")
         cmd = input("Command: ").lower()
@@ -161,25 +168,7 @@ class StaffScreen(BaseScreen):
                 # If job title = "manager" or "boss" set isManager = True, otherwise False)
             # Search for
             case "s":
-                search = input("Search for: ") 
-
-                search_staff = self.ui.logic_api.staff_search(search)
-
-                search_staff_table = PrettyTable()
-                search_staff_table.field_names = ["ID","Name","Job title","Destination","SSN"]
-
-                for unit in search_staff:
-                    unit_destination = self.ui.logic_api.destination_get_by_ID(unit.destinationID.upper())
-
-                    if unit_destination is not None:
-                        unit_destination.country = unit_destination.country
-                    else:
-                        unit_destination.country = "Not assigned"
-
-                    search_staff_table.add_row([unit.ID,unit.name,unit.job_title,unit_destination.country,unit.ssn])
-
-                print(search_staff_table) 
-                input("Press enter to continue.")
+                self.active_search_filter = input("Search for: ") 
             # View contractors
             case "c":
                 return ui_consts.CONTRACTOR_SCREEN

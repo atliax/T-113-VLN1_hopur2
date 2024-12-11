@@ -12,6 +12,7 @@ class FacilityScreen(BaseScreen):
     def __init__(self, ui) -> None:
         super().__init__(ui)
         self.current_page = -1
+        self.active_search_filter = ""
 
     def run(self):
         self.clear_screen()
@@ -28,17 +29,20 @@ class FacilityScreen(BaseScreen):
 
         propertyID = self.ui.logic_api.facility_get_selected_property()
 
-        all_facilities = self.ui.logic_api.facility_get_by_propertyID(propertyID)
+        if self.active_search_filter:
+            facility_list = self.ui.logic_api.facility_search(self.active_search_filter)
+        else:
+            facility_list = self.ui.logic_api.facility_get_by_propertyID(propertyID)
 
         all_facilities_table = PrettyTable()
         all_facilities_table.field_names = ["ID","Name","Description"]
 
-        for facility in all_facilities:
+        for facility in facility_list:
             all_facilities_table.add_row([facility.ID,facility.name,facility.description])
 
         all_facilities_table._min_table_width = ui_consts.TABLE_WIDTH
 
-        total_pages = math.ceil(len(all_facilities) / 10)
+        total_pages = math.ceil(len(facility_list) / 10)
 
         if self.current_page < 0:
             self.current_page = 0
@@ -48,6 +52,9 @@ class FacilityScreen(BaseScreen):
 
         print(f"|  Facility list (Page {self.current_page+1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page")
+
+        if self.active_search_filter:
+            print(f"|   Active search filter: '{self.active_search_filter}'")
 
         if total_pages != 0:
             print(all_facilities_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
@@ -81,22 +88,7 @@ class FacilityScreen(BaseScreen):
                     print(f"No facility found with the ID: '{remove_id}'.")
             # Search for
             case "s":
-                search = input("Search for: ").strip()
-
-                filtered_facilities = self.ui.logic_api.facility_search(search)
-
-                if not filtered_facilities:
-                    print(f"No facilities found matching '{search}'.")
-                else:
-                    search_results_table = PrettyTable()
-                    search_results_table.field_names = ["ID", "Name", "Description"]
-
-                    for facility in filtered_facilities:
-                        search_results_table.add_row([facility.ID, facility.name, facility.description])
-
-                    print("\nSearch Results:")
-                    print(search_results_table)
-                    input("")
+                self.active_search_filter = input("Search for: ")
             # View details
             case "v":
                 view_facility = input("View the details of facility with the ID (B to cancel): ").strip().upper()
