@@ -35,6 +35,7 @@ class ContractorScreen(BaseScreen):
         except Exception as e:
             logging.error(f"Error getting contractors: {e}")
             print("Could not get contractor list. Try again.")
+            input("Press enter to continue: ")
             return self
         
         contractor_table = PrettyTable()
@@ -52,6 +53,7 @@ class ContractorScreen(BaseScreen):
         except Exception as e:
             logging.error(f"Error adding contractors to table: {e}")
             print("Error displaying contractor details. Try again.")
+            input("Press enter to continue: ")
 
         contractor_table._min_table_width = ui_consts.TABLE_WIDTH
 
@@ -80,6 +82,7 @@ class ContractorScreen(BaseScreen):
         except Exception as e:
             logging.error(f"Error getting destinations: {e}")
             print("Could not get destinations. Try again.")
+            input("Press enter to continue: ")
             return self
         
         all_destinations_table = PrettyTable()
@@ -110,6 +113,7 @@ class ContractorScreen(BaseScreen):
                         add_contact = input("New contractor contact (optional): ")
                     except ValueError:
                         print("Invalid input! Rating must be a number.")
+                        input("Press enter to continue: ")
                         return self
                     add_rating = float(input("Enter rating: "))
                     add_phone = input("New contractor phone: ")
@@ -122,6 +126,7 @@ class ContractorScreen(BaseScreen):
                 except Exception as e:
                     logging.error(f"Error adding contractor: {e}")
                     print("Could not add contractor. Please try again.")
+                    input("Press enter to continue: ")
 
 
          
@@ -134,6 +139,8 @@ class ContractorScreen(BaseScreen):
                 except Exception as e:
                     logging.error(f"Error removing contractor: {e}")
                     print("Could not remove contractor. Try again.")
+                    input("Press enter to continue: ")
+
             # View contact info
             case "v":
                 contact_by_id = None
@@ -148,12 +155,14 @@ class ContractorScreen(BaseScreen):
                     except Exception as e:
                         logging.error(f"Error getting contact info: {e}")
                         print("Could not get contact information. Try again.")
+                        input("Press enter to continue: ")
 
                     if contact_by_id is None:
                         print(f"No contractor with the ID: '{view_contact}'")
 
                 contact_by_id_table = PrettyTable()
                 contact_by_id_table.field_names = ["ID","Name","Type","Destination","Contact","rating"]
+
                 try:
                     contact_by_id_table.add_row([contact_by_id.ID,contact_by_id.name,contact_by_id.contractor_type,self.ui.logic_api.destination_get_by_ID(contact_by_id.destinationID).country,contact_by_id.contact,contact_by_id.rating])
                     print(contact_by_id_table)
@@ -161,6 +170,8 @@ class ContractorScreen(BaseScreen):
                 except Exception as e:
                     logging.error(f"Error displaying contact info: {e}")
                     print("Could not display contact information. Try again.")
+                    input("Press enter to continue: ")
+                    
             # Edit contractor
             case "e":
                 contractor_edit = None
@@ -196,6 +207,7 @@ class ContractorScreen(BaseScreen):
                 except Exception as e:
                     logging.error(f"Error editing contractor: {e}")
                     print("Could not edit contractor. Try again.")
+                    input("Press enter to continue: ")
                 # If ID does not exist in the employee list, raise error "No employee found with that ID!"
                 # If ID does not exist, cancel command
                 # If job title = "manager" or "boss" set isManager = True, otherwise False)
