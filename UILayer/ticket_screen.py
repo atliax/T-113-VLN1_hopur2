@@ -99,14 +99,41 @@ class TicketScreen(BaseScreen):
             case "e":
                 # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"
                 # If ID does not exist, cancel command
+                
+                for ticket in all_tickets:
+                    if ticket == ticket.ID:
+                        edit_ticket = ticket
+                        
                 print("If you do not wish to change a specific field, you can leave the input empty")
-                change_title = input("Change ticket title to: ")
-                change_description = input("Change ticket description to: ")
-                change_priority = input("Change ticket priority to: ")
-                change_status = input("Change ticket status: ")
-                change_date = input("Change ticket date to: ")
-                change_recurring = int(input("Change if ticket should recur every N days (0 = never): "))
-                # if recur > 0 set recurring = True otherwise False
+                edit_ticket = None
+                ticket_attributes = ["ID", "facilityID", "reportID", "propertyID", "priority", "title", "description", "status", "recurring", "recurring_days", "open_date"]
+
+                while edit_ticket is None:
+                    pick_ticket = input("Type in ID of ticket to edit: ").upper()
+                    if edit_ticket == "B":
+                        return self
+                    
+                    edit_ticket = self.ui.logic_api._get_by_ID(pick_ticket)
+
+                    if edit_ticket is not None:
+                        print ("Leave empty if you wish to not change ")
+                        for attribute in ticket_attributes:
+                            current_value = getattr(edit_ticket, attribute)
+                            new_value = input(f"New {attribute} (current: {current_value}): ").strip()
+                            if new_value:
+                                setattr(edit_ticket, attribute, new_value)
+                        self.ui.logic_api._edit(edit_ticket)
+
+                    else:
+                        print("Destination not found, try again or b to return")
+
+                # change_title = input("Change ticket title to: ")
+                # change_description = input("Change ticket description to: ")
+                # change_priority = input("Change ticket priority to: ")
+                # change_status = input("Change ticket status: ")
+                # change_date = input("Change ticket date to: ")
+                # change_recurring = int(input("Change if ticket should recur every N days (0 = never): "))
+                # # if recur > 0 set recurring = True otherwise False
             # Search for
             case "s":
                 print("You can search for a keyword and/or timeline, you can leave an input empty")
