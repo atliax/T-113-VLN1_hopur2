@@ -112,18 +112,6 @@ class LogicAPI:
 #==========================================================================
 #--Staff-------------------------------------------------------------------
 
-    def authenticate_login(self, email : str, password : str) -> bool:
-        """Attempts to log in using a specified email/password combination"""
-        return self.staff_manager.authenticate_login(email, password)
-
-    def logout(self) -> None:
-        """Invalidates the login status of the currently logged in user"""
-        self.staff_manager.logout()
-
-    def get_logged_in_staff(self) -> Staff:
-        """Returns the currently logged in staff member"""
-        return self.staff_manager.get_logged_in_staff()
-
     def staff_get_all(self) -> list[Staff]:
         return self.staff_manager.staff_get_all()
 
@@ -141,6 +129,24 @@ class LogicAPI:
 
     def staff_search(self, search_string : str) -> list[Staff]:
         return self.staff_manager.staff_search(search_string)
+
+#==========================================================================
+#--Login/Session-----------------------------------------------------------
+
+    def authenticate_login(self, email : str, password : str) -> bool:
+        """Attempts to log in using a specified email/password combination"""
+        return self.staff_manager.authenticate_login(email, password)
+
+    def logout(self) -> None:
+        """Invalidates the login status of the currently logged in user"""
+        self.staff_manager.logout()
+
+    def get_logged_in_staff(self) -> Staff:
+        """Returns the currently logged in staff member"""
+        return self.staff_manager.get_logged_in_staff()
+
+    def is_manager_logged_in(self) -> bool:
+        return self.staff_manager.is_manager_logged_in()
 
 #==========================================================================
 #--Tickets-----------------------------------------------------------------

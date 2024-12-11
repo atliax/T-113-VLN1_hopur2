@@ -21,9 +21,14 @@ class PropertyScreen(BaseScreen):
 
         print(ui_consts.SEPERATOR)
         print("|")
-        print("|	[A] Add a property		[E] Edit a property			[B] Go back")
-        print("|	[R] Remove a property		[S] Search for")
-        print("|	[V] View facilities")
+
+        if self.ui.logic_api.is_manager_logged_in():
+            print("|	[A] Add a property		[E] Edit a property			[B] Go back")
+            print("|	[R] Remove a property		[S] Search for")
+            print("|	[V] View facilities")
+        else:
+            print("|	[V] View facilities		[S] Search for				[B] Go back")
+
         print("|")
         print(ui_consts.SEPERATOR)
 
@@ -81,26 +86,34 @@ class PropertyScreen(BaseScreen):
                 self.current_page -= 1
             # [A] Add a property
             case "a":
-                # First present the available destinations
-                print(destination_table)
+                if self.ui.logic_api.is_manager_logged_in():
+                    # First present the available destinations
+                    print(destination_table)
 
-                # Get new property details from user
-                p_new_name = input("New property name: ")
-                p_new_destination = input("New property destionation ID: ")
-                p_new_address = input("New property address: ")
-                p_new_square_mtrs = (input("New property square meters: "))
-                p_new_roomnum = (input("New property number of rooms: "))
-                p_new_type = input("New property type: ")
+                    # Get new property details from user
+                    p_new_name = input("New property name: ")
+                    p_new_destination = input("New property destionation ID: ")
+                    p_new_address = input("New property address: ")
+                    p_new_square_mtrs = (input("New property square meters: "))
+                    p_new_roomnum = (input("New property number of rooms: "))
+                    p_new_type = input("New property type: ")
 
-                # construct property
-                new_property = Property(None, p_new_destination, p_new_name, p_new_address, p_new_square_mtrs, p_new_roomnum, p_new_type)
+                    # construct property
+                    new_property = Property(None, p_new_destination, p_new_name, p_new_address, p_new_square_mtrs, p_new_roomnum, p_new_type)
 
-                # Send property to logic api
-                self.ui.logic_api.property_add(new_property)
+                    # Send property to logic api
+                    self.ui.logic_api.property_add(new_property)
+                else:
+                    print("You don't have permission to do that.")
+                    input("Press enter to continue.")
             # [R] Remove a property
             case "r":
-                remove_id = input("Remove a property that has the ID: ").upper()
-                self.ui.logic_api.property_remove(remove_id)
+                if self.ui.logic_api.is_manager_logged_in():
+                    remove_id = input("Remove a property that has the ID: ").upper()
+                    self.ui.logic_api.property_remove(remove_id)
+                else:
+                    print("You don't have permission to do that.")
+                    input("Press enter to continue.")
             # [V] View facilities
             case "v":
                 # If ID does not exist in property list, raise error "No property found with that ID!"
@@ -115,32 +128,36 @@ class PropertyScreen(BaseScreen):
                     input("Press enter to continue.")
             # [E] Edit a property 
             case "e":
-                property_edit = None
-                property_attributes = ["destinationID","name","address","square_meters","rooms", "type"]
+                if self.ui.logic_api.is_manager_logged_in():
+                    property_edit = None
+                    property_attributes = ["destinationID","name","address","square_meters","rooms", "type"]
 
-                while property_edit is None:
-                    edit_with_id = input("Edit property with the ID: ").upper()
+                    while property_edit is None:
+                        edit_with_id = input("Edit property with the ID: ").upper()
 
-                    property_edit = self.ui.logic_api.property_get_by_ID(edit_with_id)
+                        property_edit = self.ui.logic_api.property_get_by_ID(edit_with_id)
 
-                    if property_edit is None:
-                        print(f"No property with the ID: '{edit_with_id}' Try again (B to cancel).")
+                        if property_edit is None:
+                            print(f"No property with the ID: '{edit_with_id}' Try again (B to cancel).")
 
-                    if edit_with_id == "B":
-                        return ui_consts.CMD_BACK
+                        if edit_with_id == "B":
+                            return ui_consts.CMD_BACK
 
-                # First present the available destinations
-                print(destination_table)
+                    # First present the available destinations
+                    print(destination_table)
 
-                # Then get the new data from the user
-                # if nothing is input, the field will be left unchanged
-                for attribute in property_attributes:
-                    current_value = getattr(property_edit, attribute)
-                    new_value = input(f"New {attribute.capitalize()} (Current {current_value}): ").strip()
-                    if new_value:
-                        setattr(property_edit,attribute,new_value)
+                    # Then get the new data from the user
+                    # if nothing is input, the field will be left unchanged
+                    for attribute in property_attributes:
+                        current_value = getattr(property_edit, attribute)
+                        new_value = input(f"New {attribute.capitalize()} (Current {current_value}): ").strip()
+                        if new_value:
+                            setattr(property_edit,attribute,new_value)
 
-                self.ui.logic_api.property_edit(property_edit)
+                    self.ui.logic_api.property_edit(property_edit)
+                else:
+                    print("You don't have permission to do that.")
+                    input("Press enter to continue.")
             # [S] Search for
             case "s":
                 self.active_search_filter = input("Search for: ") 

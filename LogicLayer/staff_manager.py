@@ -1,6 +1,5 @@
 from StorageLayer.storage_api import StorageAPI
 
-import json
 from Model import Staff
 from Model import Destination
 
@@ -11,6 +10,14 @@ class StaffManager:
         self.tmp_destination : Destination = None #tmp, remove later
 
     def authenticate_login(self, email : str, password : str) -> bool:
+
+        all_staff = self.storage_api.staff_get_all()
+        for employee in all_staff:
+            if employee.email == email:
+                if employee.password == password:
+                    self.logged_in_staff = employee
+                    return True
+
         if email.upper() == 'BOSS' and password == 'Man':
             self.logged_in_staff = Staff("S0", "D0", "Manager", "090488-2959", "Grundargata 12", "555-5555", "867-5309", "siggi@nanair.is", "flubber", "Yfirmaður rekstrarsviðs", True)
             self.tmp_destination = Destination("D0", "Ísland", "Keflavík", "555-5556", "24/7", self.logged_in_staff.ID)
@@ -30,6 +37,9 @@ class StaffManager:
 
     def get_logged_in_staff(self) -> Staff:
         return self.logged_in_staff
+
+    def is_manager_logged_in(self) -> bool:
+        return self.logged_in_staff.is_manager
 
     def staff_get_all(self) -> list[Staff]:
         return self.storage_api.staff_get_all()
