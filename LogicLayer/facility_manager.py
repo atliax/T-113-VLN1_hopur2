@@ -23,9 +23,6 @@ class FacilityManager:
         self.storage_api.facility_add(new_facility)
 
     def facility_remove(self, facilityID : str) -> None:
-        # TODO validation
-
-        # ef í lagi:
         self.storage_api.facility_remove(facilityID)
 
     def facility_get_all(self) -> list[Facility]:
@@ -46,8 +43,22 @@ class FacilityManager:
                     break
 
         return filteded_facilities
+    
+#var að prufa ef attributes eru "none" en er buið að laga það þannig það geti aldrei verið
+#def facility_search(self, search_string: str):
+ #   all_facilities: list[Facility] = self.facility_get_by_propertyID(self.selected_property)
+#
+#   filtered_facilities = []
+#   for facility in all_facilities:
+#       for attribute_value in facility.__dict__.values():
+#           if attribute_value is not None and search_string.lower() in str(attribute_value).lower():
+#               filtered_facilities.append(facility)
+#               break
+
+#    return filtered_facilities
 
     # [E] to edit a facility
+
     def facility_edit(self, edited_facility : Facility):
         self.storage_api.facility_edit(edited_facility)
 

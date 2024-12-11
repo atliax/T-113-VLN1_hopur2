@@ -55,7 +55,7 @@ class LogicAPI:
         self.destination_manager.destination_edit(edited_destination)
 
     def destination_get_by_ID(self, destinationID : str) -> Destination:
-        """Returns a destination with a matching destinationID if it exists"""
+     #Returns a destination with a matching destinationID if it exists
         return self.destination_manager.destination_get_by_ID(destinationID)
 
 #==========================================================================

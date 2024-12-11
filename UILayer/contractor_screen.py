@@ -175,6 +175,7 @@ class ContractorScreen(BaseScreen):
                 search_contractor_table.add_row([unit.ID,unit.name,unit.contractor_type,unit_destination.country,unit.contact,unit.rating])
             print(search_contractor_table)
             input()
+            #TODO vantar option að go back, ert fastur i search þangað til þú slærð inn valid contractor search
 
 
         if cmd == "b":
