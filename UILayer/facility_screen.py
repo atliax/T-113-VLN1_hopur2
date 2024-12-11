@@ -86,6 +86,7 @@ class FacilityScreen(BaseScreen):
                     self.ui.logic_api.facility_remove(remove_id)
                 else:
                     print(f"No facility found with the ID: '{remove_id}'.")
+                    input("Press enter to continue.")
             # Search for
             case "s":
                 self.active_search_filter = input("Search for: ")
