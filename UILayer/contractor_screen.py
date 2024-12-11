@@ -109,13 +109,15 @@ class ContractorScreen(BaseScreen):
                     add_contractor = input("New contractor name: ")
                     add_type = input("New contractor type: ")
                     #add_destinationID = input("New destinationID: ")
+
                     try:
-                        add_contact = input("New contractor contact (optional): ")
+                        add_rating = float(input("Enter rating: "))
                     except ValueError:
                         print("Invalid input! Rating must be a number.")
                         input("Press enter to continue: ")
                         return self
-                    add_rating = float(input("Enter rating: "))
+                    add_contact = input("New contractor contact (optional): ")
+                    
                     add_phone = input("New contractor phone: ")
                     add_address = input("New contractor address: ")
                     add_opening_hours = (input("Add opening hours for contractor: "))
@@ -162,6 +164,9 @@ class ContractorScreen(BaseScreen):
 
                 contact_by_id_table = PrettyTable()
                 contact_by_id_table.field_names = ["ID","Name","Type","Destination","Contact","rating"]
+
+                if  destinationID is None:
+                    destinationID = "Not assigned"
 
                 try:
                     contact_by_id_table.add_row([contact_by_id.ID,contact_by_id.name,contact_by_id.contractor_type,self.ui.logic_api.destination_get_by_ID(contact_by_id.destinationID).country,contact_by_id.contact,contact_by_id.rating])
