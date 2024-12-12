@@ -29,6 +29,11 @@ class TicketScreen(BaseScreen):
         print("|")
         print(ui_consts.SEPERATOR)
 
+        # Geyma nöfn til að þurfa ekki að fletta upp í hvert skipti
+        facility_names = {}
+        property_names = {}
+        staff_names = {}
+
         all_tickets = self.ui.logic_api.ticket_get_all() # fyrir edit og view og svona, mögulega ekki sniðugt
 
         if self.active_search_filter:
@@ -45,7 +50,14 @@ class TicketScreen(BaseScreen):
                 facility_name = "None"
             else:
                 ticket_facility = self.ui.logic_api.facility_get_by_ID(ticket.facilityID)
-                facility_name = ticket_facility.name 
+                facility_name = ticket_facility.name
+
+            staff_name = "Siggi Ísmaður"
+
+            facility_names[ticket.facilityID] = facility_name
+            property_names[ticket.propertyID] = ticket_property.name
+            staff_names[ticket.staffID] = staff_name
+
             all_tickets_table.add_row([ticket.ID, ticket_property.name, facility_name, fill(ticket.title, width=40), ticket.priority, ticket.status])
 
         all_tickets_table._min_table_width = ui_consts.TABLE_WIDTH
@@ -92,7 +104,7 @@ class TicketScreen(BaseScreen):
                 new_date = ""
                 new_recurring = -1
                 new_priority = ""
-                priority_list = ["High", "Medium", "Low"]
+                priority_list = ["high", "medium", "low"]
 
                 # choose property with verification  
                 new_property_id = input("Property ID of ticket: ").upper()  
@@ -127,12 +139,12 @@ class TicketScreen(BaseScreen):
                         verified = self.ui.logic_api.facility_validate(new_ticket_facility_id, tmp)
 
                 while not new_ticket_title: 
-                    new_ticket_title = input("New ticket title: ")
+                    new_ticket_title = input("New ticket title: ").strip()
 
                 new_description = input("New ticket description: ")
                 
                 while new_priority not in priority_list:
-                    new_priority = input("New ticket priority(high, medium, low): ").lower()
+                    new_priority = input("New ticket priority(high, medium, low): ").lower().capitalize()
 
                 date_validated = False
                 while not date_validated:
@@ -178,7 +190,7 @@ class TicketScreen(BaseScreen):
                 ticket_table = PrettyTable()
                 #total_cost = ticket_by_id.cost + ticket_by_id.contractor_fee
                 ticket_table.field_names = ["ID", ticket_by_id.ID]
-                ticket_table.add_row(["Facility", ticket_by_id.facilityID], divider=True)
+                ticket_table.add_row(["Facility", facility_names[ticket_by_id.facilityID]], divider=True)
                 ticket_table.add_row(["Property", ticket_by_id.propertyID], divider=True)
                 ticket_table.add_row(["Priority", ticket_by_id.priority], divider=True)
                 ticket_table.add_row(["Title", ticket_by_id.title], divider=True)
