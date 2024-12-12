@@ -202,7 +202,7 @@ facilities.append(Facility('F110','P27','Hótel Akúla Kjarnakljúfur',''))
 
 facilities.append(Facility('F111','P1','iGloo-Ville móttaka',''))
 
-tickets.append(Ticket("T1","F1","P2","Pronto!","Generic ticket title", "description kemur hér", True, "New", False, 0, "09/12/2024", "S1", "report kemur hér", 5000, "C1", "Stóð sig vel, allar óléttar, enginn vökvi fór til spillis.", 9.8, 1500))
+tickets.append(Ticket("T1","F1","P2","Pronto!","Generic ticket title", "description kemur hér", True, "New", False, 0, "09/12/2024", "", "S1", "report kemur hér", 5000, "C1", "Stóð sig vel, allar óléttar, enginn vökvi fór til spillis.", 9.8, 1500))
 
 # -------------------------- write to the actual files -------------------------
 

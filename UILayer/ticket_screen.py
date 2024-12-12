@@ -1,6 +1,7 @@
 import math
 
 from prettytable import PrettyTable
+from textwrap import fill
 
 from UILayer.base_screen import BaseScreen
 
@@ -150,19 +151,43 @@ class TicketScreen(BaseScreen):
                         print(f"No ticket with the ID: '{view_ticket}', try again (B to return).")
                     if view_ticket == "B":
                         return ui_consts.CMD_BACK
-                    
-                ticket_by_id_table = PrettyTable()
-                ticket_by_id_table.field_names = ["ID","Name","Priority","Status","Property","Facility","Description","Open Date","Employee"]
-                ticket_by_id_table.add_row([ticket_by_id.ID,ticket_by_id.title,ticket_by_id.priority,ticket_by_id.status,ticket_by_id.propertyID,ticket_by_id.facilityID,ticket_by_id.description,ticket_by_id.open_date,ticket_by_id.staffID])
-                print(ticket_by_id_table)
-                print()
+
+                    ticket_table = PrettyTable()
+
+                    ticket_table.field_names = ["ID", ticket_by_id.ID]
+                    ticket_table.add_row(["Facility", ticket_by_id.facilityID], divider=True)
+                    ticket_table.add_row(["Property", ticket_by_id.propertyID], divider=True)
+                    ticket_table.add_row(["Priority", ticket_by_id.priority], divider=True)
+                    ticket_table.add_row(["Title", ticket_by_id.title], divider=True)
+                    ticket_table.add_row(["Description", fill(ticket_by_id.description, width=50)], divider=True)
+                    ticket_table.add_row(["Open?", ticket_by_id.open], divider=True)
+                    ticket_table.add_row(["Status", ticket_by_id.status], divider=True)
+                    ticket_table.add_row(["Recurring?", ticket_by_id.recurring], divider=True)
+                    ticket_table.add_row(["Recurring days", ticket_by_id.recurring_days], divider=True)
+                    ticket_table.add_row(["Open date", ticket_by_id.open_date], divider=True)
+                    ticket_table.add_row(["Staff", ticket_by_id.staffID], divider=True)
+                    ticket_table.add_row(["Report", ticket_by_id.report], divider=True)
+                    ticket_table.add_row(["Cost", ticket_by_id.cost], divider=True)
+                    ticket_table.add_row(["Contractor", ticket_by_id.contractorID], divider=True)
+                    ticket_table.add_row(["Contr. review", ticket_by_id.contractor_review], divider=True)
+                    ticket_table.add_row(["Contr. rating", ticket_by_id.contractor_rating], divider=True)
+                    ticket_table.add_row(["Contractor fee", ticket_by_id.contractor_fee], divider=True)
+
+                    print(ticket_table)
+                    input("Press enter to continue.")
+
+                #ticket_by_id_table = PrettyTable()
+                #ticket_by_id_table.field_names = ["ID","Name","Priority","Status","Property","Facility","Description","Open Date","Employee"]
+                #ticket_by_id_table.add_row([ticket_by_id.ID,ticket_by_id.title,ticket_by_id.priority,ticket_by_id.status,ticket_by_id.propertyID,ticket_by_id.facilityID,ticket_by_id.description,ticket_by_id.open_date,ticket_by_id.staffID])
+                #print(ticket_by_id_table)
+                #print()
                 
-                total_cost = ticket_by_id.cost + ticket_by_id.contractor_fee
-                ticket_by_id_table_2 = PrettyTable()
-                ticket_by_id_table_2.field_names = ["Report","Cost","Contractor","Contractor Review", "Contractor Rating", "Contractor Fee","Total Cost"]
-                ticket_by_id_table_2.add_row([ticket_by_id.report,ticket_by_id.cost,ticket_by_id.contractorID,ticket_by_id.contractor_review,ticket_by_id.contractor_rating,ticket_by_id.contractor_fee,total_cost])
-                print(ticket_by_id_table_2)
-                input()
+                #total_cost = ticket_by_id.cost + ticket_by_id.contractor_fee
+                #ticket_by_id_table_2 = PrettyTable()
+                #ticket_by_id_table_2.field_names = ["Report","Cost","Contractor","Contractor Review", "Contractor Rating", "Contractor Fee","Total Cost"]
+                #ticket_by_id_table_2.add_row([ticket_by_id.report,ticket_by_id.cost,ticket_by_id.contractorID,ticket_by_id.contractor_review,ticket_by_id.contractor_rating,ticket_by_id.contractor_fee,total_cost])
+                #print(ticket_by_id_table_2)
+                #input()
 
             case "e":    # Edit ticket
                 # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"
