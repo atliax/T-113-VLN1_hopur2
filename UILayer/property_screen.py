@@ -159,19 +159,21 @@ class PropertyScreen(BaseScreen):
 
                         if property_edit is None:
                             print(f"No property with the ID: '{edit_with_id}' Try again (B to cancel).")
+                        
 
                         if edit_with_id == "B":
                             return ui_consts.CMD_BACK
 
                     # First present the available destinations
                     print(destination_table)
+                    print("If nothing is input, the field will be unchanged")
 
                     # Then get the new data from the user
                     # if nothing is input, the field will be left unchanged
                     for attribute in property_attributes:
                         current_value = getattr(property_edit, attribute)
-                        new_value = input(f"New {attribute.capitalize()} Current {current_value}: ").strip()
-                        print("If nothing is input, field will be unchanged")
+                        new_value = input(f"New {attribute.capitalize()}( Current {current_value}): ").strip()
+                        
                         if new_value:
                             setattr(property_edit,attribute,new_value)
 

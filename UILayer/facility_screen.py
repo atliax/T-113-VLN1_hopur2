@@ -132,7 +132,7 @@ class FacilityScreen(BaseScreen):
                     if f_edit_facility == "B":
                         return ui_consts.CMD_BACK
 
-                    facility_edit = self.ui.logic_api.facility_get_by_ID(f_edit_facility)
+                    f_edit_facility = self.ui.logic_api.facility_get_by_ID(f_edit_facility)
 
                     if facility_edit is None:
                         print(f"No facility with the ID: '{f_edit_facility}'.")
