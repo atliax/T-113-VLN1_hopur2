@@ -29,17 +29,32 @@ class DestinationScreen(BaseScreen):
         print("|")
         print(ui_consts.SEPERATOR)
 
-        all_destinations = self.ui.logic_api.destination_get_all()
+        try:
+            all_destinations = self.ui.logic_api.destination_get_all()
+        except Exception as e:
+            print(f"Error loading destinations:")
+            print(f"{type(e).__name__}: {e}")
+            input("Press enter to go back.")
+            return ui_consts.CMD_BACK
 
         destination_table = PrettyTable()
         destination_table.field_names = ["ID", "Destination","Airport", "Opening hours", "Phone", "Manager"]
 
         for destination in all_destinations:
-            destinanation_manager_id = self.ui.logic_api.staff_get_by_ID(destination.managerID)
-            if destinanation_manager_id:
-                destination_table.add_row([destination.ID, destination.country, destination.airport, destination.opening_hours, destination.phone, destinanation_manager_id.name])
+            try:
+                destinanation_manager = self.ui.logic_api.staff_get_by_ID(destination.managerID)
+            except Exception as e:
+                print(f"Error loading info for manager '{destination.managerID}' in destination '{destination.ID}':")
+                print(f"{type(e).__name__}: {e}")
+                input("Press enter to go back.")
+                return ui_consts.CMD_BACK
+
+            if destinanation_manager is None:
+                manager_name = "Needs manager"
             else:
-                destination_table.add_row([destination.ID, destination.country, destination.airport, destination.opening_hours, destination.phone, "Needs manager"])
+                manager_name = destinanation_manager.name
+
+            destination_table.add_row([destination.ID, destination.country, destination.airport, destination.opening_hours, destination.phone, manager_name])
 
         destination_table._min_table_width = ui_consts.TABLE_WIDTH
 
@@ -76,7 +91,14 @@ class DestinationScreen(BaseScreen):
                         new_value = input(f"New {attribute}: ")
                         new_destination.append(new_value)
                     tmp = Destination(None,new_destination[0],new_destination[1],new_destination[2],new_destination[3],new_destination[4])
-                    self.ui.logic_api.destination_add(tmp)
+
+                    try:
+                        self.ui.logic_api.destination_add(tmp)
+                    except Exception as e:
+                        print(f"Error adding new destination:")
+                        print(f"{type(e).__name__}: {e}")
+                        input("Press enter to continue.")
+                        return self
                 else:
                     print("You don't have permission to do that.")
                     input("Press enter to continue.")
@@ -91,18 +113,31 @@ class DestinationScreen(BaseScreen):
                         if pick_destination == "B":
                             return self
 
-                        destination_edit = self.ui.logic_api.destination_get_by_ID(pick_destination)
+                        try:
+                            destination_edit = self.ui.logic_api.destination_get_by_ID(pick_destination)
+                        except Exception as e:
+                            print(f"Error adding loading destination '{pick_destination}':")
+                            print(f"{type(e).__name__}: {e}")
+                            input("Press enter to continue.")
+                            return self
 
-                        if destination_edit is not None:
-                            print ("Leave empty if you wish to not change ")
-                            for attribute in destination_attributes:
-                                current_value = getattr(destination_edit, attribute)
-                                new_value = input(f"New {attribute} (current: {current_value}): ").strip()
-                                if new_value:
-                                    setattr(destination_edit, attribute, new_value)
-                            self.ui.logic_api.destination_edit(destination_edit)
-                        else:
+                        if destination_edit is None:
                             print("Destination not found, try again (B to return)")
+                            continue
+
+                        print ("Leave empty if you wish to not change ")
+                        for attribute in destination_attributes:
+                            current_value = getattr(destination_edit, attribute)
+                            new_value = input(f"New {attribute} (current: {current_value}): ").strip()
+                            if new_value:
+                                setattr(destination_edit, attribute, new_value)
+                        try:
+                            self.ui.logic_api.destination_edit(destination_edit)
+                        except Exception as e:
+                            print(f"Error editing destination '{pick_destination}':")
+                            print(f"{type(e).__name__}: {e}")
+                            input("Press enter to continue.")
+                            return self
                 else:
                     print("You don't have permission to do that.")
                     input("Press enter to continue.")
