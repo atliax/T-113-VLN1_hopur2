@@ -25,4 +25,3 @@
 {"ID": "P25", "destinationID": "D2", "name": "DirtGlooVille 10", "address": "N\u00fdggivegur 1, 100, T\u00f3rshavn", "square_meters": "15", "rooms": "1", "type": "Moldarh\u00fas"}
 {"ID": "P26", "destinationID": "D3", "name": "Vei BnB", "address": "Vei 217, Longyearbyen, Svalbar\u00f0i", "square_meters": 150, "rooms": 4, "type": "Einb\u00fdlish\u00fas"}
 {"ID": "P27", "destinationID": "D3", "name": "H\u00f3tel Ak\u00fala", "address": "Longyearbyen Harbor 1, Svalbar\u00f0i", "square_meters": 5000, "rooms": 80, "type": "Kafb\u00e1tur"}
-{"ID": "P28", "destinationID": "D4", "name": "Retard", "address": "Retardstreet", "square_meters": "Retard M", "rooms": "Retard rooms", "type": "Retard rooms"}
