@@ -134,19 +134,19 @@ class FacilityScreen(BaseScreen):
 
                     f_edit_facility = self.ui.logic_api.facility_get_by_ID(f_edit_facility)
 
-                    if facility_edit is None:
+                    if f_edit_facility is None:
                         print(f"No facility with the ID: '{f_edit_facility}'.")
 
                     editable_attributes = ["name", "description"]
 
                     for attribute in editable_attributes:
-                        current_value = getattr(facility_edit, attribute)
+                        current_value = getattr(f_edit_facility, attribute)
                         new_value = input(f"New {attribute.capitalize()} (Current: {current_value}): ").strip()
 
                         if new_value:
-                            setattr(facility_edit, attribute, new_value)
+                            setattr(f_edit_facility, attribute, new_value)
 
-                    self.ui.logic_api.facility_edit(facility_edit)
+                    self.ui.logic_api.facility_edit(f_edit_facility)
                 else:
                     print("You don't have permission to do that.")
                     input("Press enter to continue.")
