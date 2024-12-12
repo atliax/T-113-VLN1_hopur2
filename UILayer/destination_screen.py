@@ -148,8 +148,10 @@ class DestinationScreen(BaseScreen):
                             
                             manager_ids = [manager.ID for manager in self.ui.logic_api.staff_list_managers()]
                             while new_value not in manager_ids:
-                                print(f"Invalid manager ID: {new_value}. Please provide a valid manager ID.")
-                                new_value = input(f"New {attribute} (current: {current_value}): ").strip()
+                                print(f"Invalid manager ID: {new_value}. Please provide a valid manager ID. (B to cancel) ")
+                                new_value = input(f"New {attribute} (current: {current_value}): ").strip().upper()
+                                if new_value == "B":
+                                    return self
                         
                         elif attribute == "phone" and new_value:
                             
