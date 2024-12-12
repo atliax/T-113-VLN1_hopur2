@@ -85,13 +85,12 @@ class TicketScreen(BaseScreen):
             case "a":   # Add a ticket
 
                 print(property_table)
-
-                validated = False   # choose property with verification
-                new_property_id = input("Property ID of report: ").upper()
+                # choose property with verification  
+                new_property_id = input("Property ID of ticket: ").upper()  
                 validated = self.ui.logic_api.validate_property(new_property_id)
                 while not validated:
                     print ("No such property")
-                    new_property_id = input("Property ID of report or b to cancel: ").upper()
+                    new_property_id = input("(b)to cancel or Property ID of ticket: ").upper()
                     if new_property_id == "B":
                         return self
                     validated = self.ui.logic_api.validate_property(new_property_id)
@@ -103,7 +102,15 @@ class TicketScreen(BaseScreen):
                     facility_table.add_row([facility.ID,facility.name,facility.description])
                 print(facility_table)  
 
-                new_ticket_facility_id = input("ID of facility: ").upper()
+                #Choose facility with verification
+                new_ticket_facility_id = input("ID of facility for ticket: ").upper()
+                verified = self.ui.logic_api.facility_validate(new_ticket_facility_id, tmp)
+                while not verified:
+                    print ("No such facility at this property")
+                    new_ticket_facility_id = input("(b) to cancel or ID of facility for ticket").upper()
+                    if new_ticket_facility_id == "B":
+                        return self
+                    verified = self.ui.logic_api.facility_validate(new_ticket_facility_id, tmp)
     
                 new_ticket_title = input("New ticket title: ")
                 new_description = input("New ticket description: ")

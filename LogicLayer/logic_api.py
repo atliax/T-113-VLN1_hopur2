@@ -85,6 +85,9 @@ class LogicAPI:
 
     def facility_get_selected_property(self) -> str:
         return self.facility_manager.get_selected_property()
+    
+    def facility_validate(self, facilityID : str, facility_list : list[Facility] ) -> bool:
+        return self.facility_manager.facility_validate(facilityID, facility_list)
 
 #==========================================================================
 #--Properties--------------------------------------------------------------
