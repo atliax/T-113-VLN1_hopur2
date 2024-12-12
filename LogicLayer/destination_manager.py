@@ -11,13 +11,15 @@ class DestinationManager:
 
     def destination_add(self, new_destination : Destination) -> None:
         all_destinations = self.destination_get_all()
-        n = int(all_destinations[len(all_destinations)-1].ID[1:])
+        if len(all_destinations) != 0:
+            n = int(all_destinations[len(all_destinations)-1].ID[1:])
+        else:
+            n = 0
+
         n += 1
         new_id = "D" + str(n)
         new_destination.ID = new_id
-        #new_destination = f"{new_id}, {new_destination}"
-        #new_destination = new_destination.split(",")
-        #new_destination_instance = Destination(new_destination[0],new_destination[1],new_destination[2],new_destination[3],new_destination[4],new_destination[5])
+
         self.storage_api.destination_add(new_destination)
 
     def destination_edit(self, edited_destination) -> None:
