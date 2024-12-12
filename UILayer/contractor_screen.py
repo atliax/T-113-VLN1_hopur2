@@ -58,7 +58,12 @@ class ContractorScreen(BaseScreen):
                 input("Press enter to go back.")
                 return ui_consts.CMD_BACK
 
-            contractor_table.add_row([contractor.ID, fill(contractor.name,width=20), contractor.contractor_type, contractor_destination.country, contractor.contact, contractor.rating, contractor.opening_hours])
+            if contractor_destination is not None:
+                contractor_destination_country = contractor_destination.country
+            else:
+                contractor_destination_country = "Not assigned"
+
+            contractor_table.add_row([contractor.ID, fill(contractor.name,width=20), contractor.contractor_type, contractor_destination_country, contractor.contact, contractor.rating, contractor.opening_hours])
 
         contractor_table._min_table_width = ui_consts.TABLE_WIDTH
 
