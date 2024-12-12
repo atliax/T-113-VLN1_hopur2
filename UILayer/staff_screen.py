@@ -52,7 +52,7 @@ class StaffScreen(BaseScreen):
             try:
                 employee_destination = self.ui.logic_api.destination_get_by_ID(employee.destinationID.upper())
             except Exception as e:
-                print(f"Error loading destination data for contractor '{employee.ID}': {type(e).__name__}: {e}")
+                print(f"Error loading destination data for employee '{employee.ID}': {type(e).__name__}: {e}")
                 print("Error displaying employee details.")
                 input("Press enter to go back.")
                 return ui_consts.CMD_BACK
