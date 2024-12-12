@@ -86,15 +86,16 @@ class TicketScreen(BaseScreen):
 
                 print(property_table)
 
-                validated = False
-                validated = self.ui.logic_api.validate_property(input("Property ID of report: ").upper())
+                validated = False   # choose property with verification
+                new_property_id = input("Property ID of report: ").upper()
+                validated = self.ui.logic_api.validate_property(new_property_id)
                 while not validated:
                     print ("No such property")
                     new_property_id = input("Property ID of report or b to cancel: ").upper()
                     if new_property_id == "B":
                         return self
                     validated = self.ui.logic_api.validate_property(new_property_id)
-                tmp = self.ui.logic_api.facility_get_by_propertyID(new_property_id)
+                tmp = self.ui.logic_api.facility_get_by_propertyID(new_property_id) 
 
                 facility_table = PrettyTable()
                 facility_table.field_names = ["ID","Name","Description"]
