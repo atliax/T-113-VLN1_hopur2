@@ -51,8 +51,9 @@ class TicketScreen(BaseScreen):
             else:
                 ticket_facility = self.ui.logic_api.facility_get_by_ID(ticket.facilityID)
                 facility_name = ticket_facility.name
-
-            staff_name = "Siggi Ísmaður"
+            
+            ticket_staff = self.ui.logic_api.staff_get_by_ID(ticket.staffID)
+            staff_name = ticket_staff.name
 
             facility_names[ticket.facilityID] = facility_name
             property_names[ticket.propertyID] = ticket_property.name
@@ -165,7 +166,7 @@ class TicketScreen(BaseScreen):
                 self.ui.logic_api.ticket_add(new_ticket)
 
             case "r":    # Remove a ticket
-                remove_ticket = input("Remove ticket with ID: ")
+                remove_ticket = input("Remove ticket with ID: ").upper()
                 self.ui.logic_api.ticket_remove(remove_ticket)
                 
             
@@ -191,7 +192,7 @@ class TicketScreen(BaseScreen):
                 #total_cost = ticket_by_id.cost + ticket_by_id.contractor_fee
                 ticket_table.field_names = ["ID", ticket_by_id.ID]
                 ticket_table.add_row(["Facility", facility_names[ticket_by_id.facilityID]], divider=True)
-                ticket_table.add_row(["Property", ticket_by_id.propertyID], divider=True)
+                ticket_table.add_row(["Property", property_names[ticket_by_id.propertyID]], divider=True)
                 ticket_table.add_row(["Priority", ticket_by_id.priority], divider=True)
                 ticket_table.add_row(["Title", ticket_by_id.title], divider=True)
                 ticket_table.add_row(["Description", fill(ticket_by_id.description, width=50)], divider=True)
@@ -200,7 +201,7 @@ class TicketScreen(BaseScreen):
                 ticket_table.add_row(["Recurring?", ticket_by_id.recurring], divider=True)
                 ticket_table.add_row(["Recurring days", ticket_by_id.recurring_days], divider=True)
                 ticket_table.add_row(["Open date", ticket_by_id.open_date], divider=True)
-                ticket_table.add_row(["Staff", ticket_by_id.staffID], divider=True)
+                ticket_table.add_row(["Staff", staff_names[ticket.staffID]], divider=True)
                 ticket_table.add_row(["Report", fill(ticket_by_id.report)], divider=True)
                 ticket_table.add_row(["Cost", ticket_by_id.cost], divider=True)
                 ticket_table.add_row(["Contractor", ticket_by_id.contractorID], divider=True)
