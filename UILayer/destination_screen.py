@@ -37,8 +37,17 @@ class DestinationScreen(BaseScreen):
             input("Press enter to go back.")
             return ui_consts.CMD_BACK
 
+        total_pages = math.ceil(len(all_destinations) / 10)
+
+        if self.current_page < 0:
+            self.current_page = 0
+
+        if self.current_page > (total_pages - 1):
+            self.current_page = (total_pages - 1)
+
         destination_table = PrettyTable()
         destination_table.field_names = ["ID", "Destination","Airport", "Opening hours", "Phone", "Manager"]
+        destination_table._min_table_width = ui_consts.TABLE_WIDTH
 
         for destination in all_destinations:
             try:
@@ -56,21 +65,11 @@ class DestinationScreen(BaseScreen):
 
             destination_table.add_row([destination.ID, destination.country, destination.airport, destination.opening_hours, destination.phone, manager_name])
 
-        destination_table._min_table_width = ui_consts.TABLE_WIDTH
-
-        total_pages = math.ceil(len(all_destinations) / 10)
-
-        if self.current_page < 0:
-            self.current_page = 0
-
-        if self.current_page > (total_pages - 1):
-            self.current_page = (total_pages - 1)
-
         print(f"|  Destination list (Page {self.current_page + 1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page")
 
         if total_pages != 0:
-            print(destination_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
+            print(destination_table.get_string(start=self.current_page * 10, end=(self.current_page + 1) * 10))
 
         print("")
         cmd = input("Command: ").lower()
@@ -79,25 +78,29 @@ class DestinationScreen(BaseScreen):
             # Next page
             case "n":
                 self.current_page += 1
+
             # Previous page
             case "p":
                 self.current_page -= 1
+
             # Add a destination
             case "a": 
                 if self.ui.logic_api.is_manager_logged_in():
                     destination_attributes = ["country", "airport", "phone", "opening_hours"]
+
                     new_destination = []
                     for attribute in destination_attributes:
+                        new_value = input(f"New {attribute}: ")
+
                         if attribute == "phone":
-                            while True:
+                            check_phone = new_value.replace("+", "").replace("-", "").replace(" ", "")
+                            while not check_phone.isdigit():
+                                print("Phone number must contain only '+', '-', ' ' and numbers.")
                                 new_value = input(f"New {attribute}: ")
-                                if (new_value.startswith('+') and new_value[1:].isdigit()) or new_value.isdigit():
-                                    break  
-                                print("Phone number must contain only numbers or start with a single '+' followed by numbers.")
-                        else:
-                            new_value = input(f"New {attribute}: ")
+                                check_phone = new_value.replace("+", "").replace("-", "").replace(" ", "")
+
                         new_destination.append(new_value)
-                    
+
                     tmp = Destination(None, new_destination[0], new_destination[1], new_destination[2], new_destination[3], None)
 
                     try:
@@ -108,7 +111,6 @@ class DestinationScreen(BaseScreen):
                         input("Press enter to continue.")
                         return self
 
-                    
                     print("New destination added successfully.")
                     print("Please navigate to the staff menu and add a manager for this location.")
                     input("Press enter to continue.")
@@ -124,6 +126,7 @@ class DestinationScreen(BaseScreen):
 
                     while destination_edit is None:
                         pick_destination = input("Type in the ID of the destination you want to edit (B to return): ").upper()
+
                         if pick_destination == "B":
                             return self
 
@@ -136,28 +139,27 @@ class DestinationScreen(BaseScreen):
                             return self
 
                         if destination_edit is None:
-                            print("Destination not found, try again (B to return)")
-                            continue
+                            print(f"Destination '{pick_destination}' not found, try again.")
+                            input("Press enter to continue.")
 
                     print("Leave empty if you wish to not change.")
                     for attribute in destination_attributes:
                         current_value = getattr(destination_edit, attribute)
                         new_value = input(f"New {attribute} (current: {current_value}): ").upper().strip()
-                        
+
                         if attribute == "managerID" and new_value:
-                            
                             manager_ids = [manager.ID for manager in self.ui.logic_api.staff_list_managers()]
                             while new_value not in manager_ids:
                                 print(f"Invalid manager ID: {new_value}. Please provide a valid manager ID. (B to cancel) ")
                                 new_value = input(f"New {attribute} (current: {current_value}): ").strip().upper()
                                 if new_value == "B":
                                     return self
-                        
                         elif attribute == "phone" and new_value:
-                            
-                            while not ((new_value.startswith('+') and new_value[1:].isdigit()) or new_value.isdigit()):
-                                print("Phone number must contain only numbers or start with a single '+' followed by numbers.")
+                            check_phone = new_value.replace("+", "").replace("-", "").replace(" ", "")
+                            while not check_phone.isdigit():
+                                print("Phone number must contain only '+', '-', ' ' and numbers.")
                                 new_value = input(f"New {attribute} (current: {current_value}): ").strip()
+                                check_phone = new_value.replace("+", "").replace("-", "").replace(" ", "")
 
                         if new_value:
                             setattr(destination_edit, attribute, new_value)
@@ -175,7 +177,7 @@ class DestinationScreen(BaseScreen):
                     print("You don't have permission to do that.")
                     input("Press enter to continue.")
 
-              
+            # Go back
             case "b":
                 return ui_consts.CMD_BACK
 
