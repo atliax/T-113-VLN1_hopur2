@@ -116,10 +116,10 @@ class ContractorScreen(BaseScreen):
 
                     while True:
                         try:
-                            new_destination = input("Enter destination ID for new employee (B to go back): ").upper()
+                            new_destination = input("Enter destination ID for new employee (B to cancel): ").upper()
                             
                             if new_destination == "B":
-                                return ui_consts.CMD_BACK  
+                                return self 
 
                             
                             if not self.ui.logic_api.destination_get_by_ID(new_destination):
@@ -219,10 +219,10 @@ class ContractorScreen(BaseScreen):
 
                     while True:
                         try:
-                            new_destinationID = input("Enter destination ID for contractor (B to go back): ").upper()
+                            new_destinationID = input("Enter destination ID for contractor (B to go cancel): ").upper()
                             
                             if new_destinationID == "B":
-                                return ui_consts.CMD_BACK  
+                                return self  
 
                             if not self.ui.logic_api.destination_get_by_ID(new_destinationID):
                                 raise ValueError(f"No destination found with the ID: '{new_destinationID}'")
