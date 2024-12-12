@@ -124,7 +124,7 @@ class PropertyScreen(BaseScreen):
             case "r":
                 if self.ui.logic_api.is_manager_logged_in():
                     remove_id = input("Remove a property that has the ID: ").upper()
-
+                while True:
                     try:
                         self.ui.logic_api.property_remove(remove_id)
                     except Exception as e:
@@ -170,7 +170,8 @@ class PropertyScreen(BaseScreen):
                     # if nothing is input, the field will be left unchanged
                     for attribute in property_attributes:
                         current_value = getattr(property_edit, attribute)
-                        new_value = input(f"New {attribute.capitalize()} (Current {current_value}): ").strip()
+                        new_value = input(f"New {attribute.capitalize()} Current {current_value}: ").strip()
+                        print("If nothing is input, field will be unchanged")
                         if new_value:
                             setattr(property_edit,attribute,new_value)
 
