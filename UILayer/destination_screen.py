@@ -1,9 +1,9 @@
 import math
 
 from prettytable import PrettyTable
+from prompt_toolkit import print_formatted_text, HTML
 
 from UILayer.base_screen import BaseScreen
-
 from UILayer import ui_consts
 
 from Model import Destination
@@ -24,7 +24,7 @@ class DestinationScreen(BaseScreen):
         if self.ui.logic_api.is_manager_logged_in():
             print("|	[A] Add a destination		[E] Edit a destination			[B] Go back")
         else:
-            print("|	[B] Go back")
+            print_formatted_text(HTML("|	<s>[A] Add a destination</s>		<s>[E] Edit a destination</s>			[B] Go back"))
 
         print("|")
         print(ui_consts.SEPERATOR)
