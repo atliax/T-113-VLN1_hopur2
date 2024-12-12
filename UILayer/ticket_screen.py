@@ -127,12 +127,12 @@ class TicketScreen(BaseScreen):
                         verified = self.ui.logic_api.facility_validate(new_ticket_facility_id, tmp)
 
                 while not new_ticket_title: 
-                    new_ticket_title = input("New ticket title: ")
+                    new_ticket_title = input("New ticket title: ").strip()
 
                 new_description = input("New ticket description: ")
                 
                 while new_priority not in priority_list:
-                    new_priority = input("New ticket priority(high, medium, low): ").lower()
+                    new_priority = input("New ticket priority(high, medium, low): ").lower().capitalize()
 
                 date_validated = False
                 while not date_validated:
