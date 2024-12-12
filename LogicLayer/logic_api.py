@@ -106,6 +106,9 @@ class LogicAPI:
 
     def property_search(self, search_string : str) -> list[Property]:
         return self.property_manager.property_search(search_string)
+    
+    def validate_property(self, propertyID: str) -> bool:
+        return self.property_manager.validate_property(propertyID)
 
 #==========================================================================
 #--Staff-------------------------------------------------------------------

@@ -70,7 +70,7 @@ class TicketScreen(BaseScreen):
         property_table.field_names = ["Property ID","Name","Destination","Type"]
         for property in properties:
             property_table.add_row([property.ID, property.name,property.destinationID,property.type])
-
+        
 
 
 
@@ -83,15 +83,27 @@ class TicketScreen(BaseScreen):
                 self.current_page -= 1
             
             case "a":   # Add a ticket
+
                 print(property_table)
-                new_property_id = input("property ID of report: ").upper()
+
+                validated = False
+                validated = self.ui.logic_api.validate_property(input("Property ID of report: ").upper())
+                while not validated:
+                    print ("No such property")
+                    new_property_id = input("Property ID of report or b to cancel: ").upper()
+                    if new_property_id == "B":
+                        return self
+                    validated = self.ui.logic_api.validate_property(new_property_id)
                 tmp = self.ui.logic_api.facility_get_by_propertyID(new_property_id)
+
                 facility_table = PrettyTable()
                 facility_table.field_names = ["ID","Name","Description"]
                 for facility in tmp:
                     facility_table.add_row([facility.ID,facility.name,facility.description])
                 print(facility_table)  
+
                 new_ticket_facility_id = input("ID of facility: ").upper()
+    
                 new_ticket_title = input("New ticket title: ")
                 new_description = input("New ticket description: ")
                 new_priority = input("New ticket priority: ")

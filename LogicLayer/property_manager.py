@@ -49,6 +49,13 @@ class PropertyManager:
                         filtered_properties.append(item)
 
         return filtered_properties
+    
+    def validate_property(self, propertyID : str) -> bool:
+        all_property =self.storage_api.property_get_all()
+        for property in all_property:
+            if propertyID == property.ID:
+                return True
+        return False
     # [V] View facilities
     #def view_facilities():
     #    pass
