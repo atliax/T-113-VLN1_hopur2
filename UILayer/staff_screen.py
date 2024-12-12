@@ -224,9 +224,11 @@ class StaffScreen(BaseScreen):
                     print(destination_table)
                     
                     print(f"Editing details for employee ID: {edit_with_id}")
+                    print("Leave empty if you dont want to change.")
                     
                     for attribute in staff_attributes:
                         current_value = getattr(staff_edit, attribute, None)
+                        
                         new_value = input(f"New {attribute.capitalize()} (Current: {current_value}): ").strip()
                         if not new_value:
                             continue

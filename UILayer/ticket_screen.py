@@ -1,4 +1,5 @@
 import math
+import datetime
 
 from prettytable import PrettyTable
 from textwrap import fill
@@ -84,6 +85,11 @@ class TicketScreen(BaseScreen):
 
                 print(property_table)
                 new_ticket_title = ""
+                new_date = ""
+                new_recurring = -1
+                new_priority = ""
+                priority_list = ["high", "medium", "low"]
+
                 # choose property with verification  
                 new_property_id = input("Property ID of ticket: ").upper()  
                 validated = self.ui.logic_api.validate_property(new_property_id)
@@ -94,33 +100,53 @@ class TicketScreen(BaseScreen):
                         return self
                     validated = self.ui.logic_api.validate_property(new_property_id)
                 tmp = self.ui.logic_api.facility_get_by_propertyID(new_property_id) 
-
-                facility_table = PrettyTable()
-                facility_table.field_names = ["ID","Name","Description"]
-                for facility in tmp:
-                    facility_table.add_row([facility.ID,facility.name,facility.description])
-                print(facility_table)  
+ 
 
                 #Choose facility with verification
-                new_ticket_facility_id = input("ID of facility for ticket: ").upper()
-                verified = self.ui.logic_api.facility_validate(new_ticket_facility_id, tmp)
-                while not verified:
-                    print ("No such facility at this property")
-                    new_ticket_facility_id = input("(b) to cancel or ID of facility for ticket: ").upper()
-                    if new_ticket_facility_id == "B":
-                        return self
+                if len(tmp) == 0:
+                    print ("No Facalities to choose, using propertyID only")
+                    new_ticket_facility_id = None
+                else:
+                    facility_table = PrettyTable()
+                    facility_table.field_names = ["ID","Name","Description"]
+                    for facility in tmp:
+                        facility_table.add_row([facility.ID,facility.name,facility.description])
+                    print(facility_table) 
+
+                    new_ticket_facility_id = input("ID of facility for ticket: ").upper()
                     verified = self.ui.logic_api.facility_validate(new_ticket_facility_id, tmp)
+                    while not verified:
+                        print ("No such facility at this property")
+                        new_ticket_facility_id = input("(b) to cancel or ID of facility for ticket: ").upper()
+                        if new_ticket_facility_id == "B":
+                            return self
+                        verified = self.ui.logic_api.facility_validate(new_ticket_facility_id, tmp)
 
                 while not new_ticket_title: 
                     new_ticket_title = input("New ticket title: ")
+
                 new_description = input("New ticket description: ")
-                new_priority = input("New ticket priority: ")
-                new_date = input("Date to open(leave empty if open now): ")
-                new_recurring = int(input("Recur every N days (0 = never): "))
+                
+                while new_priority not in priority_list:
+                    new_priority = input("New ticket priority(high, medium, low): ").lower()
+
+                date_validated = False
+                while not date_validated:
+                    print ("Use DD-MM-YYYY format")
+                    new_date = input("Date to open(leave empty if open now): ")
+                    if new_date == "":
+                        new_date = datetime.datetime.now()
+                    try:
+                        date = new_date
+                        date_validated = datetime.datetime.strptime(date, "%d-%m-%Y")
+                    except ValueError:
+                        print ("Sorry wrong format, try again!")
+
+                while new_recurring >= 0:
+                    new_recurring = int(input("Recur every N days (0 = never): "))
                 
                 new_ticket = Ticket(None, new_ticket_facility_id, new_property_id, new_priority, new_ticket_title, new_description,None, None, None, new_recurring , new_date, None, None, None, None, None, None, None, None)
                 self.ui.logic_api.ticket_add(new_ticket)
-                # If recur > 0 set recurring = True otherwise False, needs logic for this. 
 
             case "r":    # Remove a ticket
                 remove_ticket = input("Remove ticket with ID: ")
