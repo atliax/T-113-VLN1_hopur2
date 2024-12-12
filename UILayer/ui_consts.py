@@ -18,6 +18,10 @@ CMD_QUIT = "quit"
 
 # Messages
 MSG_EXIT = "Exiting..."
+MSG_ENTER_BACK = "Press enter to go back."
+MSG_ENTER_CONTINUE = "Press enter to continue."
+MSG_NO_PERMISSION = "You don't have permission to do that."
+MSG_INVALID_PHONE = "Phone number must contain only '+', '-', ' ' and numbers."
 
 # Format
 SEPERATOR =  "//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////"

@@ -12,7 +12,6 @@ class BaseScreen:
 
     def run(self):
         """Main 'running' function for each screen. Each screen will implement
-        its own version of it. It needs to return either its 'self' instance or
-        a string representing either the next screen or a UI manager action to
-        perform (exit/back)."""
+        its own version of it. Returns None to stay on the same screen, a string
+        representing another screen or a UI manager action to perform (exit/back)."""
         raise NotImplementedError("Subclass needs to implement run()")
