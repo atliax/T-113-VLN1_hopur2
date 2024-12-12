@@ -72,7 +72,7 @@ class StaffManager:
         return self.storage_api.staff_get_by_ID(staffID)
 
     def staff_search(self, search_string : str) -> list[Staff]:
-        all_staff : list[Staff] = self.storage_api.staff_get_all()
+        all_staff : list[Staff] = self.staff_get_all()
         filtered_staff = []
         for staff in all_staff:
             found = False
@@ -89,3 +89,13 @@ class StaffManager:
                         filtered_staff.append(staff)
 
         return filtered_staff
+
+    def staff_list_managers(self) -> list[Staff]:
+        all_staff : list[Staff] = self.staff_get_all()
+
+        managers = []
+        for staff in all_staff:
+            if staff.is_manager:
+                managers.append(staff)
+
+        return managers

@@ -134,6 +134,9 @@ class LogicAPI:
     def staff_search(self, search_string : str) -> list[Staff]:
         return self.staff_manager.staff_search(search_string)
 
+    def staff_list_managers(self) -> list[Staff]:
+        return self.staff_manager.staff_list_managers()
+
 #==========================================================================
 #--Login/Session-----------------------------------------------------------
 
