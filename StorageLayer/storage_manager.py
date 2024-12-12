@@ -3,6 +3,8 @@ import os
 
 from Model import BaseModel
 
+from Exceptions import FileWriteError, FileReadError
+
 class StorageManager:
     def __init__(self, filename : str, model_class : BaseModel) -> None:
         self.filename = filename
@@ -43,33 +45,35 @@ class StorageManager:
         for item in current_items:
             if item.ID == ID:
                 return item
-            
-    #def search(self, search_string : str) -> list[BaseModel]:
-    #    current_items = self.load_from_file()
-    #    filtered_items = []
-    #    for item in current_items:
-    #        for attribute_value in list(item.__dict__.values()):
-    #            if search_string.lower() in str(attribute_value).lower():
-    #                filtered_items.append(item)
-    #                break
-    #    return filtered_items
 
     def load_from_file(self) -> list[BaseModel]:
         ret = []
 
-        # read all the lines from the file
-        with open(self.filename, "r") as file:
-            lines = file.readlines()
+        try:
+            # read all the lines from the file
+            with open(self.filename, "r") as file:
+                lines = file.readlines()
+        except FileNotFoundError:
+            # return empty list if the file does not exist
+            return []
+        except IOError as e:
+            raise FileReadError(f"Error reading file '{self.filename}': {e}")
 
         # go through the lines in the file
         for line in lines:
             # parse the line as json
-            line_json = json.loads(line)
+            try:
+                line_json = json.loads(line)
+            except json.decoder.JSONDecodeError:
+                raise FileReadError(f"Malformed JSON in data file '{self.filename}'.")
 
             # construct an instance of the appropriate class
-            tmp_model = self.model_class(**line_json)
+            try:
+                tmp_model = self.model_class(**line_json)
+            except TypeError:
+                raise FileReadError(f"JSON data structure in '{self.filename}' didn't match model class.")
 
-            # add it to the list if it is valid
+            # add the model to the list if it was valid
             if tmp_model is not None:
                 ret.append(tmp_model)
 
@@ -90,9 +94,11 @@ class StorageManager:
         # check if the file was written successfully
         if bytes_written == len(new_file_contents):
             # no error, swap with the temporary file
-            os.remove(self.filename)
+            try:
+                os.remove(self.filename)
+            except FileNotFoundError:
+                # original file didn't exist, but no error is needed since it's about to be overwritten
+                pass
             os.rename(self.filename+".tmp", self.filename)
         else:
-            # error has occurred writing to the file
-            # TODO: Throw some error up to the UI layer?
-            pass
+            raise FileWriteError(f"Number of bytes written to '{self.filename}.tmp' does not match expected value.")
