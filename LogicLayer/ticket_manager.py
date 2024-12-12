@@ -32,5 +32,30 @@ class TicketManager:
         self.storage_api.ticket_remove(ticketID)
 
     def ticket_search(self, search_string : str) -> list[Ticket]:
-        # TODO
-        return []
+        all_tickets : list[Ticket] = self.storage_api.ticket_get_all()
+        filtered_tickets = []
+        for item in all_tickets:
+            found = False
+            for attribute_value in list(item.__dict__.values()):
+                if search_string.lower() in str(attribute_value).lower():
+                    filtered_tickets.append(item)
+                    found = True
+                    break
+
+            if not found:
+                ticket_property = self.storage_api.property_get_by_ID(item.propertyID)
+                if ticket_property is not None:
+                    if search_string.lower() in ticket_property.name.lower():
+                        filtered_tickets.append(item)
+                        found = True
+                        continue
+
+            if not found:
+                ticket_facility = self.storage_api.facility_get_by_ID(item.facilityID)
+                if ticket_facility is not None:
+                    if search_string.lower() in ticket_facility.name.lower():
+                        filtered_tickets.append(item)
+                        found = True
+                        continue
+
+        return filtered_tickets
