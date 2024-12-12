@@ -23,7 +23,7 @@ class TicketScreen(BaseScreen):
 
         print(ui_consts.SEPERATOR)
         print("|")
-        print("|	[A] Add a ticket		[EP] Process/Edit			[B] Go back")
+        print("|	[A] Add a ticket		[EP] Edit/Process			[B] Go back")
         print("|	[R] Remove a ticket		[S] Search for")
         print("|	[V] View closed tickets		[D] Ticket details")
         print("|")
@@ -219,7 +219,7 @@ class TicketScreen(BaseScreen):
                 print(ticket_table)
                 input("Press enter to continue.")
 
-            case "ep":    # Edit ticket
+            case "e":    # Edit ticket
                 # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"
                 # If ID does not exist, cancel command
 
