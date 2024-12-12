@@ -73,8 +73,6 @@ class TicketScreen(BaseScreen):
             property_table.add_row([property.ID, property.name,property.destinationID,property.type])
         
 
-
-
         match cmd:
             
             case "n":   # Next page:
@@ -86,6 +84,7 @@ class TicketScreen(BaseScreen):
             case "a":   # Add a ticket
 
                 print(property_table)
+                new_ticket_title = ""
                 # choose property with verification  
                 new_property_id = input("Property ID of ticket: ").upper()  
                 validated = self.ui.logic_api.validate_property(new_property_id)
@@ -108,25 +107,19 @@ class TicketScreen(BaseScreen):
                 verified = self.ui.logic_api.facility_validate(new_ticket_facility_id, tmp)
                 while not verified:
                     print ("No such facility at this property")
-                    new_ticket_facility_id = input("(b) to cancel or ID of facility for ticket").upper()
+                    new_ticket_facility_id = input("(b) to cancel or ID of facility for ticket: ").upper()
                     if new_ticket_facility_id == "B":
                         return self
                     verified = self.ui.logic_api.facility_validate(new_ticket_facility_id, tmp)
-    
-                new_ticket_title = input("New ticket title: ")
+
+                while not new_ticket_title: 
+                    new_ticket_title = input("New ticket title: ")
                 new_description = input("New ticket description: ")
                 new_priority = input("New ticket priority: ")
-                new_status = input("New ticket status: ")
-                new_date = input("New ticket date: ")
+                new_date = input("Date to open(leave empty if open now): ")
                 new_recurring = int(input("Recur every N days (0 = never): "))
-                new_staff = input("New ticket staff ID: ")
-                new_report = input("REPORT placeholder: ")
-                new_cost = float(input("Cost: placerholder "))
-                new_contr_id = input("Enter contractor ID: placeholder ")
-                new_contr_review = input("Contractor review: placeholder ")
-                new_contr_rating = float(input("Contractor rating: placeholder "))
-                new_contr_fee = float(input("Contractor fee: placeholder "))
-                new_ticket = Ticket(None, new_ticket_facility_id, new_property_id, new_priority, new_ticket_title, new_description,None, new_status, None, new_recurring , new_date, new_staff,new_report, new_cost, new_contr_id, new_contr_review, new_contr_rating, new_contr_fee )
+                
+                new_ticket = Ticket(None, new_ticket_facility_id, new_property_id, new_priority, new_ticket_title, new_description,None, None, None, new_recurring , new_date, None, None, None, None, None, None, None, None)
                 self.ui.logic_api.ticket_add(new_ticket)
                 # If recur > 0 set recurring = True otherwise False, needs logic for this. 
 
