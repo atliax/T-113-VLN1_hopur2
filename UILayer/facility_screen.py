@@ -127,24 +127,27 @@ class FacilityScreen(BaseScreen):
             # Edit a facility
             case "e":
                 if self.ui.logic_api.is_manager_logged_in():
-                    f_edit_facility = input("Edit the facility with the ID (B to cancel): ").strip().upper()
+                    f_edit_facility = None
+                    while f_edit_facility is None:
+                        f_edit_facility_id = input("Edit the facility with the ID (B to cancel): ").strip().upper()
 
-                    if f_edit_facility == "B":
-                        return ui_consts.CMD_BACK
+                        if f_edit_facility_id == "B":
+                            return ui_consts.CMD_BACK
 
-                    f_edit_facility = self.ui.logic_api.facility_get_by_ID(f_edit_facility)
+                        f_edit_facility = self.ui.logic_api.facility_get_by_ID(f_edit_facility_id)
 
-                    if f_edit_facility is None:
-                        print(f"No facility with the ID: '{f_edit_facility}'.")
+                        if f_edit_facility is None:
+                            print(f"No facility with the ID: '{f_edit_facility_id}'.")
+                            continue
 
-                    editable_attributes = ["name", "description"]
+                        editable_attributes = ["name", "description"]
 
-                    for attribute in editable_attributes:
-                        current_value = getattr(f_edit_facility, attribute)
-                        new_value = input(f"New {attribute.capitalize()} (Current: {current_value}): ").strip()
+                        for attribute in editable_attributes:
+                            current_value = getattr(f_edit_facility, attribute)
+                            new_value = input(f"New {attribute.capitalize()} (Current: {current_value}): ").strip()
 
-                        if new_value:
-                            setattr(f_edit_facility, attribute, new_value)
+                            if new_value:
+                                setattr(f_edit_facility, attribute, new_value)
 
                     self.ui.logic_api.facility_edit(f_edit_facility)
                 else:
