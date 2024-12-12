@@ -135,12 +135,16 @@ class TicketScreen(BaseScreen):
                     print ("Use DD-MM-YYYY format")
                     new_date = input("Date to open(leave empty if open now): ")
                     if new_date == "":
-                        new_date = datetime.datetime.now()
-                    try:
-                        date = new_date
-                        date_validated = datetime.datetime.strptime(date, "%d-%m-%Y")
-                    except ValueError:
-                        print ("Sorry wrong format, try again!")
+                        new_date = datetime.datetime.now().strftime("%d-%m-%Y")
+                        input (print (new_date))
+                        date_validated = True
+                    else:
+                        try:
+                            date = new_date
+                            date_validated = datetime.datetime.strptime(date, "%d-%m-%Y")
+                            input (print (new_date))
+                        except ValueError:
+                            print ("Sorry wrong format, try again!")
 
                 while new_recurring >= 0:
                     new_recurring = int(input("Recur every N days (0 = never): "))
