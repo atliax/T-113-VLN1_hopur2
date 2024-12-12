@@ -45,9 +45,18 @@ class ContractorScreen(BaseScreen):
             print(f"{type(e).__name__}: {e}")
             input("Press enter to go back.")
             return ui_consts.CMD_BACK
-        
+
+        total_pages = math.ceil(len(contractor_list) / 10)
+
+        if self.current_page < 0:
+            self.current_page = 0
+
+        if self.current_page > (total_pages - 1):
+            self.current_page = (total_pages - 1)
+
         contractor_table = PrettyTable()
         contractor_table.field_names = ["ID", "Name","Type","Destination","Contact","Rating","Opening hours"]
+        contractor_table._min_table_width = ui_consts.TABLE_WIDTH
 
         for contractor in contractor_list:
             try:
@@ -64,16 +73,6 @@ class ContractorScreen(BaseScreen):
                 contractor_destination_country = "Not assigned"
 
             contractor_table.add_row([contractor.ID, fill(contractor.name,width=20), contractor.contractor_type, contractor_destination_country, contractor.contact, contractor.rating, contractor.opening_hours])
-
-        contractor_table._min_table_width = ui_consts.TABLE_WIDTH
-
-        total_pages = math.ceil(len(contractor_list) / 10)
-
-        if self.current_page < 0:
-            self.current_page = 0
-
-        if self.current_page > (total_pages - 1):
-            self.current_page = (total_pages - 1)
 
         print(f"|  Contractor list (Page {self.current_page + 1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page")
