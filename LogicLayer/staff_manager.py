@@ -45,7 +45,11 @@ class StaffManager:
 
     def staff_add(self, new_staff : Staff) -> None:
         all_staff = self.storage_api.staff_get_all()
-        n = int(all_staff[len(all_staff)-1].ID[1:])
+        if len(all_staff) != 0:
+            n = int(all_staff[len(all_staff)-1].ID[1:])
+        else:
+            n = 0
+
         n += 1
         new_id = "S" + str(n)
         new_staff.ID = new_id

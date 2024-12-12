@@ -15,7 +15,11 @@ class PropertyManager:
     # [A] Add a property
     def property_add(self, new_property : Property) -> None:
         all_properties = self.storage_api.property_get_all()
-        n = int(all_properties[len(all_properties)-1].ID[1:])
+        if len(all_properties) != 0:
+            n = int(all_properties[len(all_properties)-1].ID[1:])
+        else:
+            n = 0
+
         n += 1
         new_id = "P" + str(n)
         new_property.ID = new_id
