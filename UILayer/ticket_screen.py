@@ -166,8 +166,14 @@ class TicketScreen(BaseScreen):
                 self.ui.logic_api.ticket_add(new_ticket)
 
             case "r":    # Remove a ticket
+
                 remove_ticket = input("Remove ticket with ID: ").upper()
-                self.ui.logic_api.ticket_remove(remove_ticket)
+                try:
+                    self.ui.logic_api.ticket_remove(remove_ticket)
+                except Exception as e:
+                    print(f"Error removing ticket:{type(e).__name__}: {e}")
+                    print ("could not remove property, possibly its the wrong ticket")
+                    input("Press any key to continue")
                 
             
             case "v":   # View closed tickets

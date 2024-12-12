@@ -1,5 +1,5 @@
 from StorageLayer import StorageAPI
-
+from Exceptions import IDNotFoundError
 from Model import Ticket
 
 class TicketManager:
@@ -29,7 +29,11 @@ class TicketManager:
         self.storage_api.ticket_edit(edited_ticket)
 
     def ticket_remove(self, ticketID : str) -> None:
-        self.storage_api.ticket_remove(ticketID)
+        ticket_exists = self.storage_api.ticket_get_by_ID(ticketID)
+        if ticket_exists:
+            self.storage_api.ticket_remove(ticketID)
+        else:
+            raise IDNotFoundError(f" {ticketID} does not exist")
 
     def ticket_search(self, search_string : str) -> list[Ticket]:
         all_tickets : list[Ticket] = self.storage_api.ticket_get_all()
