@@ -216,12 +216,29 @@ class StaffScreen(BaseScreen):
                             input("Press enter to continue.")
                             return self
                         
-                        
 
                         if staff_edit is None:
                             print(f"No employee with the ID: '{edit_with_id}' try again (B to return).")
                     
                     print(destination_table)
+                    
+                    while True:
+                        try:
+                            new_destinationID = input("Enter destination ID for employee (B to go back): ").upper()
+                            
+                            if new_destinationID == "B":
+                                return ui_consts.CMD_BACK  
+
+                            
+                            if not self.ui.logic_api.destination_get_by_ID(new_destinationID):
+                                raise ValueError(f"No destination found with the ID: '{new_destinationID}'")
+                            break  
+
+                        except ValueError as e:
+                            print(e)
+                            print("Please try again or type 'B' to go back.")
+
+                    setattr(staff_edit, "destinationID", new_destinationID)
                     
                     print(f"Editing details for employee ID: {edit_with_id}")
                     print("Leave empty if you dont want to change.")
@@ -232,6 +249,8 @@ class StaffScreen(BaseScreen):
                         new_value = input(f"New {attribute.capitalize()} (Current: {current_value}): ").strip()
                         if not new_value:
                             continue
+
+                        
                     
                         if attribute in ["phone_home", "phone_gsm"]:
                             while not ((new_value.startswith('+') and new_value[1:].isdigit()) or new_value.isdigit()):
