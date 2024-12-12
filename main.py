@@ -10,8 +10,7 @@ def main():
     try:
         ui.run()
     except (KeyboardInterrupt, EOFError):
-        print("\nBless bless...")
-        input("Press enter to exit.")
+        print("\nExiting...")
 
 if __name__ == '__main__':
     main()
