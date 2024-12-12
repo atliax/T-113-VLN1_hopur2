@@ -13,7 +13,9 @@ class Ticket(BaseModel):
         self.priority = priority
         self.title = title
         self.description = description
+
         self.open = open
+        
         self.status = status
         self.recurring = recurring
         self.recurring_days = recurring_days
