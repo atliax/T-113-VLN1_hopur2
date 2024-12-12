@@ -203,7 +203,7 @@ class StaffScreen(BaseScreen):
                         edit_with_id = input("Edit employee with the ID: ").upper()
 
                         if edit_with_id == "B":
-                            return ui_consts.CMD_BACK
+                            return self
                         
                             # First display the available destinations
                         
@@ -218,7 +218,7 @@ class StaffScreen(BaseScreen):
                         
 
                         if staff_edit is None:
-                            print(f"No employee with the ID: '{edit_with_id}' try again (B to return).")
+                            print(f"No employee with the ID: '{edit_with_id}' try again (B to cancel).")
                     
                     print(destination_table)
                     
@@ -236,7 +236,7 @@ class StaffScreen(BaseScreen):
 
                         except ValueError as e:
                             print(e)
-                            print("Please try again or type 'B' to go back.")
+                            print("Please try again (B to cancel).")
 
                     setattr(staff_edit, "destinationID", new_destinationID)
                     

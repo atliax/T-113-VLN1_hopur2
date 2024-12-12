@@ -23,7 +23,7 @@ class TicketScreen(BaseScreen):
 
         print(ui_consts.SEPERATOR)
         print("|")
-        print("|	[A] Add a ticket		[EP] Process/Edit			[B] Go back")
+        print("|	[A] Add a ticket		[E] Edit/Process			[B] Go back")
         print("|	[R] Remove a ticket		[S] Search for")
         print("|	[V] View closed tickets		[D] Ticket details")
         print("|")
@@ -51,12 +51,12 @@ class TicketScreen(BaseScreen):
             else:
                 ticket_facility = self.ui.logic_api.facility_get_by_ID(ticket.facilityID)
                 facility_name = ticket_facility.name
+            
+            #ticket_staff = self.ui.logic_api.staff_get_by_ID(ticket.staffID)
+            #staff_name = ticket_staff.name
 
-            staff_name = "Siggi Ísmaður"
-
-            facility_names[ticket.facilityID] = facility_name
             property_names[ticket.propertyID] = ticket_property.name
-            staff_names[ticket.staffID] = staff_name
+            #staff_names[ticket.staffID] = staff_name
 
             all_tickets_table.add_row([ticket.ID, ticket_property.name, facility_name, fill(ticket.title, width=40), ticket.priority, ticket.status])
 
@@ -104,7 +104,7 @@ class TicketScreen(BaseScreen):
                 new_date = ""
                 new_recurring = -1
                 new_priority = ""
-                priority_list = ["high", "medium", "low"]
+                priority_list = ["High", "Medium", "Low"]
 
                 # choose property with verification  
                 new_property_id = input("Property ID of ticket: ").upper()  
@@ -151,7 +151,7 @@ class TicketScreen(BaseScreen):
                     print ("Use DD-MM-YYYY format")
                     new_date = input("Date to open(leave empty if open now): ")
                     if new_date == "":
-                        new_date = datetime.datetime.now()
+                        new_date = datetime.datetime.now().strftime("%d-%m-%Y")
                     try:
                         date = new_date
                         date_validated = datetime.datetime.strptime(date, "%d-%m-%Y")
@@ -165,8 +165,14 @@ class TicketScreen(BaseScreen):
                 self.ui.logic_api.ticket_add(new_ticket)
 
             case "r":    # Remove a ticket
-                remove_ticket = input("Remove ticket with ID: ")
-                self.ui.logic_api.ticket_remove(remove_ticket)
+
+                remove_ticket = input("Remove ticket with ID: ").upper()
+                try:
+                    self.ui.logic_api.ticket_remove(remove_ticket)
+                except Exception as e:
+                    print(f"Error removing ticket:{type(e).__name__}: {e}")
+                    print ("could not remove property, possibly its the wrong ticket")
+                    input("Press any key to continue")
                 
             
             case "v":   # View closed tickets
@@ -191,7 +197,7 @@ class TicketScreen(BaseScreen):
                 #total_cost = ticket_by_id.cost + ticket_by_id.contractor_fee
                 ticket_table.field_names = ["ID", ticket_by_id.ID]
                 ticket_table.add_row(["Facility", facility_names[ticket_by_id.facilityID]], divider=True)
-                ticket_table.add_row(["Property", ticket_by_id.propertyID], divider=True)
+                ticket_table.add_row(["Property", property_names[ticket_by_id.propertyID]], divider=True)
                 ticket_table.add_row(["Priority", ticket_by_id.priority], divider=True)
                 ticket_table.add_row(["Title", ticket_by_id.title], divider=True)
                 ticket_table.add_row(["Description", fill(ticket_by_id.description, width=50)], divider=True)
@@ -200,7 +206,7 @@ class TicketScreen(BaseScreen):
                 ticket_table.add_row(["Recurring?", ticket_by_id.recurring], divider=True)
                 ticket_table.add_row(["Recurring days", ticket_by_id.recurring_days], divider=True)
                 ticket_table.add_row(["Open date", ticket_by_id.open_date], divider=True)
-                ticket_table.add_row(["Staff", ticket_by_id.staffID], divider=True)
+                ticket_table.add_row(["Staff", staff_names[ticket.staffID]], divider=True)
                 ticket_table.add_row(["Report", fill(ticket_by_id.report)], divider=True)
                 ticket_table.add_row(["Cost", ticket_by_id.cost], divider=True)
                 ticket_table.add_row(["Contractor", ticket_by_id.contractorID], divider=True)
@@ -212,7 +218,7 @@ class TicketScreen(BaseScreen):
                 print(ticket_table)
                 input("Press enter to continue.")
 
-            case "ep":    # Edit ticket
+            case "e":    # Edit ticket
                 # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"
                 # If ID does not exist, cancel command
 
