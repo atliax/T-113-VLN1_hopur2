@@ -208,7 +208,7 @@ class ContractorScreen(BaseScreen):
 
                     while True:
                         try:
-                            new_destinationID = input("Enter destination ID for new employee (B to go back): ").upper()
+                            new_destinationID = input("Enter destination ID for contractor (B to go back): ").upper()
                             
                             if new_destinationID == "B":
                                 return ui_consts.CMD_BACK  
@@ -228,9 +228,8 @@ class ContractorScreen(BaseScreen):
 
                     for attribute in contractor_attributes:
                         current_value = getattr(contractor_edit, attribute)
-
+                        
                         new_value = input(f"New {attribute.capitalize()} (Current {current_value}): ").strip()
-
                         if new_value:
                             setattr(contractor_edit, attribute, new_value)
 

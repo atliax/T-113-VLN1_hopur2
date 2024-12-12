@@ -211,8 +211,8 @@ class StaffScreen(BaseScreen):
                         try:
                             staff_edit = self.ui.logic_api.staff_get_by_ID(edit_with_id)
                         except Exception as e:
-                            print(f"Error loading contractor info: {type(e).__name__}: {e}")
-                            print("Could not load contractor information. Try again.")
+                            print(f"Error loading employee info: {type(e).__name__}: {e}")
+                            print("Could not load employee information. Try again.")
                             input("Press enter to continue.")
                             return self
                         
