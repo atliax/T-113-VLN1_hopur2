@@ -23,7 +23,7 @@ class TicketScreen(BaseScreen):
 
         print(ui_consts.SEPERATOR)
         print("|")
-        print("|	[A] Add a ticket		[E] Edit a ticket			[B] Go back")
+        print("|	[A] Add a ticket		[EP] Process/Edit			[B] Go back")
         print("|	[R] Remove a ticket		[S] Search for")
         print("|	[V] View closed tickets		[D] Ticket details")
         print("|")
@@ -196,7 +196,7 @@ class TicketScreen(BaseScreen):
                 print(ticket_table)
                 input("Press enter to continue.")
 
-            case "e":    # Edit ticket
+            case "ep":    # Edit ticket
                 # If ID does not exist in the ticket list, raise error "No ticket found with that ID!"
                 # If ID does not exist, cancel command
 
@@ -207,7 +207,7 @@ class TicketScreen(BaseScreen):
                         
                 print("If you do not wish to change a specific field, you can leave the input empty")
                 edit_ticket = None
-                ticket_attributes = ["ID", "facilityID", "propertyID", "priority", "title", "description", "status", "recurring", "recurring_days", "open_date"]
+                ticket_attributes = ["facilityID", "propertyID", "priority", "title", "description", "status", "recurring", "recurring_days", "open_date","close_date","staffID","report","cost","contractorID","contractor_review","contractor_rating","contractor_fee"]
 
                 while edit_ticket is None:
                     pick_ticket = input("Type in ID of ticket to edit: ").upper()
@@ -217,10 +217,9 @@ class TicketScreen(BaseScreen):
                     edit_ticket = self.ui.logic_api.ticket_get_by_ID(pick_ticket)
 
                     if edit_ticket is not None:
-                        print ("Leave empty if you wish to not change ")
                         for attribute in ticket_attributes:
                             current_value = getattr(edit_ticket, attribute)
-                            new_value = input(f"New {attribute} (current: {current_value}): ").strip()
+                            new_value = input(f"New {attribute} (Current: {current_value}): ").strip()
                             if new_value:
                                 setattr(edit_ticket, attribute, new_value)
                         self.ui.logic_api.ticket_edit(edit_ticket)

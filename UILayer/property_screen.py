@@ -166,7 +166,7 @@ class PropertyScreen(BaseScreen):
 
                     # First present the available destinations
                     print(destination_table)
-                    print("If nothing is input, the field will be unchanged")
+                    
 
                     # Then get the new data from the user
                     # if nothing is input, the field will be left unchanged
