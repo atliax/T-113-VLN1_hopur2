@@ -142,7 +142,7 @@ class DestinationScreen(BaseScreen):
                     print("Leave empty if you wish to not change.")
                     for attribute in destination_attributes:
                         current_value = getattr(destination_edit, attribute)
-                        new_value = input(f"New {attribute} (current: {current_value}): ").strip()
+                        new_value = input(f"New {attribute} (current: {current_value}): ").upper().strip()
                         
                         if attribute == "managerID" and new_value:
                             
