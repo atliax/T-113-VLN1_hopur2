@@ -36,7 +36,7 @@ class ContractorScreen(BaseScreen):
             else:
                 contractor_list = self.ui.logic_api.contractor_get_all()
         except Exception as e:
-            print(f"Error getting contractors: {e}")
+            print(f"Error getting contractors: {type(e).__name__}: {e}")
             print("Could not load contractor list. Try again.")
             input("Press enter to go back.")
             return ui_consts.CMD_BACK
@@ -48,7 +48,7 @@ class ContractorScreen(BaseScreen):
             try:
                 contractor_destination = self.ui.logic_api.destination_get_by_ID(contractor.destinationID)
             except Exception as e:
-                print(f"Error loading destination data for contractor '{contractor.ID}': {e}")
+                print(f"Error loading destination data for contractor '{contractor.ID}': {type(e).__name__}: {e}")
                 print("Error displaying contractor details.")
                 input("Press enter to go back.")
                 return ui_consts.CMD_BACK
@@ -87,7 +87,7 @@ class ContractorScreen(BaseScreen):
         try:
             all_destinations = self.ui.logic_api.destination_get_all()
         except Exception as e:
-            print(f"Error loading destination data: {e}")
+            print(f"Error loading destination data: {type(e).__name__}: {e}")
             print("Could not load destinations. Try again.")
             input("Press enter to go back.")
             return ui_consts.CMD_BACK
@@ -143,7 +143,7 @@ class ContractorScreen(BaseScreen):
                     try:
                         self.ui.logic_api.contractor_add(new_contractor)
                     except Exception as e:
-                        print(f"Error adding contractor: {e}")
+                        print(f"Error adding contractor: {type(e).__name__}: {e}")
                         print("Could not add contractor. Please try again.")
                         input("Press enter to continue.")
             # Remove a contractor
@@ -154,7 +154,7 @@ class ContractorScreen(BaseScreen):
                     try:
                         self.ui.logic_api.contractor_remove(remove_id)
                     except Exception as e:
-                        print(f"Error removing contractor: {e}")
+                        print(f"Error removing contractor: {type(e).__name__}: {e}")
                         print("Could not remove contractor. Try again.")
                         input("Press enter to continue: ")
             # View contact info
@@ -166,7 +166,7 @@ class ContractorScreen(BaseScreen):
                     try:
                         contact_by_id = self.ui.logic_api.contractor_get_by_ID(view_contact)
                     except Exception as e:
-                        print(f"Error loading contractor info: {e}")
+                        print(f"Error loading contractor info: {type(e).__name__}: {e}")
                         print("Could not load contractor information. Try again.")
                         input("Press enter to continue.")
                         return self
@@ -193,7 +193,7 @@ class ContractorScreen(BaseScreen):
                             contractor_edit = self.ui.logic_api.contractor_get_by_ID(edit_with_id)
 
                         except Exception as e:
-                            print(f"Error loading contractor info: {e}")
+                            print(f"Error loading contractor info: {type(e).__name__}: {e}")
                             print("Could not load contractor information. Try again.")
                             input("Press enter to continue.")
                             return self
@@ -237,7 +237,7 @@ class ContractorScreen(BaseScreen):
                     try:
                         self.ui.logic_api.contractor_edit(contractor_edit)
                     except Exception as e:
-                        print(f"Error editing contractor: {e}")
+                        print(f"Error editing contractor: {type(e).__name__}: {e}")
                         print("Could not edit contractor. Try again.")
                         input("Press enter to continue.")
             # Search for contractor
