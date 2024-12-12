@@ -83,7 +83,7 @@ class DestinationScreen(BaseScreen):
             case "p":
                 self.current_page -= 1
             # Add a destination
-            case "a":  
+            case "a": 
                 if self.ui.logic_api.is_manager_logged_in():
                     destination_attributes = ["country", "airport", "phone", "opening_hours"]
                     new_destination = []
@@ -102,12 +102,16 @@ class DestinationScreen(BaseScreen):
 
                     try:
                         self.ui.logic_api.destination_add(tmp)
-                        print("New destination added successfully.")
                     except Exception as e:
                         print(f"Error adding new destination:")
                         print(f"{type(e).__name__}: {e}")
                         input("Press enter to continue.")
                         return self
+
+                    
+                    print("New destination added successfully.")
+                    print("Please navigate to the staff menu and add a manager for this location.")
+                    input("Press enter to continue.")
                 else:
                     print("You don't have permission to do that.")
                     input("Press enter to continue.")
@@ -119,14 +123,14 @@ class DestinationScreen(BaseScreen):
                     destination_attributes = ["managerID", "country", "airport", "phone", "opening_hours"]
 
                     while destination_edit is None:
-                        pick_destination = input("Type in the id of the destination you want to edit: ").upper()
+                        pick_destination = input("Type in the ID of the destination you want to edit (B to return): ").upper()
                         if pick_destination == "B":
                             return self
 
                         try:
                             destination_edit = self.ui.logic_api.destination_get_by_ID(pick_destination)
                         except Exception as e:
-                            print(f"Error adding loading destination '{pick_destination}':")
+                            print(f"Error loading destination '{pick_destination}':")
                             print(f"{type(e).__name__}: {e}")
                             input("Press enter to continue.")
                             return self
@@ -135,23 +139,41 @@ class DestinationScreen(BaseScreen):
                             print("Destination not found, try again (B to return)")
                             continue
 
-                        print ("Leave empty if you wish to not change ")
-                        for attribute in destination_attributes:
-                            current_value = getattr(destination_edit, attribute)
-                            new_value = input(f"New {attribute} (current: {current_value}): ").strip()
-                            if new_value:
-                                setattr(destination_edit, attribute, new_value)
-                        try:
-                            self.ui.logic_api.destination_edit(destination_edit)
-                        except Exception as e:
-                            print(f"Error editing destination '{pick_destination}':")
-                            print(f"{type(e).__name__}: {e}")
-                            input("Press enter to continue.")
-                            return self
+                    print("Leave empty if you wish to not change.")
+                    for attribute in destination_attributes:
+                        current_value = getattr(destination_edit, attribute)
+                        new_value = input(f"New {attribute} (current: {current_value}): ").strip()
+                        
+                        if attribute == "managerID" and new_value:
+                            
+                            manager_ids = [manager.ID for manager in self.ui.logic_api.staff_list_managers()]
+                            while new_value not in manager_ids:
+                                print(f"Invalid manager ID: {new_value}. Please provide a valid manager ID.")
+                                new_value = input(f"New {attribute} (current: {current_value}): ").strip()
+                        
+                        elif attribute == "phone" and new_value:
+                            
+                            while not ((new_value.startswith('+') and new_value[1:].isdigit()) or new_value.isdigit()):
+                                print("Phone number must contain only numbers or start with a single '+' followed by numbers.")
+                                new_value = input(f"New {attribute} (current: {current_value}): ").strip()
+
+                        if new_value:
+                            setattr(destination_edit, attribute, new_value)
+
+                    try:
+                        self.ui.logic_api.destination_edit(destination_edit)
+                        print("Destination updated successfully.")
+                        input("Press enter to continue.")
+                    except Exception as e:
+                        print(f"Error editing destination '{pick_destination}':")
+                        print(f"{type(e).__name__}: {e}")
+                        input("Press enter to continue.")
+                        return self
                 else:
                     print("You don't have permission to do that.")
                     input("Press enter to continue.")
-            # Go back
+
+              
             case "b":
                 return ui_consts.CMD_BACK
 
