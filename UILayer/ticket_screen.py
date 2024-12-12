@@ -12,8 +12,8 @@ from UILayer import ui_consts
 from Model import Ticket
 
 class TicketScreen(BaseScreen):
-    def __init__(self, ui) -> None:
-        super().__init__(ui)
+    def __init__(self, logic_api) -> None:
+        super().__init__(logic_api)
         self.current_page = -1
         self.active_search_filter = ""
 
@@ -25,7 +25,7 @@ class TicketScreen(BaseScreen):
         print(ui_consts.SEPERATOR)
         print("|")
 
-        if self.ui.logic_api.is_manager_logged_in():
+        if self.logic_api.is_manager_logged_in():
             print("|	[A] Add a ticket		[E] Edit/Process			[B] Go back")
             print("|	[R] Remove a ticket		[S] Search for")
             print("|	[V] View closed tickets		[D] Ticket details")
@@ -42,25 +42,25 @@ class TicketScreen(BaseScreen):
         property_names = {}
         staff_names = {}
 
-        all_tickets = self.ui.logic_api.ticket_get_all() # fyrir edit og view og svona, mögulega ekki sniðugt
+        all_tickets = self.logic_api.ticket_get_all() # fyrir edit og view og svona, mögulega ekki sniðugt
 
         if self.active_search_filter:
-            ticket_list = self.ui.logic_api.ticket_search(self.active_search_filter)
+            ticket_list = self.logic_api.ticket_search(self.active_search_filter)
         else:
-            ticket_list = self.ui.logic_api.ticket_get_all()
+            ticket_list = self.logic_api.ticket_get_all()
 
         all_tickets_table = PrettyTable()
         all_tickets_table.field_names = ["ID", "Property", "Facility", "Title", "Priority", "Status"]
 
         for ticket in ticket_list:
-            ticket_property = self.ui.logic_api.property_get_by_ID(ticket.propertyID)
+            ticket_property = self.logic_api.property_get_by_ID(ticket.propertyID)
             if ticket.facilityID == None:
                 facility_name = "None"
             else:
-                ticket_facility = self.ui.logic_api.facility_get_by_ID(ticket.facilityID)
+                ticket_facility = self.logic_api.facility_get_by_ID(ticket.facilityID)
                 facility_name = ticket_facility.name
 
-            ticket_staff = self.ui.logic_api.staff_get_by_ID(ticket.staffID)
+            ticket_staff = self.logic_api.staff_get_by_ID(ticket.staffID)
             if ticket_staff is None:
                 staff_name = "No staff assigned"
             else:
@@ -94,7 +94,7 @@ class TicketScreen(BaseScreen):
         print("")
         cmd = input("Command: ").lower()
 
-        properties = self.ui.logic_api.property_get_all()
+        properties = self.logic_api.property_get_all()
         property_table = PrettyTable()
         property_table.field_names = ["Property ID","Name","Destination","Type"]
         for property in properties:
@@ -119,14 +119,14 @@ class TicketScreen(BaseScreen):
 
                 # choose property with verification
                 new_property_id = input("Property ID of ticket: ").upper()
-                validated = self.ui.logic_api.validate_property(new_property_id)
+                validated = self.logic_api.validate_property(new_property_id)
                 while not validated:
                     print ("No such property")
                     new_property_id = input("(B) to cancel or Property ID of ticket: ").upper()
                     if new_property_id == "B":
                         return self
-                    validated = self.ui.logic_api.validate_property(new_property_id)
-                tmp = self.ui.logic_api.facility_get_by_propertyID(new_property_id)
+                    validated = self.logic_api.validate_property(new_property_id)
+                tmp = self.logic_api.facility_get_by_propertyID(new_property_id)
 
                 #Choose facility with verification
                 if len(tmp) == 0:
@@ -140,13 +140,13 @@ class TicketScreen(BaseScreen):
                     print(facility_table) 
 
                     new_ticket_facility_id = input("ID of facility for ticket: ").upper()
-                    verified = self.ui.logic_api.facility_validate(new_ticket_facility_id, tmp)
+                    verified = self.logic_api.facility_validate(new_ticket_facility_id, tmp)
                     while not verified:
                         print ("No such facility at this property")
                         new_ticket_facility_id = input("(B) to cancel or ID of facility for ticket: ").upper()
                         if new_ticket_facility_id == "B":
                             return self
-                        verified = self.ui.logic_api.facility_validate(new_ticket_facility_id, tmp)
+                        verified = self.logic_api.facility_validate(new_ticket_facility_id, tmp)
 
                 while not new_ticket_title:
                     new_ticket_title = input("New ticket title: ").strip()
@@ -172,13 +172,13 @@ class TicketScreen(BaseScreen):
                     new_recurring = int(input("Recur every N days (0 = never): "))
 
                 new_ticket = Ticket(None, new_ticket_facility_id, new_property_id, new_priority, new_ticket_title, new_description,None, None, None, new_recurring , new_date, None, None, None, None, None, None, None, None)
-                self.ui.logic_api.ticket_add(new_ticket)
+                self.logic_api.ticket_add(new_ticket)
 
             case "r":    # Remove a ticket
-                if self.ui.logic_api.is_manager_logged_in():
+                if self.logic_api.is_manager_logged_in():
                     remove_ticket = input("Remove ticket with ID: ").upper()
                     try:
-                        self.ui.logic_api.ticket_remove(remove_ticket)
+                        self.logic_api.ticket_remove(remove_ticket)
                     except Exception as e:
                         print(f"Error removing ticket '{remove_ticket}':")
                         print(f"{type(e).__name__}: {e}")
@@ -196,7 +196,7 @@ class TicketScreen(BaseScreen):
                 while ticket_by_id is None:
                     view_ticket = input("Type in ID of ticket for details: ").upper()
 
-                    ticket_by_id = self.ui.logic_api.ticket_get_by_ID(view_ticket)
+                    ticket_by_id = self.logic_api.ticket_get_by_ID(view_ticket)
                     
                     if ticket_by_id is None:
                         print(f"No ticket with the ID: '{view_ticket}', try again (B to cancel).")
@@ -249,7 +249,7 @@ class TicketScreen(BaseScreen):
                     if edit_ticket == "B":
                         return self
 
-                    edit_ticket = self.ui.logic_api.ticket_get_by_ID(pick_ticket)
+                    edit_ticket = self.logic_api.ticket_get_by_ID(pick_ticket)
 
                     if edit_ticket is not None:
                         for attribute in ticket_attributes:
@@ -257,7 +257,7 @@ class TicketScreen(BaseScreen):
                             new_value = input(f"New {attribute} (Current: {current_value}): ").strip()
                             if new_value:
                                 setattr(edit_ticket, attribute, new_value)
-                        self.ui.logic_api.ticket_edit(edit_ticket)
+                        self.logic_api.ticket_edit(edit_ticket)
 
                     else:
                         print(f"No ticket with the ID: '{view_ticket}', try again (B to cancel).")

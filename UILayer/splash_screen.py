@@ -3,8 +3,8 @@ from UILayer.base_screen import BaseScreen
 from UILayer import ui_consts
 
 class SplashScreen(BaseScreen):
-    def __init__(self, ui) -> None:
-        super().__init__(ui)
+    def __init__(self, logic_api) -> None:
+        super().__init__(logic_api)
 
     def run(self):
         self.clear_screen()

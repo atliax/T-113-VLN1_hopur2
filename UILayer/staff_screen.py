@@ -9,8 +9,8 @@ from UILayer import ui_consts
 from Model import Staff
 
 class StaffScreen(BaseScreen):
-    def __init__(self, ui) -> None:
-        super().__init__(ui)
+    def __init__(self, logic_api) -> None:
+        super().__init__(logic_api)
         self.current_page = -1
         self.active_search_filter = ""
 
@@ -22,7 +22,7 @@ class StaffScreen(BaseScreen):
         print(ui_consts.SEPERATOR)
         print("|")
 
-        if self.ui.logic_api.is_manager_logged_in():
+        if self.logic_api.is_manager_logged_in():
             print("|	[A] Add an employee		[E] Edit an employee			[B] Go back")
             print("|	[R] Remove an employee		[S] Search for")
             print("|	[V] View contact info		[C] View contractors")
@@ -36,9 +36,9 @@ class StaffScreen(BaseScreen):
 
         try:
             if self.active_search_filter:
-                staff_list = self.ui.logic_api.staff_search(self.active_search_filter)
+                staff_list = self.logic_api.staff_search(self.active_search_filter)
             else:
-                staff_list = self.ui.logic_api.staff_get_all()
+                staff_list = self.logic_api.staff_get_all()
         except Exception as e:
             print(f"Error getting employee: {type(e).__name__}: {e}")
             print("Could not load employee list. Try again.")
@@ -50,7 +50,7 @@ class StaffScreen(BaseScreen):
 
         for employee in staff_list:
             try:
-                employee_destination = self.ui.logic_api.destination_get_by_ID(employee.destinationID.upper())
+                employee_destination = self.logic_api.destination_get_by_ID(employee.destinationID.upper())
             except Exception as e:
                 print(f"Error loading destination data for employee '{employee.ID}': {type(e).__name__}: {e}")
                 print("Error displaying employee details.")
@@ -88,7 +88,7 @@ class StaffScreen(BaseScreen):
 
         # construct a table of destinations for use with the "add" and "edit" commands
         try:    
-            destinations = self.ui.logic_api.destination_get_all()
+            destinations = self.logic_api.destination_get_all()
         except Exception as e:
             print(f"Error loading destination data: {e}")
             print("Could not load destinations. Try again.")
@@ -109,7 +109,7 @@ class StaffScreen(BaseScreen):
                 self.current_page -= 1
             # Add an employee
             case "a":
-                if self.ui.logic_api.is_manager_logged_in():
+                if self.logic_api.is_manager_logged_in():
                     print(destination_table)
                     while True:
                         try:
@@ -119,7 +119,7 @@ class StaffScreen(BaseScreen):
                                 return self 
 
                             
-                            if not self.ui.logic_api.destination_get_by_ID(new_destination):
+                            if not self.logic_api.destination_get_by_ID(new_destination):
                                 raise ValueError(f"No destination found with the ID: '{new_destination}'")
                             break  
 
@@ -158,7 +158,7 @@ class StaffScreen(BaseScreen):
                     )
 
                     try:
-                        self.ui.logic_api.staff_add(new_staff)
+                        self.logic_api.staff_add(new_staff)
                     except Exception as e:
                         print(f"Error removing employee: {type(e).__name__}: {e}")
                         print("Could not remove employee. Try again.")
@@ -169,9 +169,9 @@ class StaffScreen(BaseScreen):
 
             #[R] to remove staff
             case "r":
-                if self.ui.logic_api.is_manager_logged_in():
+                if self.logic_api.is_manager_logged_in():
                     remove_id = input("Remove employee with the ID: ").upper()
-                    self.ui.logic_api.staff_remove(remove_id)
+                    self.logic_api.staff_remove(remove_id)
                 else:
                     print("You don't have permission to do that.")
                     input("Press enter to continue.")
@@ -182,7 +182,7 @@ class StaffScreen(BaseScreen):
                 while contact_by_id is None:
                     view_contact = input("View the contact information of employee with the ID: ").upper()
 
-                    contact_by_id = self.ui.logic_api.staff_get_by_ID(view_contact)
+                    contact_by_id = self.logic_api.staff_get_by_ID(view_contact)
 
                     if contact_by_id is None:
                         print(f"No employee with the ID: '{view_contact}', try again (B to cancel).")
@@ -196,7 +196,7 @@ class StaffScreen(BaseScreen):
                 input("Press enter to continue.")
             # [E] to Edit an employee
             case "e":
-                if self.ui.logic_api.is_manager_logged_in():
+                if self.logic_api.is_manager_logged_in():
                     staff_edit = None
                     staff_attributes = ["destinationID", "name", "address", "phone_home", "phone_gsm", "email", "password", "job_title", "is_manager"]
 
@@ -210,7 +210,7 @@ class StaffScreen(BaseScreen):
                         
 
                         try:
-                            staff_edit = self.ui.logic_api.staff_get_by_ID(edit_with_id)
+                            staff_edit = self.logic_api.staff_get_by_ID(edit_with_id)
                         except Exception as e:
                             print(f"Error loading employee info: {type(e).__name__}: {e}")
                             print("Could not load employee information. Try again.")
@@ -231,7 +231,7 @@ class StaffScreen(BaseScreen):
                                 return self 
 
                             
-                            if not self.ui.logic_api.destination_get_by_ID(new_destinationID):
+                            if not self.logic_api.destination_get_by_ID(new_destinationID):
                                 raise ValueError(f"No destination found with the ID: '{new_destinationID}'")
                             break  
 
@@ -274,7 +274,7 @@ class StaffScreen(BaseScreen):
                         setattr(staff_edit, attribute, new_value)
 
                     try:
-                        self.ui.logic_api.staff_edit(staff_edit)
+                        self.logic_api.staff_edit(staff_edit)
                     except Exception as e:
                         print(f"Error editing employee: {type(e).__name__}: {e}")
                         print("Could not edit employee. Try again.")

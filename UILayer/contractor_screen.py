@@ -10,8 +10,8 @@ from UILayer import ui_consts
 from Model import Contractor
 
 class ContractorScreen(BaseScreen):
-    def __init__(self, ui) -> None:
-        super().__init__(ui)
+    def __init__(self, logic_api) -> None:
+        super().__init__(logic_api)
         self.current_page = -1
         self.active_search_filter = ""
 
@@ -23,7 +23,7 @@ class ContractorScreen(BaseScreen):
         print(ui_consts.SEPERATOR)
         print("|")
 
-        if self.ui.logic_api.is_manager_logged_in():
+        if self.logic_api.is_manager_logged_in():
             print("|	[A] Add a contractor		[E] Edit a contractor			[B] Go back")
             print("|	[R] Remove a contractor		[S] Search for")
             print("|	[V] View contact info")
@@ -37,9 +37,9 @@ class ContractorScreen(BaseScreen):
 
         try:
             if self.active_search_filter:
-                contractor_list = self.ui.logic_api.contractor_search(self.active_search_filter)
+                contractor_list = self.logic_api.contractor_search(self.active_search_filter)
             else:
-                contractor_list = self.ui.logic_api.contractor_get_all()
+                contractor_list = self.logic_api.contractor_get_all()
         except Exception as e:
             print(f"Error loading contractor list:")
             print(f"{type(e).__name__}: {e}")
@@ -60,7 +60,7 @@ class ContractorScreen(BaseScreen):
 
         for contractor in contractor_list:
             try:
-                contractor_destination = self.ui.logic_api.destination_get_by_ID(contractor.destinationID)
+                contractor_destination = self.logic_api.destination_get_by_ID(contractor.destinationID)
             except Exception as e:
                 print(f"Error loading destination data for contractor '{contractor.ID}':")
                 print(f"{type(e).__name__}: {e}")
@@ -89,7 +89,7 @@ class ContractorScreen(BaseScreen):
         cmd = input("Command: ").lower()
 
         try:
-            all_destinations = self.ui.logic_api.destination_get_all()
+            all_destinations = self.logic_api.destination_get_all()
         except Exception as e:
             print(f"Error loading destination data: {type(e).__name__}: {e}")
             print("Could not load destinations. Try again.")
@@ -111,12 +111,12 @@ class ContractorScreen(BaseScreen):
                 self.current_page -= 1
             # Add a contractor
             case "a":
-                if self.ui.logic_api.is_manager_logged_in():
+                if self.logic_api.is_manager_logged_in():
                     print(all_destinations_table)
 
                     input_prompt = "Enter destination ID for new contractor (B to cancel): "
                     try:
-                        while not self.ui.logic_api.destination_get_by_ID(new_destination := input(input_prompt).upper()):
+                        while not self.logic_api.destination_get_by_ID(new_destination := input(input_prompt).upper()):
                             if new_destination == "B":
                                 return self
                             print(f"No destination found with the ID: '{new_destination}'")
@@ -143,7 +143,7 @@ class ContractorScreen(BaseScreen):
                     new_contractor = Contractor(None, new_destination, add_rating, add_contractor, add_contact, add_phone, add_address, add_opening_hours, add_type)
 
                     try:
-                        self.ui.logic_api.contractor_add(new_contractor)
+                        self.logic_api.contractor_add(new_contractor)
                     except Exception as e:
                         print(f"Error adding contractor '{add_contractor}':")
                         print(f"{type(e).__name__}: {e}")
@@ -154,11 +154,11 @@ class ContractorScreen(BaseScreen):
                     input("Press enter to continue.")
             # Remove a contractor
             case "r":
-                if self.ui.logic_api.is_manager_logged_in():
+                if self.logic_api.is_manager_logged_in():
                     remove_id = input("Remove contractor with the ID: ").upper()
 
                     try:
-                        self.ui.logic_api.contractor_remove(remove_id)
+                        self.logic_api.contractor_remove(remove_id)
                     except Exception as e:
                         print(f"Error removing contractor: {type(e).__name__}: {e}")
                         print("Could not remove contractor. Try again.")
@@ -173,7 +173,7 @@ class ContractorScreen(BaseScreen):
                 while contact_by_id is None:
                     view_contact = input("View the contact information of contractor with the ID: ").upper()
                     try:
-                        contact_by_id = self.ui.logic_api.contractor_get_by_ID(view_contact)
+                        contact_by_id = self.logic_api.contractor_get_by_ID(view_contact)
                     except Exception as e:
                         print(f"Error loading contractor info: {type(e).__name__}: {e}")
                         print("Could not load contractor information. Try again.")
@@ -193,14 +193,14 @@ class ContractorScreen(BaseScreen):
                 input("Press enter to continue.")
             # Edit contractor
             case "e":
-                if self.ui.logic_api.is_manager_logged_in():
+                if self.logic_api.is_manager_logged_in():
                     contractor_edit = None
 
                     while contractor_edit is None:
                         edit_with_id = input("Edit contractor with the ID: ").upper()
 
                         try:
-                            contractor_edit = self.ui.logic_api.contractor_get_by_ID(edit_with_id)
+                            contractor_edit = self.logic_api.contractor_get_by_ID(edit_with_id)
 
                         except Exception as e:
                             print(f"Error loading contractor info: {type(e).__name__}: {e}")
@@ -218,7 +218,7 @@ class ContractorScreen(BaseScreen):
 
                     input_prompt = "Enter new destination ID for the contractor (B to cancel): "
                     try:
-                        while not self.ui.logic_api.destination_get_by_ID(new_destinationID := input(input_prompt).upper()):
+                        while not self.logic_api.destination_get_by_ID(new_destinationID := input(input_prompt).upper()):
                             if new_destinationID == "B":
                                 return self
                             print(f"No destination found with the ID: '{new_destinationID}'")
@@ -250,7 +250,7 @@ class ContractorScreen(BaseScreen):
                         setattr(contractor_edit, attribute, new_value)
 
                     try:
-                        self.ui.logic_api.contractor_edit(contractor_edit)
+                        self.logic_api.contractor_edit(contractor_edit)
                     except Exception as e:
                         print(f"Error editing contractor '{contractor_edit.ID}':")
                         print(f"{type(e).__name__}: {e}")

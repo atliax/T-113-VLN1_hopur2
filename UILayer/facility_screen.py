@@ -12,8 +12,8 @@ from UILayer import ui_consts
 from Model import Facility
 
 class FacilityScreen(BaseScreen):
-    def __init__(self, ui) -> None:
-        super().__init__(ui)
+    def __init__(self, logic_api) -> None:
+        super().__init__(logic_api)
         self.current_page = -1
         self.active_search_filter = ""
 
@@ -25,7 +25,7 @@ class FacilityScreen(BaseScreen):
         print(ui_consts.SEPERATOR)
         print("|")
 
-        if self.ui.logic_api.is_manager_logged_in():
+        if self.logic_api.is_manager_logged_in():
             print("|	[A] Add a facility		[E] Edit a facility			[B] Go back")
             print("|	[R] Remove a facility		[S] Search for")
             print("|	[V] View details")
@@ -37,14 +37,14 @@ class FacilityScreen(BaseScreen):
         print("|")
         print(ui_consts.SEPERATOR)
 
-        propertyID = self.ui.logic_api.facility_get_selected_property()
+        propertyID = self.logic_api.facility_get_selected_property()
         print(f"Viewing facilities for Property ID: {propertyID}")
         
 
         if self.active_search_filter:
-            facility_list = self.ui.logic_api.facility_search(self.active_search_filter)
+            facility_list = self.logic_api.facility_search(self.active_search_filter)
         else:
-            facility_list = self.ui.logic_api.facility_get_by_propertyID(propertyID)
+            facility_list = self.logic_api.facility_get_by_propertyID(propertyID)
 
         facilities_table = PrettyTable()
         facilities_table.field_names = ["ID","Name","Description"]
@@ -82,14 +82,14 @@ class FacilityScreen(BaseScreen):
             # Add a facility
             case "a":
                 try:
-                    if self.ui.logic_api.is_manager_logged_in():
+                    if self.logic_api.is_manager_logged_in():
                         while (f_new_name := input("New facility name: ")) == "":
                             print("Facility name can't be empty.")
 
                         f_new_description = input("New facility description: ")
 
                         new_facility = Facility(None, propertyID, f_new_name, f_new_description)
-                        self.ui.logic_api.facility_add(new_facility)
+                        self.logic_api.facility_add(new_facility)
                     else:
                         print("You don't have permission to do that.")
                         input("Press enter to continue.")
@@ -101,16 +101,16 @@ class FacilityScreen(BaseScreen):
             # Remove a facility
             case "r":
                 try:
-                    if self.ui.logic_api.is_manager_logged_in():
+                    if self.logic_api.is_manager_logged_in():
                         remove_id = input("Remove facility that has the ID (B to cancel): ").strip().upper()
 
                         if remove_id == "B":
                             return self
 
-                        facility_to_remove = self.ui.logic_api.facility_get_by_ID(remove_id)
+                        facility_to_remove = self.logic_api.facility_get_by_ID(remove_id)
 
                         if facility_to_remove is not None:
-                            self.ui.logic_api.facility_remove(remove_id)
+                            self.logic_api.facility_remove(remove_id)
                         else:
                             print(f"No facility found with the ID: '{remove_id}'.")
                     else:
@@ -130,7 +130,7 @@ class FacilityScreen(BaseScreen):
                     return self
 
                 try:
-                    facility_by_id = self.ui.logic_api.facility_get_by_ID(view_facility)
+                    facility_by_id = self.logic_api.facility_get_by_ID(view_facility)
 
                     if facility_by_id is None:
                         print(f"No facility with the ID: '{view_facility}'.")
@@ -149,7 +149,7 @@ class FacilityScreen(BaseScreen):
 
             # Edit a facility
             case "e":
-                if self.ui.logic_api.is_manager_logged_in():
+                if self.logic_api.is_manager_logged_in():
                     f_edit_facility = None
                     while f_edit_facility is None:
                         f_edit_facility_id = input("Edit the facility with the ID (B to cancel): ").strip().upper()
@@ -157,7 +157,7 @@ class FacilityScreen(BaseScreen):
                         if f_edit_facility_id == "B":
                             return self
 
-                        f_edit_facility = self.ui.logic_api.facility_get_by_ID(f_edit_facility_id)
+                        f_edit_facility = self.logic_api.facility_get_by_ID(f_edit_facility_id)
 
                         if f_edit_facility is None:
                             print(f"No facility with the ID: '{f_edit_facility_id}'.")
@@ -172,7 +172,7 @@ class FacilityScreen(BaseScreen):
                             if new_value:
                                 setattr(f_edit_facility, attribute, new_value)
 
-                    self.ui.logic_api.facility_edit(f_edit_facility)
+                    self.logic_api.facility_edit(f_edit_facility)
                 else:
                     print("You don't have permission to do that.")
                     input("Press enter to continue.")

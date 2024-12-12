@@ -7,4 +7,4 @@ from Model.property import Property
 from Model.staff import Staff
 from Model.ticket import Ticket
 
-__all__ = ['Facility','Contractor','Destination','Property','Staff','Ticket','BaseModel']
+__all__ = ['BaseModel','Facility','Contractor','Destination','Property','Staff','Ticket']

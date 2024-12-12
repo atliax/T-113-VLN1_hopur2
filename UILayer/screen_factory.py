@@ -11,26 +11,31 @@ from UILayer.facility_screen import FacilityScreen
 from UILayer import ui_consts
 
 class ScreenFactory:
-    def __init__(self, ui):
-        self.ui = ui
+    """Class to handle creation of BaseScreen child class instances."""
+    def __init__(self, logic_api):
+        self.logic_api = logic_api
 
-    def create_screen(self, screen_name):
+    def create_screen(self, screen_name : str):
+        """Creates an instance of the requested screen based on its string ID.
+        Deliberately no return type hint since it would be too messy."""
         match screen_name:
             case ui_consts.CONTRACTOR_SCREEN:
-                return ContractorScreen(self.ui)
+                return ContractorScreen(self.logic_api)
             case ui_consts.DESTINATION_SCREEN:
-                return DestinationScreen(self.ui)
+                return DestinationScreen(self.logic_api)
             case ui_consts.FACILITY_SCREEN:
-                return FacilityScreen(self.ui)
+                return FacilityScreen(self.logic_api)
             case ui_consts.LOGIN_SCREEN:
-                return LoginScreen(self.ui)
+                return LoginScreen(self.logic_api)
             case ui_consts.MAIN_MENU_SCREEN:
-                return MainMenuScreen(self.ui)
+                return MainMenuScreen(self.logic_api)
             case ui_consts.PROPERTY_SCREEN:
-                return PropertyScreen(self.ui)
+                return PropertyScreen(self.logic_api)
             case ui_consts.SPLASH_SCREEN:
-                return SplashScreen(self.ui)
+                return SplashScreen(self.logic_api)
             case ui_consts.STAFF_SCREEN:
-                return StaffScreen(self.ui)
+                return StaffScreen(self.logic_api)
             case ui_consts.TICKET_SCREEN:
-                return TicketScreen(self.ui)
+                return TicketScreen(self.logic_api)
+            case _:
+                return None

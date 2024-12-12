@@ -5,8 +5,8 @@ from UILayer.base_screen import BaseScreen
 from UILayer import ui_consts
 
 class LoginScreen(BaseScreen):
-    def __init__(self, ui) -> None:
-        super().__init__(ui)
+    def __init__(self, logic_api) -> None:
+        super().__init__(logic_api)
         self.user_note = ""
 
     def run(self):
@@ -35,7 +35,7 @@ class LoginScreen(BaseScreen):
         email = "Boss"
         password = "Man"
 
-        if self.ui.logic_api.authenticate_login(email,password):
+        if self.logic_api.authenticate_login(email,password):
             self.user_note = ""
             return ui_consts.MAIN_MENU_SCREEN
         else:

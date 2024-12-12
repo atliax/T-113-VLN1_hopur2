@@ -3,13 +3,13 @@ from UILayer.base_screen import BaseScreen
 from UILayer import ui_consts
 
 class MainMenuScreen(BaseScreen):
-    def __init__(self, ui):
-        super().__init__(ui)
+    def __init__(self, logic_api):
+        super().__init__(logic_api)
 
     def run(self):
         self.clear_screen()
 
-        logged_in_user = self.ui.logic_api.get_logged_in_staff()
+        logged_in_user = self.logic_api.get_logged_in_staff()
 
         print("Main Menu")
         print(ui_consts.SEPERATOR)
@@ -41,16 +41,29 @@ class MainMenuScreen(BaseScreen):
         cmd = input("Command: ").lower()
 
         match cmd:
+
+            # [P] Properties
             case "p":
                 return ui_consts.PROPERTY_SCREEN
+
+            # [T] Tickets
             case "t":
                 return ui_consts.TICKET_SCREEN
+
+            # [S] Staff
             case "s":
                 return ui_consts.STAFF_SCREEN
+
+            # [D] Destinations
             case "d":
                 return ui_consts.DESTINATION_SCREEN
+
+            # [L] Log out
             case "l":
+                self.logic_api.logout()
                 return ui_consts.CMD_LOGOUT
+
+            # [X] Exit
             case "x":
                 return ui_consts.CMD_QUIT
 
