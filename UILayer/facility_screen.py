@@ -1,12 +1,14 @@
+# standard library imports
 import math
 from textwrap import fill
 
+# pip library imports
 from prettytable import PrettyTable
 from prompt_toolkit import print_formatted_text, HTML
 
+# local imports
 from UILayer.base_screen import BaseScreen
 from UILayer import ui_consts
-from textwrap import fill
 from Model import Facility
 
 class FacilityScreen(BaseScreen):
