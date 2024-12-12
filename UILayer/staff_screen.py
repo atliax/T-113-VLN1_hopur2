@@ -48,7 +48,13 @@ class StaffScreen(BaseScreen):
         staff_table.field_names = ["ID", "Name","Job title","Destination","SSN"]
 
         for employee in staff_list:
-            employee_destination = self.ui.logic_api.destination_get_by_ID(employee.destinationID.upper())
+            try:
+                employee_destination = self.ui.logic_api.destination_get_by_ID(employee.destinationID.upper())
+            except Exception as e:
+                print(f"Error loading destination data for contractor '{contractor.ID}': {e}")
+                print("Error displaying contractor details.")
+                input("Press enter to go back.")
+                return ui_consts.CMD_BACK
 
             if employee_destination is not None:
                 employee_destination_country = employee_destination.country
@@ -80,7 +86,14 @@ class StaffScreen(BaseScreen):
         cmd = input("Command: ").lower()
 
         # construct a table of destinations for use with the "add" and "edit" commands
-        destinations = self.ui.logic_api.destination_get_all()
+        try:    
+            destinations = self.ui.logic_api.destination_get_all()
+        except Exception as e:
+            print(f"Error loading destination data: {e}")
+            print("Could not load destinations. Try again.")
+            input("Press enter to go back.")
+            return ui_consts.CMD_BACK
+
         destination_table = PrettyTable()
         destination_table.field_names = ["Destination ID","Country","Airport"]
         for destination in destinations:
@@ -143,8 +156,12 @@ class StaffScreen(BaseScreen):
                         new_phone_nr, new_gsm, new_email, new_password, new_title, is_manager
                     )
 
-                    
-                    self.ui.logic_api.staff_add(new_staff)
+                    try:
+                        self.ui.logic_api.staff_add(new_staff)
+                    except Exception as e:
+                        print(f"Error removing employee: {e}")
+                        print("Could not remove employee. Try again.")
+                        input("Press enter to continue: ")                       
                 else:
                     print("You don't have permission to do that.")
                     input("Press enter to continue.")
@@ -191,7 +208,13 @@ class StaffScreen(BaseScreen):
                             # First display the available destinations
                         print(destination_table)
 
-                        staff_edit = self.ui.logic_api.staff_get_by_ID(edit_with_id)
+                        try:
+                            staff_edit = self.ui.logic_api.staff_get_by_ID(edit_with_id)
+                        except Exception as e:
+                            print(f"Error loading contractor info: {e}")
+                            print("Could not load contractor information. Try again.")
+                            input("Press enter to continue.")
+                            return self
 
                         if staff_edit is None:
                             print(f"No employee with the ID: '{edit_with_id}' try again (B to return).")
@@ -225,8 +248,13 @@ class StaffScreen(BaseScreen):
                         
                         setattr(staff_edit, attribute, new_value)
 
-                    
-                    self.ui.logic_api.staff_edit(staff_edit)
+                    try:
+                        self.ui.logic_api.staff_edit(staff_edit)
+                    except Exception as e:
+                        print(f"Error editing employee: {e}")
+                        print("Could not edit employee. Try again.")
+                        input("Press enter to continue.")  
+
                     print(f"Updated details for employee ID: {edit_with_id}")
                 else:
                     print("You don't have permission to do that.")

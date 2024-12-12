@@ -202,7 +202,7 @@ class ContractorScreen(BaseScreen):
                             print(f"No contractor with the ID: '{edit_with_id}' Try again (B to cancel).")
 
                         if edit_with_id == "B":
-                            return self
+                            return ui_consts.CMD_BACK
 
                     print(all_destinations_table)
 
