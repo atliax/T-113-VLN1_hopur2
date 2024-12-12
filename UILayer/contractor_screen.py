@@ -1,4 +1,5 @@
 import math
+from textwrap import fill
 
 from prettytable import PrettyTable
 from prompt_toolkit import print_formatted_text, HTML
@@ -40,8 +41,8 @@ class ContractorScreen(BaseScreen):
             else:
                 contractor_list = self.ui.logic_api.contractor_get_all()
         except Exception as e:
-            print(f"Error getting contractors: {type(e).__name__}: {e}")
-            print("Could not load contractor list. Try again.")
+            print(f"Error loading contractor list:")
+            print(f"{type(e).__name__}: {e}")
             input("Press enter to go back.")
             return ui_consts.CMD_BACK
         
@@ -52,8 +53,8 @@ class ContractorScreen(BaseScreen):
             try:
                 contractor_destination = self.ui.logic_api.destination_get_by_ID(contractor.destinationID)
             except Exception as e:
-                print(f"Error loading destination data for contractor '{contractor.ID}': {type(e).__name__}: {e}")
-                print("Error displaying contractor details.")
+                print(f"Error loading destination data for contractor '{contractor.ID}':")
+                print(f"{type(e).__name__}: {e}")
                 input("Press enter to go back.")
                 return ui_consts.CMD_BACK
 
@@ -62,7 +63,7 @@ class ContractorScreen(BaseScreen):
             else:
                 contractor_destination_country = "Not assigned"
 
-            contractor_table.add_row([contractor.ID, contractor.name, contractor.contractor_type, contractor_destination_country, contractor.contact, contractor.rating, contractor.opening_hours])
+            contractor_table.add_row([contractor.ID, fill(contractor.name,width=20), contractor.contractor_type, contractor_destination_country, contractor.contact, contractor.rating, contractor.opening_hours])
 
         contractor_table._min_table_width = ui_consts.TABLE_WIDTH
 
@@ -114,42 +115,41 @@ class ContractorScreen(BaseScreen):
                 if self.ui.logic_api.is_manager_logged_in():
                     print(all_destinations_table)
 
-                    while True:
-                        try:
-                            new_destination = input("Enter destination ID for new employee (B to cancel): ").upper()
-                            
+                    input_prompt = "Enter destination ID for new contractor (B to cancel): "
+                    try:
+                        while not self.ui.logic_api.destination_get_by_ID(new_destination := input(input_prompt).upper()):
                             if new_destination == "B":
-                                return self 
+                                return self
+                            print(f"No destination found with the ID: '{new_destination}'")
+                    except Exception as e:
+                        print(f"Error loading destination '{new_destination}' for new contractor:")
+                        print(f"{type(e).__name__}: {e}")
+                        input("Press enter to continue.")
+                        return self
 
-                            
-                            if not self.ui.logic_api.destination_get_by_ID(new_destination):
-                                raise ValueError(f"No destination found with the ID: '{new_destination}'")
-                            break  
-
-                        except ValueError as e:
-                            print(e)
-                            print("Please try again or type 'B' to go back.")
-                    # If ID does not exist in destination list, raise error "No destination found with that ID!"
-                    # Cancel command if destination ID is not found
                     add_contractor = input("New contractor name: ")
                     add_type = input("New contractor type: ")
                     add_rating = 0.0
                     add_contact = input("New contractor contact (optional): ")
-                    add_phone = input("New contractor phone number: ").replace(" ", "").replace("-", "")
-                    while not (add_phone.startswith("+") and add_phone[1:].isdigit() or add_phone.isdigit()):
-                        print("Phone number must contain only numbers or start with a single '+' followed by numbers.")
-                        add_phone = input("New contractor phone number: ").replace(" ", "").replace("-", "")
+
+                    phone_prompt = "New contractor phone number: "
+                    check_phone = "this string needs to contain letters :)"
+                    while not check_phone.isdigit():
+                        add_phone = input(phone_prompt)
+                        check_phone = add_phone.replace("+","").replace("-","").replace(" ","")
 
                     add_address = input("New contractor address: ")
                     add_opening_hours = (input("Add opening hours for contractor: "))
 
                     new_contractor = Contractor(None, new_destination, add_rating, add_contractor, add_contact, add_phone, add_address, add_opening_hours, add_type)
+
                     try:
                         self.ui.logic_api.contractor_add(new_contractor)
                     except Exception as e:
-                        print(f"Error adding contractor: {type(e).__name__}: {e}")
-                        print("Could not add contractor. Please try again.")
+                        print(f"Error adding contractor '{add_contractor}':")
+                        print(f"{type(e).__name__}: {e}")
                         input("Press enter to continue.")
+                        return self
                 else:
                     print("You don't have permission to do that.")
                     input("Press enter to continue.")
@@ -217,20 +217,17 @@ class ContractorScreen(BaseScreen):
 
                     print(all_destinations_table)
 
-                    while True:
-                        try:
-                            new_destinationID = input("Enter destination ID for contractor (B to go cancel): ").upper()
-                            
+                    input_prompt = "Enter new destination ID for the contractor (B to cancel): "
+                    try:
+                        while not self.ui.logic_api.destination_get_by_ID(new_destinationID := input(input_prompt).upper()):
                             if new_destinationID == "B":
-                                return self  
-
-                            if not self.ui.logic_api.destination_get_by_ID(new_destinationID):
-                                raise ValueError(f"No destination found with the ID: '{new_destinationID}'")
-                            break  
-
-                        except ValueError as e:
-                            print(e)
-                            print("Please try again or type 'B' to go back.")
+                                return self
+                            print(f"No destination found with the ID: '{new_destinationID}'")
+                    except Exception as e:
+                        print(f"Error loading destination '{new_destinationID}' while editing contractor '{edit_with_id}':")
+                        print(f"{type(e).__name__}: {e}")
+                        input("Press enter to continue.")
+                        return self
 
                     setattr(contractor_edit, "destinationID", new_destinationID)
                     print("Leave empty if you dont want to change.")
@@ -240,23 +237,26 @@ class ContractorScreen(BaseScreen):
                     for attribute in contractor_attributes:
                         current_value = getattr(contractor_edit, attribute)
                         
-                        new_value = input(f"New {attribute.capitalize()} (Current {current_value}): ").strip()
+                        new_value = input(f"New {attribute.capitalize().replace("_", " ")} (Current {current_value}): ").strip()
                         if not new_value:
                             continue
 
-                        if attribute in ["phone"]:
-                            while not ((new_value.startswith('+') and new_value[1:].isdigit()) or new_value.isdigit()):
-                                print("Phone number must contain only numbers or start with a single '+' followed by numbers.")
-                                new_value = input(f"New {attribute.capitalize()} (Current: {current_value}): ").strip()
+                        if attribute == "phone":
+                            check_phone = new_value.replace("+", "").replace("-", "").replace(" ", "")
+                            while not check_phone.isdigit():
+                                print("Phone number must contain only '+', '-', ' ' and numbers.")
+                                new_value = input(f"New {attribute.capitalize().replace("_", " ")} (Current {current_value}): ").strip()
+                                check_phone = new_value.replace("+", "").replace("-", "").replace(" ", "")
 
                         setattr(contractor_edit, attribute, new_value)
 
                     try:
                         self.ui.logic_api.contractor_edit(contractor_edit)
                     except Exception as e:
-                        print(f"Error editing contractor: {type(e).__name__}: {e}")
-                        print("Could not edit contractor. Try again.")
+                        print(f"Error editing contractor '{contractor_edit.ID}':")
+                        print(f"{type(e).__name__}: {e}")
                         input("Press enter to continue.")
+                        return self
                 else:
                     print("You don't have permission to do that.")
                     input("Press enter to continue.")
