@@ -42,7 +42,7 @@ class ContractorScreen(BaseScreen):
             return ui_consts.CMD_BACK
         
         contractor_table = PrettyTable()
-        contractor_table.field_names = ["ID", "Name","Type","Destination","Contact","Rating"]
+        contractor_table.field_names = ["ID", "Name","Type","Destination","Contact","Rating","Opening hours"]
 
         for contractor in contractor_list:
             try:
@@ -58,7 +58,7 @@ class ContractorScreen(BaseScreen):
             else:
                 contractor_destination_country = "Not assigned"
 
-            contractor_table.add_row([contractor.ID, contractor.name, contractor.contractor_type, contractor_destination_country, contractor.contact, contractor.rating])
+            contractor_table.add_row([contractor.ID, contractor.name, contractor.contractor_type, contractor_destination_country, contractor.contact, contractor.rating, contractor.opening_hours])
 
         contractor_table._min_table_width = ui_consts.TABLE_WIDTH
 
