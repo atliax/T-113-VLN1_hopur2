@@ -9,7 +9,7 @@ def main():
 
     try:
         ui.run()
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, EOFError):
         print("\nBless bless...")
         input("Press enter to exit.")
 
