@@ -139,7 +139,7 @@ class TicketScreen(BaseScreen):
 
 
                     ticket_by_id = self.ui.logic_api.ticket_get_by_ID(view_ticket)
-                    total_cost = ticket_by_id.cost + ticket_by_id.contractor_fee
+                    
                     if ticket_by_id is None:
                         print(f"No ticket with the ID: '{view_ticket}', try again (B to return).")
                     if view_ticket == "B":
@@ -147,7 +147,7 @@ class TicketScreen(BaseScreen):
                     
 
                 ticket_table = PrettyTable()
-
+                total_cost = ticket_by_id.cost + ticket_by_id.contractor_fee
                 ticket_table.field_names = ["ID", ticket_by_id.ID]
                 ticket_table.add_row(["Facility", ticket_by_id.facilityID], divider=True)
                 ticket_table.add_row(["Property", ticket_by_id.propertyID], divider=True)
