@@ -72,3 +72,9 @@ class FacilityManager:
                 filtered_facilities.append(facility)
 
         return filtered_facilities
+
+    def facility_validate(self, facilityID : str, facility_list : list[Facility]) -> bool:
+        for facility in facility_list:
+            if facilityID == facility.ID:
+                return True
+        return False
