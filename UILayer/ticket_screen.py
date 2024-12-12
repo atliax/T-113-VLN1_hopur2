@@ -119,13 +119,13 @@ class TicketScreen(BaseScreen):
 
                 # choose property with verification
                 new_property_id = input("Property ID of ticket: ").upper()
-                validated = self.logic_api.validate_property(new_property_id)
+                validated = self.logic_api.property_validate(new_property_id)
                 while not validated:
                     print ("No such property")
                     new_property_id = input("(B) to cancel or Property ID of ticket: ").upper()
                     if new_property_id == "B":
                         return self
-                    validated = self.logic_api.validate_property(new_property_id)
+                    validated = self.logic_api.property_validate(new_property_id)
                 tmp = self.logic_api.facility_get_by_propertyID(new_property_id)
 
                 #Choose facility with verification
