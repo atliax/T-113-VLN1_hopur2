@@ -105,7 +105,7 @@ class TicketScreen(BaseScreen):
                 new_date = ""
                 new_recurring = -1
                 new_priority = ""
-                priority_list = ["high", "medium", "low"]
+                priority_list = ["High", "Medium", "Low"]
 
                 # choose property with verification  
                 new_property_id = input("Property ID of ticket: ").upper()  
