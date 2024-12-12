@@ -206,7 +206,7 @@ class StaffScreen(BaseScreen):
                             return ui_consts.CMD_BACK
                         
                             # First display the available destinations
-                        print(destination_table)
+                        
 
                         try:
                             staff_edit = self.ui.logic_api.staff_get_by_ID(edit_with_id)
@@ -215,10 +215,13 @@ class StaffScreen(BaseScreen):
                             print("Could not load contractor information. Try again.")
                             input("Press enter to continue.")
                             return self
+                        
+                        
 
                         if staff_edit is None:
                             print(f"No employee with the ID: '{edit_with_id}' try again (B to return).")
-
+                    
+                    print(destination_table)
                     
                     print(f"Editing details for employee ID: {edit_with_id}")
                     
