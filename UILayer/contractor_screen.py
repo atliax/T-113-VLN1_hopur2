@@ -140,7 +140,6 @@ class ContractorScreen(BaseScreen):
                     add_opening_hours = (input("Add opening hours for contractor: "))
 
                     new_contractor = Contractor(None, new_destination, add_rating, add_contractor, add_contact, add_phone, add_address, add_opening_hours, add_type)
-##biður um rating en það er ekki hér, opening hours fer í rating slottið í pretty table 
                     try:
                         self.ui.logic_api.contractor_add(new_contractor)
                     except Exception as e:
