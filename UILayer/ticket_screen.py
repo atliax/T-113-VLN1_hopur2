@@ -88,7 +88,7 @@ class TicketScreen(BaseScreen):
                 new_date = ""
                 new_recurring = -1
                 new_priority = ""
-                priority_list = ["high", "medium", "low"]
+                priority_list = ["High", "Medium", "Low"]
 
                 # choose property with verification  
                 new_property_id = input("Property ID of ticket: ").upper()  
@@ -117,7 +117,7 @@ class TicketScreen(BaseScreen):
                     verified = self.ui.logic_api.facility_validate(new_ticket_facility_id, tmp)
                     while not verified:
                         print ("No such facility at this property")
-                        new_ticket_facility_id = input("(b) to cancel or ID of facility for ticket: ").upper()
+                        new_ticket_facility_id = input("(B) to cancel or ID of facility for ticket: ").upper()
                         if new_ticket_facility_id == "B":
                             return self
                         verified = self.ui.logic_api.facility_validate(new_ticket_facility_id, tmp)
@@ -135,16 +135,12 @@ class TicketScreen(BaseScreen):
                     print ("Use DD-MM-YYYY format")
                     new_date = input("Date to open(leave empty if open now): ")
                     if new_date == "":
-                        new_date = datetime.datetime.now().strftime("%d-%m-%Y")
-                        input (print (new_date))
-                        date_validated = True
-                    else:
-                        try:
-                            date = new_date
-                            date_validated = datetime.datetime.strptime(date, "%d-%m-%Y")
-                            input (print (new_date))
-                        except ValueError:
-                            print ("Sorry wrong format, try again!")
+                        new_date = datetime.datetime.now()
+                    try:
+                        date = new_date
+                        date_validated = datetime.datetime.strptime(date, "%d-%m-%Y")
+                    except ValueError:
+                        print ("Sorry wrong format, try again!")
 
                 while new_recurring >= 0:
                     new_recurring = int(input("Recur every N days (0 = never): "))
@@ -176,7 +172,7 @@ class TicketScreen(BaseScreen):
                     
 
                 ticket_table = PrettyTable()
-                total_cost = ticket_by_id.cost + ticket_by_id.contractor_fee
+                #total_cost = ticket_by_id.cost + ticket_by_id.contractor_fee
                 ticket_table.field_names = ["ID", ticket_by_id.ID]
                 ticket_table.add_row(["Facility", ticket_by_id.facilityID], divider=True)
                 ticket_table.add_row(["Property", ticket_by_id.propertyID], divider=True)
@@ -195,7 +191,7 @@ class TicketScreen(BaseScreen):
                 ticket_table.add_row(["Contr. review", ticket_by_id.contractor_review], divider=True)
                 ticket_table.add_row(["Contr. rating", ticket_by_id.contractor_rating], divider=True)
                 ticket_table.add_row(["Contractor fee", ticket_by_id.contractor_fee], divider=True)
-                ticket_table.add_row(["Total cost", total_cost], divider=True)
+                #ticket_table.add_row(["Total cost", total_cost], divider=True)
 
                 print(ticket_table)
                 input("Press enter to continue.")
@@ -229,7 +225,7 @@ class TicketScreen(BaseScreen):
                         self.ui.logic_api.ticket_edit(edit_ticket)
 
                     else:
-                        print("Ticket not found, try again (B to return)")
+                        print(f"No ticket with the ID: '{view_ticket}', try again (B to cancel).")
                     if pick_ticket == "B".upper():
                         return self
 
