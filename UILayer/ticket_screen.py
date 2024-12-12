@@ -41,7 +41,6 @@ class TicketScreen(BaseScreen):
 
         for ticket in ticket_list:
             ticket_property = self.ui.logic_api.property_get_by_ID(ticket.propertyID)
-            all_tickets_table.add_row([ticket.ID, ticket_property.name, ticket_facility.name, fill(ticket.title, width=40), ticket.priority, ticket.status])
             if ticket.facilityID == None:
                 facility_name = "None"
             else:
