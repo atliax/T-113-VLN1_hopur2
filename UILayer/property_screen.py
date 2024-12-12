@@ -187,6 +187,21 @@ class PropertyScreen(BaseScreen):
                     # First present the available destinations
                     print(destination_table)
                     
+                    while True:
+                        try:
+                            new_destinationID = input("Enter destination ID for employee (B to go back): ").upper()
+                            
+                            if new_destinationID == "B":
+                                return ui_consts.CMD_BACK  
+
+                            
+                            if not self.ui.logic_api.destination_get_by_ID(new_destinationID):
+                                raise ValueError(f"No destination found with the ID: '{new_destinationID}'")
+                            break  
+
+                        except ValueError as e:
+                            print(e)
+                            print("Please try again (B to cancel).")
 
                     # Then get the new data from the user
                     # if nothing is input, the field will be left unchanged
