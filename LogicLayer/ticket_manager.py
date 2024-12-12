@@ -14,7 +14,11 @@ class TicketManager:
 
     def ticket_add(self, new_ticket : Ticket) -> None:
         all_tickets = self.storage_api.ticket_get_all()
-        n = int(all_tickets[len(all_tickets)-1].ID[1:])
+        if len(all_tickets) != 0:
+            n = int(all_tickets[len(all_tickets)-1].ID[1:])
+        else:
+            n = 0
+
         n += 1
         new_id = "T" + str(n)
         new_ticket.ID = new_id

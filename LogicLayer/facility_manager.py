@@ -15,7 +15,11 @@ class FacilityManager:
 
     def facility_add(self, new_facility : Facility) -> None:
         all_facilities = self.storage_api.facility_get_all()
-        n = int(all_facilities[len(all_facilities)-1].ID[1:])
+        if len(all_facilities) != 0:
+            n = int(all_facilities[len(all_facilities)-1].ID[1:])
+        else:
+            n = 0
+
         n += 1
         new_id = "F" + str(n)
         new_facility.ID = new_id
@@ -31,7 +35,6 @@ class FacilityManager:
     def facility_get_by_ID(self, facilityID : str) -> Facility:
         return self.storage_api.facility_get_by_ID(facilityID)
     
-    # [S] to search for a facility
     def facility_search(self, search_string : str):
         all_facilities : list[Facility] = self.facility_get_by_propertyID(self.selected_property)
 
@@ -43,21 +46,6 @@ class FacilityManager:
                     break
 
         return filteded_facilities
-    
-#var að prufa ef attributes eru "none" en er buið að laga það þannig það geti aldrei verið
-#def facility_search(self, search_string: str):
- #   all_facilities: list[Facility] = self.facility_get_by_propertyID(self.selected_property)
-#
-#   filtered_facilities = []
-#   for facility in all_facilities:
-#       for attribute_value in facility.__dict__.values():
-#           if attribute_value is not None and search_string.lower() in str(attribute_value).lower():
-#               filtered_facilities.append(facility)
-#               break
-
-#    return filtered_facilities
-
-    # [E] to edit a facility
 
     def facility_edit(self, edited_facility : Facility):
         self.storage_api.facility_edit(edited_facility)
