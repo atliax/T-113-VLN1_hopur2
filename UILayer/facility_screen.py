@@ -134,7 +134,7 @@ class FacilityScreen(BaseScreen):
                         f_edit_facility_id = input("Edit the facility with the ID (B to cancel): ").strip().upper()
 
                         if f_edit_facility_id == "B":
-                            return ui_consts.CMD_BACK
+                            return self
 
                         f_edit_facility = self.ui.logic_api.facility_get_by_ID(f_edit_facility_id)
 
