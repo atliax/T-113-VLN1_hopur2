@@ -1,11 +1,12 @@
 import math
+from textwrap import fill
 
 from prettytable import PrettyTable
 from prompt_toolkit import print_formatted_text, HTML
 
 from UILayer.base_screen import BaseScreen
 from UILayer import ui_consts
-
+from textwrap import fill
 from Model import Facility
 
 class FacilityScreen(BaseScreen):
@@ -35,6 +36,8 @@ class FacilityScreen(BaseScreen):
         print(ui_consts.SEPERATOR)
 
         propertyID = self.ui.logic_api.facility_get_selected_property()
+        print(f"Viewing facilities for Property ID: {propertyID}")
+        
 
         if self.active_search_filter:
             facility_list = self.ui.logic_api.facility_search(self.active_search_filter)
@@ -132,7 +135,9 @@ class FacilityScreen(BaseScreen):
                     else:
                         facility_by_id_table = PrettyTable()
                         facility_by_id_table.field_names = ["ID", "Name", "Description"]
-                        facility_by_id_table.add_row([facility_by_id.ID, facility_by_id.name, facility_by_id.description])
+                        facility_by_id_table.add_row([facility_by_id.ID, fill(facility_by_id.name,width=30) ,fill(facility_by_id.description,width=40)])
+                        facility_by_id_table._min_table_width = ui_consts.TABLE_WIDTH
+                        
                         print(facility_by_id_table)
 
                 except Exception as e:
