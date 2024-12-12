@@ -191,6 +191,7 @@ class ContractorScreen(BaseScreen):
 
                         try:
                             contractor_edit = self.ui.logic_api.contractor_get_by_ID(edit_with_id)
+
                         except Exception as e:
                             print(f"Error loading contractor info: {e}")
                             print("Could not load contractor information. Try again.")
@@ -205,7 +206,21 @@ class ContractorScreen(BaseScreen):
 
                     print(all_destinations_table)
 
-                    new_destinationID = input("New destination ID: ").upper()
+                    while True:
+                        try:
+                            new_destinationID = input("Enter destination ID for new employee (B to go back): ").upper()
+                            
+                            if new_destinationID == "B":
+                                return ui_consts.CMD_BACK  
+
+                            
+                            if not self.ui.logic_api.destination_get_by_ID(new_destinationID):
+                                raise ValueError(f"No destination found with the ID: '{new_destinationID}'")
+                            break  
+
+                        except ValueError as e:
+                            print(e)
+                            print("Please try again or type 'B' to go back.")
 
                     setattr(contractor_edit, "destinationID", new_destinationID)
 
@@ -217,7 +232,7 @@ class ContractorScreen(BaseScreen):
                         new_value = input(f"New {attribute.capitalize()} (Current {current_value}): ").strip()
 
                         if new_value:
-                            setattr(contractor_edit,attribute,new_value)
+                            setattr(contractor_edit, attribute, new_value)
 
                     try:
                         self.ui.logic_api.contractor_edit(contractor_edit)

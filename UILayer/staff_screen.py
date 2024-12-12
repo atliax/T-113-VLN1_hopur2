@@ -32,12 +32,12 @@ class StaffScreen(BaseScreen):
 
         print("|")
         print(ui_consts.SEPERATOR)
-
+#try 
         if self.active_search_filter:
             staff_list = self.ui.logic_api.staff_search(self.active_search_filter)
         else:
             staff_list = self.ui.logic_api.staff_get_all()
-
+#except
         staff_table = PrettyTable()
         staff_table.field_names = ["ID", "Name","Job title","Destination","SSN"]
 
