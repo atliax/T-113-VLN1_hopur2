@@ -51,12 +51,16 @@ class TicketScreen(BaseScreen):
             else:
                 ticket_facility = self.ui.logic_api.facility_get_by_ID(ticket.facilityID)
                 facility_name = ticket_facility.name
-            
-            #ticket_staff = self.ui.logic_api.staff_get_by_ID(ticket.staffID)
-            #staff_name = ticket_staff.name
 
+            ticket_staff = self.ui.logic_api.staff_get_by_ID(ticket.staffID)
+            if ticket_staff is None:
+                staff_name = "No staff assigned"
+            else:
+                staff_name = ticket_staff.name
+
+            facility_names[ticket.facilityID] = facility_name
             property_names[ticket.propertyID] = ticket_property.name
-            #staff_names[ticket.staffID] = staff_name
+            staff_names[ticket.staffID] = staff_name
 
             all_tickets_table.add_row([ticket.ID, ticket_property.name, facility_name, fill(ticket.title, width=40), ticket.priority, ticket.status])
 
@@ -158,7 +162,7 @@ class TicketScreen(BaseScreen):
                     except ValueError:
                         print ("Sorry wrong format, try again!")
 
-                while new_recurring >= 0:
+                while new_recurring <= 0:
                     new_recurring = int(input("Recur every N days (0 = never): "))
                 
                 new_ticket = Ticket(None, new_ticket_facility_id, new_property_id, new_priority, new_ticket_title, new_description,None, None, None, new_recurring , new_date, None, None, None, None, None, None, None, None)
@@ -184,14 +188,14 @@ class TicketScreen(BaseScreen):
                 while ticket_by_id is None:
                     view_ticket = input("Type in ID of ticket for details: ").upper()
 
-
                     ticket_by_id = self.ui.logic_api.ticket_get_by_ID(view_ticket)
                     
                     if ticket_by_id is None:
                         print(f"No ticket with the ID: '{view_ticket}', try again (B to cancel).")
                     if view_ticket == "B":
                         return self
-                    
+
+                print(ticket_by_id.staffID)
 
                 ticket_table = PrettyTable()
                 #total_cost = ticket_by_id.cost + ticket_by_id.contractor_fee
@@ -207,7 +211,8 @@ class TicketScreen(BaseScreen):
                 ticket_table.add_row(["Recurring days", ticket_by_id.recurring_days], divider=True)
                 ticket_table.add_row(["Open date", ticket_by_id.open_date], divider=True)
                 ticket_table.add_row(["Staff", staff_names[ticket.staffID]], divider=True)
-                ticket_table.add_row(["Report", fill(ticket_by_id.report)], divider=True)
+                if ticket_by_id.report:
+                    ticket_table.add_row(["Report", fill(ticket_by_id.report)], divider=True)
                 ticket_table.add_row(["Cost", ticket_by_id.cost], divider=True)
                 ticket_table.add_row(["Contractor", ticket_by_id.contractorID], divider=True)
                 ticket_table.add_row(["Contr. review", ticket_by_id.contractor_review], divider=True)
