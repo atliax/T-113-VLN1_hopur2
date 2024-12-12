@@ -124,7 +124,13 @@ class PropertyScreen(BaseScreen):
             case "r":
                 if self.ui.logic_api.is_manager_logged_in():
                     remove_id = input("Remove a property that has the ID: ").upper()
-                    self.ui.logic_api.property_remove(remove_id)
+
+                    try:
+                        self.ui.logic_api.property_remove(remove_id)
+                    except Exception as e:
+                        print(f"Error removing property:{type(e).__name__}: {e}")
+                        print("Could not remove property. Try again.")
+                        input("Press enter to continue: ")
                 else:
                     print("You don't have permission to do that.")
                     input("Press enter to continue.")
