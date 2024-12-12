@@ -7,7 +7,11 @@ def main():
     logic = LogicAPI(storage)
     ui = UIManager(logic)
 
-    ui.run()
+    try:
+        ui.run()
+    except (KeyboardInterrupt, EOFError):
+        print("\nBless bless...")
+        input("Press enter to exit.")
 
 if __name__ == '__main__':
     main()
