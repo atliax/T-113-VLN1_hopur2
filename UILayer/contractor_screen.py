@@ -48,7 +48,7 @@ class ContractorScreen(BaseScreen):
             try:
                 contractor_destination = self.ui.logic_api.destination_get_by_ID(contractor.destinationID)
             except Exception as e:
-                print(f"Error loading destination data: {e}")
+                print(f"Error loading destination data for contractor '{contractor.ID}': {e}")
                 print("Error displaying contractor details.")
                 input("Press enter to go back.")
                 return ui_consts.CMD_BACK
@@ -99,8 +99,10 @@ class ContractorScreen(BaseScreen):
             all_destinations_table.add_row([destination.ID, destination.country])
 
         match cmd:
+            # Next page
             case "n":
                 self.current_page += 1
+            # Previous page
             case "p":
                 self.current_page -= 1
             # Add a contractor
@@ -166,17 +168,23 @@ class ContractorScreen(BaseScreen):
             case "e":
                 if self.ui.logic_api.is_manager_logged_in():
                     contractor_edit = None
-           
+
                     while contractor_edit is None:
                         edit_with_id = input("Edit contractor with the ID: ").upper()
 
-                        contractor_edit = self.ui.logic_api.contractor_get_by_ID(edit_with_id)
+                        try:
+                            contractor_edit = self.ui.logic_api.contractor_get_by_ID(edit_with_id)
+                        except Exception as e:
+                            print(f"Error loading contractor info: {e}")
+                            print("Could not load contractor information. Try again.")
+                            input("Press enter to continue.")
+                            return self
 
                         if contractor_edit is None:
                             print(f"No contractor with the ID: '{edit_with_id}' Try again (B to cancel).")
 
                         if edit_with_id == "B":
-                            return ui_consts.CMD_BACK
+                            return self
 
                     print(all_destinations_table)
 
