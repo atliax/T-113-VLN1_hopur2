@@ -39,7 +39,7 @@ class StaffScreen(BaseScreen):
             else:
                 staff_list = self.ui.logic_api.staff_get_all()
         except Exception as e:
-            print(f"Error getting employee: {e}")
+            print(f"Error getting employee: {type(e).__name__}: {e}")
             print("Could not load employee list. Try again.")
             input("Press enter to go back.")
             return ui_consts.CMD_BACK
@@ -51,7 +51,7 @@ class StaffScreen(BaseScreen):
             try:
                 employee_destination = self.ui.logic_api.destination_get_by_ID(employee.destinationID.upper())
             except Exception as e:
-                print(f"Error loading destination data for contractor '{employee.ID}': {e}")
+                print(f"Error loading destination data for contractor '{employee.ID}': {type(e).__name__}: {e}")
                 print("Error displaying employee details.")
                 input("Press enter to go back.")
                 return ui_consts.CMD_BACK
@@ -159,7 +159,7 @@ class StaffScreen(BaseScreen):
                     try:
                         self.ui.logic_api.staff_add(new_staff)
                     except Exception as e:
-                        print(f"Error removing employee: {e}")
+                        print(f"Error removing employee: {type(e).__name__}: {e}")
                         print("Could not remove employee. Try again.")
                         input("Press enter to continue: ")                       
                 else:
@@ -211,7 +211,7 @@ class StaffScreen(BaseScreen):
                         try:
                             staff_edit = self.ui.logic_api.staff_get_by_ID(edit_with_id)
                         except Exception as e:
-                            print(f"Error loading contractor info: {e}")
+                            print(f"Error loading contractor info: {type(e).__name__}: {e}")
                             print("Could not load contractor information. Try again.")
                             input("Press enter to continue.")
                             return self
@@ -251,7 +251,7 @@ class StaffScreen(BaseScreen):
                     try:
                         self.ui.logic_api.staff_edit(staff_edit)
                     except Exception as e:
-                        print(f"Error editing employee: {e}")
+                        print(f"Error editing employee: {type(e).__name__}: {e}")
                         print("Could not edit employee. Try again.")
                         input("Press enter to continue.")  
 
