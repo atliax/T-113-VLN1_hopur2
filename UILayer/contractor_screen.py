@@ -1,9 +1,11 @@
 import math
+
 from prettytable import PrettyTable
+from prompt_toolkit import print_formatted_text, HTML
 
 from UILayer.base_screen import BaseScreen
-
 from UILayer import ui_consts
+
 from Model import Contractor
 
 class ContractorScreen(BaseScreen):
@@ -25,7 +27,9 @@ class ContractorScreen(BaseScreen):
             print("|	[R] Remove a contractor		[S] Search for")
             print("|	[V] View contact info")
         else:
-            print("|	[V] View contact info		[S] Search for					[B] Go back")
+            print_formatted_text(HTML("|	<s>[A] Add a contractor</s>		<s>[E] Edit a contractor</s>			[B] Go back"))
+            print_formatted_text(HTML("|	<s>[R] Remove a contractor</s>		[S] Search for"))
+            print_formatted_text(HTML("|	[V] View contact info"))
 
         print("|")
         print(ui_consts.SEPERATOR)
@@ -146,6 +150,9 @@ class ContractorScreen(BaseScreen):
                         print(f"Error adding contractor: {type(e).__name__}: {e}")
                         print("Could not add contractor. Please try again.")
                         input("Press enter to continue.")
+                else:
+                    print("You don't have permission to do that.")
+                    input("Press enter to continue.")
             # Remove a contractor
             case "r":
                 if self.ui.logic_api.is_manager_logged_in():
@@ -157,6 +164,9 @@ class ContractorScreen(BaseScreen):
                         print(f"Error removing contractor: {type(e).__name__}: {e}")
                         print("Could not remove contractor. Try again.")
                         input("Press enter to continue: ")
+                else:
+                    print("You don't have permission to do that.")
+                    input("Press enter to continue.")
             # View contact info
             case "v":
                 contact_by_id = None
@@ -173,6 +183,7 @@ class ContractorScreen(BaseScreen):
 
                     if contact_by_id is None:
                         print(f"No contractor with the ID: '{view_contact}', try again (B to cancel).")
+
                     if view_contact == "B":
                         return self
 
@@ -213,7 +224,6 @@ class ContractorScreen(BaseScreen):
                             if new_destinationID == "B":
                                 return ui_consts.CMD_BACK  
 
-                            
                             if not self.ui.logic_api.destination_get_by_ID(new_destinationID):
                                 raise ValueError(f"No destination found with the ID: '{new_destinationID}'")
                             break  
@@ -238,8 +248,7 @@ class ContractorScreen(BaseScreen):
                             while not ((new_value.startswith('+') and new_value[1:].isdigit()) or new_value.isdigit()):
                                 print("Phone number must contain only numbers or start with a single '+' followed by numbers.")
                                 new_value = input(f"New {attribute.capitalize()} (Current: {current_value}): ").strip()
-                        
-                            
+
                         setattr(contractor_edit, attribute, new_value)
 
                     try:
@@ -250,7 +259,7 @@ class ContractorScreen(BaseScreen):
                         input("Press enter to continue.")
                 else:
                     print("You don't have permission to do that.")
-                    input("Press enter to continue")
+                    input("Press enter to continue.")
             # Search for contractor
             case "s":
                 self.active_search_filter = input("Search for: ")

@@ -1,8 +1,9 @@
 import math
 import datetime
+from textwrap import fill
 
 from prettytable import PrettyTable
-from textwrap import fill
+from prompt_toolkit import print_formatted_text, HTML
 
 from UILayer.base_screen import BaseScreen
 
@@ -23,9 +24,16 @@ class TicketScreen(BaseScreen):
 
         print(ui_consts.SEPERATOR)
         print("|")
-        print("|	[A] Add a ticket		[E] Edit/Process			[B] Go back")
-        print("|	[R] Remove a ticket		[S] Search for")
-        print("|	[V] View closed tickets		[D] Ticket details")
+
+        if self.ui.logic_api.is_manager_logged_in():
+            print("|	[A] Add a ticket		[E] Edit/Process			[B] Go back")
+            print("|	[R] Remove a ticket		[S] Search for")
+            print("|	[V] View closed tickets		[D] Ticket details")
+        else:
+            print_formatted_text(HTML("|	[A] Add a ticket		[E] Edit/Process			[B] Go back"))
+            print_formatted_text(HTML("|	<s>[R] Remove a ticket</s>		[S] Search for"))
+            print_formatted_text(HTML("|	[V] View closed tickets		[D] Ticket details"))
+
         print("|")
         print(ui_consts.SEPERATOR)
 
@@ -169,16 +177,18 @@ class TicketScreen(BaseScreen):
                 self.ui.logic_api.ticket_add(new_ticket)
 
             case "r":    # Remove a ticket
+                if self.ui.logic_api.is_manager_logged_in():
+                    remove_ticket = input("Remove ticket with ID: ").upper()
+                    try:
+                        self.ui.logic_api.ticket_remove(remove_ticket)
+                    except Exception as e:
+                        print(f"Error removing ticket:{type(e).__name__}: {e}")
+                        print ("could not remove property, possibly its the wrong ticket")
+                        input("Press any key to continue")
+                else:
+                    print("You don't have permission to do that.")
+                    input("Press enter to continue.")
 
-                remove_ticket = input("Remove ticket with ID: ").upper()
-                try:
-                    self.ui.logic_api.ticket_remove(remove_ticket)
-                except Exception as e:
-                    print(f"Error removing ticket:{type(e).__name__}: {e}")
-                    print ("could not remove property, possibly its the wrong ticket")
-                    input("Press any key to continue")
-                
-            
             case "v":   # View closed tickets
                 # Gefur lista á closed tickets (virkar eins og search með fixed keyword)
                 pass
