@@ -223,15 +223,24 @@ class ContractorScreen(BaseScreen):
                             print("Please try again or type 'B' to go back.")
 
                     setattr(contractor_edit, "destinationID", new_destinationID)
+                    print("Leave empty if you dont want to change.")
 
-                    contractor_attributes = ["name","contact","phone","opening_hours","contractor_type"]
+                    contractor_attributes = ["name","contact","phone","address","opening_hours","contractor_type"]
 
                     for attribute in contractor_attributes:
                         current_value = getattr(contractor_edit, attribute)
                         
                         new_value = input(f"New {attribute.capitalize()} (Current {current_value}): ").strip()
-                        if new_value:
-                            setattr(contractor_edit, attribute, new_value)
+                        if not new_value:
+                            continue
+
+                        if attribute in ["phone"]:
+                            while not ((new_value.startswith('+') and new_value[1:].isdigit()) or new_value.isdigit()):
+                                print("Phone number must contain only numbers or start with a single '+' followed by numbers.")
+                                new_value = input(f"New {attribute.capitalize()} (Current: {current_value}): ").strip()
+                        
+                            
+                        setattr(contractor_edit, attribute, new_value)
 
                     try:
                         self.ui.logic_api.contractor_edit(contractor_edit)
@@ -239,6 +248,9 @@ class ContractorScreen(BaseScreen):
                         print(f"Error editing contractor: {type(e).__name__}: {e}")
                         print("Could not edit contractor. Try again.")
                         input("Press enter to continue.")
+                else:
+                    print("You don't have permission to do that.")
+                    input("Press enter to continue")
             # Search for contractor
             case "s":
                 self.active_search_filter = input("Search for: ")
