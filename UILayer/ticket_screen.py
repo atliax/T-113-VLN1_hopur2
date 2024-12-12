@@ -23,7 +23,7 @@ class TicketScreen(BaseScreen):
 
         print(ui_consts.SEPERATOR)
         print("|")
-        print("|	[A] Add a ticket		[EP] Edit/Process			[B] Go back")
+        print("|	[A] Add a ticket		[E] Edit/Process			[B] Go back")
         print("|	[R] Remove a ticket		[S] Search for")
         print("|	[V] View closed tickets		[D] Ticket details")
         print("|")
