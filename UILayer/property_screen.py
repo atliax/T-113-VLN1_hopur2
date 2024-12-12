@@ -8,6 +8,8 @@ from UILayer import ui_consts
 
 from Model import Property
 
+from prompt_toolkit import print_formatted_text, HTML
+
 class PropertyScreen(BaseScreen):
     def __init__(self, ui) -> None:
         super().__init__(ui)
@@ -27,21 +29,35 @@ class PropertyScreen(BaseScreen):
             print("|	[R] Remove a property		[S] Search for")
             print("|	[V] View facilities")
         else:
-            print("|	[V] View facilities		[S] Search for				[B] Go back")
+            print_formatted_text(HTML("|	<s>[A] Add a property</s>		<s>[E] Edit a property</s>			[B] Go back"))
+            print_formatted_text(HTML("|	<s>[R] Remove a property</s>		[S] Search for"))
+            print_formatted_text("|	[V] View facilities")
 
         print("|")
         print(ui_consts.SEPERATOR)
 
-        if self.active_search_filter:
-            property_list = self.ui.logic_api.property_search(self.active_search_filter)
-        else:
-            property_list = self.ui.logic_api.property_get_all()
+        try:
+            if self.active_search_filter:
+                property_list = self.ui.logic_api.property_search(self.active_search_filter)
+            else:
+                property_list = self.ui.logic_api.property_get_all()
+        except Exception as e:
+            print(f"Error loading properties:")
+            print(f"{type(e).__name__}: {e}")
+            input("Press enter to go back.")
+            return ui_consts.CMD_BACK
 
         property_table = PrettyTable()
         property_table.field_names = ["ID","Name","Destination","Address","Sq meters","Rooms","Type"]
 
         for property in property_list:
-            property_destination = self.ui.logic_api.destination_get_by_ID(property.destinationID.upper())
+            try:
+                property_destination = self.ui.logic_api.destination_get_by_ID(property.destinationID)
+            except Exception as e:
+                print(f"Error loading destination '{property.destinationID}' for property '{property.ID}':")
+                print(f"{type(e).__name__}: {e}")
+                input("Press enter to go back.")
+                return ui_consts.CMD_BACK
 
             if property_destination is not None:
                 property_destination_country = property_destination.country
@@ -92,21 +108,19 @@ class PropertyScreen(BaseScreen):
 
                     # Get new property details from user
                     p_new_name = input("New property name: ")
-                    while True:
-                        try:
-                            p_new_destination = input("Enter a destination ID for new property: ").upper()
 
+                    input_prompt = "Enter a destination ID for new property (B to go cancel): "
+                    try:
+                        while not self.ui.logic_api.destination_get_by_ID(p_new_destination := input(input_prompt).upper()):
                             if p_new_destination == "B":
-                                return ui_consts.CMD_BACK
-                            
+                                return self
+                            print(f"No destination found with the ID: {p_new_destination}")
+                    except Exception as e:
+                        print(f"Error loading destination '{p_new_destination}' for new property '{p_new_name}':")
+                        print(f"{type(e).__name__}: {e}")
+                        input("Press enter to continue.")
+                        return self
 
-                            if not self.ui.logic_api.destination_get_by_ID(p_new_destination):
-                                raise ValueError(f"No destination found with the ID: '{p_new_destination}'")
-                            break
-
-                        except ValueError as e:
-                            print(e)
-                            print("Please try again or type 'B' to go back.")     
                     p_new_address = input("New property address: ")
                     p_new_square_mtrs = (input("New property square meters: "))
                     p_new_roomnum = (input("New property number of rooms: "))
@@ -116,7 +130,13 @@ class PropertyScreen(BaseScreen):
                     new_property = Property(None, p_new_destination, p_new_name, p_new_address, p_new_square_mtrs, p_new_roomnum, p_new_type)
 
                     # Send property to logic api
-                    self.ui.logic_api.property_add(new_property)
+                    try:
+                        self.ui.logic_api.property_add(new_property)
+                    except Exception as e:
+                        print(f"Error adding new property '{new_property.name}':")
+                        print(f"{type(e).__name__}: {e}")
+                        input("Press enter to continue.")
+                        return self
                 else:
                     print("You don't have permission to do that.")
                     input("Press enter to continue.")
@@ -124,13 +144,13 @@ class PropertyScreen(BaseScreen):
             case "r":
                 if self.ui.logic_api.is_manager_logged_in():
                     remove_id = input("Remove a property that has the ID: ").upper()
-                while True:
                     try:
                         self.ui.logic_api.property_remove(remove_id)
                     except Exception as e:
-                        print(f"Error removing property:{type(e).__name__}: {e}")
-                        print("Could not remove property. Try again.")
+                        print(f"Error removing property '{remove_id}':")
+                        print(f"{type(e).__name__}: {e}")
                         input("Press enter to continue: ")
+                        return self
                 else:
                     print("You don't have permission to do that.")
                     input("Press enter to continue.")
