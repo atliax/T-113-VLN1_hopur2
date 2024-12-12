@@ -52,12 +52,11 @@ class TicketScreen(BaseScreen):
                 ticket_facility = self.ui.logic_api.facility_get_by_ID(ticket.facilityID)
                 facility_name = ticket_facility.name
             
-            ticket_staff = self.ui.logic_api.staff_get_by_ID(ticket.staffID)
-            staff_name = ticket_staff.name
+            #ticket_staff = self.ui.logic_api.staff_get_by_ID(ticket.staffID)
+            #staff_name = ticket_staff.name
 
-            facility_names[ticket.facilityID] = facility_name
             property_names[ticket.propertyID] = ticket_property.name
-            staff_names[ticket.staffID] = staff_name
+            #staff_names[ticket.staffID] = staff_name
 
             all_tickets_table.add_row([ticket.ID, ticket_property.name, facility_name, fill(ticket.title, width=40), ticket.priority, ticket.status])
 
@@ -152,7 +151,7 @@ class TicketScreen(BaseScreen):
                     print ("Use DD-MM-YYYY format")
                     new_date = input("Date to open(leave empty if open now): ")
                     if new_date == "":
-                        new_date = datetime.datetime.now()
+                        new_date = datetime.datetime.now().strftime("%d-%m-%Y")
                     try:
                         date = new_date
                         date_validated = datetime.datetime.strptime(date, "%d-%m-%Y")
