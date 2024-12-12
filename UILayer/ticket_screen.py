@@ -41,8 +41,13 @@ class TicketScreen(BaseScreen):
 
         for ticket in ticket_list:
             ticket_property = self.ui.logic_api.property_get_by_ID(ticket.propertyID)
-            ticket_facility = self.ui.logic_api.facility_get_by_ID(ticket.facilityID)
             all_tickets_table.add_row([ticket.ID, ticket_property.name, ticket_facility.name, fill(ticket.title, width=40), ticket.priority, ticket.status])
+            if ticket.facilityID == None:
+                facility_name = "None"
+            else:
+                ticket_facility = self.ui.logic_api.facility_get_by_ID(ticket.facilityID)
+                facility_name = ticket_facility.name 
+            all_tickets_table.add_row([ticket.ID, ticket_property.name, facility_name, fill(ticket.title, width=40), ticket.priority, ticket.status])
 
         all_tickets_table._min_table_width = ui_consts.TABLE_WIDTH
 
