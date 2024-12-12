@@ -94,14 +94,14 @@ class PropertyScreen(BaseScreen):
                     p_new_name = input("New property name: ")
                     while True:
                         try:
-                            new_destination = input("Enter a destination ID for new property: ").upper()
+                            p_new_destination = input("Enter a destination ID for new property: ").upper()
 
-                            if new_destination == "B":
+                            if p_new_destination == "B":
                                 return ui_consts.CMD_BACK
                             
 
-                            if not self.ui.logic_api.destination_get_by_ID(new_destination):
-                                raise ValueError(f"No destination found with the ID: '{new_destination}'")
+                            if not self.ui.logic_api.destination_get_by_ID(p_new_destination):
+                                raise ValueError(f"No destination found with the ID: '{p_new_destination}'")
                             break
 
                         except ValueError as e:
