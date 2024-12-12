@@ -1,9 +1,9 @@
 import math
 
 from prettytable import PrettyTable
+from prompt_toolkit import print_formatted_text, HTML
 
 from UILayer.base_screen import BaseScreen
-
 from UILayer import ui_consts
 
 from Model import Staff
@@ -27,8 +27,9 @@ class StaffScreen(BaseScreen):
             print("|	[R] Remove an employee		[S] Search for")
             print("|	[V] View contact info		[C] View contractors")
         else:
-            print("|	[V] View contact info		[C] View contractors		[B] Go back")
-            print("|	[S] Search for")
+            print_formatted_text(HTML("|	<s>[A] Add an employee</s>		<s>[E] Edit an employee</s>			[B] Go back"))
+            print_formatted_text(HTML("|	<s>[R] Remove an employee</s>		[S] Search for"))
+            print_formatted_text(HTML("|	[V] View contact info		[C] View contractors"))
 
         print("|")
         print(ui_consts.SEPERATOR)

@@ -1,9 +1,9 @@
 import math
 
 from prettytable import PrettyTable
+from prompt_toolkit import print_formatted_text, HTML
 
 from UILayer.base_screen import BaseScreen
-
 from UILayer import ui_consts
 
 from Model import Facility
@@ -27,7 +27,9 @@ class FacilityScreen(BaseScreen):
             print("|	[R] Remove a facility		[S] Search for")
             print("|	[V] View details")
         else:
-            print("|	[V] View details		[S] Search for				[B] Go back")
+            print_formatted_text(HTML("|	<s>[A] Add a facility</s>		<s>[E] Edit a facility</s>			[B] Go back"))
+            print_formatted_text(HTML("|	<s>[R] Remove a facility</s>		[S] Search for"))
+            print_formatted_text(HTML("|	[V] View details"))
 
         print("|")
         print(ui_consts.SEPERATOR)
