@@ -92,7 +92,21 @@ class PropertyScreen(BaseScreen):
 
                     # Get new property details from user
                     p_new_name = input("New property name: ")
-                    p_new_destination = input("New property destionation ID: ")
+                    while True:
+                        try:
+                            new_destination = input("Enter a destination ID for new property: ").upper()
+
+                            if new_destination == "B":
+                                return ui_consts.CMD_BACK
+                            
+
+                            if not self.ui.logic_api.destination_get_by_ID(new_destination):
+                                raise ValueError(f"No destination found with the ID: '{new_destination}'")
+                            break
+
+                        except ValueError as e:
+                            print(e)
+                            print("Please try again or type 'B' to go back.")     
                     p_new_address = input("New property address: ")
                     p_new_square_mtrs = (input("New property square meters: "))
                     p_new_roomnum = (input("New property number of rooms: "))
