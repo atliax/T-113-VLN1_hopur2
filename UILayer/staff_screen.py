@@ -116,7 +116,7 @@ class StaffScreen(BaseScreen):
                             new_destination = input("Enter destination ID for new employee (B to go back): ").upper()
                             
                             if new_destination == "B".upper():
-                                return ui_consts.CMD_BACK  
+                                return self 
 
                             
                             if not self.ui.logic_api.destination_get_by_ID(new_destination):
@@ -228,7 +228,7 @@ class StaffScreen(BaseScreen):
                             new_destinationID = input("Enter destination ID for employee (B to go back): ").upper()
                             
                             if new_destinationID == "B":
-                                return ui_consts.CMD_BACK  
+                                return self 
 
                             
                             if not self.ui.logic_api.destination_get_by_ID(new_destinationID):

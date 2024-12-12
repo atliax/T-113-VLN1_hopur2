@@ -182,7 +182,7 @@ class PropertyScreen(BaseScreen):
                         
 
                         if edit_with_id == "B":
-                            return ui_consts.CMD_BACK
+                            return self
 
                     # First present the available destinations
                     print(destination_table)
