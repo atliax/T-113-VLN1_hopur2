@@ -73,8 +73,6 @@ class TicketScreen(BaseScreen):
             property_table.add_row([property.ID, property.name,property.destinationID,property.type])
         
 
-
-
         match cmd:
             
             case "n":   # Next page:
@@ -86,6 +84,7 @@ class TicketScreen(BaseScreen):
             case "a":   # Add a ticket
 
                 print(property_table)
+                new_ticket_title = ""
                 # choose property with verification  
                 new_property_id = input("Property ID of ticket: ").upper()  
                 validated = self.ui.logic_api.validate_property(new_property_id)
@@ -108,25 +107,19 @@ class TicketScreen(BaseScreen):
                 verified = self.ui.logic_api.facility_validate(new_ticket_facility_id, tmp)
                 while not verified:
                     print ("No such facility at this property")
-                    new_ticket_facility_id = input("(b) to cancel or ID of facility for ticket").upper()
+                    new_ticket_facility_id = input("(b) to cancel or ID of facility for ticket: ").upper()
                     if new_ticket_facility_id == "B":
                         return self
                     verified = self.ui.logic_api.facility_validate(new_ticket_facility_id, tmp)
-    
-                new_ticket_title = input("New ticket title: ")
+
+                while not new_ticket_title: 
+                    new_ticket_title = input("New ticket title: ")
                 new_description = input("New ticket description: ")
                 new_priority = input("New ticket priority: ")
-                new_status = input("New ticket status: ")
-                new_date = input("New ticket date: ")
+                new_date = input("Date to open(leave empty if open now): ")
                 new_recurring = int(input("Recur every N days (0 = never): "))
-                new_staff = input("New ticket staff ID: ")
-                new_report = input("REPORT placeholder: ")
-                new_cost = float(input("Cost: placerholder "))
-                new_contr_id = input("Enter contractor ID: placeholder ")
-                new_contr_review = input("Contractor review: placeholder ")
-                new_contr_rating = float(input("Contractor rating: placeholder "))
-                new_contr_fee = float(input("Contractor fee: placeholder "))
-                new_ticket = Ticket(None, new_ticket_facility_id, new_property_id, new_priority, new_ticket_title, new_description,None, new_status, None, new_recurring , new_date, new_staff,new_report, new_cost, new_contr_id, new_contr_review, new_contr_rating, new_contr_fee )
+                
+                new_ticket = Ticket(None, new_ticket_facility_id, new_property_id, new_priority, new_ticket_title, new_description,None, None, None, new_recurring , new_date, None, None, None, None, None, None, None, None)
                 self.ui.logic_api.ticket_add(new_ticket)
                 # If recur > 0 set recurring = True otherwise False, needs logic for this. 
 
@@ -141,40 +134,42 @@ class TicketScreen(BaseScreen):
 
             case "d":   # Ticket details
                 ticket_by_id = None
-
                 while ticket_by_id is None:
                     view_ticket = input("Type in ID of ticket for details: ").upper()
 
-                    ticket_by_id = self.ui.logic_api.ticket_get_by_ID(view_ticket)
 
+                    ticket_by_id = self.ui.logic_api.ticket_get_by_ID(view_ticket)
+                    
                     if ticket_by_id is None:
                         print(f"No ticket with the ID: '{view_ticket}', try again (B to return).")
                     if view_ticket == "B":
                         return ui_consts.CMD_BACK
+                    
 
-                    ticket_table = PrettyTable()
+                ticket_table = PrettyTable()
+                total_cost = ticket_by_id.cost + ticket_by_id.contractor_fee
+                ticket_table.field_names = ["ID", ticket_by_id.ID]
+                ticket_table.add_row(["Facility", ticket_by_id.facilityID], divider=True)
+                ticket_table.add_row(["Property", ticket_by_id.propertyID], divider=True)
+                ticket_table.add_row(["Priority", ticket_by_id.priority], divider=True)
+                ticket_table.add_row(["Title", ticket_by_id.title], divider=True)
+                ticket_table.add_row(["Description", fill(ticket_by_id.description, width=50)], divider=True)
+                ticket_table.add_row(["Open?", ticket_by_id.open], divider=True)
+                ticket_table.add_row(["Status", ticket_by_id.status], divider=True)
+                ticket_table.add_row(["Recurring?", ticket_by_id.recurring], divider=True)
+                ticket_table.add_row(["Recurring days", ticket_by_id.recurring_days], divider=True)
+                ticket_table.add_row(["Open date", ticket_by_id.open_date], divider=True)
+                ticket_table.add_row(["Staff", ticket_by_id.staffID], divider=True)
+                ticket_table.add_row(["Report", fill(ticket_by_id.report)], divider=True)
+                ticket_table.add_row(["Cost", ticket_by_id.cost], divider=True)
+                ticket_table.add_row(["Contractor", ticket_by_id.contractorID], divider=True)
+                ticket_table.add_row(["Contr. review", ticket_by_id.contractor_review], divider=True)
+                ticket_table.add_row(["Contr. rating", ticket_by_id.contractor_rating], divider=True)
+                ticket_table.add_row(["Contractor fee", ticket_by_id.contractor_fee], divider=True)
+                ticket_table.add_row(["Total cost", total_cost], divider=True)
 
-                    ticket_table.field_names = ["ID", ticket_by_id.ID]
-                    ticket_table.add_row(["Facility", ticket_by_id.facilityID], divider=True)
-                    ticket_table.add_row(["Property", ticket_by_id.propertyID], divider=True)
-                    ticket_table.add_row(["Priority", ticket_by_id.priority], divider=True)
-                    ticket_table.add_row(["Title", ticket_by_id.title], divider=True)
-                    ticket_table.add_row(["Description", fill(ticket_by_id.description, width=50)], divider=True)
-                    ticket_table.add_row(["Open?", ticket_by_id.open], divider=True)
-                    ticket_table.add_row(["Status", ticket_by_id.status], divider=True)
-                    ticket_table.add_row(["Recurring?", ticket_by_id.recurring], divider=True)
-                    ticket_table.add_row(["Recurring days", ticket_by_id.recurring_days], divider=True)
-                    ticket_table.add_row(["Open date", ticket_by_id.open_date], divider=True)
-                    ticket_table.add_row(["Staff", ticket_by_id.staffID], divider=True)
-                    ticket_table.add_row(["Report", ticket_by_id.report], divider=True)
-                    ticket_table.add_row(["Cost", ticket_by_id.cost], divider=True)
-                    ticket_table.add_row(["Contractor", ticket_by_id.contractorID], divider=True)
-                    ticket_table.add_row(["Contr. review", ticket_by_id.contractor_review], divider=True)
-                    ticket_table.add_row(["Contr. rating", ticket_by_id.contractor_rating], divider=True)
-                    ticket_table.add_row(["Contractor fee", ticket_by_id.contractor_fee], divider=True)
-
-                    print(ticket_table)
-                    input("Press enter to continue.")
+                print(ticket_table)
+                input("Press enter to continue.")
 
                 #ticket_by_id_table = PrettyTable()
                 #ticket_by_id_table.field_names = ["ID","Name","Priority","Status","Property","Facility","Description","Open Date","Employee"]

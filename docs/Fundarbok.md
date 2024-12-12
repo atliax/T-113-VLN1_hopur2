@@ -352,3 +352,11 @@ Eva kom rétt eftir morgunfund.
 Gísli fór yfir state diagrams og endurgerði það í raun og veru. Daníel byrjaður á input validation og voru 2 screens búnir að einhverju leyti. Atli náði að setja user validation í gang, virkar. Þarf að útfæra það yfir allt appið og að setja í gang, er off eins og er, til að pödduleit sé léttari. Óli/Hjörtur náðu að setja Ui virkni á Tickets, þarf að laga logicið til að virka betur í því. Eva og gísli fóru yfir skýrsluna betur og samrændu hana aðeins betur allavega. Þetta var lengsti dagurinn okkar hingað til. 
 
 Fyrir Morgundaginn þá þurfum við í raun og veru bara að klára forritið og dumpa einhverjum kröfum ef þess þarf. Verðum að reyna að hafa fósturdag til að vinna í  skýrslunni og fínpússa allt saman, við erum að renna út á tíma.
+
+
+
+## 12 des Morgunfundur
+Viðstaddir : Gísli!, Atli, Óli, Eva, Daníel, hjörtur
+
+## Markmið dagsins
+Óli ætlar að skoða add ticket og gera alla fítusu fyrir það ready. Hjörtur ætlar að vinna í Tickets. Eva ætlar að gera input validation. Daníel ætlar einnig að gera input validation. Gísli ætlar að samræna happypath. Atli ætlar að gera input validation. Við ætlum að reyna að hafa forritið í fullri virkni og "relatively error free" í enda dags. 

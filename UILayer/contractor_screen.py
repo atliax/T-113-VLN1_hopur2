@@ -110,19 +110,36 @@ class ContractorScreen(BaseScreen):
                 if self.ui.logic_api.is_manager_logged_in():
                     print(all_destinations_table)
 
-                    new_destination = input("Enter destination ID for new contractor: ").upper()
+                    while True:
+                        try:
+                            new_destination = input("Enter destination ID for new employee (B to go back): ").upper()
+                            
+                            if new_destination == "B":
+                                return ui_consts.CMD_BACK  
+
+                            
+                            if not self.ui.logic_api.destination_get_by_ID(new_destination):
+                                raise ValueError(f"No destination found with the ID: '{new_destination}'")
+                            break  
+
+                        except ValueError as e:
+                            print(e)
+                            print("Please try again or type 'B' to go back.")
                     # If ID does not exist in destination list, raise error "No destination found with that ID!"
                     # Cancel command if destination ID is not found
                     add_contractor = input("New contractor name: ")
                     add_type = input("New contractor type: ")
                     add_rating = 0.0
                     add_contact = input("New contractor contact (optional): ")
-                    add_phone = input("New contractor phone: ")
+                    add_phone = input("New contractor phone number: ").replace(" ", "").replace("-", "")
+                    while not (add_phone.startswith("+") and add_phone[1:].isdigit() or add_phone.isdigit()):
+                        print("Phone number must contain only numbers or start with a single '+' followed by numbers.")
+                        add_phone = input("New contractor phone number: ").replace(" ", "").replace("-", "")
+
                     add_address = input("New contractor address: ")
                     add_opening_hours = (input("Add opening hours for contractor: "))
 
                     new_contractor = Contractor(None, new_destination, add_rating, add_contractor, add_contact, add_phone, add_address, add_opening_hours, add_type)
-
                     try:
                         self.ui.logic_api.contractor_add(new_contractor)
                     except Exception as e:
@@ -174,6 +191,7 @@ class ContractorScreen(BaseScreen):
 
                         try:
                             contractor_edit = self.ui.logic_api.contractor_get_by_ID(edit_with_id)
+
                         except Exception as e:
                             print(f"Error loading contractor info: {e}")
                             print("Could not load contractor information. Try again.")
@@ -188,7 +206,21 @@ class ContractorScreen(BaseScreen):
 
                     print(all_destinations_table)
 
-                    new_destinationID = input("New destination ID: ").upper()
+                    while True:
+                        try:
+                            new_destinationID = input("Enter destination ID for new employee (B to go back): ").upper()
+                            
+                            if new_destinationID == "B":
+                                return ui_consts.CMD_BACK  
+
+                            
+                            if not self.ui.logic_api.destination_get_by_ID(new_destinationID):
+                                raise ValueError(f"No destination found with the ID: '{new_destinationID}'")
+                            break  
+
+                        except ValueError as e:
+                            print(e)
+                            print("Please try again or type 'B' to go back.")
 
                     setattr(contractor_edit, "destinationID", new_destinationID)
 
@@ -200,7 +232,7 @@ class ContractorScreen(BaseScreen):
                         new_value = input(f"New {attribute.capitalize()} (Current {current_value}): ").strip()
 
                         if new_value:
-                            setattr(contractor_edit,attribute,new_value)
+                            setattr(contractor_edit, attribute, new_value)
 
                     try:
                         self.ui.logic_api.contractor_edit(contractor_edit)

@@ -74,6 +74,8 @@ class FacilityManager:
         return filtered_facilities
 
     def facility_validate(self, facilityID : str, facility_list : list[Facility]) -> bool:
+        if len(facility_list) == 0:
+            return True
         for facility in facility_list:
             if facilityID == facility.ID:
                 return True
