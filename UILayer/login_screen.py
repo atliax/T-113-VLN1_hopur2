@@ -32,8 +32,8 @@ class LoginScreen(BaseScreen):
         # password = getpass("Password: ")
 
         #Temp
-        email = "Pleb"
-        password = "1234"
+        email = "Boss"
+        password = "Man"
 
         if self.ui.logic_api.authenticate_login(email,password):
             self.user_note = ""
