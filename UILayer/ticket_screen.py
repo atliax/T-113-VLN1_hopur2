@@ -99,16 +99,15 @@ class TicketScreen(BaseScreen):
         property_table.field_names = ["Property ID","Name","Destination","Type"]
         for property in properties:
             property_table.add_row([property.ID, property.name,property.destinationID,property.type])
-        
 
         match cmd:
-            
+
             case "n":   # Next page:
                 self.current_page += 1
-            
+
             case "p":   # Previous page:
                 self.current_page -= 1
-            
+
             case "a":   # Add a ticket
 
                 print(property_table)
@@ -118,8 +117,8 @@ class TicketScreen(BaseScreen):
                 new_priority = ""
                 priority_list = ["High", "Medium", "Low"]
 
-                # choose property with verification  
-                new_property_id = input("Property ID of ticket: ").upper()  
+                # choose property with verification
+                new_property_id = input("Property ID of ticket: ").upper()
                 validated = self.ui.logic_api.validate_property(new_property_id)
                 while not validated:
                     print ("No such property")
@@ -127,8 +126,7 @@ class TicketScreen(BaseScreen):
                     if new_property_id == "B":
                         return self
                     validated = self.ui.logic_api.validate_property(new_property_id)
-                tmp = self.ui.logic_api.facility_get_by_propertyID(new_property_id) 
- 
+                tmp = self.ui.logic_api.facility_get_by_propertyID(new_property_id)
 
                 #Choose facility with verification
                 if len(tmp) == 0:
@@ -150,11 +148,11 @@ class TicketScreen(BaseScreen):
                             return self
                         verified = self.ui.logic_api.facility_validate(new_ticket_facility_id, tmp)
 
-                while not new_ticket_title: 
+                while not new_ticket_title:
                     new_ticket_title = input("New ticket title: ").strip()
 
                 new_description = input("New ticket description: ")
-                
+
                 while new_priority not in priority_list:
                     new_priority = input("New ticket priority(high, medium, low): ").lower().capitalize()
 
@@ -170,9 +168,9 @@ class TicketScreen(BaseScreen):
                     except ValueError:
                         print ("Sorry wrong format, try again!")
 
-                while new_recurring <= 0:
+                while new_recurring < 0:
                     new_recurring = int(input("Recur every N days (0 = never): "))
-                
+
                 new_ticket = Ticket(None, new_ticket_facility_id, new_property_id, new_priority, new_ticket_title, new_description,None, None, None, new_recurring , new_date, None, None, None, None, None, None, None, None)
                 self.ui.logic_api.ticket_add(new_ticket)
 
@@ -182,8 +180,8 @@ class TicketScreen(BaseScreen):
                     try:
                         self.ui.logic_api.ticket_remove(remove_ticket)
                     except Exception as e:
-                        print(f"Error removing ticket:{type(e).__name__}: {e}")
-                        print ("could not remove property, possibly its the wrong ticket")
+                        print(f"Error removing ticket '{remove_ticket}':")
+                        print(f"{type(e).__name__}: {e}")
                         input("Press any key to continue")
                 else:
                     print("You don't have permission to do that.")
@@ -241,7 +239,7 @@ class TicketScreen(BaseScreen):
                 for ticket in all_tickets:
                     if ticket == ticket.ID:
                         edit_ticket = ticket
-                        
+
                 print("If you do not wish to change a specific field, you can leave the input empty")
                 edit_ticket = None
                 ticket_attributes = ["facilityID", "propertyID", "priority", "title", "description", "status", "recurring", "recurring_days", "open_date","close_date","staffID","report","cost","contractorID","contractor_review","contractor_rating","contractor_fee"]
@@ -250,7 +248,7 @@ class TicketScreen(BaseScreen):
                     pick_ticket = input("Type in ID of ticket to edit: ").upper()
                     if edit_ticket == "B":
                         return self
-                    
+
                     edit_ticket = self.ui.logic_api.ticket_get_by_ID(pick_ticket)
 
                     if edit_ticket is not None:
@@ -271,7 +269,6 @@ class TicketScreen(BaseScreen):
             case "s":    # Search for
                 self.active_search_filter = input("Search for: ")
                 # "Main menu > Tickets > Filtered" window and commands are identical to "Main menu > Tickets"
-            
 
             case "b":
                 return ui_consts.CMD_BACK
