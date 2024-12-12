@@ -114,7 +114,7 @@ class StaffScreen(BaseScreen):
                         try:
                             new_destination = input("Enter destination ID for new employee (B to go back): ").upper()
                             
-                            if new_destination == "B".lower():
+                            if new_destination == "B".upper():
                                 return ui_consts.CMD_BACK  
 
                             
