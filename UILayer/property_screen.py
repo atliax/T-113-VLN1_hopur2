@@ -107,9 +107,8 @@ class PropertyScreen(BaseScreen):
                     print(destination_table)
 
                     # Get new property details from user
-                    p_new_name = input("New property name: ")
-
                     input_prompt = "Enter a destination ID for new property (B to go cancel): "
+
                     try:
                         while not self.ui.logic_api.destination_get_by_ID(p_new_destination := input(input_prompt).upper()):
                             if p_new_destination == "B":
@@ -121,6 +120,7 @@ class PropertyScreen(BaseScreen):
                         input("Press enter to continue.")
                         return self
 
+                    p_new_name = input("New property name: ")
                     p_new_address = input("New property address: ")
                     p_new_square_mtrs = (input("New property square meters: "))
                     p_new_roomnum = (input("New property number of rooms: "))
