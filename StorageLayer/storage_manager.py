@@ -11,11 +11,13 @@ class StorageManager:
         self.model_class = model_class
 
     def add(self, new_item) -> None:
+        """Takes in an instance of a BaseModel child class and adds it to the system."""
         current_items = self.load_from_file()
         current_items.append(new_item)
         self.save_to_file(current_items)
 
     def remove(self, ID : str) -> None:
+        """Takes in an ID for a BaseModel child class and removes the corresponding item from the system."""
         current_items = self.load_from_file()
 
         updated_items = []
@@ -26,6 +28,7 @@ class StorageManager:
         self.save_to_file(updated_items)
 
     def edit(self, edited_item) -> None:
+        """Takes in an instance of a BaseModel child class and replaces the corresponding item (with a matching .ID) in the system."""
         current_items = self.load_from_file()
 
         updated_items = []
@@ -38,15 +41,18 @@ class StorageManager:
         self.save_to_file(updated_items)
 
     def get_all(self) -> list[BaseModel]:
+        """Returns a list of all the instances of a BaseModel child class that exist in the system."""
         return self.load_from_file()
 
     def get_by_ID(self, ID : str) -> BaseModel:
+        """Takes in an ID and returns an instance of a BaseModel child class that matches that ID if it exists."""
         current_items = self.load_from_file()
         for item in current_items:
             if item.ID == ID:
                 return item
 
     def load_from_file(self) -> list[BaseModel]:
+        """Loads the data file from self.filename and parses each line from it as a separate JSON string, creating an instance of the corresponding BaseModel class for that data file."""
         ret = []
 
         try:
@@ -81,6 +87,7 @@ class StorageManager:
         return ret
 
     def save_to_file(self, data : list[BaseModel]) -> None:
+        """Takes in a list of BaseModel child classes and writes each one to a separate line in self.filename as a JSON string."""
         # create a buffer with the new contents for the file
         new_file_contents = ""
         for item in data:
