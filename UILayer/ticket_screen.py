@@ -294,20 +294,20 @@ class TicketScreen(BaseScreen):
                                 print(facility_table) 
 
                                 print ("Leave empty if you don't want to change facilityID")
-                                edit_ticket_facility_id = input(f"New propertyID (Current: {edit_ticket.facilityID}) associated with ticket {edit_ticket.ID}: ").upper()
+                                edit_ticket_facility_id = input(f"New facilityID (Current: {edit_ticket.facilityID}) associated with ticket {edit_ticket.ID}: ").upper()
                                 if edit_ticket_facility_id.strip() == "":
                                     verified = True
                                     edit_ticket_facility_id = edit_ticket.facilityID
                                 else:
                                     verified = self.logic_api.facility_validate(edit_ticket_facility_id, tmp)
                                 while not verified:
-                                    if new_ticket_facility_id == "B":
+                                    if edit_ticket_facility_id == "B":
                                         return None
                                     print ("No such facility at this property, B to cancel or try again")
-                                    new_ticket_facility_id = input(f"New propertyID (Current: {edit_ticket.facilityID}) associated with ticket {edit_ticket.ID}: ").upper()
+                                    edit_ticket_facility_id = input(f"New propertyID (Current: {edit_ticket.facilityID}) associated with ticket {edit_ticket.ID}: ").upper()
                                     if edit_ticket_facility_id.strip() == "":
                                         edit_ticket_facility_id = edit_ticket.facilityID
-                                    verified = self.logic_api.facility_validate(new_ticket_facility_id, tmp)
+                                    verified = self.logic_api.facility_validate(edit_ticket_facility_id, tmp)
 
                             
                             self.print_ticket_detail_table(edit_ticket)
