@@ -1,11 +1,14 @@
+# standard library imports
 import math
+from textwrap import fill
 
+# pip library imports
 from prettytable import PrettyTable
 from prompt_toolkit import print_formatted_text, HTML
 
+# local imports
 from UILayer.base_screen import BaseScreen
 from UILayer import ui_consts
-
 from Model import Destination
 
 class DestinationScreen(BaseScreen):
@@ -13,7 +16,7 @@ class DestinationScreen(BaseScreen):
         super().__init__(logic_api)
         self.current_page = -1
 
-    def run(self):
+    def run(self) -> str | None:
         self.clear_screen()
 
         print("Main Menu > Destinations")
@@ -34,7 +37,7 @@ class DestinationScreen(BaseScreen):
         except Exception as e:
             print(f"Error loading destinations:")
             print(f"{type(e).__name__}: {e}")
-            input("Press enter to go back.")
+            input(ui_consts.MSG_ENTER_BACK)
             return ui_consts.CMD_BACK
 
         total_pages = math.ceil(len(all_destinations) / 10)
@@ -55,7 +58,7 @@ class DestinationScreen(BaseScreen):
             except Exception as e:
                 print(f"Error loading info for manager '{destination.managerID}' in destination '{destination.ID}':")
                 print(f"{type(e).__name__}: {e}")
-                input("Press enter to go back.")
+                input(ui_consts.MSG_ENTER_BACK)
                 return ui_consts.CMD_BACK
 
             if destinanation_manager is None:
@@ -70,6 +73,9 @@ class DestinationScreen(BaseScreen):
 
         if total_pages != 0:
             print(destination_table.get_string(start=self.current_page * 10, end=(self.current_page + 1) * 10))
+        else:
+            print("")
+            print("No destinations found.")
 
         print("")
         cmd = input("Command: ").lower()
@@ -86,78 +92,83 @@ class DestinationScreen(BaseScreen):
             # Add a destination
             case "a": 
                 if self.logic_api.is_manager_logged_in():
-                    destination_attributes = ["country", "airport", "phone", "opening_hours"]
+                    new_destination_attributes = ["country", "airport", "phone", "opening_hours"]
 
-                    new_destination = []
-                    for attribute in destination_attributes:
-                        new_value = input(f"New {attribute}: ")
+                    new_destination_data = []
+                    for attribute in new_destination_attributes:
+                        while (new_value := input(f"New {attribute}: ")) == "":
+                            print(f"Field '{attribute}' can't be empty.")
 
                         if attribute == "phone":
                             check_phone = new_value.replace("+", "").replace("-", "").replace(" ", "")
                             while not check_phone.isdigit():
-                                print("Phone number must contain only '+', '-', ' ' and numbers.")
+                                print(ui_consts.MSG_INVALID_PHONE)
                                 new_value = input(f"New {attribute}: ")
                                 check_phone = new_value.replace("+", "").replace("-", "").replace(" ", "")
 
-                        new_destination.append(new_value)
+                        new_destination_data.append(new_value)
 
-                    tmp = Destination(None, new_destination[0], new_destination[1], new_destination[2], new_destination[3], None)
+                    new_destination = Destination(None, None, new_destination_data[0], new_destination_data[1], new_destination_data[2], new_destination_data[3])
 
                     try:
-                        self.logic_api.destination_add(tmp)
+                        self.logic_api.destination_add(new_destination)
                     except Exception as e:
                         print(f"Error adding new destination:")
                         print(f"{type(e).__name__}: {e}")
-                        input("Press enter to continue.")
-                        return self
+                        input(ui_consts.MSG_ENTER_CONTINUE)
+                        return None
 
                     print("New destination added successfully.")
                     print("Please navigate to the staff menu and add a manager for this location.")
-                    input("Press enter to continue.")
+                    input(ui_consts.MSG_ENTER_CONTINUE)
+                    return None
                 else:
-                    print("You don't have permission to do that.")
-                    input("Press enter to continue.")
+                    print(ui_consts.MSG_NO_PERMISSION)
+                    input(ui_consts.MSG_ENTER_CONTINUE)
+                    return None
 
             # Edit destination
             case "e":
                 if self.logic_api.is_manager_logged_in():
                     destination_edit = None
-                    destination_attributes = ["managerID", "country", "airport", "phone", "opening_hours"]
+                    edit_destination_attributes = ["managerID", "country", "airport", "phone", "opening_hours"]
 
                     while destination_edit is None:
-                        pick_destination = input("Type in the ID of the destination you want to edit (B to return): ").upper()
+                        edit_destination_ID = input("Enter the ID of the destination you want to edit (B to return): ").upper()
 
-                        if pick_destination == "B":
-                            return self
+                        if edit_destination_ID == "B":
+                            return None
 
                         try:
-                            destination_edit = self.logic_api.destination_get_by_ID(pick_destination)
+                            destination_edit = self.logic_api.destination_get_by_ID(edit_destination_ID)
                         except Exception as e:
-                            print(f"Error loading destination '{pick_destination}':")
+                            print(f"Error loading destination '{edit_destination_ID}':")
                             print(f"{type(e).__name__}: {e}")
-                            input("Press enter to continue.")
-                            return self
+                            input(ui_consts.MSG_ENTER_CONTINUE)
+                            return None
 
                         if destination_edit is None:
-                            print(f"Destination '{pick_destination}' not found, try again.")
-                            input("Press enter to continue.")
+                            print(f"Destination '{edit_destination_ID}' not found, try again.")
+                            input(ui_consts.MSG_ENTER_CONTINUE)
 
-                    print("Leave empty if you wish to not change.")
-                    for attribute in destination_attributes:
+                    print("Enter new data for the destination, leave the field empty to keep the previous data.")
+
+                    for attribute in edit_destination_attributes:
                         current_value = getattr(destination_edit, attribute)
-                        new_value = input(f"New {attribute} (current: {current_value}): ").upper().strip()
+                        new_value = input(f"New {attribute} (current: {current_value}): ").strip()
 
                         if attribute == "managerID" and new_value:
+                            new_value = new_value.upper()
                             manager_ids = [manager.ID for manager in self.logic_api.staff_list_managers()]
                             while new_value not in manager_ids:
                                 print(f"Invalid manager ID: {new_value}. Please provide a valid manager ID. (B to cancel) ")
                                 new_value = input(f"New {attribute} (current: {current_value}): ").strip().upper()
                                 if new_value == "B":
-                                    return self
+                                    return None
                         elif attribute == "phone" and new_value:
                             check_phone = new_value.replace("+", "").replace("-", "").replace(" ", "")
                             while not check_phone.isdigit():
-                                print("Phone number must contain only '+', '-', ' ' and numbers.")
+                                print(ui_consts.MSG_INVALID_PHONE)
                                 new_value = input(f"New {attribute} (current: {current_value}): ").strip()
                                 check_phone = new_value.replace("+", "").replace("-", "").replace(" ", "")
 
@@ -166,19 +177,19 @@ class DestinationScreen(BaseScreen):
 
                     try:
                         self.logic_api.destination_edit(destination_edit)
-                        print("Destination updated successfully.")
-                        input("Press enter to continue.")
                     except Exception as e:
-                        print(f"Error editing destination '{pick_destination}':")
+                        print(f"Error editing destination '{edit_destination_ID}':")
                         print(f"{type(e).__name__}: {e}")
-                        input("Press enter to continue.")
-                        return self
+                        input(ui_consts.MSG_ENTER_CONTINUE)
+                        return None
+                    print("Destination updated successfully.")
+                    input(ui_consts.MSG_ENTER_CONTINUE)
                 else:
-                    print("You don't have permission to do that.")
-                    input("Press enter to continue.")
+                    print(ui_consts.MSG_NO_PERMISSION)
+                    input(ui_consts.MSG_ENTER_CONTINUE)
 
             # Go back
             case "b":
                 return ui_consts.CMD_BACK
 
-        return self
+        return None

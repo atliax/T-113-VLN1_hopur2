@@ -1,12 +1,14 @@
+# standard library imports
 import math
 from textwrap import fill
 
+# pip library imports
 from prettytable import PrettyTable
 from prompt_toolkit import print_formatted_text, HTML
 
+# local imports
 from UILayer.base_screen import BaseScreen
 from UILayer import ui_consts
-
 from Model import Contractor
 
 class ContractorScreen(BaseScreen):
@@ -83,6 +85,7 @@ class ContractorScreen(BaseScreen):
         if total_pages != 0:
             print(contractor_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
         else:
+            print("")
             print("No contractors found.")
 
         print("")
@@ -167,7 +170,7 @@ class ContractorScreen(BaseScreen):
                 if self.logic_api.is_manager_logged_in():
                     remove_id = input("Remove contractor with the ID: ").upper()
 
-                    if input(f"Are you sure you want to remove contractor '{remove_id}' (Y to confirm)?").upper() != "Y":
+                    if input(f"Are you sure you want to remove contractor '{remove_id}' (Y to confirm)? ").upper() != "Y":
                         return None
 
                     try:
@@ -249,7 +252,7 @@ class ContractorScreen(BaseScreen):
 
                     setattr(contractor_edit, "destinationID", new_destinationID)
 
-                    print("Please enter new data for the contractor, leave the field empty to keep the previous data.")
+                    print("Enter new data for the contractor, leave the field empty to keep the previous data.")
 
                     editable_attributes = ["name","contact","phone","address","opening_hours","contractor_type"]
                     for attribute in editable_attributes:
@@ -282,7 +285,7 @@ class ContractorScreen(BaseScreen):
 
             # Search for contractor
             case "s":
-                self.active_search_filter = input("Enter search term (empty to clear active filter): ")
+                self.active_search_filter = input(ui_consts.MSG_ENTER_SEARCH)
                 return None
 
             # Go back

@@ -113,7 +113,7 @@ class LogicAPI:
         return self.facility_manager.facility_remove(facilityID)
 
     def facility_search(self, search_string : str) -> list[Facility]:
-        """Takes a string and returns a list of facilities in the system that have attributes containing that string."""
+        """Takes a string and returns a list of facilities in the system that have attributes containing that string. Only searches facilities matching the 'active' property ID."""
         return self.facility_manager.facility_search(search_string)
 
     def facility_set_selected_property(self, propertyID : str) -> None:

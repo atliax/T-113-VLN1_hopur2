@@ -17,7 +17,7 @@ class FacilityScreen(BaseScreen):
         self.current_page = -1
         self.active_search_filter = ""
 
-    def run(self):
+    def run(self) -> str | None:
         self.clear_screen()
 
         print("Main Menu > Properties > Facilities")
@@ -38,21 +38,17 @@ class FacilityScreen(BaseScreen):
         print(ui_consts.SEPERATOR)
 
         propertyID = self.logic_api.facility_get_selected_property()
-        print(f"Viewing facilities for Property ID: {propertyID}")
-        
 
-        if self.active_search_filter:
-            facility_list = self.logic_api.facility_search(self.active_search_filter)
-        else:
-            facility_list = self.logic_api.facility_get_by_propertyID(propertyID)
-
-        facilities_table = PrettyTable()
-        facilities_table.field_names = ["ID","Name","Description"]
-
-        for facility in facility_list:
-            facilities_table.add_row([facility.ID,facility.name,facility.description])
-
-        facilities_table._min_table_width = ui_consts.TABLE_WIDTH
+        try:
+            if self.active_search_filter:
+                facility_list = self.logic_api.facility_search(self.active_search_filter)
+            else:
+                facility_list = self.logic_api.facility_get_by_propertyID(propertyID)
+        except Exception as e:
+            print(f"Error loading facilities:")
+            print(f"{type(e).__name__}: {e}")
+            input(ui_consts.MSG_ENTER_BACK)
+            return ui_consts.CMD_BACK
 
         total_pages = math.ceil(len(facility_list) / 10)
 
@@ -62,7 +58,14 @@ class FacilityScreen(BaseScreen):
         if self.current_page > (total_pages - 1):
             self.current_page = (total_pages - 1)
 
-        print(f"|  Facility list (Page {self.current_page+1}/{total_pages}):")
+        facilities_table = PrettyTable()
+        facilities_table.field_names = ["ID","Name","Description"]
+        facilities_table._min_table_width = ui_consts.TABLE_WIDTH
+
+        for facility in facility_list:
+            facilities_table.add_row([facility.ID,facility.name,facility.description])
+
+        print(f"|  Facility list for Property '{propertyID}' (Page {self.current_page+1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page")
 
         if self.active_search_filter:
@@ -70,114 +73,159 @@ class FacilityScreen(BaseScreen):
 
         if total_pages != 0:
             print(facilities_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
+        else:
+            print("")
+            print("No facilities found.")
 
         print("")
         cmd = input("Command: ").lower() 
 
         match cmd:
+
+            # Next page
             case "n":
                 self.current_page += 1
+
+            # Previous page
             case "p":
                 self.current_page -= 1
+
             # Add a facility
             case "a":
-                try:
-                    if self.logic_api.is_manager_logged_in():
-                        while (f_new_name := input("New facility name: ")) == "":
-                            print("Facility name can't be empty.")
+                if self.logic_api.is_manager_logged_in():
+                    while (f_new_name := input("New facility name: ")) == "":
+                        print("Facility name can't be empty.")
 
-                        f_new_description = input("New facility description: ")
+                    f_new_description = input("New facility description: ")
 
-                        new_facility = Facility(None, propertyID, f_new_name, f_new_description)
+                    new_facility = Facility(None, propertyID, f_new_name, f_new_description)
+
+                    try:
                         self.logic_api.facility_add(new_facility)
-                    else:
-                        print("You don't have permission to do that.")
-                        input("Press enter to continue.")
-                except Exception as e:
-                    print(f"An error occurred: {e}")
-                    input("Press enter to continue.")
+                    except Exception as e:
+                        print(f"Error creating facility '{f_new_name}' for property '{propertyID}':")
+                        print(f"{type(e).__name__}: {e}")
+                        input(ui_consts.MSG_ENTER_CONTINUE)
+                        return None
+                else:
+                    print(ui_consts.MSG_NO_PERMISSION)
+                    input(ui_consts.MSG_ENTER_CONTINUE)
+                    return None
 
-        
             # Remove a facility
             case "r":
-                try:
-                    if self.logic_api.is_manager_logged_in():
-                        remove_id = input("Remove facility that has the ID (B to cancel): ").strip().upper()
 
-                        if remove_id == "B":
-                            return self
+                # TODO: enforce 'active' property limitation
 
-                        facility_to_remove = self.logic_api.facility_get_by_ID(remove_id)
+                if self.logic_api.is_manager_logged_in():
+                    remove_facility_prompt = "Enter ID for facility to remove (B to cancel): "
+                    try:
+                        while not self.logic_api.facility_get_by_ID(remove_facility_ID := input(remove_facility_prompt).strip().upper()):
+                            if remove_facility_ID == "B":
+                                return None
+                            print(f"No facility found with the ID: '{remove_facility_ID}'.")
 
-                        if facility_to_remove is not None:
-                            self.logic_api.facility_remove(remove_id)
-                        else:
-                            print(f"No facility found with the ID: '{remove_id}'.")
-                    else:
-                        print("You don't have permission to do that.")
-                except Exception as e:
-                    print(f"An error occurred: {e}")
-                input("Press enter to continue.")
-                   
+                        if input(f"Are you sure you want to remove facility '{remove_facility_ID}' (Y to confirm)? ").upper() != "Y":
+                            return None
+
+                        self.logic_api.facility_remove(remove_facility_ID)
+                    except Exception as e:
+                        print(f"Error removing facility '{remove_facility_ID}':")
+                        print(f"{type(e).__name__}: {e}")
+                        input(ui_consts.MSG_ENTER_CONTINUE)
+                        return None
+                else:
+                    print(ui_consts.MSG_NO_PERMISSION)
+                    print(ui_consts.MSG_ENTER_CONTINUE)
+                    return None
+
             # Search for
             case "s":
-                self.active_search_filter = input("Search for: ")
+                self.active_search_filter = input(ui_consts.MSG_ENTER_SEARCH)
+                return None
+
             # View details
             case "v":
-                view_facility = input("View the details of facility with the ID (B to cancel): ").strip().upper()
+                view_facility = None
 
-                if view_facility == "B":
-                    return self
+                while view_facility is None:
+                    view_facility_ID = input("View details of the facility with the ID (B to cancel): ").strip().upper()
 
-                try:
-                    facility_by_id = self.logic_api.facility_get_by_ID(view_facility)
+                    if view_facility_ID == "B":
+                        return None
 
-                    if facility_by_id is None:
-                        print(f"No facility with the ID: '{view_facility}'.")
-                    else:
-                        facility_by_id_table = PrettyTable()
-                        facility_by_id_table.field_names = ["ID", "Name", "Description"]
-                        facility_by_id_table.add_row([facility_by_id.ID, fill(facility_by_id.name,width=30) ,fill(facility_by_id.description,width=40)])
-                        facility_by_id_table._min_table_width = ui_consts.TABLE_WIDTH
-                        
-                        print(facility_by_id_table)
+                    try:
+                        view_facility = self.logic_api.facility_get_by_ID(view_facility_ID)
+                    except Exception as e:
+                        print(f"Error loading data for facility '{view_facility_ID}':")
+                        print(f"{type(e).__name__}: {e}")
+                        input(ui_consts.MSG_ENTER_CONTINUE)
+                        return None
 
-                except Exception as e:
-                    print(f"An error occurred while retrieving the facility: {e}")
+                    if view_facility is None:
+                        print(f"No facility with the ID: '{view_facility_ID}'.")
+                        input(ui_consts.MSG_ENTER_CONTINUE)
 
-                input("Press enter to continue.")
+                view_facility_table = PrettyTable()
+                view_facility_table.field_names = ["ID", "Name", "Description"]
+                view_facility_table.add_row([view_facility.ID, fill(view_facility.name, width=30) ,fill(view_facility.description, width=40)])
+                view_facility_table._min_table_width = ui_consts.TABLE_WIDTH
+
+                print(view_facility_table)
+
+                input(ui_consts.MSG_ENTER_CONTINUE)
+                return None
 
             # Edit a facility
             case "e":
                 if self.logic_api.is_manager_logged_in():
-                    f_edit_facility = None
-                    while f_edit_facility is None:
-                        f_edit_facility_id = input("Edit the facility with the ID (B to cancel): ").strip().upper()
 
-                        if f_edit_facility_id == "B":
-                            return self
+                    # TODO: enforce 'active' property ID limitations
 
-                        f_edit_facility = self.logic_api.facility_get_by_ID(f_edit_facility_id)
+                    edit_facility = None
 
-                        if f_edit_facility is None:
-                            print(f"No facility with the ID: '{f_edit_facility_id}'.")
-                            continue
+                    while edit_facility is None:
+                        edit_facility_ID = input("Edit the facility with the ID (B to cancel): ").strip().upper()
 
-                        editable_attributes = ["name", "description"]
+                        if edit_facility_ID == "B":
+                            return None
 
-                        for attribute in editable_attributes:
-                            current_value = getattr(f_edit_facility, attribute)
-                            new_value = input(f"New {attribute.capitalize()} (Current: {current_value}): ").strip()
+                        try:
+                            edit_facility = self.logic_api.facility_get_by_ID(edit_facility_ID)
+                        except Exception as e:
+                            print(f"Error loading data for facility '{edit_facility_ID}':")
+                            print(f"{type(e).__name__}: {e}")
+                            input(ui_consts.MSG_ENTER_CONTINUE)
+                            return None
 
-                            if new_value:
-                                setattr(f_edit_facility, attribute, new_value)
+                        if edit_facility is None:
+                            print(f"No facility with the ID: '{edit_facility_ID}'.")
 
-                    self.logic_api.facility_edit(f_edit_facility)
+                    print("Enter new data for the facility, leave the field empty to keep the previous data.")
+
+                    editable_attributes = ["name", "description"]
+
+                    for attribute in editable_attributes:
+                        current_value = getattr(edit_facility, attribute)
+                        new_value = input(f"New {attribute.capitalize()} (Current: {current_value}): ").strip()
+
+                        if new_value:
+                            setattr(edit_facility, attribute, new_value)
+
+                    try:
+                        self.logic_api.facility_edit(edit_facility)
+                    except Exception as e:
+                        print(f"Error editing facility '{edit_facility_ID}':")
+                        print(f"{type(e).__name__}: {e}")
+                        input(ui_consts.MSG_ENTER_CONTINUE)
+                        return None
                 else:
-                    print("You don't have permission to do that.")
-                    input("Press enter to continue.")
+                    print(ui_consts.MSG_NO_PERMISSION)
+                    input(ui_consts.MSG_ENTER_CONTINUE)
+                    return None
+
             # Go back
             case "b":
                 return ui_consts.CMD_BACK
 
-        return self
+        return None

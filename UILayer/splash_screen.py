@@ -1,12 +1,12 @@
+# local imports
 from UILayer.base_screen import BaseScreen
-
 from UILayer import ui_consts
 
 class SplashScreen(BaseScreen):
     def __init__(self, logic_api) -> None:
         super().__init__(logic_api)
 
-    def run(self):
+    def run(self) -> str | None:
         self.clear_screen()
 
         print("          ___           ___           ___                    ___                       ___     ")
@@ -27,6 +27,6 @@ class SplashScreen(BaseScreen):
         print("")
         print("")
 
-        input("Press enter to continue.")
+        input(ui_consts.MSG_ENTER_CONTINUE)
 
         return ui_consts.LOGIN_SCREEN

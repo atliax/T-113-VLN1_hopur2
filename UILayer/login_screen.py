@@ -1,7 +1,8 @@
+# standard library imports
 from getpass import getpass
 
+# local imports
 from UILayer.base_screen import BaseScreen
-
 from UILayer import ui_consts
 
 class LoginScreen(BaseScreen):
@@ -9,7 +10,7 @@ class LoginScreen(BaseScreen):
         super().__init__(logic_api)
         self.user_note = ""
 
-    def run(self):
+    def run(self) -> str | None:
         self.clear_screen()
 
         print(ui_consts.SEPERATOR)
@@ -25,13 +26,14 @@ class LoginScreen(BaseScreen):
         print("Username: Pleb        and    Password: 1234")
         print("")
 
+        # only display a message to the user if we have something to say
         if self.user_note != "":
             print("\n" + self.user_note)
 
         # email = input("Username: ")
         # password = getpass("Password: ")
 
-        #Temp
+        # Temporary login skip
         email = "Boss"
         password = "Man"
 
@@ -40,4 +42,4 @@ class LoginScreen(BaseScreen):
             return ui_consts.MAIN_MENU_SCREEN
         else:
             self.user_note = "Invalid username or password."
-            return self
+            return None
