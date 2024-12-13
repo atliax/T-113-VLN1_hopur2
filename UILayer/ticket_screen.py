@@ -52,22 +52,39 @@ class TicketScreen(BaseScreen):
         print(ui_consts.SEPERATOR)
 
         # uppfæra ticket sem þarf að opna og endurtekna ticket
-        self.logic_api.ticket_update_pending()
-        
-        self.logic_api.ticket_update_recurring()
+        try:
+            self.logic_api.ticket_update_pending()
+            self.logic_api.ticket_update_recurring()
+        except Exception as e:
+            print(f"Error updating pending/recurring tickets:")
+            print(f"{type(e).__name__}: {e}")
+            input(ui_consts.MSG_ENTER_BACK)
+            return ui_consts.CMD_BACK
 
         # Sækja áfangastað núverandi innskráðs starfsmanns til að nota seinna
         logged_in_destinationID = self.logic_api.get_logged_in_staff().destinationID
 
         # Smíða töflu af destinations til að geta nýtt hana á fleiri en einum stað
-        properties = self.logic_api.property_get_by_destinationID(logged_in_destinationID)
+        try:
+            properties = self.logic_api.property_get_by_destinationID(logged_in_destinationID)
+        except Exception as e:
+            print(f"Error loading properties for destination '{logged_in_destinationID}':")
+            print(f"{type(e).__name__}: {e}")
+            input(ui_consts.MSG_ENTER_BACK)
+            return ui_consts.CMD_BACK
         property_table = PrettyTable()
         property_table.field_names = ["Property ID","Name","Destination","Type"]
         for property in properties:
             property_table.add_row([property.ID, property.name,property.destinationID,property.type])
 
         # sækja núverandi lista af tickets eftir því hvaða search filterar eru virkir
-        ticket_list = self.logic_api.ticket_search_advanced(self.active_search_filter,logged_in_destinationID,self.search_start_date, self.search_end_date, self.filter_by_property)
+        try:
+            ticket_list = self.logic_api.ticket_search_advanced(self.active_search_filter,logged_in_destinationID,self.search_start_date, self.search_end_date, self.filter_by_property)
+        except Exception as e:
+            print(f"Error loading tickets:")
+            print(f"{type(e).__name__}: {e}")
+            input(ui_consts.MSG_ENTER_BACK)
+            return ui_consts.CMD_BACK
 
         # stilla af blaðsíðudót
         total_pages = math.ceil(len(ticket_list) / 10)
@@ -83,15 +100,33 @@ class TicketScreen(BaseScreen):
 
         # sækja Ticket gögnin og setja í töfluna
         for ticket in ticket_list:
-            ticket_property = self.logic_api.property_get_by_ID(ticket.propertyID)
+            try:
+                ticket_property = self.logic_api.property_get_by_ID(ticket.propertyID)
+            except Exception as e:
+                print(f"Error loading data for property '{ticket.propertyID}':")
+                print(f"{type(e).__name__}: {e}")
+                input(ui_consts.MSG_ENTER_BACK)
+                return ui_consts.CMD_BACK
 
             if ticket.facilityID == None:
                 facility_name = "None"
             else:
-                facility_name = self.logic_api.facility_get_by_ID(ticket.facilityID).name
+                try:
+                    facility_name = self.logic_api.facility_get_by_ID(ticket.facilityID).name
+                except Exception as e:
+                    print(f"Error loading data for facility '{ticket.facilityID}':")
+                    print(f"{type(e).__name__}: {e}")
+                    input(ui_consts.MSG_ENTER_BACK)
+                    return ui_consts.MSG_ENTER_BACK
 
-            ticket_open_date = datetime.strptime(ticket.open_date, ui_consts.DATE_FORMAT)
-            days_delta = datetime.now() - ticket_open_date
+            try:
+                ticket_open_date = datetime.strptime(ticket.open_date, ui_consts.DATE_FORMAT)
+                days_delta = datetime.now() - ticket_open_date
+            except ValueError:
+                print(f"Error creating datetime object:")
+                print(f"{type(e).__name__}: {e}")
+                input(ui_consts.MSG_ENTER_BACK)
+                return ui_consts.CMD_BACK
             days_open = days_delta.days
 
             if ticket.status != logic_consts.TICKET_STATUS_OPEN:
@@ -114,7 +149,13 @@ class TicketScreen(BaseScreen):
             if self.search_end_date != "":
                 search_description.append(f"End: '{self.search_end_date}'")
             if self.filter_by_property != "":
-                selected_property_name = self.logic_api.property_get_by_ID(self.filter_by_property).name
+                try:
+                    selected_property_name = self.logic_api.property_get_by_ID(self.filter_by_property).name
+                except Exception as e:
+                    print(f"Error loading property name for property '{self.filter_by_property}':")
+                    print(f"{type(e).__name__}: {e}")
+                    input(ui_consts.MSG_ENTER_BACK)
+                    return ui_consts.CMD_BACK
                 search_description.append(f"Property: '{selected_property_name}' ({self.filter_by_property})")
             print(" ".join(search_description), end="")
             print("")
@@ -130,15 +171,15 @@ class TicketScreen(BaseScreen):
 
         match cmd:
 
-            # TODO DEBUG REMOVE
-            case "sw":
-                match self.logic_api.get_logged_in_staff().destinationID:
-                    case "D1":
-                        self.logic_api.get_logged_in_staff().destinationID = "D2"
-                    case "D2":
-                        self.logic_api.get_logged_in_staff().destinationID = "D3"
-                    case "D3":
-                        self.logic_api.get_logged_in_staff().destinationID = "D1"
+            #DEBUG helper command, left in code for teacher's convenience
+            #case "sw":
+            #    match self.logic_api.get_logged_in_staff().destinationID:
+            #        case "D1":
+            #            self.logic_api.get_logged_in_staff().destinationID = "D2"
+            #        case "D2":
+            #            self.logic_api.get_logged_in_staff().destinationID = "D3"
+            #        case "D3":
+            #            self.logic_api.get_logged_in_staff().destinationID = "D1"
 
             # Next page:
             case "n":
@@ -159,13 +200,25 @@ class TicketScreen(BaseScreen):
 
                 # choose property with verification
                 new_property_id = input("Property ID for new ticket: ").upper()
-                while (validated := self.logic_api.property_validate(new_property_id)) == False:
-                    print(f"No property with ID '{new_property_id}' found.")
-                    new_property_id = input("(B) to cancel or Property ID for new ticket: ").upper()
-                    if new_property_id == "B":
-                        return None
+                try:
+                    while self.logic_api.property_validate(new_property_id) == False:
+                        print(f"No property with ID '{new_property_id}' found.")
+                        new_property_id = input("(B) to cancel or Property ID for new ticket: ").upper()
+                        if new_property_id == "B":
+                            return None
+                except Exception as e:
+                    print(f"Error validating property '{new_property_id}':")
+                    print(f"{type(e).__name__}: {e}")
+                    input(ui_consts.MSG_ENTER_CONTINUE)
+                    return None
 
-                new_facility_list = self.logic_api.facility_get_by_propertyID(new_property_id)
+                try:
+                    new_facility_list = self.logic_api.facility_get_by_propertyID(new_property_id)
+                except Exception as e:
+                    print(f"Error loading facililies for property '{new_property_id}':")
+                    print(f"{type(e).__name__}: {e}")
+                    input(ui_consts.MSG_ENTER_CONTINUE)
+                    return None
 
                 # skip facility ID if there are no facilities matching the propertyID
                 if len(new_facility_list) == 0:
@@ -181,11 +234,17 @@ class TicketScreen(BaseScreen):
                     print(facility_table) 
 
                     new_ticket_facility_id = input("Enter ID of facility for new ticket: ").upper()
-                    while (verified := self.logic_api.facility_validate(new_ticket_facility_id, new_facility_list)) == False:
-                        print(f"No facility '{new_ticket_facility_id}' at this property")
-                        new_ticket_facility_id = input("(B) to cancel or ID of facility for new ticket: ").upper()
-                        if new_ticket_facility_id == "B":
-                            return None
+                    try:
+                        while self.logic_api.facility_validate(new_ticket_facility_id, new_facility_list) == False:
+                            print(f"No facility '{new_ticket_facility_id}' at this property")
+                            new_ticket_facility_id = input("(B) to cancel or ID of facility for new ticket: ").upper()
+                            if new_ticket_facility_id == "B":
+                                return None
+                    except Exception as e:
+                        print(f"Error validating facility '{new_ticket_facility_id}':")
+                        print(f"{type(e).__name__}: {e}")
+                        input(ui_consts.MSG_ENTER_CONTINUE)
+                        return None
 
                 while not (new_ticket_title := input("New ticket title: ").strip()):
                     print("Ticket title can't be empty.")
@@ -201,7 +260,13 @@ class TicketScreen(BaseScreen):
                     print ("Use DD-MM-YYYY format")
                     new_open_date = input("Date to open ticket (leave empty to open the ticket now): ")
                     if new_open_date == "":
-                        new_open_date = datetime.now().strftime(ui_consts.DATE_FORMAT)
+                        try:
+                            new_open_date = datetime.now().strftime(ui_consts.DATE_FORMAT)
+                        except ValueError as e:
+                            print(f"Error creating datetime object using format '{ui_consts.DATE_FORMAT}':")
+                            print(f"{type(e).__name__}: {e}")
+                            input(ui_consts.MSG_ENTER_CONTINUE)
+                            return None
                         status = logic_consts.TICKET_STATUS_OPEN
                     try:
                         date = new_open_date
@@ -225,7 +290,13 @@ class TicketScreen(BaseScreen):
                                     close_date = None, staffID = None, report = None, cost = 0, contractorID = None, \
                                     contractor_review = None, contractor_rating = None, contractor_fee = 0)
 
-                self.logic_api.ticket_add(new_ticket)
+                try:
+                    self.logic_api.ticket_add(new_ticket)
+                except Exception as e:
+                    print(f"Error adding new ticket: '{new_ticket.title}':")
+                    print(f"{type(e).__name__}: {e}")
+                    input(ui_consts.MSG_ENTER_CONTINUE)
+                    return None
 
             # Remove a ticket
             case "r":
@@ -266,12 +337,19 @@ class TicketScreen(BaseScreen):
                     if ticket_details_ID == "B":
                         return None
 
-                    ticket_details = self.logic_api.ticket_get_by_ID(ticket_details_ID)
-                    
+                    try:
+                        ticket_details = self.logic_api.ticket_get_by_ID(ticket_details_ID)
+                    except Exception as e:
+                        print(f"Error loading data for ticket '{ticket_details_ID}':")
+                        print(f"{type(e).__name__}: {e}")
+                        input(ui_consts.MSG_ENTER_CONTINUE)
+                        return None
+
                     if ticket_details is None:
                         print(f"No ticket with the ID: '{ticket_details_ID}', try again.")
 
                 self.print_ticket_detail_table(ticket_details)
+
                 input(ui_consts.MSG_ENTER_CONTINUE)
                 return None
 
@@ -297,7 +375,7 @@ class TicketScreen(BaseScreen):
                             print(f"Error loading ticket data '{edit_ticket_ID}':")
                             print(f"{type(e).__name__}: {e}")
                             input(ui_consts.MSG_ENTER_BACK)
-                            return ui_consdts.CMD_BACK
+                            return ui_consts.CMD_BACK
 
                         if edit_ticket is None:
                             print(f"No ticket with the ID: '{edit_ticket_ID}', try again (B to cancel).")
