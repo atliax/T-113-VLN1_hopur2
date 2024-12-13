@@ -7,6 +7,7 @@ class ContractorManager:
         self.storage_api = storage_api
 
     def contractor_add(self, new_contractor : Contractor) -> None:
+        """Takes a new contractor instance and adds it to the system."""
         all_contractors = self.storage_api.contractor_get_all()
         if len(all_contractors) != 0:
             n = int(all_contractors[len(all_contractors)-1].ID[1:])
@@ -20,12 +21,15 @@ class ContractorManager:
         self.storage_api.contractor_add(new_contractor)
 
     def contractor_remove(self, contractorID : str) -> None:
+        """Takes a contractor ID and removes it from the system."""
         self.storage_api.contractor_remove(contractorID)
 
     def contractor_edit(self, edited_contractor : Contractor) -> None:
+        """Takes a contractor instance and replaces a contractor in the system that has the same ID."""
         self.storage_api.contractor_edit(edited_contractor)
 
     def contractor_search(self, search_string : str) -> list[Contractor]:
+        """Takes a string and returns a list of contractors in the system that have attributes containing that string."""
         all_contractors : list[Contractor] = self.storage_api.contractor_get_all()
         filtered_contractors = []
         for contractor in all_contractors:
@@ -45,9 +49,11 @@ class ContractorManager:
         return filtered_contractors
 
     def contractor_get_all(self) -> list[Contractor]:
+        """Returns a list of all the contractors that exist in the system."""
         return self.storage_api.contractor_get_all()
 
     def contractor_get_by_ID(self, contractorID : str) -> Contractor:
+        """Takes a contractor ID and returns a contractor from the system with the same ID if it exists."""
         return self.storage_api.contractor_get_by_ID(contractorID)
 
     def contractor_update_rating(self, contractorID : str) -> None:

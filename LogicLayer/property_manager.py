@@ -7,13 +7,16 @@ class PropertyManager:
         self.storage_api = storage_api
 
     def property_get_all(self) -> list[Property]:
+        """Returns a list of all the properties that exist in the system."""
         return self.storage_api.property_get_all()
 
     def property_get_by_ID(self, propertyID : str) -> Property:
+        """Takes a property ID and returns a property from the system with the same ID if it exists."""
         return self.storage_api.property_get_by_ID(propertyID)
 
     # [A] Add a property
     def property_add(self, new_property : Property) -> None:
+        """Takes a new property instance and adds it to the system."""
         all_properties = self.storage_api.property_get_all()
         if len(all_properties) != 0:
             n = int(all_properties[len(all_properties)-1].ID[1:])
@@ -28,14 +31,17 @@ class PropertyManager:
 
     # [R] Remove a property
     def property_remove(self, propertyID : str):
+        """Takes a property ID and removes it from the system."""
         self.storage_api.property_remove(propertyID)
 
     # [E] Edit a property
     def property_edit(self, edited_property : Property):
+        """Takes a property instance and replaces a property in the system that has the same ID."""
         self.storage_api.property_edit(edited_property)
 
     # [S] Search for
     def property_search(self, search_string : str) -> list[Property]:
+        """Takes a string and returns a list of properties in the system that have attributes containing that string."""
         all_properties : list[Property] = self.storage_api.property_get_all()
         filtered_properties = []
         for item in all_properties:
@@ -55,11 +61,9 @@ class PropertyManager:
         return filtered_properties
     
     def validate_property(self, propertyID : str) -> bool:
+        """Takes in a property ID and returns True if it exists in the system, otherwise returns False."""
         all_property =self.storage_api.property_get_all()
         for property in all_property:
             if propertyID == property.ID:
                 return True
         return False
-    # [V] View facilities
-    #def view_facilities():
-    #    pass

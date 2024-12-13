@@ -8,12 +8,15 @@ class FacilityManager:
         self.selected_property = None
 
     def set_selected_property(self, propertyID) -> None:
+        """Takes a property ID and sets that as the 'active' property on the Facility screen."""
         self.selected_property = propertyID
 
     def get_selected_property(self) -> str:
+        """Returns the property ID that is currently the 'active' property on the Facility screen."""
         return self.selected_property
 
     def facility_add(self, new_facility : Facility) -> None:
+        """Takes a new facility instance and adds it to the system."""
         all_facilities = self.storage_api.facility_get_all()
         if len(all_facilities) != 0:
             n = int(all_facilities[len(all_facilities)-1].ID[1:])
@@ -27,15 +30,19 @@ class FacilityManager:
         self.storage_api.facility_add(new_facility)
 
     def facility_remove(self, facilityID : str) -> None:
+        """Takes a facility ID and removes it from the system."""
         self.storage_api.facility_remove(facilityID)
 
     def facility_get_all(self) -> list[Facility]:
+        """Returns a list of all the facilities that exist in the system."""
         return self.storage_api.facility_get_all()
 
     def facility_get_by_ID(self, facilityID : str) -> Facility:
+        """Takes a facility ID and returns a facility from the system with the same ID if it exists."""
         return self.storage_api.facility_get_by_ID(facilityID)
     
     def facility_search(self, search_string : str):
+        """Takes a string and returns a list of facilities in the system that have attributes containing that string. Only searches facilities matching the 'active' property ID."""
         all_facilities : list[Facility] = self.facility_get_by_propertyID(self.selected_property)
 
         filteded_facilities = []
@@ -48,9 +55,11 @@ class FacilityManager:
         return filteded_facilities
 
     def facility_edit(self, edited_facility : Facility):
+        """Takes a facility instance and replaces a facility in the system that has the same ID."""
         self.storage_api.facility_edit(edited_facility)
 
     def facility_get_by_propertyID(self, propertyID : str) -> list[Facility]:
+        """Takes a property ID and returns a list of facilities that correspond to that property."""
         all_facilities = self.storage_api.facility_get_all()
 
         filtered_facilities = []
@@ -62,6 +71,7 @@ class FacilityManager:
         return filtered_facilities
 
     def facility_validate(self, facilityID : str, facility_list : list[Facility]) -> bool:
+        """Takes in a facility ID and a list of Facilities and returns True if the ID exists in the list, otherwise returns False."""
         for facility in facility_list:
             if facilityID == facility.ID:
                 return True

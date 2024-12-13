@@ -7,12 +7,15 @@ class TicketManager:
         self.storage_api = storage_api
 
     def ticket_get_all(self) -> list[Ticket]:
+        """Returns a list of all the tickets that exist in the system."""
         return self.storage_api.ticket_get_all()
 
     def ticket_get_by_ID(self, ticketID : str) -> Ticket:
+        """Takes a ticket ID and returns a ticket from the system with the same ID if it exists."""
         return self.storage_api.ticket_get_by_ID(ticketID)
 
     def ticket_add(self, new_ticket : Ticket) -> None:
+        """Takes a new ticket instance and adds it to the system."""
         all_tickets = self.storage_api.ticket_get_all()
         if len(all_tickets) != 0:
             n = int(all_tickets[len(all_tickets)-1].ID[1:])
@@ -26,9 +29,11 @@ class TicketManager:
         self.storage_api.ticket_add(new_ticket)
 
     def ticket_edit(self, edited_ticket : Ticket) -> None:
+        """Takes a ticket instance and replaces a ticket in the system that has the same ID."""
         self.storage_api.ticket_edit(edited_ticket)
 
     def ticket_remove(self, ticketID : str) -> None:
+        """Takes a ticket ID and removes it from the system."""
         ticket_exists = self.storage_api.ticket_get_by_ID(ticketID)
         if ticket_exists:
             self.storage_api.ticket_remove(ticketID)
@@ -36,6 +41,7 @@ class TicketManager:
             raise IDNotFoundError(f" {ticketID} does not exist")
 
     def ticket_search(self, search_string : str) -> list[Ticket]:
+        """Takes a string and returns a list of tickets in the system that have attributes containing that string."""
         all_tickets : list[Ticket] = self.storage_api.ticket_get_all()
         filtered_tickets = []
         for item in all_tickets:
