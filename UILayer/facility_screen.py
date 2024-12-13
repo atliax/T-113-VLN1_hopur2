@@ -12,12 +12,20 @@ from UILayer import ui_consts
 from Model import Facility
 
 class FacilityScreen(BaseScreen):
+    """
+    Screen class to manage facilities within a property,
+    allows adding, editing viewing, removing 
+    and searching for facilities
+    """
     def __init__(self, logic_api) -> None:
         super().__init__(logic_api)
-        self.current_page = -1
-        self.active_search_filter = ""
+        self.current_page = -1 # track current page for navigation
+        self.active_search_filter = "" 
 
     def run(self) -> str | None:
+        """
+        Main method to display the facilities management 
+        screen and handle user input"""
         self.clear_screen()
 
         print("Main Menu > Properties > Facilities")
@@ -25,6 +33,7 @@ class FacilityScreen(BaseScreen):
         print(ui_consts.SEPERATOR)
         print("|")
 
+        # Display options based on user permissions
         if self.logic_api.is_manager_logged_in():
             print("|	[A] Add a facility		[E] Edit a facility			[B] Go back")
             print("|	[R] Remove a facility		[S] Search for")
@@ -37,8 +46,10 @@ class FacilityScreen(BaseScreen):
         print("|")
         print(ui_consts.SEPERATOR)
 
+        # Get the currently selected property ID
         propertyID = self.logic_api.facility_get_selected_property()
 
+       # Load facilities based on search filter or selected property
         try:
             if self.active_search_filter:
                 facility_list = self.logic_api.facility_search(self.active_search_filter)
@@ -58,6 +69,7 @@ class FacilityScreen(BaseScreen):
         if self.current_page > (total_pages - 1):
             self.current_page = (total_pages - 1)
 
+        # Set up facilities table
         facilities_table = PrettyTable()
         facilities_table.field_names = ["ID","Name","Description"]
         facilities_table._min_table_width = ui_consts.TABLE_WIDTH
@@ -65,6 +77,7 @@ class FacilityScreen(BaseScreen):
         for facility in facility_list:
             facilities_table.add_row([facility.ID,facility.name,facility.description])
 
+        # Fetch the active property details
         try:
             active_property = self.logic_api.property_get_by_ID(propertyID)
         except Exception as e:
@@ -78,6 +91,7 @@ class FacilityScreen(BaseScreen):
         else:
             property_name = "-"
 
+        # Display facilities and page nagivation options
         print(f"|  Facility list for Property '{property_name}' ({propertyID}) (Page {self.current_page+1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page")
 
@@ -93,6 +107,7 @@ class FacilityScreen(BaseScreen):
         print("")
         cmd = input("Command: ").lower() 
 
+        # Handle user commands
         match cmd:
 
             # Next page
@@ -106,6 +121,7 @@ class FacilityScreen(BaseScreen):
             # Add a facility
             case "a":
                 if self.logic_api.is_manager_logged_in():
+                    # Prompt for facility name, ensuring its not empty
                     while (f_new_name := input("New facility name: ")) == "":
                         print("Facility name can't be empty.")
 
@@ -113,6 +129,7 @@ class FacilityScreen(BaseScreen):
 
                     new_facility = Facility(None, propertyID, f_new_name, f_new_description)
 
+                    # Attempt to add the facility
                     try:
                         self.logic_api.facility_add(new_facility)
                     except Exception as e:
@@ -125,22 +142,25 @@ class FacilityScreen(BaseScreen):
                     input(ui_consts.MSG_ENTER_CONTINUE)
                     return None
 
-            # Remove a facility
+            # Remove an existing facility
             case "r":
                 if self.logic_api.is_manager_logged_in():
                     remove_facility_prompt = "Enter ID for facility to remove (B to cancel): "
                     try:
+                        # Prompt for a valic facility ID
                         while not self.logic_api.facility_get_by_ID(remove_facility_ID := input(remove_facility_prompt).strip().upper()):
                             if remove_facility_ID == "B":
                                 return None
                             print(f"No facility found with the ID: '{remove_facility_ID}'.")
 
+                        # Confirm removal if facility belongs to a different property
                         if not self.logic_api.facility_get_by_ID(remove_facility_ID).propertyID == propertyID:
                             if input(f"Facility '{remove_facility_ID}' does not belong to the currently active property, do you still want to remove it? (Y to confirm)? ").upper() != "Y":
                                 return None
                         elif input(f"Are you sure you want to remove facility '{remove_facility_ID}' (Y to confirm)? ").upper() != "Y":
                             return None
 
+                        # Remove the facility
                         self.logic_api.facility_remove(remove_facility_ID)
                     except Exception as e:
                         print(f"Error removing facility '{remove_facility_ID}':")
@@ -163,12 +183,14 @@ class FacilityScreen(BaseScreen):
                 view_facility = None
 
                 while view_facility is None:
+                    # Prompt for a valid facility ID
                     view_facility_ID = input("View details of the facility with the ID (B to cancel): ").strip().upper()
 
                     if view_facility_ID == "B":
                         return None
 
                     try:
+                        # Fetch facility details
                         view_facility = self.logic_api.facility_get_by_ID(view_facility_ID)
                     except Exception as e:
                         print(f"Error loading data for facility '{view_facility_ID}':")
@@ -180,6 +202,7 @@ class FacilityScreen(BaseScreen):
                         print(f"No facility with the ID: '{view_facility_ID}'.")
                         input(ui_consts.MSG_ENTER_CONTINUE)
 
+                # Display facility details
                 view_facility_table = PrettyTable()
                 view_facility_table.field_names = ["ID", "Name", "Description"]
                 view_facility_table.add_row([view_facility.ID, fill(view_facility.name, width=30) ,fill(view_facility.description, width=40)])
@@ -195,17 +218,17 @@ class FacilityScreen(BaseScreen):
             case "e":
                 if self.logic_api.is_manager_logged_in():
 
-                    # TODO: enforce 'active' property ID limitations
-
                     edit_facility = None
 
                     while edit_facility is None:
+                        # Prompt for valid facility ID
                         edit_facility_ID = input("Edit the facility with the ID (B to cancel): ").strip().upper()
 
                         if edit_facility_ID == "B":
                             return None
 
                         try:
+                            # Fetch facility details
                             edit_facility = self.logic_api.facility_get_by_ID(edit_facility_ID)
                         except Exception as e:
                             print(f"Error loading data for facility '{edit_facility_ID}':")
@@ -216,12 +239,14 @@ class FacilityScreen(BaseScreen):
                         if edit_facility is None:
                             print(f"No facility with the ID: '{edit_facility_ID}'.")
 
+                    # Confirm editing if the facility belongs to a different property
                     if not edit_facility.propertyID == propertyID:
                         if input(f"Facility '{edit_facility_ID}' does not belong to the currently active property, do you still want to edit it? (Y to confirm)? ").upper() != "Y":
                             return None
 
                     print("Enter new data for the facility, leave the field empty to keep the previous data.")
 
+                    # Prompt for editable attributes
                     editable_attributes = ["name", "description"]
 
                     for attribute in editable_attributes:
@@ -230,6 +255,7 @@ class FacilityScreen(BaseScreen):
 
                         if new_value:
                             setattr(edit_facility, attribute, new_value)
+                            # Save changes
 
                     try:
                         self.logic_api.facility_edit(edit_facility)
