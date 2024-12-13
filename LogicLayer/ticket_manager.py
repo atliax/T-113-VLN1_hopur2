@@ -116,3 +116,9 @@ class TicketManager:
                         continue
 
         return filtered_tickets
+
+    def ticket_update_pending(self) -> None:
+        pass
+
+    def ticket_update_recurring(self) -> None:
+        pass

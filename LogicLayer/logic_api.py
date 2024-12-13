@@ -227,6 +227,12 @@ class LogicAPI:
     def ticket_get_by_destinationID(self, destinationID : str) -> list[Ticket]:
         return self.ticket_manager.ticket_get_by_destinationID(destinationID)
 
+    def ticket_update_recurring(self) -> None:
+        self.ticket_manager.ticket_update_recurring()
+
+    def ticket_update_pending(self) -> None:
+        self.ticket_manager.ticket_update_pending()
+
 #==========================================================================
 #--Time-----------------------------------------------------------------
 
