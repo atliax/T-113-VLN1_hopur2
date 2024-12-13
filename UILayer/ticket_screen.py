@@ -27,12 +27,12 @@ class TicketScreen(BaseScreen):
 
         if self.logic_api.is_manager_logged_in():
             print("|	[A] Add a ticket		[E] Edit			[B] Go back")
-            print("|	[R] Remove a ticket		[S] Search for      [PR] Process")
-            print("|	[V] View closed/open tickets		[D] Ticket details")
+            print("|	[R] Remove a ticket		[S] Search for			[PR] Process")
+            print("|	[V] View closed/open tickets	[D] Ticket details")
         else:
-            print_formatted_text(HTML("|	[A] Add a ticket		[E] <s>Edit/Process</s>			[B] Go back"))
-            print_formatted_text(HTML("|	<s>[R] Remove a ticket</s>		[S] Search for      [PR] Process"))
-            print_formatted_text(HTML("|	[V] View closed/open tickets		[D] Ticket details"))
+            print_formatted_text(HTML("|	[A] Add a ticket		<s>[E] Edit</s>			[B] Go back"))
+            print_formatted_text(HTML("|	<s>[R] Remove a ticket</s>		[S] Search for			[PR] Process"))
+            print_formatted_text(HTML("|	[V] View closed/open tickets	[D] Ticket details"))
 
         print("|")
         print(ui_consts.SEPERATOR)
@@ -90,6 +90,9 @@ class TicketScreen(BaseScreen):
 
         if total_pages != 0:
             print(all_tickets_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
+        else:
+            print("")
+            print("No tickets found.")
 
         print("")
         cmd = input("Command: ").lower()
@@ -444,7 +447,7 @@ class TicketScreen(BaseScreen):
 
 
             case "s":    # Search for
-                self.active_search_filter = input("Search for: ")
+                self.active_search_filter = input(ui_consts.MSG_ENTER_SEARCH)
                 # "Main menu > Tickets > Filtered" window and commands are identical to "Main menu > Tickets"
 
             case "b":
