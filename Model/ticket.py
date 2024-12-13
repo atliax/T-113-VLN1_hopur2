@@ -17,8 +17,10 @@ class Ticket(BaseModel):
         self.open = open
         
         self.status = status
+
         self.recurring = recurring
         self.recurring_days = recurring_days
+        
         self.open_date = open_date
         self.close_date = close_date
         self.staffID = staffID

@@ -169,7 +169,11 @@ class TicketScreen(BaseScreen):
                         print ("Sorry wrong format, try again!")
 
                 while new_recurring < 0:
-                    new_recurring = int(input("Recur every N days (0 = never): "))
+                    try:
+                        new_recurring = int(input("Recur every N days (0 = never): "))
+                    except ValueError:
+                        print("Invalid input, Please enter a valid number.")
+                        new_recurring = -1
 
                 new_ticket = Ticket(None, new_ticket_facility_id, new_property_id, new_priority, new_ticket_title, new_description,None, None, None, new_recurring , new_date, None, None, None, None, None, None, None, None)
                 self.logic_api.ticket_add(new_ticket)
@@ -232,17 +236,18 @@ class TicketScreen(BaseScreen):
                 input("Press enter to continue.")
 
             case "e":# Edit ticket
+                ##### ÞARF LOCKED/OPEN FUNCTIONALITY, má ekki edita ef locked.
                 priority_list = ["High", "Medium", "Low"]
                 edit_priority = ""
                 edit_ticket_title = ""
-                edit_description = ""
-#, "open_date","close_date","staffID","report","cost","contractorID","contractor_review","contractor_rating","contractor_fee"
+                #edit_description = ""
+                #"open_date","close_date","staffID","report","cost","contractorID","contractor_review","contractor_rating","contractor_fee"
 
                 print("If you do not wish to change a specific field, you can leave the input empty")
-                edit_ticket = None
+                
                 #ticket_attributes = ["priority", "title", "description", "status", "recurring_days"]
 
-
+                edit_ticket = None
                 while edit_ticket is None:
                     pick_ticket = input("Type in ID of ticket to edit or b to back: ").upper()
                     if pick_ticket == "B":
@@ -318,7 +323,56 @@ class TicketScreen(BaseScreen):
 
             case "p":
                 #rest af edit
-                return self
+                edit_recurring = -1
+                process_ticket = None
+                process_cost = -1
+                while process_ticket is None:
+                    pick_ticket = input("Type in ID of ticket to edit or b to back: ").upper()
+                    if pick_ticket == "B":
+                        return self
+                    
+                    process_ticket = self.logic_api.ticket_get_by_ID(pick_ticket)
+
+                    if process_ticket is not None:
+
+                        while edit_recurring < 0:
+                            print (f"Current recur rate in days {process_ticket.recurring_days}")
+                            print ("leave empty if you want it to remain as is")
+                            try:
+                                edit_recurring = input(" New recur rate every X days (0 = never): ")
+                                if edit_recurring.strip() == "":
+                                    break
+                                edit_recurring = int(edit_recurring)
+                            except ValueError:
+                                print("Invalid input, Please enter a number")
+                                edit_recurring = -1
+                        process_ticket.recurring_days = edit_recurring
+                    
+                        while process_cost < 0:
+                            print (f"If there was material cost, type in how much: ")
+                            try:
+                                process_cost = input(f"leave empty if none or type 0")
+                                if  process_cost.strip() == "" or int(process_cost) == 0:
+                                    process_ticket.cost = 0
+                                else:
+                                    process_ticket.cost = int(process_cost) 
+                            except ValueError:
+                                print ("please enter a valid number or leave empty.")
+                                process_cost = -1
+
+                        contractor = input("Was a contractred involved in the ticket? (\"yes\" if so): ").lower()
+                        if contractor == "yes":
+                            
+
+
+                                
+
+
+                        
+                    
+                        
+
+
             case "s":    # Search for
                 self.active_search_filter = input("Search for: ")
                 # "Main menu > Tickets > Filtered" window and commands are identical to "Main menu > Tickets"
