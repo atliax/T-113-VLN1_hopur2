@@ -49,6 +49,10 @@ class LogicAPI:
     def contractor_get_all(self) -> list[Contractor]:
         """Returns a list of all the contractors that exist in the system."""
         return self.contractor_manager.contractor_get_all()
+    
+    def contractor_get_by_destinationID(self, destinationID : str) -> list[Contractor]:
+        """Returns a list of all the contractors that exist in the system in the destination."""
+        return self.contractor_manager.contractor_get_by_destinationID(destinationID)
 
     def contractor_get_by_ID(self, contractorID : str) -> Contractor:
         """Takes a contractor ID and returns a contractor from the system with the same ID if it exists."""

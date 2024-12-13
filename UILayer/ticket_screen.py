@@ -26,12 +26,12 @@ class TicketScreen(BaseScreen):
         print("|")
 
         if self.logic_api.is_manager_logged_in():
-            print("|	[A] Add a ticket		[E] Edit/Process			[B] Go back")
-            print("|	[R] Remove a ticket		[S] Search for")
+            print("|	[A] Add a ticket		[E] Edit			[B] Go back")
+            print("|	[R] Remove a ticket		[S] Search for      [PR] Process")
             print("|	[V] View closed tickets		[D] Ticket details")
         else:
-            print_formatted_text(HTML("|	[A] Add a ticket		[E] Edit/Process			[B] Go back"))
-            print_formatted_text(HTML("|	<s>[R] Remove a ticket</s>		[S] Search for"))
+            print_formatted_text(HTML("|	[A] Add a ticket		[E] <s>Edit/Process</s>			[B] Go back"))
+            print_formatted_text(HTML("|	<s>[R] Remove a ticket</s>		[S] Search for      [PR] Process"))
             print_formatted_text(HTML("|	[V] View closed tickets		[D] Ticket details"))
 
         print("|")
@@ -321,11 +321,15 @@ class TicketScreen(BaseScreen):
                         print(f"No ticket with the ID: '{pick_ticket}', try again (B to cancel).")
 
 
-            case "p":
-                #rest af edit
+            case "pr":
+                #
                 edit_recurring = -1
                 process_ticket = None
                 process_cost = -1
+                chosen_contractor = ""
+                contractor_rating = -1
+                contractor_fee = -1 
+
                 while process_ticket is None:
                     pick_ticket = input("Type in ID of ticket to edit or b to back: ").upper()
                     if pick_ticket == "B":
@@ -336,33 +340,69 @@ class TicketScreen(BaseScreen):
                     if process_ticket is not None:
 
                         while edit_recurring < 0:
-                            print (f"Current recur rate in days {process_ticket.recurring_days}")
-                            print ("leave empty if you want it to remain as is")
+                            print (f"\nCurrent recur rate in days {process_ticket.recurring_days}")
                             try:
-                                edit_recurring = input(" New recur rate every X days (0 = never): ")
-                                if edit_recurring.strip() == "":
-                                    break
-                                edit_recurring = int(edit_recurring)
+                                edit_recurring = int(input("New recur rate every X days (0 = never): "))
+                                edit_recurring = process_ticket.recurring_days
                             except ValueError:
-                                print("Invalid input, Please enter a number")
+                                print("\nInvalid input, Please enter a number")
                                 edit_recurring = -1
                         process_ticket.recurring_days = edit_recurring
                     
                         while process_cost < 0:
-                            print (f"If there was material cost, type in how much: ")
+                            print (f"\nIf there was material cost, type in how much: ")
                             try:
-                                process_cost = input(f"leave empty if none or type 0")
-                                if  process_cost.strip() == "" or int(process_cost) == 0:
-                                    process_ticket.cost = 0
-                                else:
-                                    process_ticket.cost = int(process_cost) 
+                                process_cost = int(input("Type 0 if none: "))
+                                process_cost = process_ticket.cost
                             except ValueError:
                                 print ("please enter a valid number or leave empty.")
                                 process_cost = -1
+                        process_ticket.cost = process_cost
+                        print ("\nWas a contractror involved in the ticket?")
+                        contractor = input("(\"yes\" if so, anything else if not): ").lower()
+                        if contractor == "yes" or contractor == "y":
+                            
+                            destination_id = self.logic_api.property_get_by_ID(process_ticket.propertyID).destinationID
+                            contractor_in_destination = self.logic_api.contractor_get_by_destinationID(destination_id)
+                            Contractor_table = PrettyTable()
+                            Contractor_table.field_names = ["ID","Name","Rating", "phone", "opening hours", "type"]
+                            for contractor_inst in contractor_in_destination:
+                                Contractor_table.add_row([contractor_inst.ID,contractor_inst.name,contractor_inst.rating, contractor_inst.phone, contractor_inst.opening_hours, contractor_inst.contractor_type])
+                            print(Contractor_table)
 
-                        contractor = input("Was a contractred involved in the ticket? (\"yes\" if so): ").lower()
-                        if contractor == "yes":
-                            pass
+                            validated_contractor = False
+                            while not validated_contractor:
+                                chosen_contractor = input("Choose ID of contractor you want to register for this job: ").upper()
+                                for con in contractor_in_destination:
+                                    if chosen_contractor == con.ID:
+                                        validated_contractor = True
+                            process_ticket.contractorID = chosen_contractor
+
+                            print ("\nleave empty if you do not wish to add a review")
+                            contractor_review = input ("Review of the job done: ")
+                            process_ticket.contractor_review = contractor_review
+
+                            while contractor_rating < 0 or contractor_rating > 5:
+                                contractor_rating = float(input("\ninput a number from 0-5 "))
+                                if contractor_rating < 0 or contractor_rating > 5:
+                                    print("Try again")
+                            process_ticket.contractor_rating = contractor_rating
+
+                            while contractor_fee <= 0:
+                                contractor_fee = int(input("How much was the fee for the contractor: "))
+                                if contractor_fee <= 0:
+                                    print ("Try again")
+                            process_ticket.contractor_fee = contractor_fee
+
+                        process_report = input ("\nWrite report here: ")
+                        process_ticket.report = process_report
+                        process_ticket.staffID = self.logic_api.get_logged_in_staff().ID
+
+
+                        
+                        self.logic_api.ticket_edit(process_ticket)
+                        if contractor == "yes" or contractor == "y":
+                            self.logic_api.contractor_update_rating()
 
 
                                 

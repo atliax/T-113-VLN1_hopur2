@@ -27,6 +27,15 @@ class ContractorManager:
     def contractor_edit(self, edited_contractor : Contractor) -> None:
         """Takes a contractor instance and replaces a contractor in the system that has the same ID."""
         self.storage_api.contractor_edit(edited_contractor)
+    
+    def contractor_get_by_destinationID(self, destinationID: str) -> list[Contractor]:
+        all_contractors : list[Contractor] = self.storage_api.contractor_get_all()
+        contractors_in_dest = []
+        for contractor in all_contractors:
+            if contractor.destinationID == destinationID:
+                contractors_in_dest.append(contractor)
+        return contractors_in_dest
+        
 
     def contractor_search(self, search_string : str) -> list[Contractor]:
         """Takes a string and returns a list of contractors in the system that have attributes containing that string."""

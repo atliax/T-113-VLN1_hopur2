@@ -16,16 +16,20 @@ class Ticket(BaseModel):
 
         self.open = open
         
-        self.status = status
+        self.status = status # open, done, closed
 
         self.recurring = recurring
         self.recurring_days = recurring_days
         
         self.open_date = open_date
         self.close_date = close_date
+        
         self.staffID = staffID
+
         self.report = report
+
         self.cost = cost
+
         self.contractorID = contractorID
         self.contractor_review = contractor_review
         self.contractor_rating = contractor_rating
