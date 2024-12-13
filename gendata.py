@@ -236,6 +236,9 @@ contractors.append(Contractor('C1','D1',0.0,'Píparaþjónusta Sigurjóns','Sigu
 contractors.append(Contractor('C2','D2',0.0,'Guðmundur Sigfinnsson','','+354 555-1212', 'Gata 14, Borg', '24/7','Þúsundþjalasmiður'))
 contractors.append(Contractor('C3','D3',0.0,'Actavis','','+354 525-1515', 'Götugata 19, Borgarbær', '9-17 um helgar','Lyfjasala'))
 
+staff.append(Staff('C10','D1','BossMan','101010-1119','Heimilisfang 2, Reykjavík','+354 555-5555','+354 777-7777','Boss','Man','Prufuyfirmaður',True))
+staff.append(Staff('C11','D1','Pleb','111110-1229','Heimilisfang 1, Reykjavík','+354 444-5555','+354 888-7777','Pleb','1234','Prufuundirmaður',False))
+
 # -------------------------- write to the actual files -------------------------
 
 destination_storage.save_to_file(destinations)

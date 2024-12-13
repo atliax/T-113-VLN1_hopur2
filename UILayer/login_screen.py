@@ -30,16 +30,18 @@ class LoginScreen(BaseScreen):
         if self.user_note != "":
             print("\n" + self.user_note)
 
-        # email = input("Username: ")
-        # password = getpass("Password: ")
+        email = input("Email: ")
+        password = getpass("Password: ")
 
-        # Temporary login skip
-        email = "Boss"
-        password = "Man"
-
-        if self.logic_api.authenticate_login(email,password):
-            self.user_note = ""
-            return ui_consts.MAIN_MENU_SCREEN
-        else:
-            self.user_note = "Invalid username or password."
-            return None
+        try:
+            if self.logic_api.authenticate_login(email,password):
+                self.user_note = ""
+                return ui_consts.MAIN_MENU_SCREEN
+            else:
+                self.user_note = "Invalid username or password."
+                return None
+        except Exception as e:
+            print(f"Error logging in '{email}':")
+            print(f"{type(e).__name__}: {e}")
+            input(ui_consts.MSG_ENTER_BACK)
+            return ui_consts.CMD_BACK
