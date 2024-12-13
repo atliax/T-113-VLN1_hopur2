@@ -194,7 +194,7 @@ class TicketScreen(BaseScreen):
                                     priority = new_priority, title = new_ticket_title, description = new_description, status = "Open", 
                                     recurring = ticket_recurring, recurring_days = new_recurring , open_date = new_open_date, 
                                     close_date = None, staffID = None, report = None, cost = 0, contractorID = None, 
-                                    contractor_review = None, contractor_rating = None, contractor_fee = None)
+                                    contractor_review = None, contractor_rating = None, contractor_fee = 0)
                 self.logic_api.ticket_add(new_ticket)
 
             case "r":    # Remove a ticket
