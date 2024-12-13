@@ -454,7 +454,7 @@ class TicketScreen(BaseScreen):
                 print ("Use DD-MM-YYYY format")
                 date_validated = False
                 while not date_validated:
-                    self.search_start_date = input("Enter start date (empty for floogemooge): ")
+                    self.search_start_date = input("Enter start date (empty to clear filter): ")
                     if self.search_start_date != "":
                         try:
                             date_validated = datetime.strptime(self.search_start_date, "%d-%m-%Y")
@@ -465,7 +465,7 @@ class TicketScreen(BaseScreen):
 
                 date_validated = False
                 while not date_validated:
-                    self.search_end_date = input("Enter end date (empty googlymoogly): ")
+                    self.search_end_date = input("Enter end date (empty to clear filter): ")
                     if self.search_end_date != "":
                         try:
                             date_validated = datetime.strptime(self.search_end_date, "%d-%m-%Y")
