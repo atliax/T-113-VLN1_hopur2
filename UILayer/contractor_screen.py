@@ -233,10 +233,7 @@ class ContractorScreen(BaseScreen):
                             return None
 
                         if contractor_edit is None:
-                            print(f"No contractor with the ID: '{contractor_edit_ID}', try again (B to cancel).")
-
-                        if contractor_edit_ID == "B":
-                            return None
+                            print(f"No contractor with the ID: '{contractor_edit_ID}', try again.")
 
                     # Since we found a valid contractor to edit, display the available destinations
                     print(all_destinations_table)
