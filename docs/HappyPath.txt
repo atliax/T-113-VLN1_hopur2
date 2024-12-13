@@ -140,12 +140,8 @@ password:(INPUT)
 
 
 
-
-
-
-
-Main menu
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Main Menu
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
 |             __   _ _______ __   _                     ______
 |             | \  | |_____| | \  |                     _\ _~-\___
@@ -158,7 +154,7 @@ Main menu
 |
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
-|       Hello {username}!
+|       Hello {user}!
 |       What would you like to view?
 |
 |       [P] Properties
@@ -216,7 +212,8 @@ Command: (INPUT)
 	*** print destination table
     # ID Auto generate variable = int(n + 1) then make str("P"+(variable))
     Mew property name: (INPUT/str)
-    New property destination ID: (INPUT/str)
+    New property destination ID: (INPUT/str)    /     o O o o o o O O o o o o o o O o  |\_
+|             |_____|   |   |_____/                         `~-.__        ___..----..             
 	# If ID does not exist in destination list, raise error "No destination found with that ID!"
 	# Cancel command if destination ID is not found
     New property address: (INPUT/str)
@@ -290,6 +287,8 @@ Main menu > Properties > Facilities
 | ...  | ...                                | ...                                                                               |
 +------+------------------------------------+-----------------------------------------------------------------------------------+
 
+Command: (INPUT)
+
 # [A] Add a facility
     # Program runs through each command from top to bottom
 	
@@ -336,8 +335,8 @@ Main menu > Staff
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
 |       [A] Add an employee		    [E] Edit an employee            [B] Go back
-|       [R] Remove an employee	    [S] Search for
-|       [V] View contact info       [C] View contractors
+|       [R] Remove an employee	    	    [S] Search for
+|       [V] View contact info               [C] View contractors
 |
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |	    List of employees (Page x/y):
@@ -500,10 +499,9 @@ Command (INPUT)
 Main menu > Tickets
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |
-|       [A] Add a ticket            [E] Edit a ticket               [B] Go back
-|       [R] Remove a ticket         [S] Search for
-|       [V] View closed tickets     [MR] Make a ticket report
-|       [D] Ticket details          [VR] View a ticket report
+|       [A] Add a ticket                 [E] Edit a ticket               [B] Go back
+|       [R] Remove a ticket              [S] Search for                  [PR] Process
+|       [V] View closed/open tickets     [D] Ticket details          
 |
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 |       List of tickets (page x/y):
