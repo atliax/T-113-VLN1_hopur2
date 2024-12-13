@@ -53,11 +53,9 @@ class TicketScreen(BaseScreen):
         logged_in_destinationID = self.logic_api.get_logged_in_staff().destinationID
 
         if self.active_search_filter:
-            #ticket_list = self.logic_api.ticket_search(self.active_search_filter)
             ticket_list = self.logic_api.ticket_search_only_destinationID(self.active_search_filter,logged_in_destinationID)
         else:
             ticket_list = self.logic_api.ticket_get_by_destinationID(logged_in_destinationID)
-            #ticket_list = self.logic_api.ticket_get_all()
 
         total_pages = math.ceil(len(ticket_list) / 10)
 
@@ -108,6 +106,16 @@ class TicketScreen(BaseScreen):
         cmd = input("Command: ").lower()
 
         match cmd:
+
+            # TODO REMOVE
+            case "sw":
+                match self.logic_api.get_logged_in_staff().destinationID:
+                    case "D1":
+                        self.logic_api.get_logged_in_staff().destinationID = "D2"
+                    case "D2":
+                        self.logic_api.get_logged_in_staff().destinationID = "D3"
+                    case "D3":
+                        self.logic_api.get_logged_in_staff().destinationID = "D1"
 
             case "n":   # Next page:
                 self.current_page += 1
