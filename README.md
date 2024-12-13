@@ -12,4 +12,4 @@ systems will function correctly.
 We ran the program both directly as "main.py" and as "python main.py" and those both
 worked.
 
-Link to video: 
+Link to video: https://youtu.be/zO7HtgOohY8
