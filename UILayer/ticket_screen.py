@@ -362,7 +362,7 @@ class TicketScreen(BaseScreen):
 
                         contractor = input("Was a contractred involved in the ticket? (\"yes\" if so): ").lower()
                         if contractor == "yes":
-                            
+                            pass
 
 
                                 
