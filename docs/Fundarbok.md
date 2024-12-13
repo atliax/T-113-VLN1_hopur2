@@ -373,3 +373,7 @@ Eva og Gísla ætla að fara yfir skýrslu aðeins betur
 Atli ætlar að fara yfir allskonar validation og betrumbæta það sem þarf
 
 Planið er eins og í gær, klára forrit og fara yfir skýrslu, það verður langur dagur í dag. Óli ætlar á Jólahlaðborð kl 18 en kemur aftur eftir á. 
+
+## Lokafundur
+
+Við tókum allan daginn í þetta og erum að enda þetta í 11:50. Tókum eftir einum eða tveim errors í myndbandavinnslu en erum að renna út á tíma því mniður og þurfum þvi að hætta. dagurinn var samt þrusugóður og mikið var áorkað. Það helsta sem kom út úr þessu er lærdómur um hvernig við eigum að vinna hópverkefni og við erum búin að gera skjal til að skjala það. Við munum koma til baka með vengeance næsta svona verklegt námskeið. Það er visst.
