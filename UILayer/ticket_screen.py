@@ -281,7 +281,7 @@ class TicketScreen(BaseScreen):
                             edit_property_id = input(f"New propertyID (Current: {edit_ticket.propertyID}) associated with ticket {edit_ticket.ID}: ").upper()
                             if edit_property_id.strip() == "":
                                 edit_property_id = edit_ticket.propertyID
-                            validated = self.logic_api.validate_property(edit_property_id)
+                            validated = self.logic_api.property_validate(edit_property_id)
                             while not validated:
                                 if edit_property_id == "B":
                                     return self
@@ -289,7 +289,7 @@ class TicketScreen(BaseScreen):
                                 edit_property_id = input(f"New propertyID (Current: {edit_ticket.propertyID}) associated with ticket {edit_ticket.ID}: ").upper()
                                 if edit_property_id == "":
                                     edit_property_id = edit_ticket.propertyID
-                                validated = self.logic_api.validate_property(edit_property_id)
+                                validated = self.logic_api.property_validate(edit_property_id)
                             tmp = self.logic_api.facility_get_by_propertyID(edit_property_id)
 
                             #Edit facility with verification
