@@ -112,7 +112,6 @@ class TicketScreen(BaseScreen):
 
                 print(property_table)
                 new_ticket_title = ""
-                new_date = ""
                 new_recurring = -1
                 new_priority = ""
                 priority_list = ["High", "Medium", "Low"]
@@ -159,11 +158,11 @@ class TicketScreen(BaseScreen):
                 date_validated = False
                 while not date_validated:
                     print ("Use DD-MM-YYYY format")
-                    new_date = input("Date to open(leave empty if open now): ")
-                    if new_date == "":
-                        new_date = datetime.datetime.now().strftime("%d-%m-%Y")
+                    new_open_date = input("Date to open(leave empty if open now): ")
+                    if new_open_date == "":
+                        new_open_date = datetime.datetime.now().strftime("%d-%m-%Y")
                     try:
-                        date = new_date
+                        date = new_open_date
                         date_validated = datetime.datetime.strptime(date, "%d-%m-%Y")
                     except ValueError:
                         print ("Sorry wrong format, try again!")
@@ -174,8 +173,13 @@ class TicketScreen(BaseScreen):
                     except ValueError:
                         print("Invalid input, Please enter a valid number.")
                         new_recurring = -1
+                ticket_recurring = True if new_recurring > 0 else False
 
-                new_ticket = Ticket(None, new_ticket_facility_id, new_property_id, new_priority, new_ticket_title, new_description, None, None, new_recurring , new_date, None, None, None, None, None, None, None, None)
+                new_ticket = Ticket(ID = None, facilityID = new_ticket_facility_id, propertyID = new_property_id, 
+                                    priority = new_priority, title = new_ticket_title, description = new_description, status = "Open", 
+                                    recurring = ticket_recurring, recurring_days = new_recurring , open_date = new_open_date, 
+                                    close_date = None, staffID = None, report = None, cost = 0, contractorID = None, 
+                                    contractor_review = None, contractor_rating = None, contractor_fee = None)
                 self.logic_api.ticket_add(new_ticket)
 
             case "r":    # Remove a ticket
@@ -236,90 +240,101 @@ class TicketScreen(BaseScreen):
                 input("Press enter to continue.")
 
             case "e":# Edit ticket
-                ##### ÞARF LOCKED/OPEN FUNCTIONALITY, má ekki edita ef locked.
-                priority_list = ["High", "Medium", "Low"]
-                edit_priority = ""
-                edit_ticket_title = ""
-                #edit_description = ""
-                #"open_date","close_date","staffID","report","cost","contractorID","contractor_review","contractor_rating","contractor_fee"
+                if self.logic_api.is_manager_logged_in():
 
-                print("If you do not wish to change a specific field, you can leave the input empty")
-                
-                #ticket_attributes = ["priority", "title", "description", "status", "recurring_days"]
+                    ##### ÞARF LOCKED/OPEN FUNCTIONALITY, má ekki edita ef locked.
+                    priority_list = ["High", "Medium", "Low"]
+                    edit_priority = ""
+                    edit_ticket_title = ""
+                    #edit_description = ""
+                    #"open_date","close_date","staffID","report","cost","contractorID","contractor_review","contractor_rating","contractor_fee"
+                    
+                    print("If you do not wish to change a specific field, you can leave the input empty")
+                    
+                    #ticket_attributes = ["priority", "title", "description", "status", "recurring_days"]
 
-                edit_ticket = None
-                while edit_ticket is None:
-                    pick_ticket = input("Type in ID of ticket to edit or b to back: ").upper()
-                    if pick_ticket == "B":
-                        return self
+                    edit_ticket = None
+                    while edit_ticket is None:
+                        pick_ticket = input("Type in ID of ticket to edit or b to back: ").upper()
+                        if pick_ticket == "B":
+                            return self
 
-                    edit_ticket = self.logic_api.ticket_get_by_ID(pick_ticket)
+                        edit_ticket = self.logic_api.ticket_get_by_ID(pick_ticket)
 
-                    if edit_ticket is not None:
-
-                        # Edit property with verification
-                        print(property_table)
-                        print ("Leave empty if you don't want to change propertyID")
-                        edit_property_id = input(f"New propertyID (Current: {edit_ticket.propertyID}) associated with ticket {edit_ticket.ID}: ").upper()
-                        if edit_property_id.strip() == "":
-                            edit_property_id = edit_ticket.propertyID
-                        validated = self.logic_api.validate_property(edit_property_id)
-                        while not validated:
-                            if edit_property_id == "B":
+                        if (edit_ticket is not None) and (edit_ticket.status == "Closed"):
+                            print ("Tickets need to be open to edit or progress them")
+                            answer = input(print ("Do you want to open the ticket? (yes/y to open, no/n to stay closed)")).lower()
+                            if answer == "yes" or answer == "y":
+                                edit_ticket.status = "Open"
+                            elif answer == "no" or answer == "n":
                                 return self
-                            print ("No such property, type B to back or try again")
+                            self.logic_api.ticket_edit(edit_ticket)                                
+                            
+
+                        if (edit_ticket is not None) and (edit_ticket.status != "Closed"):
+
+                            # Edit property with verification
+                            print(property_table)
+                            print ("Leave empty if you don't want to change propertyID")
                             edit_property_id = input(f"New propertyID (Current: {edit_ticket.propertyID}) associated with ticket {edit_ticket.ID}: ").upper()
-                            if edit_property_id == "":
+                            if edit_property_id.strip() == "":
                                 edit_property_id = edit_ticket.propertyID
                             validated = self.logic_api.validate_property(edit_property_id)
-                        tmp = self.logic_api.facility_get_by_propertyID(edit_property_id)
-
-                        #Edit facility with verification
-                        if len(tmp) == 0:
-                            print ("No Facalities to choose, using propertyID only")
-                            edit_ticket.facilityID = None
-                        else:
-                            facility_table = PrettyTable()
-                            facility_table.field_names = ["ID","Name","Description"]
-                            for facility in tmp:
-                                facility_table.add_row([facility.ID,facility.name,facility.description])
-                            print(facility_table) 
-
-                            print ("Leave empty if you don't want to change facilityID")
-                            edit_ticket_facility_id = input(f"New propertyID (Current: {edit_ticket.facilityID}) associated with ticket {edit_ticket.ID}: ").upper()
-                            if edit_ticket_facility_id.strip() == "":
-                                edit_ticket_facility_id = edit_ticket.facilityID
-                            verified = self.logic_api.facility_validate(edit_ticket_facility_id, tmp)
-                            while not verified:
-                                if new_ticket_facility_id == "B":
+                            while not validated:
+                                if edit_property_id == "B":
                                     return self
-                                print ("No such facility at this property, B to cancel or try again")
-                                new_ticket_facility_id = input(f"New propertyID (Current: {edit_ticket.facilityID}) associated with ticket {edit_ticket.ID}: ").upper()
+                                print ("No such property, type B to back or try again")
+                                edit_property_id = input(f"New propertyID (Current: {edit_ticket.propertyID}) associated with ticket {edit_ticket.ID}: ").upper()
+                                if edit_property_id == "":
+                                    edit_property_id = edit_ticket.propertyID
+                                validated = self.logic_api.validate_property(edit_property_id)
+                            tmp = self.logic_api.facility_get_by_propertyID(edit_property_id)
+
+                            #Edit facility with verification
+                            if len(tmp) == 0:
+                                print ("No Facalities to choose, using propertyID only")
+                                edit_ticket.facilityID = None
+                            else:
+                                facility_table = PrettyTable()
+                                facility_table.field_names = ["ID","Name","Description"]
+                                for facility in tmp:
+                                    facility_table.add_row([facility.ID,facility.name,facility.description])
+                                print(facility_table) 
+
+                                print ("Leave empty if you don't want to change facilityID")
+                                edit_ticket_facility_id = input(f"New propertyID (Current: {edit_ticket.facilityID}) associated with ticket {edit_ticket.ID}: ").upper()
                                 if edit_ticket_facility_id.strip() == "":
                                     edit_ticket_facility_id = edit_ticket.facilityID
-                                verified = self.logic_api.facility_validate(new_ticket_facility_id, tmp)
+                                verified = self.logic_api.facility_validate(edit_ticket_facility_id, tmp)
+                                while not verified:
+                                    if new_ticket_facility_id == "B":
+                                        return self
+                                    print ("No such facility at this property, B to cancel or try again")
+                                    new_ticket_facility_id = input(f"New propertyID (Current: {edit_ticket.facilityID}) associated with ticket {edit_ticket.ID}: ").upper()
+                                    if edit_ticket_facility_id.strip() == "":
+                                        edit_ticket_facility_id = edit_ticket.facilityID
+                                    verified = self.logic_api.facility_validate(new_ticket_facility_id, tmp)
 
-                        while edit_priority not in priority_list: # edit priority 
-                            print ("leave empty if you don't wish to change priority")
-                            edit_priority = input(f"edit ticket priority(high, medium, low), current ({edit_ticket.priority}): ").lower().capitalize()
-                            if edit_priority.strip() == "":
-                                edit_priority = edit_ticket.priority
-                        edit_ticket.priority = edit_priority.lower().capitalize()
+                            while edit_priority not in priority_list: # edit priority 
+                                print ("leave empty if you don't wish to change priority")
+                                edit_priority = input(f"edit ticket priority(high, medium, low), current ({edit_ticket.priority}): ").lower().capitalize()
+                                if edit_priority.strip() == "":
+                                    edit_priority = edit_ticket.priority
+                            edit_ticket.priority = edit_priority.lower().capitalize()
 
-                        while not edit_ticket_title:
-                            print ("leave empty if you don't wish to change ticket title")
-                            edit_ticket_title = input("New ticket title: ").strip()
-                            if edit_ticket_title == "":
-                                edit_ticket_title = edit_ticket.title
-                        edit_ticket.title = edit_ticket_title
+                            while not edit_ticket_title:
+                                print ("leave empty if you don't wish to change ticket title")
+                                edit_ticket_title = input("New ticket title: ").strip()
+                                if edit_ticket_title == "":
+                                    edit_ticket_title = edit_ticket.title
+                            edit_ticket.title = edit_ticket_title
 
 
 
-                        self.logic_api.ticket_edit(edit_ticket)
+                            self.logic_api.ticket_edit(edit_ticket)
 
-                    else:
-                        print(f"No ticket with the ID: '{pick_ticket}', try again (B to cancel).")
-
+                        else:
+                            print(f"No ticket with the ID: '{pick_ticket}', try again (B to cancel).")
 
             case "pr":
                 #
@@ -337,7 +352,23 @@ class TicketScreen(BaseScreen):
                     
                     process_ticket = self.logic_api.ticket_get_by_ID(pick_ticket)
 
-                    if process_ticket is not None:
+                    if process_ticket is not None and process_ticket.status == "Done" and self.logic_api.is_manager_logged_in():
+
+
+                        print ("This ticket is ready for completion")
+                        answer = input("type yes/y if you want to mark this as complete: ").lower()
+                        if answer == "yes" or answer == "y":
+                            print ("\nleave empty if you wish to add nothing")
+                            report = input("Type in comment to add to report: ").strip()
+                            if report != "":
+                                userID = self.logic_api.get_logged_in_staff().name
+                                process_ticket.report += f"\n{userID} {report}"
+                            process_ticket.status = "Closed"
+                            process_ticket.close_date = datetime.datetime.now().strftime("%d-%m-%Y")
+                            self.logic_api.ticket_edit(process_ticket)
+
+
+                    if process_ticket is not None and process_ticket.status != "Closed":
 
                         while edit_recurring < 0:
                             print (f"\nCurrent recur rate in days {process_ticket.recurring_days}")
@@ -407,7 +438,7 @@ class TicketScreen(BaseScreen):
                         #update contractor ratings only if there was one. 
                         if contractor == "yes" or contractor == "y":
                             self.logic_api.contractor_update_rating(process_ticket.contractorID)
-
+                    
 
                                 
 
