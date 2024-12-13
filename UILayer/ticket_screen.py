@@ -176,9 +176,11 @@ class TicketScreen(BaseScreen):
                     new_open_date = input("Date to open(leave empty if open now): ")
                     if new_open_date == "":
                         new_open_date = datetime.now().strftime("%d-%m-%Y")
+                        status = "Open"
                     try:
                         date = new_open_date
                         date_validated = datetime.strptime(date, "%d-%m-%Y")
+                        status = "Pending"
                     except ValueError:
                         print ("Sorry wrong format, try again!")
 
@@ -191,7 +193,7 @@ class TicketScreen(BaseScreen):
                 ticket_recurring = True if new_recurring > 0 else False
 
                 new_ticket = Ticket(ID = None, facilityID = new_ticket_facility_id, propertyID = new_property_id, 
-                                    priority = new_priority, title = new_ticket_title, description = new_description, status = "Open", 
+                                    priority = new_priority, title = new_ticket_title, description = new_description, status = status, 
                                     recurring = ticket_recurring, recurring_days = new_recurring , open_date = new_open_date, 
                                     close_date = None, staffID = None, report = None, cost = 0, contractorID = None, 
                                     contractor_review = None, contractor_rating = None, contractor_fee = 0)
