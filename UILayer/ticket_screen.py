@@ -16,7 +16,10 @@ class TicketScreen(BaseScreen):
     def __init__(self, logic_api) -> None:
         super().__init__(logic_api)
         self.current_page = -1
-        self.active_search_filter = "Open"
+        if self.logic_api.is_manager_logged_in():
+            self.active_search_filter = "Done"
+        else:
+            self.active_search_filter = "Open"
         self.search_start_date = ""
         self.search_end_date = ""
 
@@ -47,6 +50,7 @@ class TicketScreen(BaseScreen):
         for property in properties:
             property_table.add_row([property.ID, property.name,property.destinationID,property.type])
 
+        # Sækja áfangastað núverandi innskráðs starfsmanns til að nota seinna
         logged_in_destinationID = self.logic_api.get_logged_in_staff().destinationID
 
         ticket_list = self.logic_api.ticket_search_only_destinationID(self.active_search_filter,logged_in_destinationID,self.search_start_date, self.search_end_date)
