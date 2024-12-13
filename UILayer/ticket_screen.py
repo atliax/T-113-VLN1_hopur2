@@ -673,7 +673,17 @@ class TicketScreen(BaseScreen):
                         date_validated = True
 
                 print(property_table)
-                self.filter_by_property = input("Enter a property ID to filter by: ")
+                found_match = False
+                while (filter_propertyID := input("Enter a property ID to filter by (empty to clear filter): ").upper()) != "":
+                    for p in properties:
+                        if p.ID == filter_propertyID:
+                            found_match = True
+                            break
+                    if found_match:
+                        break
+                    else:
+                        print(f"No property with the ID '{filter_propertyID}' found in your location.")
+                self.filter_by_property = filter_propertyID
 
             # Go back
             case "b":
