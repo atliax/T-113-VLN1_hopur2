@@ -53,6 +53,7 @@ class TicketScreen(BaseScreen):
 
         # uppfæra ticket sem þarf að opna og endurtekna ticket
         self.logic_api.ticket_update_pending()
+        
         self.logic_api.ticket_update_recurring()
 
         # Sækja áfangastað núverandi innskráðs starfsmanns til að nota seinna
@@ -289,8 +290,14 @@ class TicketScreen(BaseScreen):
 
                         if edit_ticket_ID == "B":
                             return None
-
-                        edit_ticket = self.logic_api.ticket_get_by_ID(edit_ticket_ID)
+                        
+                        try:
+                            edit_ticket = self.logic_api.ticket_get_by_ID(edit_ticket_ID)
+                        except Exception as e:
+                            print(f"Error loading ticket data '{edit_ticket_ID}':")
+                            print(f"{type(e).__name__}: {e}")
+                            input(ui_consts.MSG_ENTER_BACK)
+                            return ui_consdts.CMD_BACK
 
                         if edit_ticket is None:
                             print(f"No ticket with the ID: '{edit_ticket_ID}', try again (B to cancel).")
@@ -306,7 +313,13 @@ class TicketScreen(BaseScreen):
                             edit_ticket.status = logic_consts.TICKET_STATUS_OPEN
                         elif answer == "no" or answer == "n":
                             return None
-                        self.logic_api.ticket_edit(edit_ticket)
+                        try:
+                            self.logic_api.ticket_edit(edit_ticket)
+                        except Exception as e:
+                            print(f"Error editing ticket'{edit_ticket.ID}':")
+                            print(f"{type(e).__name__}: {e}")
+                            input(ui_consts.MSG_ENTER_BACK)
+                            return ui_consts.CMD_BACK
 
                     # otherwise allow them to edit the ticket:
                     else:
@@ -317,20 +330,32 @@ class TicketScreen(BaseScreen):
 
                         print("Leave empty if you don't want to change propertyID")
                         property_ID_prompt = f"New propertyID (Current: {edit_ticket.propertyID}) associated with ticket {edit_ticket.ID} (B to cancel): "
-                        while not self.logic_api.property_validate(edit_property_id := input(property_ID_prompt).upper()):
-                            if edit_property_id == "":
-                                edit_property_id = edit_ticket.propertyID
-                                break
+                        try:
+                            while not self.logic_api.property_validate(edit_property_id := input(property_ID_prompt).upper()):
+                                if edit_property_id == "":
+                                    edit_property_id = edit_ticket.propertyID
+                                    break
 
-                            if edit_property_id == "B":
-                                return None
+                                if edit_property_id == "B":
+                                    return None
 
-                            print(f"No property with ID '{edit_property_id}' found, try again.")
+                                print(f"No property with ID '{edit_property_id}' found, try again.")
+                        except Exception as e:
+                            print(f"Error validating property'{edit_property_id}':")
+                            print(f"{type(e).__name__}: {e}")
+                            input(ui_consts.MSG_ENTER_BACK)
+                            return ui_consts.CMD_BACK
 
                         edit_ticket.propertyID = edit_property_id
 
-                        edit_ticket_facilities = self.logic_api.facility_get_by_propertyID(edit_property_id)
-
+                        try:
+                            edit_ticket_facilities = self.logic_api.facility_get_by_propertyID(edit_property_id)
+                        except Exception as e:
+                            print(f"Error loading facility data for property'{edit_property_id}':")
+                            print(f"{type(e).__name__}: {e}")
+                            input(ui_consts.MSG_ENTER_BACK)
+                            return ui_consts.CMD_BACK
+                        
                         # Edit facility with verification
                         self.print_ticket_detail_table(edit_ticket)
                         if len(edit_ticket_facilities) == 0:
@@ -345,15 +370,22 @@ class TicketScreen(BaseScreen):
 
                             print ("Leave empty if you don't want to change facilityID")
                             facility_ID_prompt = f"New facilityID (Current: {edit_ticket.facilityID}) associated with ticket {edit_ticket.ID} (B to cancel): "
-                            while not self.logic_api.facility_validate(edit_ticket_facility_id := input(facility_ID_prompt).strip().upper(), edit_ticket_facilities):
-                                if edit_ticket_facility_id == "":
-                                    edit_ticket_facility_id = edit_ticket.facilityID
-                                    break
 
-                                if edit_ticket_facility_id == "B":
-                                    return None
+                            try:
+                                while not self.logic_api.facility_validate(edit_ticket_facility_id := input(facility_ID_prompt).strip().upper(), edit_ticket_facilities):
+                                    if edit_ticket_facility_id == "":
+                                        edit_ticket_facility_id = edit_ticket.facilityID
+                                        break
 
-                                print("No such facility at this property, B to cancel or try again")
+                                    if edit_ticket_facility_id == "B":
+                                        return None
+
+                                    print("No such facility at this property, B to cancel or try again")
+                            except Exception as e:
+                                print(f"Error validating facility'{edit_ticket_facility_id}':")
+                                print(f"{type(e).__name__}: {e}")
+                                input(ui_consts.MSG_ENTER_BACK)
+                                return ui_consts.CMD_BACK
 
                         edit_ticket.facilityID = edit_ticket_facility_id
 
@@ -452,9 +484,21 @@ class TicketScreen(BaseScreen):
                     contractor_answer = input("('yes' if so, anything else if not): ").lower()
                     if contractor_answer == "yes" or contractor_answer == "y":
                         self.print_ticket_detail_table(process_ticket)
-
-                        process_ticket_destinationID = self.logic_api.property_get_by_ID(process_ticket.propertyID).destinationID
-                        contractor_list = self.logic_api.contractor_get_by_destinationID(process_ticket_destinationID)
+                        
+                        try:
+                            process_ticket_destinationID = self.logic_api.property_get_by_ID(process_ticket.propertyID).destinationID
+                        except Exception as e:
+                            print(f"Error loading destination data for ticket'{process_ticket.ID}':")
+                            print(f"{type(e).__name__}: {e}")
+                            input(ui_consts.MSG_ENTER_BACK)
+                            return ui_consts.CMD_BACK
+                        try:
+                            contractor_list = self.logic_api.contractor_get_by_destinationID(process_ticket_destinationID)
+                        except Exception as e:
+                            print(f"Error loading contractor data for destination'{process_ticket_destinationID}':")
+                            print(f"{type(e).__name__}: {e}")
+                            input(ui_consts.MSG_ENTER_BACK)
+                            return ui_consts.CMD_BACK                        
 
                         contractor_table = PrettyTable()
                         contractor_table.field_names = ["ID","Name","Rating", "phone", "opening hours", "type"]
@@ -499,15 +543,27 @@ class TicketScreen(BaseScreen):
                     process_ticket.status = logic_consts.TICKET_STATUS_DONE
 
                     process_ticket.staffID = self.logic_api.get_logged_in_staff().ID
-
+       
                     if contractor_answer == "yes" or contractor_answer == "y":
-                        self.logic_api.contractor_update_rating(process_ticket.contractorID)
+                        try:
+                            self.logic_api.contractor_update_rating(process_ticket.contractorID)
+                        except Exception as e:
+                            print(f"Error updating rating for contractor '{process_ticket.contractorID}':")
+                            print(f"{type(e).__name__}: {e}")
+                            input(ui_consts.MSG_ENTER_BACK)
+                            return ui_consts.CMD_BACK          
 
                     self.print_ticket_detail_table(process_ticket)
                     print("This is the final version of the ticket.")
                     save_it = input("Is this acceptable(yes or y to agree, anything else to dismiss): ")
                     if save_it == "yes" or save_it == "y":
-                        self.logic_api.ticket_edit(process_ticket)
+                        try:
+                            self.logic_api.ticket_edit(process_ticket)
+                        except Exception as e:
+                            print(f"Error processing ticket '{process_ticket.ID}':")
+                            print(f"{type(e).__name__}: {e}")
+                            input(ui_consts.MSG_ENTER_BACK)
+                            return ui_consts.CMD_BACK          
                     else:
                         return None
 
@@ -550,15 +606,34 @@ class TicketScreen(BaseScreen):
     def print_ticket_detail_table(self, ticket_by_id : Ticket) -> None:
         ticket_table = PrettyTable()
 
-        facility = self.logic_api.facility_get_by_ID(ticket_by_id.facilityID)
+        try: 
+            facility = self.logic_api.facility_get_by_ID(ticket_by_id.facilityID)
+        except Exception as e:
+            print(f"Error loading facility data for ticket '{ticket_by_id.ID}':")
+            print(f"{type(e).__name__}: {e}")
+            input(ui_consts.MSG_ENTER_BACK)
+            return ui_consts.CMD_BACK            
+        
         if facility:
             facility_name = facility.name
         else:
             facility_name = "No facility"
 
-        property_name = self.logic_api.property_get_by_ID(ticket_by_id.propertyID).name
+        try:
+            property_name = self.logic_api.property_get_by_ID(ticket_by_id.propertyID).name
+        except Exception as e:
+            print(f"Error loading property data for ticket'{ticket_by_id.ID}':")
+            print(f"{type(e).__name__}: {e}")
+            input(ui_consts.MSG_ENTER_BACK)
+            return ui_consts.CMD_BACK            
 
-        staff = self.logic_api.staff_get_by_ID(ticket_by_id.staffID)
+        try:    
+            staff = self.logic_api.staff_get_by_ID(ticket_by_id.staffID)
+        except Exception as e:
+            print(f"Error loading staff data for ticket '{ticket_by_id.ID}':")
+            print(f"{type(e).__name__}: {e}")
+            input(ui_consts.MSG_ENTER_BACK)
+            return ui_consts.CMD_BACK           
         if staff:
             staff_name = staff.name
         else:
