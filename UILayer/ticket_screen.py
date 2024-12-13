@@ -1,14 +1,15 @@
+# standard library imports
 import math
 import datetime
 from textwrap import fill
 
+# pip library imports
 from prettytable import PrettyTable
 from prompt_toolkit import print_formatted_text, HTML
 
+# local imports
 from UILayer.base_screen import BaseScreen
-
 from UILayer import ui_consts
-
 from Model import Ticket
 
 class TicketScreen(BaseScreen):
@@ -17,7 +18,7 @@ class TicketScreen(BaseScreen):
         self.current_page = -1
         self.active_search_filter = ""
 
-    def run(self):
+    def run(self) -> str | None:
         self.clear_screen()
 
         print("Main Menu > Tickets")
@@ -42,18 +43,33 @@ class TicketScreen(BaseScreen):
         property_names = {}
         staff_names = {}
 
-        #all_tickets = self.logic_api.ticket_get_all() # fyrir edit og view og svona, mögulega ekki sniðugt
+        # Smíða töflu af destinations til að geta nýtt hana á fleiri en einum stað
+        properties = self.logic_api.property_get_all()
+        property_table = PrettyTable()
+        property_table.field_names = ["Property ID","Name","Destination","Type"]
+        for property in properties:
+            property_table.add_row([property.ID, property.name,property.destinationID,property.type])
 
         if self.active_search_filter:
             ticket_list = self.logic_api.ticket_search(self.active_search_filter)
         else:
             ticket_list = self.logic_api.ticket_get_all()
 
+        total_pages = math.ceil(len(ticket_list) / 10)
+
+        if self.current_page < 0:
+            self.current_page = 0
+
+        if self.current_page > (total_pages - 1):
+            self.current_page = (total_pages - 1)
+
         all_tickets_table = PrettyTable()
         all_tickets_table.field_names = ["ID", "Property", "Facility", "Title", "Priority", "Status"]
+        all_tickets_table._min_table_width = ui_consts.TABLE_WIDTH
 
         for ticket in ticket_list:
             ticket_property = self.logic_api.property_get_by_ID(ticket.propertyID)
+
             if ticket.facilityID == None:
                 facility_name = "None"
             else:
@@ -72,16 +88,6 @@ class TicketScreen(BaseScreen):
 
             all_tickets_table.add_row([ticket.ID, ticket_property.name, facility_name, fill(ticket.title, width=40), ticket.priority, ticket.status])
 
-        all_tickets_table._min_table_width = ui_consts.TABLE_WIDTH
-
-        total_pages = math.ceil(len(ticket_list) / 10)
-
-        if self.current_page < 0:
-            self.current_page = 0
-
-        if self.current_page > (total_pages - 1):
-            self.current_page = (total_pages - 1)
-
         print(f"|  Ticket list (Page {self.current_page + 1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page")
 
@@ -96,12 +102,6 @@ class TicketScreen(BaseScreen):
 
         print("")
         cmd = input("Command: ").lower()
-
-        properties = self.logic_api.property_get_all()
-        property_table = PrettyTable()
-        property_table.field_names = ["Property ID","Name","Destination","Type"]
-        for property in properties:
-            property_table.add_row([property.ID, property.name,property.destinationID,property.type])
 
         match cmd:
 
@@ -126,7 +126,7 @@ class TicketScreen(BaseScreen):
                     print ("No such property")
                     new_property_id = input("(B) to cancel or Property ID of ticket: ").upper()
                     if new_property_id == "B":
-                        return self
+                        return None
                     validated = self.logic_api.property_validate(new_property_id)
                 tmp = self.logic_api.facility_get_by_propertyID(new_property_id)
 
@@ -147,7 +147,7 @@ class TicketScreen(BaseScreen):
                         print ("No such facility at this property")
                         new_ticket_facility_id = input("(B) to cancel or ID of facility for ticket: ").upper()
                         if new_ticket_facility_id == "B":
-                            return self
+                            return None
                         verified = self.logic_api.facility_validate(new_ticket_facility_id, tmp)
 
                 while not new_ticket_title:
@@ -214,7 +214,7 @@ class TicketScreen(BaseScreen):
                     if ticket_by_id is None:
                         print(f"No ticket with the ID: '{view_ticket}', try again (B to cancel).")
                     if view_ticket == "B":
-                        return self
+                        return None
 
                 print(ticket_by_id.staffID)
 
@@ -262,7 +262,7 @@ class TicketScreen(BaseScreen):
                     while edit_ticket is None:
                         pick_ticket = input("Type in ID of ticket to edit or b to back: ").upper()
                         if pick_ticket == "B":
-                            return self
+                            return None
 
                         edit_ticket = self.logic_api.ticket_get_by_ID(pick_ticket)
 
@@ -272,7 +272,7 @@ class TicketScreen(BaseScreen):
                             if answer == "yes" or answer == "y":
                                 edit_ticket.status = "Open"
                             elif answer == "no" or answer == "n":
-                                return self
+                                return None
                             self.logic_api.ticket_edit(edit_ticket)                                
                             
 
@@ -287,7 +287,7 @@ class TicketScreen(BaseScreen):
                             validated = self.logic_api.property_validate(edit_property_id)
                             while not validated:
                                 if edit_property_id == "B":
-                                    return self
+                                    return None
                                 print ("No such property, type B to back or try again")
                                 edit_property_id = input(f"New propertyID (Current: {edit_ticket.propertyID}) associated with ticket {edit_ticket.ID}: ").upper()
                                 if edit_property_id == "":
@@ -313,7 +313,7 @@ class TicketScreen(BaseScreen):
                                 verified = self.logic_api.facility_validate(edit_ticket_facility_id, tmp)
                                 while not verified:
                                     if new_ticket_facility_id == "B":
-                                        return self
+                                        return None
                                     print ("No such facility at this property, B to cancel or try again")
                                     new_ticket_facility_id = input(f"New propertyID (Current: {edit_ticket.facilityID}) associated with ticket {edit_ticket.ID}: ").upper()
                                     if edit_ticket_facility_id.strip() == "":
@@ -353,7 +353,7 @@ class TicketScreen(BaseScreen):
                 while process_ticket is None:
                     pick_ticket = input("Type in ID of ticket to edit or b to back: ").upper()
                     if pick_ticket == "B":
-                        return self
+                        return None
                     
                     process_ticket = self.logic_api.ticket_get_by_ID(pick_ticket)
 
@@ -443,8 +443,6 @@ class TicketScreen(BaseScreen):
                         #update contractor ratings only if there was one. 
                         if contractor == "yes" or contractor == "y":
                             self.logic_api.contractor_update_rating(process_ticket.contractorID)
-                    
-
 
             case "s":    # Search for
                 self.active_search_filter = input(ui_consts.MSG_ENTER_SEARCH)
@@ -453,4 +451,4 @@ class TicketScreen(BaseScreen):
             case "b":
                 return ui_consts.CMD_BACK
 
-        return self
+        return None
