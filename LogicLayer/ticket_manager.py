@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from StorageLayer import StorageAPI
 from Exceptions import IDNotFoundError
 from Model import Ticket
@@ -40,12 +42,39 @@ class TicketManager:
         else:
             raise IDNotFoundError(f" {ticketID} does not exist")
 
-    def ticket_search_only_destinationID(self, search_string : str, destinationID : str) -> list[Ticket]:
+    def ticket_search_only_destinationID(self, search_string : str, destinationID : str, start_date : str, end_date : str) -> list[Ticket]:
         searched_tickets = self.ticket_search(search_string)
-        filtered_tickets = []
+
+        # create datetime objects from the date strings if applicable
+        if start_date != "":
+            start_date = datetime.strptime(start_date,"%d-%m-%Y")
+        if end_date != "":
+            end_date = datetime.strptime(end_date,"%d-%m-%Y")
+
+        filtered_tickets : list[Ticket] = []
+
+        # first filter by keyword ("" will return all of them)
         for ticket in searched_tickets:
             if self.storage_api.property_get_by_ID(ticket.propertyID).destinationID == destinationID:
                 filtered_tickets.append(ticket)
+
+        # then filter by start date if applicable
+        searched_tickets = filtered_tickets[:]
+        if start_date:
+            filtered_tickets = []
+            for ticket in searched_tickets:
+                ticket_date = datetime.strptime(ticket.open_date,"%d-%m-%Y")
+                if ticket_date >= start_date:
+                    filtered_tickets.append(ticket)
+
+        # finally filter by end date if applicable
+        searched_tickets = filtered_tickets[:]
+        if end_date:
+            filtered_tickets = []
+            for ticket in searched_tickets:
+                ticket_date = datetime.strptime(ticket.open_date,"%d-%m-%Y")
+                if ticket_date <= end_date:
+                    filtered_tickets.append(ticket)
 
         return filtered_tickets
 

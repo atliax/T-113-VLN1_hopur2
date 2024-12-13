@@ -49,7 +49,7 @@ class TicketScreen(BaseScreen):
 
         logged_in_destinationID = self.logic_api.get_logged_in_staff().destinationID
 
-        ticket_list = self.logic_api.ticket_search_only_destinationID(self.active_search_filter,logged_in_destinationID)
+        ticket_list = self.logic_api.ticket_search_only_destinationID(self.active_search_filter,logged_in_destinationID,self.search_start_date, self.search_end_date)
 
         total_pages = math.ceil(len(ticket_list) / 10)
 

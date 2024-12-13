@@ -221,8 +221,8 @@ class LogicAPI:
         """Takes a string and returns a list of tickets in the system that have attributes containing that string."""
         return self.ticket_manager.ticket_search(search_string)
 
-    def ticket_search_only_destinationID(self, search_string : str, destinationID : str) -> list[Ticket]:
-        return self.ticket_manager.ticket_search_only_destinationID(search_string, destinationID)
+    def ticket_search_only_destinationID(self, search_string : str, destinationID : str, start_date : str, end_date : str) -> list[Ticket]:
+        return self.ticket_manager.ticket_search_only_destinationID(search_string, destinationID, start_date, end_date)
 
     def ticket_get_by_destinationID(self, destinationID : str) -> list[Ticket]:
         return self.ticket_manager.ticket_get_by_destinationID(destinationID)
