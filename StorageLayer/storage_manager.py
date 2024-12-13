@@ -10,6 +10,13 @@ class StorageManager:
         self.filename = filename
         self.model_class = model_class
 
+    def get_highest_ID(self) -> str:
+        items = self.load_from_file()
+        if items:
+            return items[len(items)-1].ID
+        else:
+            return "X0"
+
     def add(self, new_item) -> None:
         """Takes in an instance of a BaseModel child class and adds it to the system."""
         current_items = self.load_from_file()
@@ -22,8 +29,9 @@ class StorageManager:
 
         updated_items = []
         for item in current_items:
-            if item.ID != ID:
-                updated_items.append(item)
+            if item.ID == ID:
+                item.deleted = True
+            updated_items.append(item)
 
         self.save_to_file(updated_items)
 
@@ -42,13 +50,18 @@ class StorageManager:
 
     def get_all(self) -> list[BaseModel]:
         """Returns a list of all the instances of a BaseModel child class that exist in the system."""
-        return self.load_from_file()
+        all_items = self.load_from_file()
+        existing_items = []
+        for item in all_items:
+            if not item.deleted:
+                existing_items.append(item)
+        return existing_items
 
     def get_by_ID(self, ID : str) -> BaseModel:
         """Takes in an ID and returns an instance of a BaseModel child class that matches that ID if it exists."""
         current_items = self.load_from_file()
         for item in current_items:
-            if item.ID == ID:
+            if item.ID == ID and not item.deleted:
                 return item
 
     def load_from_file(self) -> list[BaseModel]:

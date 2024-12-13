@@ -12,12 +12,7 @@ class TicketManager:
 
     def ticket_add(self, new_ticket : Ticket) -> None:
         """Takes a new ticket instance and adds it to the system."""
-        all_tickets = self.storage_api.ticket_get_all()
-        if len(all_tickets) != 0:
-            n = int(all_tickets[len(all_tickets)-1].ID[1:])
-        else:
-            n = 0
-
+        n = int(self.storage_api.ticket_get_highest_ID()[1:])
         n += 1
         new_id = "T" + str(n)
         new_ticket.ID = new_id

@@ -14,6 +14,9 @@ class StorageAPI:
 #==========================================================================
 # ----contractors----------------------------------------------------------   
 
+    def contractor_get_highest_ID(self) -> str:
+        return self.contractor_storage.get_highest_ID()
+
     def contractor_add(self, new_contractor : Contractor) -> None:
         """Takes an instance of a contractor and removes it from the data file."""
         self.contractor_storage.add(new_contractor)
@@ -36,6 +39,9 @@ class StorageAPI:
 
 #==========================================================================
 #--Destinations------------------------------------------------------------
+
+    def destination_get_highest_ID(self) -> str:
+        return self.destination_storage.get_highest_ID()
 
     def destination_add(self, new_destination : Destination) -> None:
         """Takes an instance of a destination and removes it from the data file."""
@@ -60,6 +66,9 @@ class StorageAPI:
 #==========================================================================
 #--Facilities--------------------------------------------------------------
 
+    def facility_get_highest_ID(self) -> str:
+        return self.facility_storage.get_highest_ID()
+
     def facility_add(self, new_facility : Facility) -> None:
         """Takes an instance of a facility and removes it from the data file."""
         self.facility_storage.add(new_facility)
@@ -82,6 +91,9 @@ class StorageAPI:
 
 #==========================================================================
 #--Properties--------------------------------------------------------------
+
+    def property_get_highest_ID(self) -> str:
+        return self.property_storage.get_highest_ID()
 
     def property_add(self, new_property : Property) -> None:
         """Takes an instance of a property and removes it from the data file."""
@@ -106,6 +118,9 @@ class StorageAPI:
 #==========================================================================
 #--Staff-------------------------------------------------------------------
 
+    def staff_get_highest_ID(self) -> str:
+        return self.staff_storage.get_highest_ID()
+
     def staff_add(self, new_staff : Staff) -> None:
         """Takes an instance of staff and removes it from the data file."""
         self.staff_storage.add(new_staff)
@@ -128,6 +143,9 @@ class StorageAPI:
 
 #==========================================================================
 #--Tickets-----------------------------------------------------------------
+
+    def ticket_get_highest_ID(self) -> str:
+        return self.ticket_storage.get_highest_ID()
 
     def ticket_add(self, new_ticket : Ticket) -> None:
         """Takes an instance of a ticket and removes it from the data file."""

@@ -8,12 +8,7 @@ class DestinationManager:
 
     def destination_add(self, new_destination : Destination) -> None:
         """Takes a new destination instance and adds it to the system."""
-        all_destinations = self.destination_get_all()
-        if len(all_destinations) != 0:
-            n = int(all_destinations[len(all_destinations)-1].ID[1:])
-        else:
-            n = 0
-
+        n = int(self.storage_api.ticket_get_highest_ID()[1:])
         n += 1
         new_id = "D" + str(n)
         new_destination.ID = new_id

@@ -9,12 +9,7 @@ class FacilityManager:
 
     def facility_add(self, new_facility : Facility) -> None:
         """Takes a new facility instance and adds it to the system."""
-        all_facilities = self.storage_api.facility_get_all()
-        if len(all_facilities) != 0:
-            n = int(all_facilities[len(all_facilities)-1].ID[1:])
-        else:
-            n = 0
-
+        n = int(self.storage_api.facility_get_highest_ID()[1:])
         n += 1
         new_id = "F" + str(n)
         new_facility.ID = new_id

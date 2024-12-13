@@ -8,12 +8,7 @@ class ContractorManager:
 
     def contractor_add(self, new_contractor : Contractor) -> None:
         """Takes a new contractor instance and adds it to the system."""
-        all_contractors = self.storage_api.contractor_get_all()
-        if len(all_contractors) != 0:
-            n = int(all_contractors[len(all_contractors)-1].ID[1:])
-        else:
-            n = 0
-
+        n = int(self.storage_api.contractor_get_highest_ID()[1:])
         n += 1
         new_id = "C" + str(n)
         new_contractor.ID = new_id

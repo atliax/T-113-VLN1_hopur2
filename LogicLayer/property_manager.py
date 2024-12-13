@@ -8,12 +8,7 @@ class PropertyManager:
 
     def property_add(self, new_property : Property) -> None:
         """Takes a new property instance and adds it to the system."""
-        all_properties = self.storage_api.property_get_all()
-        if len(all_properties) != 0:
-            n = int(all_properties[len(all_properties)-1].ID[1:])
-        else:
-            n = 0
-
+        n = int(self.storage_api.property_get_highest_ID()[1:])
         n += 1
         new_id = "P" + str(n)
         new_property.ID = new_id

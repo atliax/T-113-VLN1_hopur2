@@ -10,12 +10,7 @@ class StaffManager:
 
     def staff_add(self, new_staff : Staff) -> None:
         """Takes a new staff instance and adds it to the system."""
-        all_staff = self.storage_api.staff_get_all()
-        if len(all_staff) != 0:
-            n = int(all_staff[len(all_staff)-1].ID[1:])
-        else:
-            n = 0
-
+        n = int(self.storage_api.staff_get_highest_ID()[1:])
         n += 1
         new_id = "S" + str(n)
         new_staff.ID = new_id
