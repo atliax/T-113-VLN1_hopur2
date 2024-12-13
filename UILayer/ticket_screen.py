@@ -44,6 +44,10 @@ class TicketScreen(BaseScreen):
         print(ui_consts.SEPERATOR)
 
         # Smíða töflu af destinations til að geta nýtt hana á fleiri en einum stað
+
+        self.logic_api.ticket_update_pending()
+        self.logic_api.ticket_update_recurring()
+
         properties = self.logic_api.property_get_all()
         property_table = PrettyTable()
         property_table.field_names = ["Property ID","Name","Destination","Type"]
