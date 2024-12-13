@@ -1,5 +1,6 @@
 # standard library imports
 import math
+from textwrap import fill
 
 # pip library imports
 from prettytable import PrettyTable
@@ -73,7 +74,7 @@ class PropertyScreen(BaseScreen):
             else:
                 property_destination_country = "Not assigned"
 
-            property_table.add_row([property.ID, property.name, property_destination_country, property.address, property.square_meters, property.rooms, property.type])
+            property_table.add_row([property.ID, fill(property.name, width=18), fill(property_destination_country, width=18), fill(property.address, width=32), property.square_meters, property.rooms, fill(property.type, width=12)])
 
         print(f"|  Property list (Page {self.current_page+1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page")
