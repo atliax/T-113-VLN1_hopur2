@@ -1,6 +1,6 @@
 # standard library imports
 import math
-import datetime
+from datetime import datetime
 from textwrap import fill
 
 # pip library imports
@@ -16,7 +16,9 @@ class TicketScreen(BaseScreen):
     def __init__(self, logic_api) -> None:
         super().__init__(logic_api)
         self.current_page = -1
-        self.active_search_filter = ""
+        self.active_search_filter = "Open"
+        self.search_start_date = ""
+        self.search_end_date = ""
 
     def run(self) -> str | None:
         self.clear_screen()
@@ -38,11 +40,6 @@ class TicketScreen(BaseScreen):
         print("|")
         print(ui_consts.SEPERATOR)
 
-        # Geyma nöfn til að þurfa ekki að fletta upp í hvert skipti
-        facility_names = {}
-        property_names = {}
-        staff_names = {}
-
         # Smíða töflu af destinations til að geta nýtt hana á fleiri en einum stað
         properties = self.logic_api.property_get_all()
         property_table = PrettyTable()
@@ -52,10 +49,7 @@ class TicketScreen(BaseScreen):
 
         logged_in_destinationID = self.logic_api.get_logged_in_staff().destinationID
 
-        if self.active_search_filter:
-            ticket_list = self.logic_api.ticket_search_only_destinationID(self.active_search_filter,logged_in_destinationID)
-        else:
-            ticket_list = self.logic_api.ticket_get_by_destinationID(logged_in_destinationID)
+        ticket_list = self.logic_api.ticket_search_only_destinationID(self.active_search_filter,logged_in_destinationID)
 
         total_pages = math.ceil(len(ticket_list) / 10)
 
@@ -75,26 +69,24 @@ class TicketScreen(BaseScreen):
             if ticket.facilityID == None:
                 facility_name = "None"
             else:
-                ticket_facility = self.logic_api.facility_get_by_ID(ticket.facilityID)
-                facility_name = ticket_facility.name
-
-            ticket_staff = self.logic_api.staff_get_by_ID(ticket.staffID)
-            if ticket_staff is None:
-                staff_name = "No staff assigned"
-            else:
-                staff_name = ticket_staff.name
-
-            facility_names[ticket.facilityID] = facility_name
-            property_names[ticket.propertyID] = ticket_property.name
-            staff_names[ticket.staffID] = staff_name
+                facility_name = self.logic_api.facility_get_by_ID(ticket.facilityID).name
 
             all_tickets_table.add_row([ticket.ID, ticket_property.name, facility_name, fill(ticket.title, width=40), ticket.priority, ticket.status])
 
         print(f"|  Ticket list (Page {self.current_page + 1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page" + f" [{logged_in_destinationID}]") #TODO DEBUG REMOVE
 
-        if self.active_search_filter:
-            print(f"|  Active search filter: '{self.active_search_filter}'")
+        if self.active_search_filter != "" or self.search_start_date != "" or self.search_end_date != "":
+            print("|  Active search filter: ", end="")
+            search_description = []
+            if self.active_search_filter != "":
+                search_description.append(f"Keyword: '{self.active_search_filter}'")
+            if self.search_start_date != "":
+                search_description.append(f"Start date: '{self.search_start_date}'")
+            if self.search_end_date != "":
+                search_description.append(f"End date: '{self.search_end_date}'")
+            print(" ".join(search_description), end="")
+            print("")
 
         if total_pages != 0:
             print(all_tickets_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
@@ -175,10 +167,10 @@ class TicketScreen(BaseScreen):
                     print ("Use DD-MM-YYYY format")
                     new_open_date = input("Date to open(leave empty if open now): ")
                     if new_open_date == "":
-                        new_open_date = datetime.datetime.now().strftime("%d-%m-%Y")
+                        new_open_date = datetime.now().strftime("%d-%m-%Y")
                     try:
                         date = new_open_date
-                        date_validated = datetime.datetime.strptime(date, "%d-%m-%Y")
+                        date_validated = datetime.strptime(date, "%d-%m-%Y")
                     except ValueError:
                         print ("Sorry wrong format, try again!")
 
@@ -212,7 +204,7 @@ class TicketScreen(BaseScreen):
 
             case "v":   # View closed tickets
                 if self.active_search_filter == "Closed":
-                    self.active_search_filter = ""
+                    self.active_search_filter = "Open"
                 else:
                     self.active_search_filter = "Closed"
 
@@ -365,7 +357,7 @@ class TicketScreen(BaseScreen):
                                 userID = self.logic_api.get_logged_in_staff().name
                                 process_ticket.report += f"\n{userID} {report}"
                             process_ticket.status = "Closed"
-                            process_ticket.close_date = datetime.datetime.now().strftime("%d-%m-%Y")
+                            process_ticket.close_date = datetime.now().strftime("%d-%m-%Y")
                             self.logic_api.ticket_edit(process_ticket)
 
 
@@ -450,10 +442,38 @@ class TicketScreen(BaseScreen):
 
 
 
-            case "s":    # Search for
-                self.active_search_filter = input(ui_consts.MSG_ENTER_SEARCH)
-                # "Main menu > Tickets > Filtered" window and commands are identical to "Main menu > Tickets"
 
+            # Search for
+            case "s":
+                self.active_search_filter = input(ui_consts.MSG_ENTER_SEARCH)
+
+                print ("Use DD-MM-YYYY format")
+                date_validated = False
+                while not date_validated:
+                    self.search_start_date = input("Enter start date (empty for floogemooge): ")
+                    if self.search_start_date != "":
+                        try:
+                            date_validated = datetime.strptime(self.search_start_date, "%d-%m-%Y")
+                        except ValueError:
+                            print("Sorry wrong format, try again!")
+                    else:
+                        date_validated = True
+
+                date_validated = False
+                while not date_validated:
+                    self.search_end_date = input("Enter end date (empty googlymoogly): ")
+                    if self.search_end_date != "":
+                        try:
+                            date_validated = datetime.strptime(self.search_end_date, "%d-%m-%Y")
+                        except ValueError:
+                            print("Sorry wrong format, try again!")
+                    else:
+                        date_validated = True
+
+
+
+
+            # Go back
             case "b":
                 return ui_consts.CMD_BACK
 
@@ -462,15 +482,17 @@ class TicketScreen(BaseScreen):
     def print_ticket_detail_table(self, ticket_by_id : Ticket) -> None:
         ticket_table = PrettyTable()
 
-        if ticket_by_id.facilityID is not None:
-            facility_name = self.logic_api.facility_get_by_ID(ticket_by_id.facilityID).name
+        facility = self.logic_api.facility_get_by_ID(ticket_by_id.facilityID)
+        if facility:
+            facility_name = facility.name
         else:
             facility_name = "No facility"
 
         property_name = self.logic_api.property_get_by_ID(ticket_by_id.propertyID).name
 
-        if ticket_by_id.staffID is not None:
-            staff_name = self.logic_api.staff_get_by_ID(ticket_by_id.staffID).name
+        staff = self.logic_api.staff_get_by_ID(ticket_by_id.staffID)
+        if staff:
+            staff_name = staff.name
         else:
             staff_name = "No staff"
 
