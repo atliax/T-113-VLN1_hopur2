@@ -69,7 +69,7 @@ class TicketScreen(BaseScreen):
             self.current_page = (total_pages - 1)
 
         all_tickets_table = PrettyTable()
-        all_tickets_table.field_names = ["ID", "Property", "Facility", "Title", "Priority", "Status"]
+        all_tickets_table.field_names = ["ID", "Property", "Facility", "Title", "Priority", "Status", "Days Open"]
         all_tickets_table._min_table_width = ui_consts.TABLE_WIDTH
 
         for ticket in ticket_list:
@@ -80,7 +80,15 @@ class TicketScreen(BaseScreen):
             else:
                 facility_name = self.logic_api.facility_get_by_ID(ticket.facilityID).name
 
-            all_tickets_table.add_row([ticket.ID, ticket_property.name, facility_name, fill(ticket.title, width=40), ticket.priority, ticket.status])
+            ticket_open_date = datetime.strptime(ticket.open_date, "%d-%m-%Y")
+            days_delta = datetime.now() - ticket_open_date
+            days_open = days_delta.days
+            if ticket.status != "Open":
+                days_open = "N/A"
+            else:
+                days_open = str(days_open)
+
+            all_tickets_table.add_row([ticket.ID, ticket_property.name, facility_name, fill(ticket.title, width=40), ticket.priority, ticket.status, days_open])
 
         print(f"|  Ticket list (Page {self.current_page + 1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page" + f" [{logged_in_destinationID}]") #TODO DEBUG REMOVE
@@ -102,7 +110,7 @@ class TicketScreen(BaseScreen):
             print("")
 
         if total_pages != 0:
-            print(all_tickets_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
+            print(all_tickets_table.get_string(sortby="Days Open",reversesort=True,start=self.current_page*10, end=(self.current_page+1)*10))
         else:
             print("")
             print("No tickets found.")
