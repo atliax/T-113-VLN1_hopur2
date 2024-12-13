@@ -633,7 +633,7 @@ class TicketScreen(BaseScreen):
 
                     self.print_ticket_detail_table(process_ticket)
                     print("This is the final version of the ticket.")
-                    save_it = input("Is this acceptable(yes or y to agree, anything else to dismiss): ")
+                    save_it = input("Is this acceptable(yes or y to agree, anything else to dismiss): ").lower()
                     if save_it == "yes" or save_it == "y":
                         try:
                             self.logic_api.ticket_edit(process_ticket)
