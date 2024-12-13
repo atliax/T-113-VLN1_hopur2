@@ -91,7 +91,7 @@ class TicketScreen(BaseScreen):
             all_tickets_table.add_row([ticket.ID, ticket_property.name, facility_name, fill(ticket.title, width=40), ticket.priority, ticket.status])
 
         print(f"|  Ticket list (Page {self.current_page + 1}/{total_pages}):")
-        print("|  [N] Next page    [P] Previous page")
+        print("|  [N] Next page    [P] Previous page" + f" [{logged_in_destinationID}]") #TODO DEBUG REMOVE
 
         if self.active_search_filter:
             print(f"|  Active search filter: '{self.active_search_filter}'")
@@ -107,7 +107,7 @@ class TicketScreen(BaseScreen):
 
         match cmd:
 
-            # TODO REMOVE
+            # TODO DEBUG REMOVE
             case "sw":
                 match self.logic_api.get_logged_in_staff().destinationID:
                     case "D1":
