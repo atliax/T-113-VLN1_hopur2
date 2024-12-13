@@ -22,6 +22,7 @@ class TicketScreen(BaseScreen):
             self.active_search_filter = "Open"
         self.search_start_date = ""
         self.search_end_date = ""
+        self.filter_by_property = ""
 
     def run(self) -> str | None:
         self.clear_screen()
@@ -48,16 +49,20 @@ class TicketScreen(BaseScreen):
         self.logic_api.ticket_update_pending()
         self.logic_api.ticket_update_recurring()
 
-        properties = self.logic_api.property_get_all()
+        # Sækja áfangastað núverandi innskráðs starfsmanns til að nota seinna
+        logged_in_destinationID = self.logic_api.get_logged_in_staff().destinationID
+
+
+        self.logic_api.ticket_update_pending()
+        self.logic_api.ticket_update_recurring()
+
+        properties = self.logic_api.property_get_by_destinationID(logged_in_destinationID)
         property_table = PrettyTable()
         property_table.field_names = ["Property ID","Name","Destination","Type"]
         for property in properties:
             property_table.add_row([property.ID, property.name,property.destinationID,property.type])
 
-        # Sækja áfangastað núverandi innskráðs starfsmanns til að nota seinna
-        logged_in_destinationID = self.logic_api.get_logged_in_staff().destinationID
-
-        ticket_list = self.logic_api.ticket_search_only_destinationID(self.active_search_filter,logged_in_destinationID,self.search_start_date, self.search_end_date)
+        ticket_list = self.logic_api.ticket_search_advanced(self.active_search_filter,logged_in_destinationID,self.search_start_date, self.search_end_date, self.filter_by_property)
 
         total_pages = math.ceil(len(ticket_list) / 10)
 
@@ -68,7 +73,7 @@ class TicketScreen(BaseScreen):
             self.current_page = (total_pages - 1)
 
         all_tickets_table = PrettyTable()
-        all_tickets_table.field_names = ["ID", "Property", "Facility", "Title", "Priority", "Status"]
+        all_tickets_table.field_names = ["ID", "Property", "Facility", "Title", "Priority", "Status", "Days Open"]
         all_tickets_table._min_table_width = ui_consts.TABLE_WIDTH
 
         for ticket in ticket_list:
@@ -79,25 +84,37 @@ class TicketScreen(BaseScreen):
             else:
                 facility_name = self.logic_api.facility_get_by_ID(ticket.facilityID).name
 
-            all_tickets_table.add_row([ticket.ID, ticket_property.name, facility_name, fill(ticket.title, width=40), ticket.priority, ticket.status])
+            ticket_open_date = datetime.strptime(ticket.open_date, "%d-%m-%Y")
+            days_delta = datetime.now() - ticket_open_date
+            days_open = days_delta.days
+            if ticket.status != "Open":
+                days_open = "N/A"
+            else:
+                days_open = str(days_open)
+
+            all_tickets_table.add_row([ticket.ID, ticket_property.name, facility_name, fill(ticket.title, width=40), ticket.priority, ticket.status, days_open])
 
         print(f"|  Ticket list (Page {self.current_page + 1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page" + f" [{logged_in_destinationID}]") #TODO DEBUG REMOVE
 
-        if self.active_search_filter != "" or self.search_start_date != "" or self.search_end_date != "":
-            print("|  Active search filter: ", end="")
+        if self.active_search_filter != "" or self.search_start_date != "" or self.search_end_date != "" or self.filter_by_property != "":
+            print("|  Active filters: ", end="")
             search_description = []
+
             if self.active_search_filter != "":
                 search_description.append(f"Keyword: '{self.active_search_filter}'")
             if self.search_start_date != "":
-                search_description.append(f"Start date: '{self.search_start_date}'")
+                search_description.append(f"Start: '{self.search_start_date}'")
             if self.search_end_date != "":
-                search_description.append(f"End date: '{self.search_end_date}'")
+                search_description.append(f"End: '{self.search_end_date}'")
+            if self.filter_by_property != "":
+                selected_property_name = self.logic_api.property_get_by_ID(self.filter_by_property).name
+                search_description.append(f"Property: '{selected_property_name}' ({self.filter_by_property})")
             print(" ".join(search_description), end="")
             print("")
 
         if total_pages != 0:
-            print(all_tickets_table.get_string(start=self.current_page*10, end=(self.current_page+1)*10))
+            print(all_tickets_table.get_string(sortby="Days Open",reversesort=True,start=self.current_page*10, end=(self.current_page+1)*10))
         else:
             print("")
             print("No tickets found.")
@@ -177,9 +194,11 @@ class TicketScreen(BaseScreen):
                     if new_open_date == "":
                         new_open_date = datetime.now().strftime("%d-%m-%Y")
                         status = "Open"
+                        status = "Open"
                     try:
                         date = new_open_date
                         date_validated = datetime.strptime(date, "%d-%m-%Y")
+                        status = "Pending"
                         status = "Pending"
                     except ValueError:
                         print ("Sorry wrong format, try again!")
@@ -480,8 +499,8 @@ class TicketScreen(BaseScreen):
                     else:
                         date_validated = True
 
-
-
+                print(property_table)
+                self.filter_by_property = input("Enter a property ID to filter by: ")
 
             # Go back
             case "b":
