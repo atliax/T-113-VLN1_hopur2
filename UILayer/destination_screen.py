@@ -129,9 +129,10 @@ class DestinationScreen(BaseScreen):
 
             # Edit destination
             case "e":
+            
                 if self.logic_api.is_manager_logged_in():
                     destination_edit = None
-                    edit_destination_attributes = ["managerID", "country", "airport", "phone", "opening_hours"]
+                    edit_destination_attributes = ["country", "airport", "phone", "opening_hours"]
 
                     while destination_edit is None:
                         edit_destination_ID = input("Enter the ID of the destination you want to edit (B to return): ").upper()
@@ -153,19 +154,35 @@ class DestinationScreen(BaseScreen):
 
                     print("Enter new data for the destination, leave the field empty to keep the previous data.")
 
+                    print("\nAvailable Managers:")
+                    managers = self.logic_api.staff_list_managers()
+
+                    table = PrettyTable()
+                    table.field_names = ["Manager ID", "Name"]
+                    for manager in managers:
+                        table.add_row([manager.ID, manager.name])
+                    print(table)
+
+                    new_manager_id = input("Enter new Manager ID (B to cancel): ").upper().strip()
+                    if new_manager_id == "B":
+                        return None
+
+                    manager_ids = [manager.ID for manager in managers]
+                    while new_manager_id not in manager_ids:
+                        print(f"Invalid manager ID: {new_manager_id}. Please provide a valid manager ID. (B to cancel)")
+                        new_manager_id = input("Enter new Manager ID: ").strip().upper()
+                        if new_manager_id == "B":
+                            return None
+
+                    
+                    setattr(destination_edit, "managerID", new_manager_id)
+
+                   
                     for attribute in edit_destination_attributes:
                         current_value = getattr(destination_edit, attribute)
                         new_value = input(f"New {attribute} (current: {current_value}): ").strip()
 
-                        if attribute == "managerID" and new_value:
-                            new_value = new_value.upper()
-                            manager_ids = [manager.ID for manager in self.logic_api.staff_list_managers()]
-                            while new_value not in manager_ids:
-                                print(f"Invalid manager ID: {new_value}. Please provide a valid manager ID. (B to cancel) ")
-                                new_value = input(f"New {attribute} (current: {current_value}): ").strip().upper()
-                                if new_value == "B":
-                                    return None
-                        elif attribute == "phone" and new_value:
+                        if attribute == "phone" and new_value:
                             check_phone = new_value.replace("+", "").replace("-", "").replace(" ", "")
                             while not check_phone.isdigit():
                                 print(ui_consts.MSG_INVALID_PHONE)
@@ -187,6 +204,7 @@ class DestinationScreen(BaseScreen):
                 else:
                     print(ui_consts.MSG_NO_PERMISSION)
                     input(ui_consts.MSG_ENTER_CONTINUE)
+
 
             # Go back
             case "b":
