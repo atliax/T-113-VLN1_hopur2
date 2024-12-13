@@ -1,112 +1,112 @@
-{"ID": "F1", "propertyID": "P1", "name": "iGloo-Ville m\u00f3ttaka", "description": ""}
-{"ID": "F2", "propertyID": "P2", "name": "Snj\u00f3h\u00fas 1", "description": ""}
-{"ID": "F3", "propertyID": "P3", "name": "Snj\u00f3h\u00fas 2", "description": ""}
-{"ID": "F4", "propertyID": "P4", "name": "Snj\u00f3h\u00fas 3", "description": ""}
-{"ID": "F5", "propertyID": "P5", "name": "Snj\u00f3h\u00fas 4", "description": ""}
-{"ID": "F6", "propertyID": "P6", "name": "Snj\u00f3h\u00fas 5", "description": ""}
-{"ID": "F7", "propertyID": "P7", "name": "Snj\u00f3h\u00fas 6", "description": ""}
-{"ID": "F8", "propertyID": "P8", "name": "Snj\u00f3h\u00fas 7", "description": ""}
-{"ID": "F9", "propertyID": "P9", "name": "Snj\u00f3h\u00fas 8", "description": ""}
-{"ID": "F10", "propertyID": "P10", "name": "Snj\u00f3h\u00fas 9", "description": ""}
-{"ID": "F11", "propertyID": "P11", "name": "Snj\u00f3h\u00fas 10", "description": ""}
-{"ID": "F12", "propertyID": "P16", "name": "Moldarh\u00fas 1", "description": ""}
-{"ID": "F13", "propertyID": "P17", "name": "Moldarh\u00fas 2", "description": ""}
-{"ID": "F14", "propertyID": "P18", "name": "Moldarh\u00fas 3", "description": ""}
-{"ID": "F15", "propertyID": "P19", "name": "Moldarh\u00fas 4", "description": ""}
-{"ID": "F16", "propertyID": "P20", "name": "Moldarh\u00fas 5", "description": ""}
-{"ID": "F17", "propertyID": "P21", "name": "Moldarh\u00fas 6", "description": ""}
-{"ID": "F18", "propertyID": "P22", "name": "Moldarh\u00fas 7", "description": ""}
-{"ID": "F19", "propertyID": "P23", "name": "Moldarh\u00fas 8", "description": ""}
-{"ID": "F20", "propertyID": "P24", "name": "Moldarh\u00fas 9", "description": ""}
-{"ID": "F21", "propertyID": "P25", "name": "Moldarh\u00fas 10", "description": ""}
-{"ID": "F22", "propertyID": "P12", "name": "h\u00fas 1", "description": ""}
-{"ID": "F23", "propertyID": "P13", "name": "h\u00fas 2", "description": ""}
-{"ID": "F24", "propertyID": "P14", "name": "h\u00fas 3", "description": ""}
-{"ID": "F25", "propertyID": "P15", "name": "A\u00f0albygging", "description": ""}
-{"ID": "F26", "propertyID": "P26", "name": "herbergi 1", "description": ""}
-{"ID": "F27", "propertyID": "P26", "name": "herbergi 2", "description": ""}
-{"ID": "F28", "propertyID": "P26", "name": "herbergi 3", "description": ""}
-{"ID": "F29", "propertyID": "P26", "name": "herbergi 4", "description": ""}
-{"ID": "F30", "propertyID": "P27", "name": "herbergi 1", "description": ""}
-{"ID": "F31", "propertyID": "P27", "name": "herbergi 2", "description": ""}
-{"ID": "F32", "propertyID": "P27", "name": "herbergi 3", "description": ""}
-{"ID": "F33", "propertyID": "P27", "name": "herbergi 4", "description": ""}
-{"ID": "F34", "propertyID": "P27", "name": "herbergi 5", "description": ""}
-{"ID": "F35", "propertyID": "P27", "name": "herbergi 6", "description": ""}
-{"ID": "F36", "propertyID": "P27", "name": "herbergi 7", "description": ""}
-{"ID": "F37", "propertyID": "P27", "name": "herbergi 8", "description": ""}
-{"ID": "F38", "propertyID": "P27", "name": "herbergi 9", "description": ""}
-{"ID": "F39", "propertyID": "P27", "name": "herbergi 10", "description": ""}
-{"ID": "F40", "propertyID": "P27", "name": "herbergi 11", "description": ""}
-{"ID": "F41", "propertyID": "P27", "name": "herbergi 12", "description": ""}
-{"ID": "F42", "propertyID": "P27", "name": "herbergi 13", "description": ""}
-{"ID": "F43", "propertyID": "P27", "name": "herbergi 14", "description": ""}
-{"ID": "F44", "propertyID": "P27", "name": "herbergi 15", "description": ""}
-{"ID": "F45", "propertyID": "P27", "name": "herbergi 16", "description": ""}
-{"ID": "F46", "propertyID": "P27", "name": "herbergi 17", "description": ""}
-{"ID": "F47", "propertyID": "P27", "name": "herbergi 18", "description": ""}
-{"ID": "F48", "propertyID": "P27", "name": "herbergi 19", "description": ""}
-{"ID": "F49", "propertyID": "P27", "name": "herbergi 20", "description": ""}
-{"ID": "F50", "propertyID": "P27", "name": "herbergi 21", "description": ""}
-{"ID": "F51", "propertyID": "P27", "name": "herbergi 22", "description": ""}
-{"ID": "F52", "propertyID": "P27", "name": "herbergi 23", "description": ""}
-{"ID": "F53", "propertyID": "P27", "name": "herbergi 24", "description": ""}
-{"ID": "F54", "propertyID": "P27", "name": "herbergi 25", "description": ""}
-{"ID": "F55", "propertyID": "P27", "name": "herbergi 26", "description": ""}
-{"ID": "F56", "propertyID": "P27", "name": "herbergi 27", "description": ""}
-{"ID": "F57", "propertyID": "P27", "name": "herbergi 28", "description": ""}
-{"ID": "F58", "propertyID": "P27", "name": "herbergi 29", "description": ""}
-{"ID": "F59", "propertyID": "P27", "name": "herbergi 30", "description": ""}
-{"ID": "F60", "propertyID": "P27", "name": "herbergi 31", "description": ""}
-{"ID": "F61", "propertyID": "P27", "name": "herbergi 32", "description": ""}
-{"ID": "F62", "propertyID": "P27", "name": "herbergi 33", "description": ""}
-{"ID": "F63", "propertyID": "P27", "name": "herbergi 34", "description": ""}
-{"ID": "F64", "propertyID": "P27", "name": "herbergi 35", "description": ""}
-{"ID": "F65", "propertyID": "P27", "name": "herbergi 36", "description": ""}
-{"ID": "F66", "propertyID": "P27", "name": "herbergi 37", "description": ""}
-{"ID": "F67", "propertyID": "P27", "name": "herbergi 38", "description": ""}
-{"ID": "F68", "propertyID": "P27", "name": "herbergi 39", "description": ""}
-{"ID": "F69", "propertyID": "P27", "name": "herbergi 40", "description": ""}
-{"ID": "F70", "propertyID": "P27", "name": "herbergi 41", "description": ""}
-{"ID": "F71", "propertyID": "P27", "name": "herbergi 42", "description": ""}
-{"ID": "F72", "propertyID": "P27", "name": "herbergi 43", "description": ""}
-{"ID": "F73", "propertyID": "P27", "name": "herbergi 44", "description": ""}
-{"ID": "F74", "propertyID": "P27", "name": "herbergi 45", "description": ""}
-{"ID": "F75", "propertyID": "P27", "name": "herbergi 46", "description": ""}
-{"ID": "F76", "propertyID": "P27", "name": "herbergi 47", "description": ""}
-{"ID": "F77", "propertyID": "P27", "name": "herbergi 48", "description": ""}
-{"ID": "F78", "propertyID": "P27", "name": "herbergi 49", "description": ""}
-{"ID": "F79", "propertyID": "P27", "name": "herbergi 50", "description": ""}
-{"ID": "F80", "propertyID": "P27", "name": "herbergi 51", "description": ""}
-{"ID": "F81", "propertyID": "P27", "name": "herbergi 52", "description": ""}
-{"ID": "F82", "propertyID": "P27", "name": "herbergi 53", "description": ""}
-{"ID": "F83", "propertyID": "P27", "name": "herbergi 54", "description": ""}
-{"ID": "F84", "propertyID": "P27", "name": "herbergi 55", "description": ""}
-{"ID": "F85", "propertyID": "P27", "name": "herbergi 56", "description": ""}
-{"ID": "F86", "propertyID": "P27", "name": "herbergi 57", "description": ""}
-{"ID": "F87", "propertyID": "P27", "name": "herbergi 58", "description": ""}
-{"ID": "F88", "propertyID": "P27", "name": "herbergi 59", "description": ""}
-{"ID": "F89", "propertyID": "P27", "name": "herbergi 60", "description": ""}
-{"ID": "F90", "propertyID": "P27", "name": "herbergi 61", "description": ""}
-{"ID": "F91", "propertyID": "P27", "name": "herbergi 62", "description": ""}
-{"ID": "F92", "propertyID": "P27", "name": "herbergi 63", "description": ""}
-{"ID": "F93", "propertyID": "P27", "name": "herbergi 64", "description": ""}
-{"ID": "F94", "propertyID": "P27", "name": "herbergi 65", "description": ""}
-{"ID": "F95", "propertyID": "P27", "name": "herbergi 66", "description": ""}
-{"ID": "F96", "propertyID": "P27", "name": "herbergi 67", "description": ""}
-{"ID": "F97", "propertyID": "P27", "name": "herbergi 68", "description": ""}
-{"ID": "F98", "propertyID": "P27", "name": "herbergi 69", "description": ""}
-{"ID": "F99", "propertyID": "P27", "name": "herbergi 70", "description": ""}
-{"ID": "F100", "propertyID": "P27", "name": "herbergi 71", "description": ""}
-{"ID": "F101", "propertyID": "P27", "name": "herbergi 72", "description": ""}
-{"ID": "F102", "propertyID": "P27", "name": "herbergi 73", "description": ""}
-{"ID": "F103", "propertyID": "P27", "name": "herbergi 74", "description": ""}
-{"ID": "F104", "propertyID": "P27", "name": "herbergi 75", "description": ""}
-{"ID": "F105", "propertyID": "P27", "name": "herbergi 76", "description": ""}
-{"ID": "F106", "propertyID": "P27", "name": "herbergi 77", "description": ""}
-{"ID": "F107", "propertyID": "P27", "name": "herbergi 78", "description": ""}
-{"ID": "F108", "propertyID": "P27", "name": "herbergi 79", "description": ""}
-{"ID": "F109", "propertyID": "P27", "name": "herbergi 80", "description": ""}
-{"ID": "F110", "propertyID": "P27", "name": "Leik/\u00e6fingasalur og gufuba\u00f0", "description": ""}
-{"ID": "F111", "propertyID": "P27", "name": "M\u00f3ttaka", "description": ""}
-{"ID": "F112", "propertyID": "P27", "name": "Kjarnaklj\u00fafur", "description": ""}
+{"ID": "F1", "propertyID": "P1", "name": "iGloo-Ville m\u00f3ttaka", "description": "", "deleted": false}
+{"ID": "F2", "propertyID": "P2", "name": "Snj\u00f3h\u00fas 1", "description": "", "deleted": false}
+{"ID": "F3", "propertyID": "P3", "name": "Snj\u00f3h\u00fas 2", "description": "", "deleted": false}
+{"ID": "F4", "propertyID": "P4", "name": "Snj\u00f3h\u00fas 3", "description": "", "deleted": false}
+{"ID": "F5", "propertyID": "P5", "name": "Snj\u00f3h\u00fas 4", "description": "", "deleted": false}
+{"ID": "F6", "propertyID": "P6", "name": "Snj\u00f3h\u00fas 5", "description": "", "deleted": false}
+{"ID": "F7", "propertyID": "P7", "name": "Snj\u00f3h\u00fas 6", "description": "", "deleted": false}
+{"ID": "F8", "propertyID": "P8", "name": "Snj\u00f3h\u00fas 7", "description": "", "deleted": false}
+{"ID": "F9", "propertyID": "P9", "name": "Snj\u00f3h\u00fas 8", "description": "", "deleted": false}
+{"ID": "F10", "propertyID": "P10", "name": "Snj\u00f3h\u00fas 9", "description": "", "deleted": false}
+{"ID": "F11", "propertyID": "P11", "name": "Snj\u00f3h\u00fas 10", "description": "", "deleted": false}
+{"ID": "F12", "propertyID": "P16", "name": "Moldarh\u00fas 1", "description": "", "deleted": false}
+{"ID": "F13", "propertyID": "P17", "name": "Moldarh\u00fas 2", "description": "", "deleted": false}
+{"ID": "F14", "propertyID": "P18", "name": "Moldarh\u00fas 3", "description": "", "deleted": false}
+{"ID": "F15", "propertyID": "P19", "name": "Moldarh\u00fas 4", "description": "", "deleted": false}
+{"ID": "F16", "propertyID": "P20", "name": "Moldarh\u00fas 5", "description": "", "deleted": false}
+{"ID": "F17", "propertyID": "P21", "name": "Moldarh\u00fas 6", "description": "", "deleted": false}
+{"ID": "F18", "propertyID": "P22", "name": "Moldarh\u00fas 7", "description": "", "deleted": false}
+{"ID": "F19", "propertyID": "P23", "name": "Moldarh\u00fas 8", "description": "", "deleted": false}
+{"ID": "F20", "propertyID": "P24", "name": "Moldarh\u00fas 9", "description": "", "deleted": false}
+{"ID": "F21", "propertyID": "P25", "name": "Moldarh\u00fas 10", "description": "", "deleted": false}
+{"ID": "F22", "propertyID": "P12", "name": "h\u00fas 1", "description": "", "deleted": false}
+{"ID": "F23", "propertyID": "P13", "name": "h\u00fas 2", "description": "", "deleted": false}
+{"ID": "F24", "propertyID": "P14", "name": "h\u00fas 3", "description": "", "deleted": false}
+{"ID": "F25", "propertyID": "P15", "name": "A\u00f0albygging", "description": "", "deleted": false}
+{"ID": "F26", "propertyID": "P26", "name": "herbergi 1", "description": "", "deleted": false}
+{"ID": "F27", "propertyID": "P26", "name": "herbergi 2", "description": "", "deleted": false}
+{"ID": "F28", "propertyID": "P26", "name": "herbergi 3", "description": "", "deleted": false}
+{"ID": "F29", "propertyID": "P26", "name": "herbergi 4", "description": "", "deleted": false}
+{"ID": "F30", "propertyID": "P27", "name": "herbergi 1", "description": "", "deleted": false}
+{"ID": "F31", "propertyID": "P27", "name": "herbergi 2", "description": "", "deleted": false}
+{"ID": "F32", "propertyID": "P27", "name": "herbergi 3", "description": "", "deleted": false}
+{"ID": "F33", "propertyID": "P27", "name": "herbergi 4", "description": "", "deleted": false}
+{"ID": "F34", "propertyID": "P27", "name": "herbergi 5", "description": "", "deleted": false}
+{"ID": "F35", "propertyID": "P27", "name": "herbergi 6", "description": "", "deleted": false}
+{"ID": "F36", "propertyID": "P27", "name": "herbergi 7", "description": "", "deleted": false}
+{"ID": "F37", "propertyID": "P27", "name": "herbergi 8", "description": "", "deleted": false}
+{"ID": "F38", "propertyID": "P27", "name": "herbergi 9", "description": "", "deleted": false}
+{"ID": "F39", "propertyID": "P27", "name": "herbergi 10", "description": "", "deleted": false}
+{"ID": "F40", "propertyID": "P27", "name": "herbergi 11", "description": "", "deleted": false}
+{"ID": "F41", "propertyID": "P27", "name": "herbergi 12", "description": "", "deleted": false}
+{"ID": "F42", "propertyID": "P27", "name": "herbergi 13", "description": "", "deleted": false}
+{"ID": "F43", "propertyID": "P27", "name": "herbergi 14", "description": "", "deleted": false}
+{"ID": "F44", "propertyID": "P27", "name": "herbergi 15", "description": "", "deleted": false}
+{"ID": "F45", "propertyID": "P27", "name": "herbergi 16", "description": "", "deleted": false}
+{"ID": "F46", "propertyID": "P27", "name": "herbergi 17", "description": "", "deleted": false}
+{"ID": "F47", "propertyID": "P27", "name": "herbergi 18", "description": "", "deleted": false}
+{"ID": "F48", "propertyID": "P27", "name": "herbergi 19", "description": "", "deleted": false}
+{"ID": "F49", "propertyID": "P27", "name": "herbergi 20", "description": "", "deleted": false}
+{"ID": "F50", "propertyID": "P27", "name": "herbergi 21", "description": "", "deleted": false}
+{"ID": "F51", "propertyID": "P27", "name": "herbergi 22", "description": "", "deleted": false}
+{"ID": "F52", "propertyID": "P27", "name": "herbergi 23", "description": "", "deleted": false}
+{"ID": "F53", "propertyID": "P27", "name": "herbergi 24", "description": "", "deleted": false}
+{"ID": "F54", "propertyID": "P27", "name": "herbergi 25", "description": "", "deleted": false}
+{"ID": "F55", "propertyID": "P27", "name": "herbergi 26", "description": "", "deleted": false}
+{"ID": "F56", "propertyID": "P27", "name": "herbergi 27", "description": "", "deleted": false}
+{"ID": "F57", "propertyID": "P27", "name": "herbergi 28", "description": "", "deleted": false}
+{"ID": "F58", "propertyID": "P27", "name": "herbergi 29", "description": "", "deleted": false}
+{"ID": "F59", "propertyID": "P27", "name": "herbergi 30", "description": "", "deleted": false}
+{"ID": "F60", "propertyID": "P27", "name": "herbergi 31", "description": "", "deleted": false}
+{"ID": "F61", "propertyID": "P27", "name": "herbergi 32", "description": "", "deleted": false}
+{"ID": "F62", "propertyID": "P27", "name": "herbergi 33", "description": "", "deleted": false}
+{"ID": "F63", "propertyID": "P27", "name": "herbergi 34", "description": "", "deleted": false}
+{"ID": "F64", "propertyID": "P27", "name": "herbergi 35", "description": "", "deleted": false}
+{"ID": "F65", "propertyID": "P27", "name": "herbergi 36", "description": "", "deleted": false}
+{"ID": "F66", "propertyID": "P27", "name": "herbergi 37", "description": "", "deleted": false}
+{"ID": "F67", "propertyID": "P27", "name": "herbergi 38", "description": "", "deleted": false}
+{"ID": "F68", "propertyID": "P27", "name": "herbergi 39", "description": "", "deleted": false}
+{"ID": "F69", "propertyID": "P27", "name": "herbergi 40", "description": "", "deleted": false}
+{"ID": "F70", "propertyID": "P27", "name": "herbergi 41", "description": "", "deleted": false}
+{"ID": "F71", "propertyID": "P27", "name": "herbergi 42", "description": "", "deleted": false}
+{"ID": "F72", "propertyID": "P27", "name": "herbergi 43", "description": "", "deleted": false}
+{"ID": "F73", "propertyID": "P27", "name": "herbergi 44", "description": "", "deleted": false}
+{"ID": "F74", "propertyID": "P27", "name": "herbergi 45", "description": "", "deleted": false}
+{"ID": "F75", "propertyID": "P27", "name": "herbergi 46", "description": "", "deleted": false}
+{"ID": "F76", "propertyID": "P27", "name": "herbergi 47", "description": "", "deleted": false}
+{"ID": "F77", "propertyID": "P27", "name": "herbergi 48", "description": "", "deleted": false}
+{"ID": "F78", "propertyID": "P27", "name": "herbergi 49", "description": "", "deleted": false}
+{"ID": "F79", "propertyID": "P27", "name": "herbergi 50", "description": "", "deleted": false}
+{"ID": "F80", "propertyID": "P27", "name": "herbergi 51", "description": "", "deleted": false}
+{"ID": "F81", "propertyID": "P27", "name": "herbergi 52", "description": "", "deleted": false}
+{"ID": "F82", "propertyID": "P27", "name": "herbergi 53", "description": "", "deleted": false}
+{"ID": "F83", "propertyID": "P27", "name": "herbergi 54", "description": "", "deleted": false}
+{"ID": "F84", "propertyID": "P27", "name": "herbergi 55", "description": "", "deleted": false}
+{"ID": "F85", "propertyID": "P27", "name": "herbergi 56", "description": "", "deleted": false}
+{"ID": "F86", "propertyID": "P27", "name": "herbergi 57", "description": "", "deleted": false}
+{"ID": "F87", "propertyID": "P27", "name": "herbergi 58", "description": "", "deleted": false}
+{"ID": "F88", "propertyID": "P27", "name": "herbergi 59", "description": "", "deleted": false}
+{"ID": "F89", "propertyID": "P27", "name": "herbergi 60", "description": "", "deleted": false}
+{"ID": "F90", "propertyID": "P27", "name": "herbergi 61", "description": "", "deleted": false}
+{"ID": "F91", "propertyID": "P27", "name": "herbergi 62", "description": "", "deleted": false}
+{"ID": "F92", "propertyID": "P27", "name": "herbergi 63", "description": "", "deleted": false}
+{"ID": "F93", "propertyID": "P27", "name": "herbergi 64", "description": "", "deleted": false}
+{"ID": "F94", "propertyID": "P27", "name": "herbergi 65", "description": "", "deleted": false}
+{"ID": "F95", "propertyID": "P27", "name": "herbergi 66", "description": "", "deleted": false}
+{"ID": "F96", "propertyID": "P27", "name": "herbergi 67", "description": "", "deleted": false}
+{"ID": "F97", "propertyID": "P27", "name": "herbergi 68", "description": "", "deleted": false}
+{"ID": "F98", "propertyID": "P27", "name": "herbergi 69", "description": "", "deleted": false}
+{"ID": "F99", "propertyID": "P27", "name": "herbergi 70", "description": "", "deleted": false}
+{"ID": "F100", "propertyID": "P27", "name": "herbergi 71", "description": "", "deleted": false}
+{"ID": "F101", "propertyID": "P27", "name": "herbergi 72", "description": "", "deleted": false}
+{"ID": "F102", "propertyID": "P27", "name": "herbergi 73", "description": "", "deleted": false}
+{"ID": "F103", "propertyID": "P27", "name": "herbergi 74", "description": "", "deleted": false}
+{"ID": "F104", "propertyID": "P27", "name": "herbergi 75", "description": "", "deleted": false}
+{"ID": "F105", "propertyID": "P27", "name": "herbergi 76", "description": "", "deleted": false}
+{"ID": "F106", "propertyID": "P27", "name": "herbergi 77", "description": "", "deleted": false}
+{"ID": "F107", "propertyID": "P27", "name": "herbergi 78", "description": "", "deleted": false}
+{"ID": "F108", "propertyID": "P27", "name": "herbergi 79", "description": "", "deleted": false}
+{"ID": "F109", "propertyID": "P27", "name": "herbergi 80", "description": "", "deleted": false}
+{"ID": "F110", "propertyID": "P27", "name": "Leik/\u00e6fingasalur og gufuba\u00f0", "description": "", "deleted": false}
+{"ID": "F111", "propertyID": "P27", "name": "M\u00f3ttaka", "description": "", "deleted": false}
+{"ID": "F112", "propertyID": "P27", "name": "Kjarnaklj\u00fafur", "description": "", "deleted": false}
