@@ -492,7 +492,7 @@ class TicketScreen(BaseScreen):
                         self.logic_api.ticket_edit(edit_ticket)
                 else:
                     print(ui_consts.MSG_NO_PERMISSION)
-                    print(ui_consts.MSG_ENTER_CONTINUE)
+                    input(ui_consts.MSG_ENTER_CONTINUE)
                     return None
 
             # process ticket
