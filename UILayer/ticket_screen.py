@@ -28,11 +28,11 @@ class TicketScreen(BaseScreen):
         if self.logic_api.is_manager_logged_in():
             print("|	[A] Add a ticket		[E] Edit			[B] Go back")
             print("|	[R] Remove a ticket		[S] Search for      [PR] Process")
-            print("|	[V] View closed tickets		[D] Ticket details")
+            print("|	[V] View closed/open tickets		[D] Ticket details")
         else:
             print_formatted_text(HTML("|	[A] Add a ticket		[E] <s>Edit/Process</s>			[B] Go back"))
             print_formatted_text(HTML("|	<s>[R] Remove a ticket</s>		[S] Search for      [PR] Process"))
-            print_formatted_text(HTML("|	[V] View closed tickets		[D] Ticket details"))
+            print_formatted_text(HTML("|	[V] View closed/open tickets		[D] Ticket details"))
 
         print("|")
         print(ui_consts.SEPERATOR)
@@ -196,8 +196,10 @@ class TicketScreen(BaseScreen):
                     input("Press enter to continue.")
 
             case "v":   # View closed tickets
-                # Gefur lista á closed tickets (virkar eins og search með fixed keyword)
-                pass
+                if self.active_search_filter == "Closed":
+                    self.active_search_filter = ""
+                else:
+                    self.active_search_filter = "Closed"
 
             case "d":   # Ticket details
                 ticket_by_id = None
@@ -439,13 +441,6 @@ class TicketScreen(BaseScreen):
                         if contractor == "yes" or contractor == "y":
                             self.logic_api.contractor_update_rating(process_ticket.contractorID)
                     
-
-                                
-
-
-                        
-                    
-                        
 
 
             case "s":    # Search for
