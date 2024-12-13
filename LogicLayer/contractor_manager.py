@@ -67,6 +67,6 @@ class ContractorManager:
             new_rating = rating_sum / number_of_tickets
 
         contractor = self.storage_api.contractor_get_by_ID(contractorID)
-        contractor.rating = new_rating
+        contractor.rating = round(new_rating, 1)
 
         self.storage_api.contractor_edit(contractor)
