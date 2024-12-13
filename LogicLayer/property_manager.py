@@ -28,6 +28,14 @@ class PropertyManager:
         """Returns a list of all the properties that exist in the system."""
         return self.storage_api.property_get_all()
 
+    def property_get_by_destinationID(self, destinationID : str) -> list[Property]:
+        all_properties = self.property_get_all()
+        filtered_properties = []
+        for property in all_properties:
+            if property.destinationID == destinationID:
+                filtered_properties.append(property)
+        return filtered_properties
+
     def property_get_by_ID(self, propertyID : str) -> Property:
         """Takes a property ID and returns a property from the system with the same ID if it exists."""
         return self.storage_api.property_get_by_ID(propertyID)

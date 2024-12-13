@@ -147,6 +147,9 @@ class LogicAPI:
         """Returns a list of all the properties that exist in the system."""
         return self.property_manager.property_get_all()
 
+    def property_get_by_destinationID(self, destinationID : str) -> list[Property]:
+        return self.property_manager.property_get_by_destinationID(destinationID)
+
     def property_get_by_ID(self, propertyID : str) -> Property:
         """Takes a property ID and returns a property from the system with the same ID if it exists."""
         return self.property_manager.property_get_by_ID(propertyID)
@@ -221,8 +224,8 @@ class LogicAPI:
         """Takes a string and returns a list of tickets in the system that have attributes containing that string."""
         return self.ticket_manager.ticket_search(search_string)
 
-    def ticket_search_only_destinationID(self, search_string : str, destinationID : str, start_date : str, end_date : str) -> list[Ticket]:
-        return self.ticket_manager.ticket_search_only_destinationID(search_string, destinationID, start_date, end_date)
+    def ticket_search_only_destinationID(self, search_string : str, destinationID : str, start_date : str, end_date : str, propertyID : str) -> list[Ticket]:
+        return self.ticket_manager.ticket_search_only_destinationID(search_string, destinationID, start_date, end_date, propertyID)
 
     def ticket_get_by_destinationID(self, destinationID : str) -> list[Ticket]:
         return self.ticket_manager.ticket_get_by_destinationID(destinationID)

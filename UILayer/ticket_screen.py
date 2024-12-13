@@ -22,6 +22,7 @@ class TicketScreen(BaseScreen):
             self.active_search_filter = "Open"
         self.search_start_date = ""
         self.search_end_date = ""
+        self.filter_by_property = ""
 
     def run(self) -> str | None:
         self.clear_screen()
@@ -48,16 +49,16 @@ class TicketScreen(BaseScreen):
         self.logic_api.ticket_update_pending()
         self.logic_api.ticket_update_recurring()
 
-        properties = self.logic_api.property_get_all()
+        # Sækja áfangastað núverandi innskráðs starfsmanns til að nota seinna
+        logged_in_destinationID = self.logic_api.get_logged_in_staff().destinationID
+
+        properties = self.logic_api.property_get_by_destinationID(logged_in_destinationID)
         property_table = PrettyTable()
         property_table.field_names = ["Property ID","Name","Destination","Type"]
         for property in properties:
             property_table.add_row([property.ID, property.name,property.destinationID,property.type])
 
-        # Sækja áfangastað núverandi innskráðs starfsmanns til að nota seinna
-        logged_in_destinationID = self.logic_api.get_logged_in_staff().destinationID
-
-        ticket_list = self.logic_api.ticket_search_only_destinationID(self.active_search_filter,logged_in_destinationID,self.search_start_date, self.search_end_date)
+        ticket_list = self.logic_api.ticket_search_only_destinationID(self.active_search_filter,logged_in_destinationID,self.search_start_date, self.search_end_date, self.filter_by_property)
 
         total_pages = math.ceil(len(ticket_list) / 10)
 
@@ -84,15 +85,19 @@ class TicketScreen(BaseScreen):
         print(f"|  Ticket list (Page {self.current_page + 1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page" + f" [{logged_in_destinationID}]") #TODO DEBUG REMOVE
 
-        if self.active_search_filter != "" or self.search_start_date != "" or self.search_end_date != "":
-            print("|  Active search filter: ", end="")
+        if self.active_search_filter != "" or self.search_start_date != "" or self.search_end_date != "" or self.filter_by_property != "":
+            print("|  Active filters: ", end="")
             search_description = []
+
             if self.active_search_filter != "":
                 search_description.append(f"Keyword: '{self.active_search_filter}'")
             if self.search_start_date != "":
-                search_description.append(f"Start date: '{self.search_start_date}'")
+                search_description.append(f"Start: '{self.search_start_date}'")
             if self.search_end_date != "":
-                search_description.append(f"End date: '{self.search_end_date}'")
+                search_description.append(f"End: '{self.search_end_date}'")
+            if self.filter_by_property != "":
+                selected_property_name = self.logic_api.property_get_by_ID(self.filter_by_property).name
+                search_description.append(f"Property: '{selected_property_name}' ({self.filter_by_property})")
             print(" ".join(search_description), end="")
             print("")
 
@@ -176,9 +181,11 @@ class TicketScreen(BaseScreen):
                     new_open_date = input("Date to open(leave empty if open now): ")
                     if new_open_date == "":
                         new_open_date = datetime.now().strftime("%d-%m-%Y")
+                        status = "Open"
                     try:
                         date = new_open_date
                         date_validated = datetime.strptime(date, "%d-%m-%Y")
+                        status = "Pending"
                     except ValueError:
                         print ("Sorry wrong format, try again!")
 
@@ -191,7 +198,7 @@ class TicketScreen(BaseScreen):
                 ticket_recurring = True if new_recurring > 0 else False
 
                 new_ticket = Ticket(ID = None, facilityID = new_ticket_facility_id, propertyID = new_property_id, 
-                                    priority = new_priority, title = new_ticket_title, description = new_description, status = "Open", 
+                                    priority = new_priority, title = new_ticket_title, description = new_description, status = status, 
                                     recurring = ticket_recurring, recurring_days = new_recurring , open_date = new_open_date, 
                                     close_date = None, staffID = None, report = None, cost = 0, contractorID = None, 
                                     contractor_review = None, contractor_rating = None, contractor_fee = 0)
@@ -478,8 +485,8 @@ class TicketScreen(BaseScreen):
                     else:
                         date_validated = True
 
-
-
+                print(property_table)
+                self.filter_by_property = input("Enter a property ID to filter by: ")
 
             # Go back
             case "b":

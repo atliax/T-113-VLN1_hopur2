@@ -42,7 +42,7 @@ class TicketManager:
         else:
             raise IDNotFoundError(f" {ticketID} does not exist")
 
-    def ticket_search_only_destinationID(self, search_string : str, destinationID : str, start_date : str, end_date : str) -> list[Ticket]:
+    def ticket_search_only_destinationID(self, search_string : str, destinationID : str, start_date : str, end_date : str, propertyID : str) -> list[Ticket]:
         searched_tickets = self.ticket_search(search_string)
 
         # create datetime objects from the date strings if applicable
@@ -57,6 +57,14 @@ class TicketManager:
         for ticket in searched_tickets:
             if self.storage_api.property_get_by_ID(ticket.propertyID).destinationID == destinationID:
                 filtered_tickets.append(ticket)
+
+        # filter by property if applicable?
+        searched_tickets = filtered_tickets[:]
+        if propertyID:
+            filtered_tickets = []
+            for ticket in searched_tickets:
+                if ticket.propertyID == propertyID:
+                    filtered_tickets.append(ticket)
 
         # then filter by start date if applicable
         searched_tickets = filtered_tickets[:]
@@ -122,18 +130,18 @@ class TicketManager:
         for ticket in all_tickets:
             if ticket.status == "Pending":
                 ticket_date = datetime.strptime(ticket.open_date, "%d-%m-%Y")
-                if ticket_date <= datetime.now():
+                if datetime.now() >= ticket_date:
                     ticket.status = "Open"
-                    self.storage_api.ticket_edit(ticket)
+                    self.ticket_edit(ticket)
 
     def ticket_update_recurring(self) -> None:
         all_tickets = self.ticket_get_all()
         for ticket in all_tickets:
             if ticket.status == "Open" and ticket.recurring == True:
                 ticket_date = datetime.strptime(ticket.open_date, "%d-%m-%Y")
-                new_open_date = ticket_date + timedelta(days=ticket.recurring_days)
+                new_open_date = datetime.strftime(ticket_date + timedelta(days=ticket.recurring_days), "%d-%m-%Y")
                 tmp = Ticket(None,ticket.facilityID,ticket.propertyID,ticket.priority,ticket.title,ticket.description,"Pending",True,ticket.recurring_days,new_open_date,None,None,None,0,None,None,None,0)
-                self.storage_api.ticket_add(tmp)
+                self.ticket_add(tmp)
                 ticket.recurring = False
                 ticket.recurring_days = 0
-                self.storage_api.ticket_edit(ticket)
+                self.ticket_edit(ticket)
