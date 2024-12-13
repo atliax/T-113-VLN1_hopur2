@@ -219,7 +219,10 @@ class ContractorScreen(BaseScreen):
                     contractor_edit = None
 
                     while contractor_edit is None:
-                        contractor_edit_ID = input("Edit contractor with the ID: ").upper()
+                        contractor_edit_ID = input("Edit contractor with the ID (B to cancel): ").upper()
+
+                        if contractor_edit_ID == "B":
+                            return None
 
                         try:
                             contractor_edit = self.logic_api.contractor_get_by_ID(contractor_edit_ID)
