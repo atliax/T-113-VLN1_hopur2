@@ -156,7 +156,7 @@ class ContractorScreen(BaseScreen):
                     while (new_address := input("New contractor address: ")) == "":
                         print("Contractor address can't be empty.")
 
-                    add_opening_hours = input("Add opening hours for contractor: ")
+                    add_opening_hours = input("Enter opening hours for contractor: ")
 
                     new_contractor = Contractor(None, new_destinationID, 0.0, new_name, new_contact, new_phone, new_address, add_opening_hours, new_type)
 

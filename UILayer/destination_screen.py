@@ -174,10 +174,8 @@ class DestinationScreen(BaseScreen):
                         if new_manager_id == "B":
                             return None
 
-                    
                     setattr(destination_edit, "managerID", new_manager_id)
 
-                   
                     for attribute in edit_destination_attributes:
                         current_value = getattr(destination_edit, attribute)
                         new_value = input(f"New {attribute} (current: {current_value}): ").strip()
@@ -204,7 +202,6 @@ class DestinationScreen(BaseScreen):
                 else:
                     print(ui_consts.MSG_NO_PERMISSION)
                     input(ui_consts.MSG_ENTER_CONTINUE)
-
 
             # Go back
             case "b":

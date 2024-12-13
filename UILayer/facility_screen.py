@@ -130,37 +130,18 @@ class FacilityScreen(BaseScreen):
                 if self.logic_api.is_manager_logged_in():
                     remove_facility_prompt = "Enter ID for facility to remove (B to cancel): "
                     try:
-                        while True:
-                            remove_facility_ID = input(remove_facility_prompt).strip().upper()
-
+                        while not self.logic_api.facility_get_by_ID(remove_facility_ID := input(remove_facility_prompt).strip().upper()):
                             if remove_facility_ID == "B":
-                                return None  
+                                return None
+                            print(f"No facility found with the ID: '{remove_facility_ID}'.")
 
-                            facility_to_remove = self.logic_api.facility_get_by_ID(remove_facility_ID)
-
-                            if not facility_to_remove:
-                                print(f"No facility found with the ID: '{remove_facility_ID}'.")
-                                continue
-
-                            """Check if the facility belongs to the currently selected property"""
-                            if facility_to_remove.propertyID != propertyID:
-                                print(f"Warning: Facility '{remove_facility_ID}' does not belong to property '{propertyID}'.")
-                                continue_remove = input("Do you still want to remove this facility (Y/N)? ").strip().upper()
-                                if continue_remove == "N":
-                                    return None  
-                                elif continue_remove != "Y":
-                                    print("Invalid input. Returning to menu.")
-                                    return None
-
-                            break
-
-                        
-                        if input(f"Are you sure you want to remove facility '{remove_facility_ID}' (Y to confirm)? ").strip().upper() != "Y":
-                            return None  
+                        if not self.logic_api.facility_get_by_ID(remove_facility_ID).propertyID == propertyID:
+                            if input(f"Facility '{remove_facility_ID}' does not belong to the currently active property, do you still want to remove it? (Y to confirm)? ").upper() != "Y":
+                                return None
+                        elif input(f"Are you sure you want to remove facility '{remove_facility_ID}' (Y to confirm)? ").upper() != "Y":
+                            return None
 
                         self.logic_api.facility_remove(remove_facility_ID)
-                        print(f"Facility '{remove_facility_ID}' removed successfully.")
-
                     except Exception as e:
                         print(f"Error removing facility '{remove_facility_ID}':")
                         print(f"{type(e).__name__}: {e}")
@@ -214,6 +195,8 @@ class FacilityScreen(BaseScreen):
             case "e":
                 if self.logic_api.is_manager_logged_in():
 
+                    # TODO: enforce 'active' property ID limitations
+
                     edit_facility = None
 
                     while edit_facility is None:
@@ -232,19 +215,11 @@ class FacilityScreen(BaseScreen):
 
                         if edit_facility is None:
                             print(f"No facility with the ID: '{edit_facility_ID}'.")
-                        else:
-                            """ Check if the facility belongs to the selected property"""
-                            if edit_facility.propertyID != propertyID:
-                                print(f"Warning: Facility '{edit_facility_ID}' does not belong to property '{propertyID}'.")
-                                continue_edit = input("Do you want to continue editing this facility (Y/N)? ").strip().upper()
-                                if continue_edit == "N":
-                                    return None
-                                elif continue_edit != "Y":
-                                    print("Invalid input. Returning to menu.")
-                                    return None  
-                                
 
-                    """continue editing if user chooses to edit a facility not within chosen property"""
+                    if not edit_facility.propertyID == propertyID:
+                        if input(f"Facility '{edit_facility_ID}' does not belong to the currently active property, do you still want to edit it? (Y to confirm)? ").upper() != "Y":
+                            return None
+
                     print("Enter new data for the facility, leave the field empty to keep the previous data.")
 
                     editable_attributes = ["name", "description"]
@@ -258,7 +233,6 @@ class FacilityScreen(BaseScreen):
 
                     try:
                         self.logic_api.facility_edit(edit_facility)
-                        print(f"Facility '{edit_facility_ID}' updated successfully.")
                     except Exception as e:
                         print(f"Error editing facility '{edit_facility_ID}':")
                         print(f"{type(e).__name__}: {e}")
@@ -268,8 +242,6 @@ class FacilityScreen(BaseScreen):
                     print(ui_consts.MSG_NO_PERMISSION)
                     input(ui_consts.MSG_ENTER_CONTINUE)
                     return None
-
-
 
             # Go back
             case "b":

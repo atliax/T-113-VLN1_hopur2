@@ -315,11 +315,9 @@ class StaffScreen(BaseScreen):
 
                         elif attribute == "is_manager":
                             new_value = new_value.lower()
-                            # þarf að hafa svona strangt validation?
-                            #while new_value not in ["y", "n"]:
-                            #    print("Invalid input. Enter 'y' for yes or 'n' for no.")
-                            #    new_value = input(f"New {attribute.capitalize()} (Current: {current_value}): ").strip().lower()
                             new_value = True if new_value == "y" else False
+
+                            # TODO check if there is already a manager at the chosen destination?
 
                         setattr(staff_edit, attribute, new_value)
 
