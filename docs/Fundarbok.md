@@ -365,3 +365,11 @@ Viðstaddir : Gísli!, Atli, Óli, Eva, Daníel, hjörtur
 Add ticket er í raun komið. einnig er edit tickets komið langleiðina og vinna er byrjuð á process tickets. Það er komið slatti af input validation í allt forritið og user validation einnig í flesta skjái. happypath var samrænt og unnið var í skýrlslu. Hinsvegar var Markmiði ekki náð og er forritið enn non-functional. Það verður grind dagur á mrg. 
 
 todo á morgun er því eftirfarandi : Klára forrit, mögulega skera eitthvað úr svo við getum gert þetta hratt og öruglegga. Renna yfir skýrslu og athuga með functional requirements og hversu mörg við erum að ná. 
+
+## 13 des Morgunfundur
+Viðstaddir: Óli, eva, Gísli, Atli
+Óli ætlar að vinna í tickets og ætlar að klára það kl 12 annars tekur Atli yfir tickets.
+Eva og Gísla ætla að fara yfir skýrslu aðeins betur
+Atli ætlar að fara yfir allskonar validation og betrumbæta það sem þarf
+
+Planið er eins og í gær, klára forrit og fara yfir skýrslu, það verður langur dagur í dag. Óli ætlar á Jólahlaðborð kl 18 en kemur aftur eftir á. 

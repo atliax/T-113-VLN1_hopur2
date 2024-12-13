@@ -175,7 +175,7 @@ class TicketScreen(BaseScreen):
                         print("Invalid input, Please enter a valid number.")
                         new_recurring = -1
 
-                new_ticket = Ticket(None, new_ticket_facility_id, new_property_id, new_priority, new_ticket_title, new_description,None, None, None, new_recurring , new_date, None, None, None, None, None, None, None, None)
+                new_ticket = Ticket(None, new_ticket_facility_id, new_property_id, new_priority, new_ticket_title, new_description, None, None, new_recurring , new_date, None, None, None, None, None, None, None, None)
                 self.logic_api.ticket_add(new_ticket)
 
             case "r":    # Remove a ticket
@@ -384,7 +384,7 @@ class TicketScreen(BaseScreen):
                             process_ticket.contractor_review = contractor_review
 
                             while contractor_rating < 0 or contractor_rating > 5:
-                                contractor_rating = float(input("\ninput a number from 0-5 "))
+                                contractor_rating = float(input("\ninput a number from 0-5: "))
                                 if contractor_rating < 0 or contractor_rating > 5:
                                     print("Try again")
                             process_ticket.contractor_rating = contractor_rating
@@ -406,7 +406,7 @@ class TicketScreen(BaseScreen):
 
                         #update contractor ratings only if there was one. 
                         if contractor == "yes" or contractor == "y":
-                            self.logic_api.contractor_update_rating()
+                            self.logic_api.contractor_update_rating(process_ticket.contractorID)
 
 
                                 
