@@ -217,7 +217,7 @@ class TicketScreen(BaseScreen):
                 ticket_table.add_row(["Priority", ticket_by_id.priority], divider=True)
                 ticket_table.add_row(["Title", ticket_by_id.title], divider=True)
                 ticket_table.add_row(["Description", fill(ticket_by_id.description, width=50)], divider=True)
-                ticket_table.add_row(["Open?", ticket_by_id.open], divider=True)
+                #ticket_table.add_row(["Open?", ticket_by_id.open], divider=True)
                 ticket_table.add_row(["Status", ticket_by_id.status], divider=True)
                 ticket_table.add_row(["Recurring?", ticket_by_id.recurring], divider=True)
                 ticket_table.add_row(["Recurring days", ticket_by_id.recurring_days], divider=True)
@@ -397,11 +397,14 @@ class TicketScreen(BaseScreen):
 
                         process_report = input ("\nWrite report here: ")
                         process_ticket.report = process_report
+                        process_ticket.status = "Done"
                         process_ticket.staffID = self.logic_api.get_logged_in_staff().ID
 
 
-                        
+                        # update ticket
                         self.logic_api.ticket_edit(process_ticket)
+
+                        #update contractor ratings only if there was one. 
                         if contractor == "yes" or contractor == "y":
                             self.logic_api.contractor_update_rating()
 
