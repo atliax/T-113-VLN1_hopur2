@@ -1,12 +1,12 @@
-# Standard library imports
+# standard library imports
 import math
 from textwrap import fill
 
-# pip libabry imports
+# pip library imports
 from prettytable import PrettyTable
 from prompt_toolkit import print_formatted_text, HTML
 
-#local imports
+# local imports
 from UILayer.base_screen import BaseScreen
 from UILayer import ui_consts
 from Model import Facility
@@ -139,7 +139,6 @@ class FacilityScreen(BaseScreen):
                                     print("Invalid input. Returning to menu.")
                                     return None
 
-                            
                             break
 
                         
