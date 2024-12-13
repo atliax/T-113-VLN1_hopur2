@@ -343,7 +343,7 @@ class TicketScreen(BaseScreen):
                             print (f"\nCurrent recur rate in days {process_ticket.recurring_days}")
                             try:
                                 edit_recurring = int(input("New recur rate every X days (0 = never): "))
-                                edit_recurring = process_ticket.recurring_days
+                                #edit_recurring = process_ticket.recurring_days
                             except ValueError:
                                 print("\nInvalid input, Please enter a number")
                                 edit_recurring = -1
@@ -353,11 +353,12 @@ class TicketScreen(BaseScreen):
                             print (f"\nIf there was material cost, type in how much: ")
                             try:
                                 process_cost = int(input("Type 0 if none: "))
-                                process_cost = process_ticket.cost
+                                #process_cost = process_ticket.cost
                             except ValueError:
                                 print ("please enter a valid number or leave empty.")
                                 process_cost = -1
                         process_ticket.cost = process_cost
+
                         print ("\nWas a contractror involved in the ticket?")
                         contractor = input("(\"yes\" if so, anything else if not): ").lower()
                         if contractor == "yes" or contractor == "y":
