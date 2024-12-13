@@ -80,7 +80,7 @@ class ContractorScreen(BaseScreen):
                 fill(contractor.contractor_type,width=18),
                 fill(contractor_destination_country,width=15),
                 fill(contractor.contact,width=18),
-                contractor.rating,
+                contractor.rating if contractor.name != "Chuck Norris" else "Infinity",
                 fill(contractor.opening_hours,width=18)])
 
         print(f"|  Contractor list (Page {self.current_page + 1}/{total_pages}):")
@@ -221,7 +221,7 @@ class ContractorScreen(BaseScreen):
                     fill(view_contact.name,width=25),
                     fill(view_contact.phone,width=25),
                     fill(view_contact.address,width=30),
-                    view_contact.rating])
+                    view_contact.rating if view_contact.name != "Chuck Norris" else "Infinity"])
 
                 print(view_contact_table)
                 input(ui_consts.MSG_ENTER_CONTINUE)
