@@ -1,5 +1,7 @@
 from datetime import datetime, timedelta
 
+from LogicLayer import logic_consts
+from LogicLayer.logic_consts import DATE_FORMAT
 from StorageLayer import StorageAPI
 from Exceptions import IDNotFoundError
 from Model import Ticket
@@ -47,9 +49,9 @@ class TicketManager:
 
         # create datetime objects from the date strings if applicable
         if start_date != "":
-            start_date = datetime.strptime(start_date,"%d-%m-%Y")
+            start_date = datetime.strptime(start_date,DATE_FORMAT)
         if end_date != "":
-            end_date = datetime.strptime(end_date,"%d-%m-%Y")
+            end_date = datetime.strptime(end_date,DATE_FORMAT)
 
         filtered_tickets : list[Ticket] = []
 
@@ -71,7 +73,7 @@ class TicketManager:
         if start_date:
             filtered_tickets = []
             for ticket in searched_tickets:
-                ticket_date = datetime.strptime(ticket.open_date,"%d-%m-%Y")
+                ticket_date = datetime.strptime(ticket.open_date,DATE_FORMAT)
                 if ticket_date >= start_date:
                     filtered_tickets.append(ticket)
 
@@ -80,7 +82,7 @@ class TicketManager:
         if end_date:
             filtered_tickets = []
             for ticket in searched_tickets:
-                ticket_date = datetime.strptime(ticket.open_date,"%d-%m-%Y")
+                ticket_date = datetime.strptime(ticket.open_date,DATE_FORMAT)
                 if ticket_date <= end_date:
                     filtered_tickets.append(ticket)
 
@@ -119,19 +121,19 @@ class TicketManager:
     def ticket_update_pending(self) -> None:
         all_tickets = self.ticket_get_all()
         for ticket in all_tickets:
-            if ticket.status == "Pending":
-                ticket_date = datetime.strptime(ticket.open_date, "%d-%m-%Y")
+            if ticket.status == logic_consts.TICKET_STATUS_PENDING:
+                ticket_date = datetime.strptime(ticket.open_date, DATE_FORMAT)
                 if datetime.now() >= ticket_date:
-                    ticket.status = "Open"
+                    ticket.status = logic_consts.TICKET_STATUS_OPEN
                     self.ticket_edit(ticket)
 
     def ticket_update_recurring(self) -> None:
         all_tickets = self.ticket_get_all()
         for ticket in all_tickets:
-            if ticket.status == "Open" and ticket.recurring == True:
-                ticket_date = datetime.strptime(ticket.open_date, "%d-%m-%Y")
-                new_open_date = datetime.strftime(ticket_date + timedelta(days=ticket.recurring_days), "%d-%m-%Y")
-                tmp = Ticket(None,ticket.facilityID,ticket.propertyID,ticket.priority,ticket.title,ticket.description,"Pending",True,ticket.recurring_days,new_open_date,None,None,None,0,None,None,None,0)
+            if ticket.status == logic_consts.TICKET_STATUS_OPEN and ticket.recurring == True:
+                ticket_date = datetime.strptime(ticket.open_date, DATE_FORMAT)
+                new_open_date = datetime.strftime(ticket_date + timedelta(days=ticket.recurring_days), DATE_FORMAT)
+                tmp = Ticket(None,ticket.facilityID,ticket.propertyID,ticket.priority,ticket.title,ticket.description,logic_consts.TICKET_STATUS_PENDING,True,ticket.recurring_days,new_open_date,None,None,None,0,None,None,None,0)
                 self.ticket_add(tmp)
                 ticket.recurring = False
                 ticket.recurring_days = 0
