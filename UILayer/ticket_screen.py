@@ -44,6 +44,10 @@ class TicketScreen(BaseScreen):
         print(ui_consts.SEPERATOR)
 
         # Smíða töflu af destinations til að geta nýtt hana á fleiri en einum stað
+
+        self.logic_api.ticket_update_pending()
+        self.logic_api.ticket_update_recurring()
+
         properties = self.logic_api.property_get_all()
         property_table = PrettyTable()
         property_table.field_names = ["Property ID","Name","Destination","Type"]
@@ -190,7 +194,7 @@ class TicketScreen(BaseScreen):
                                     priority = new_priority, title = new_ticket_title, description = new_description, status = "Open", 
                                     recurring = ticket_recurring, recurring_days = new_recurring , open_date = new_open_date, 
                                     close_date = None, staffID = None, report = None, cost = 0, contractorID = None, 
-                                    contractor_review = None, contractor_rating = None, contractor_fee = None)
+                                    contractor_review = None, contractor_rating = None, contractor_fee = 0)
                 self.logic_api.ticket_add(new_ticket)
 
             case "r":    # Remove a ticket
