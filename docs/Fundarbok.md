@@ -360,3 +360,8 @@ Viðstaddir : Gísli!, Atli, Óli, Eva, Daníel, hjörtur
 
 ## Markmið dagsins
 Óli ætlar að skoða add ticket og gera alla fítusu fyrir það ready. Hjörtur ætlar að vinna í Tickets. Eva ætlar að gera input validation. Daníel ætlar einnig að gera input validation. Gísli ætlar að samræna happypath. Atli ætlar að gera input validation. Við ætlum að reyna að hafa forritið í fullri virkni og "relatively error free" í enda dags. 
+
+## lokafundur 
+Add ticket er í raun komið. einnig er edit tickets komið langleiðina og vinna er byrjuð á process tickets. Það er komið slatti af input validation í allt forritið og user validation einnig í flesta skjái. happypath var samrænt og unnið var í skýrlslu. Hinsvegar var Markmiði ekki náð og er forritið enn non-functional. Það verður grind dagur á mrg. 
+
+todo á morgun er því eftirfarandi : Klára forrit, mögulega skera eitthvað úr svo við getum gert þetta hratt og öruglegga. Renna yfir skýrslu og athuga með functional requirements og hversu mörg við erum að ná. 
