@@ -49,3 +49,24 @@ class ContractorManager:
 
     def contractor_get_by_ID(self, contractorID : str) -> Contractor:
         return self.storage_api.contractor_get_by_ID(contractorID)
+
+    def contractor_update_rating(self, contractorID : str) -> None:
+        """Updates the rating of the requested contractor."""
+        all_tickets = self.storage_api.ticket_get_all()
+
+        number_of_tickets = 0.0
+        rating_sum = 0.0
+        new_rating = 0.0
+
+        for ticket in all_tickets:
+            if ticket.contractorID == contractorID:
+                number_of_tickets += 1.0
+                rating_sum += ticket.contractor_rating
+
+        if number_of_tickets > 0:
+            new_rating = rating_sum / number_of_tickets
+
+        contractor = self.storage_api.contractor_get_by_ID(contractorID)
+        contractor.rating = new_rating
+
+        self.storage_api.contractor_edit(contractor)

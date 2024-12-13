@@ -62,6 +62,10 @@ class LogicAPI:
         """Takes a string and returns a list of contractors in the system that have attributes containing that string."""
         return self.contractor_manager.contractor_search(search_string)
 
+    def contractor_update_rating(self, contractorID : str) -> None:
+        """Updates the rating of the requested contractor."""
+        self.contractor_manager.contractor_update_rating(contractorID)
+
 #==========================================================================
 #--Destinations------------------------------------------------------------
 
