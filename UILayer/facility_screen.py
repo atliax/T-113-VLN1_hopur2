@@ -65,7 +65,20 @@ class FacilityScreen(BaseScreen):
         for facility in facility_list:
             facilities_table.add_row([facility.ID,facility.name,facility.description])
 
-        print(f"|  Facility list for Property '{propertyID}' (Page {self.current_page+1}/{total_pages}):")
+        try:
+            active_property = self.logic_api.property_get_by_ID(propertyID)
+        except Exception as e:
+            print(f"Error loading property data for '{propertyID}':")
+            print(f"{type(e).__name__}: {e}")
+            input(ui_consts.MSG_ENTER_BACK)
+            return ui_consts.CMD_BACK
+
+        if active_property is not None:
+            property_name = active_property.name
+        else:
+            property_name = "-"
+
+        print(f"|  Facility list for Property '{property_name}' ({propertyID}) (Page {self.current_page+1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page")
 
         if self.active_search_filter:
