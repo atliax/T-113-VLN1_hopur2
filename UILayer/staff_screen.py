@@ -91,7 +91,7 @@ class StaffScreen(BaseScreen):
         cmd = input("Command: ").lower()
 
         # construct a table of destinations for use with the "add" and "edit" commands
-        try:    
+        try:
             destinations = self.logic_api.destination_get_all()
         except Exception as e:
             print(f"Error loading destinations:")
