@@ -144,7 +144,7 @@ class TicketScreen(BaseScreen):
 
                 #Choose facility with verification
                 if len(tmp) == 0:
-                    print ("No Facalities to choose, using propertyID only")
+                    print ("No Facilities to choose, using propertyID only")
                     new_ticket_facility_id = None
                 else:
                     facility_table = PrettyTable()
@@ -255,6 +255,7 @@ class TicketScreen(BaseScreen):
                         edit_ticket = self.logic_api.ticket_get_by_ID(pick_ticket)
 
                         if (edit_ticket is not None) and (edit_ticket.status == "Closed"):
+                            self.print_ticket_detail_table(edit_ticket)
                             print ("Tickets need to be open to edit or progress them")
                             answer = input(print ("Do you want to open the ticket? (yes/y to open, no/n to stay closed)")).lower()
                             if answer == "yes" or answer == "y":
@@ -267,6 +268,7 @@ class TicketScreen(BaseScreen):
                         if (edit_ticket is not None) and (edit_ticket.status != "Closed"):
 
                             # Edit property with verification
+                            self.print_ticket_detail_table(edit_ticket)
                             print(property_table)
                             print ("Leave empty if you don't want to change propertyID")
                             edit_property_id = input(f"New propertyID (Current: {edit_ticket.propertyID}) associated with ticket {edit_ticket.ID}: ").upper()
@@ -284,6 +286,7 @@ class TicketScreen(BaseScreen):
                             tmp = self.logic_api.facility_get_by_propertyID(edit_property_id)
 
                             #Edit facility with verification
+                            self.print_ticket_detail_table(edit_ticket)
                             if len(tmp) == 0:
                                 print ("No Facalities to choose, using propertyID only")
                                 edit_ticket.facilityID = None
@@ -297,8 +300,10 @@ class TicketScreen(BaseScreen):
                                 print ("Leave empty if you don't want to change facilityID")
                                 edit_ticket_facility_id = input(f"New propertyID (Current: {edit_ticket.facilityID}) associated with ticket {edit_ticket.ID}: ").upper()
                                 if edit_ticket_facility_id.strip() == "":
+                                    verified = True
                                     edit_ticket_facility_id = edit_ticket.facilityID
-                                verified = self.logic_api.facility_validate(edit_ticket_facility_id, tmp)
+                                else:
+                                    verified = self.logic_api.facility_validate(edit_ticket_facility_id, tmp)
                                 while not verified:
                                     if new_ticket_facility_id == "B":
                                         return None
@@ -308,6 +313,8 @@ class TicketScreen(BaseScreen):
                                         edit_ticket_facility_id = edit_ticket.facilityID
                                     verified = self.logic_api.facility_validate(new_ticket_facility_id, tmp)
 
+                            
+                            self.print_ticket_detail_table(edit_ticket)
                             while edit_priority not in priority_list: # edit priority 
                                 print ("leave empty if you don't wish to change priority")
                                 edit_priority = input(f"edit ticket priority(high, medium, low), current ({edit_ticket.priority}): ").lower().capitalize()
@@ -315,6 +322,7 @@ class TicketScreen(BaseScreen):
                                     edit_priority = edit_ticket.priority
                             edit_ticket.priority = edit_priority.lower().capitalize()
 
+                            self.print_ticket_detail_table(edit_ticket)
                             while not edit_ticket_title:
                                 print ("leave empty if you don't wish to change ticket title")
                                 edit_ticket_title = input("New ticket title: ").strip()
@@ -347,7 +355,7 @@ class TicketScreen(BaseScreen):
 
                     if process_ticket is not None and process_ticket.status == "Done" and self.logic_api.is_manager_logged_in():
 
-
+                        self.print_ticket_detail_table(process_ticket)
                         print ("This ticket is ready for completion")
                         answer = input("type yes/y if you want to mark this as complete: ").lower()
                         if answer == "yes" or answer == "y":
@@ -362,7 +370,8 @@ class TicketScreen(BaseScreen):
 
 
                     if process_ticket is not None and process_ticket.status != "Closed":
-
+                        
+                        self.print_ticket_detail_table(process_ticket)
                         while edit_recurring < 0:
                             print (f"\nCurrent recur rate in days {process_ticket.recurring_days}")
                             try:
@@ -372,7 +381,8 @@ class TicketScreen(BaseScreen):
                                 print("\nInvalid input, Please enter a number")
                                 edit_recurring = -1
                         process_ticket.recurring_days = edit_recurring
-                    
+
+                        self.print_ticket_detail_table(process_ticket)
                         while process_cost < 0:
                             print (f"\nIf there was material cost, type in how much: ")
                             try:
@@ -387,6 +397,7 @@ class TicketScreen(BaseScreen):
                         contractor = input("(\"yes\" if so, anything else if not): ").lower()
                         if contractor == "yes" or contractor == "y":
                             
+                            self.print_ticket_detail_table(process_ticket)
                             destination_id = self.logic_api.property_get_by_ID(process_ticket.propertyID).destinationID
                             contractor_in_destination = self.logic_api.contractor_get_by_destinationID(destination_id)
                             Contractor_table = PrettyTable()
@@ -407,9 +418,9 @@ class TicketScreen(BaseScreen):
                             contractor_review = input ("Review of the job done: ")
                             process_ticket.contractor_review = contractor_review
 
-                            while contractor_rating < 0 or contractor_rating > 5:
-                                contractor_rating = float(input("\ninput a number from 0-5: "))
-                                if contractor_rating < 0 or contractor_rating > 5:
+                            while contractor_rating < 0 or contractor_rating > 10:
+                                contractor_rating = float(input("\ninput a rating for the contractor used from 0-10: "))
+                                if contractor_rating < 0 or contractor_rating > 10:
                                     print("Try again")
                             process_ticket.contractor_rating = contractor_rating
 
@@ -419,18 +430,25 @@ class TicketScreen(BaseScreen):
                                     print ("Try again")
                             process_ticket.contractor_fee = contractor_fee
 
+                        self.print_ticket_detail_table(process_ticket)
                         process_report = input ("\nWrite report here: ")
                         process_ticket.report = process_report
                         process_ticket.status = "Done"
                         process_ticket.staffID = self.logic_api.get_logged_in_staff().ID
 
-
-                        # update ticket
-                        self.logic_api.ticket_edit(process_ticket)
-
-                        #update contractor ratings only if there was one. 
+                        
                         if contractor == "yes" or contractor == "y":
                             self.logic_api.contractor_update_rating(process_ticket.contractorID)
+                        
+                        print ("this is the final version of the ticket")
+                        self.print_ticket_detail_table(process_ticket)
+                        save_it = input("Is this acceptable(yes or y to agree, anything else to dismiss): ")
+                        if save_it == "yes" or save_it == "y":
+                            self.logic_api.ticket_edit(process_ticket)
+                        else:
+                            return self
+
+
 
             case "s":    # Search for
                 self.active_search_filter = input(ui_consts.MSG_ENTER_SEARCH)
