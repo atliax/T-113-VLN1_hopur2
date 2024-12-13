@@ -12,6 +12,10 @@ from UILayer import ui_consts
 from Model import Property
 
 class PropertyScreen(BaseScreen):
+    """
+    Screen class to manage properties, Allows adding, editing, 
+    removing, viewing facilities and searching
+    """
     def __init__(self, logic_api) -> None:
         super().__init__(logic_api)
         self.current_page = -1
@@ -25,6 +29,7 @@ class PropertyScreen(BaseScreen):
         print(ui_consts.SEPERATOR)
         print("|")
 
+        # Display options based on user permissions
         if self.logic_api.is_manager_logged_in():
             print("|	[A] Add a property		[E] Edit a property			[B] Go back")
             print("|	[R] Remove a property		[S] Search for")
@@ -37,6 +42,8 @@ class PropertyScreen(BaseScreen):
         print("|")
         print(ui_consts.SEPERATOR)
 
+
+        # Load list of properties based on the search filter
         try:
             if self.active_search_filter:
                 property_list = self.logic_api.property_search(self.active_search_filter)
@@ -56,12 +63,14 @@ class PropertyScreen(BaseScreen):
         if self.current_page > (total_pages - 1):
             self.current_page = (total_pages - 1)
 
+        # Set up property table
         property_table = PrettyTable()
         property_table.field_names = ["ID","Name","Destination","Address","Sq meters","Rooms","Type"]
         property_table._min_table_width = ui_consts.TABLE_WIDTH
 
         for property in property_list:
             try:
+                # Fetch destination details for the property
                 property_destination = self.logic_api.destination_get_by_ID(property.destinationID)
             except Exception as e:
                 print(f"Error loading destination '{property.destinationID}' for property '{property.ID}':")
@@ -69,13 +78,16 @@ class PropertyScreen(BaseScreen):
                 input(ui_consts.MSG_ENTER_BACK)
                 return ui_consts.CMD_BACK
 
+            # Decide the destination country or " Not Assigned"
             if property_destination is not None:
                 property_destination_country = property_destination.country
             else:
                 property_destination_country = "Not assigned"
 
+            # Add property details to the table
             property_table.add_row([property.ID, fill(property.name, width=18), fill(property_destination_country, width=18), fill(property.address, width=32), property.square_meters, property.rooms, fill(property.type, width=12)])
 
+        # Display property list and navigation options
         print(f"|  Property list (Page {self.current_page+1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page")
 
@@ -99,11 +111,13 @@ class PropertyScreen(BaseScreen):
             print(f"{type(e).__name__}: {e}")
             input(ui_consts.MSG_ENTER_BACK)
             return ui_consts.CMD_BACK
+        # Create a destination table for user
         destination_table = PrettyTable()
         destination_table.field_names = ["Destination ID","Country","Airport"]
         for destination in destinations:
             destination_table.add_row([destination.ID, destination.country, destination.airport])
 
+        # Command handling logic
         match cmd:
 
             # Next page
@@ -123,6 +137,7 @@ class PropertyScreen(BaseScreen):
                     # Get new property details from user
                     new_destination_ID_prompt = "Enter a destination ID for new property (B to go cancel): "
 
+                    # Get and validate destination ID
                     try:
                         while not self.logic_api.destination_get_by_ID(new_destination_ID := input(new_destination_ID_prompt).upper()):
                             if new_destination_ID == "B":
@@ -134,12 +149,14 @@ class PropertyScreen(BaseScreen):
                         input(ui_consts.MSG_ENTER_CONTINUE)
                         return None
 
+                    # Prompt for other property details
                     while (new_property_name := input("New property name: ")) == "":
                         print("Property name can't be empty.")
 
                     while (new_property_address := input("New property address: ")) == "":
                         print("Property address can't be empty.")
 
+                    # Validate square meters and room count as valid integers
                     valid_integer = False
                     while not valid_integer:
                         try:

@@ -66,7 +66,7 @@ class PropertyManager:
 
     def property_validate(self, propertyID : str) -> bool:
         """Takes in a property ID and returns True if it exists in the system, otherwise returns False."""
-        all_property =self.storage_api.property_get_all()
+        all_property = self.storage_api.property_get_all()
         for property in all_property:
             if propertyID == property.ID:
                 return True

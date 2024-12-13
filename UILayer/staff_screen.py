@@ -11,12 +11,21 @@ from UILayer import ui_consts
 from Model import Staff
 
 class StaffScreen(BaseScreen):
+    """
+    Screen class for managing staff, with options
+    to edit, add, remove, view details search and 
+    view contractors
+    """
     def __init__(self, logic_api) -> None:
         super().__init__(logic_api)
         self.current_page = -1
         self.active_search_filter = ""
 
     def run(self) -> str | None:
+        """
+        Main method to display the staff management 
+        scren and handle user input
+        """
         self.clear_screen()
 
         print("Main Menu > Staff")
@@ -24,6 +33,7 @@ class StaffScreen(BaseScreen):
         print(ui_consts.SEPERATOR)
         print("|")
 
+        # Display menu options based on user permissions
         if self.logic_api.is_manager_logged_in():
             print("|	[A] Add an employee		[E] Edit an employee			[B] Go back")
             print("|	[R] Remove an employee		[S] Search for")
@@ -36,6 +46,7 @@ class StaffScreen(BaseScreen):
         print("|")
         print(ui_consts.SEPERATOR)
 
+        # Fetch a list of staff based on the active search filter
         try:
             if self.active_search_filter:
                 staff_list = self.logic_api.staff_search(self.active_search_filter)
@@ -55,12 +66,14 @@ class StaffScreen(BaseScreen):
         if self.current_page > (total_pages - 1):
             self.current_page = (total_pages - 1)
 
+        # Create the staff table
         staff_table = PrettyTable()
         staff_table.field_names = ["ID", "Name","Job title","Destination","SSN"]
         staff_table._min_table_width = ui_consts.TABLE_WIDTH
 
         for employee in staff_list:
             try:
+                # Fetch destination details for employee
                 employee_destination = self.logic_api.destination_get_by_ID(employee.destinationID.upper())
             except Exception as e:
                 print(f"Error loading destination data for employee '{employee.ID}':")
@@ -68,13 +81,16 @@ class StaffScreen(BaseScreen):
                 input(ui_consts.MSG_ENTER_BACK)
                 return ui_consts.CMD_BACK
 
+            # Assign "Not Assigned" if no destination is found
             if employee_destination is not None:
                 employee_destination_country = employee_destination.country
             else:
                 employee_destination_country = "Not assigned"
 
+            # Add employee details to the table
             staff_table.add_row([employee.ID, employee.name, employee.job_title, employee_destination_country, employee.ssn])
 
+        # Display staff list and page navigation
         print(f"|  Staff list (Page {self.current_page+1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page")
 
@@ -103,6 +119,7 @@ class StaffScreen(BaseScreen):
         for destination in destinations:
             destination_table.add_row([destination.ID, destination.country, destination.airport])
 
+        # Logic for user input
         match cmd:
 
             # Next page
@@ -121,16 +138,19 @@ class StaffScreen(BaseScreen):
 
                     new_destinationID_prompt = "Enter destination ID for new employee (B to cancel): "
                     try:
+                        # Validate destination ID
                         while not self.logic_api.destination_get_by_ID(new_destinationID := input(new_destinationID_prompt).upper()):
                             if new_destinationID == "B":
                                 return None
                             print(f"No destination found with the ID: '{new_destinationID}'.")
                     except Exception as e:
+                        # Handle errors in validating destination ID
                         print(f"Error loading destination '{new_destinationID}' while adding an employee:")
                         print(f"{type(e).__name__}: {e}")
                         input(ui_consts.MSG_ENTER_CONTINUE)
                         return None
 
+                    # Prompt for employee details and validate input
                     while (new_staff_name := input("New employee name: ")) == "":
                         print("Staff name can't be empty.")
 
@@ -178,15 +198,18 @@ class StaffScreen(BaseScreen):
                     while (new_title := input("New employee job title: ")) == "":
                         print("Job title can't be empty.")
 
+                    # Check if employee is a manager
                     is_manager_yn = input("Is the new employee a manager? y/n ").lower()
                     is_manager = is_manager_yn == "y"
 
                     # TODO change manager for chosen destination if it already exists?
 
+                    # Create a new staff object
                     new_staff = Staff(
                         None, new_destinationID, new_staff_name, new_staff_ssn, new_address,
                         new_phone_nr, new_gsm, new_email, new_password, new_title, is_manager)
 
+                    # Add the staff to the database
                     try:
                         self.logic_api.staff_add(new_staff)
                     except Exception as e:
@@ -195,6 +218,7 @@ class StaffScreen(BaseScreen):
                         input(ui_consts.MSG_ENTER_CONTINUE)
                         return None
                 else:
+                    # Inform user if they do not have permissions
                     print(ui_consts.MSG_NO_PERMISSION)
                     input(ui_consts.MSG_ENTER_CONTINUE)
                     return None
@@ -260,6 +284,7 @@ class StaffScreen(BaseScreen):
                             return None
 
                         try:
+                            # Get employee details usind their ID
                             staff_edit = self.logic_api.staff_get_by_ID(staff_edit_ID)
                         except Exception as e:
                             print(f"Error loading info for employee '{staff_edit_ID}':")
@@ -273,7 +298,7 @@ class StaffScreen(BaseScreen):
                     # Display the available destinations
                     print(destination_table)
 
-                    # Get new property details from user
+                    # Get new destination ID from user
                     new_destination_ID_prompt = "Enter destination ID for employee (B to cancel): "
                     try:
                         while not self.logic_api.destination_get_by_ID(new_destination_ID := input(new_destination_ID_prompt).upper()):
@@ -285,11 +310,14 @@ class StaffScreen(BaseScreen):
                         print(f"{type(e).__name__}: {e}")
                         input(ui_consts.MSG_ENTER_CONTINUE)
                         return None
-
+                    
+                    
+                       # Update the destination ID for employee 
                     setattr(staff_edit, "destinationID", new_destination_ID)
 
                     print(f"Enter new data for the employee '{staff_edit_ID}', leave the field empty to keep the previous data.")
 
+                    # Editable attibutes with validation checks
                     editable_attributes = ["name", "address", "phone_home", "phone_gsm", "email", "password", "job_title", "is_manager"]
                     for attribute in editable_attributes:
                         current_value = getattr(staff_edit, attribute, None)
@@ -319,8 +347,10 @@ class StaffScreen(BaseScreen):
 
                             # TODO check if there is already a manager at the chosen destination?
 
+                        # Set new value for attributes
                         setattr(staff_edit, attribute, new_value)
 
+                    # Save the updated employee details to the database
                     try:
                         self.logic_api.staff_edit(staff_edit)
                     except Exception as e:
@@ -333,6 +363,7 @@ class StaffScreen(BaseScreen):
                     input(ui_consts.MSG_ENTER_CONTINUE)
                     return None
                 else:
+                    # Inform users if they lack permissions
                     print(ui_consts.MSG_NO_PERMISSION)
                     input(ui_consts.MSG_ENTER_CONTINUE)
                     return None
