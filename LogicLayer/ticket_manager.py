@@ -42,7 +42,7 @@ class TicketManager:
         else:
             raise IDNotFoundError(f" {ticketID} does not exist")
 
-    def ticket_search_only_destinationID(self, search_string : str, destinationID : str, start_date : str, end_date : str, propertyID : str) -> list[Ticket]:
+    def ticket_search_advanced(self, search_string : str, destinationID : str, start_date : str, end_date : str, propertyID : str) -> list[Ticket]:
         searched_tickets = self.ticket_search(search_string)
 
         # create datetime objects from the date strings if applicable
@@ -83,15 +83,6 @@ class TicketManager:
                 ticket_date = datetime.strptime(ticket.open_date,"%d-%m-%Y")
                 if ticket_date <= end_date:
                     filtered_tickets.append(ticket)
-
-        return filtered_tickets
-
-    def ticket_get_by_destinationID(self, destinationID : str) -> list[Ticket]:
-        all_tickets : list[Ticket] = self.ticket_get_all()
-        filtered_tickets = []
-        for ticket in all_tickets:
-            if self.storage_api.property_get_by_ID(ticket.propertyID).destinationID == destinationID:
-                filtered_tickets.append(ticket)
 
         return filtered_tickets
 

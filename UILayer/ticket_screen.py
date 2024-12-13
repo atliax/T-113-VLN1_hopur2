@@ -58,7 +58,7 @@ class TicketScreen(BaseScreen):
         for property in properties:
             property_table.add_row([property.ID, property.name,property.destinationID,property.type])
 
-        ticket_list = self.logic_api.ticket_search_only_destinationID(self.active_search_filter,logged_in_destinationID,self.search_start_date, self.search_end_date, self.filter_by_property)
+        ticket_list = self.logic_api.ticket_search_advanced(self.active_search_filter,logged_in_destinationID,self.search_start_date, self.search_end_date, self.filter_by_property)
 
         total_pages = math.ceil(len(ticket_list) / 10)
 
