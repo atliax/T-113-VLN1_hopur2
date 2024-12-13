@@ -114,7 +114,7 @@ class LogicAPI:
 
     def facility_get_selected_property(self) -> str:
         """Returns the property ID that is currently the 'active' property on the Facility screen."""
-        return self.facility_manager.get_selected_property()
+        return self.facility_manager.facility_get_selected_property()
 
     def facility_remove(self, facilityID : str):
         """Takes a facility ID and removes it from the system."""
@@ -126,7 +126,7 @@ class LogicAPI:
 
     def facility_set_selected_property(self, propertyID : str) -> None:
         """Takes a property ID and sets that as the 'active' property on the Facility screen."""
-        self.facility_manager.set_selected_property(propertyID)
+        self.facility_manager.facility_set_selected_property(propertyID)
 
     def facility_validate(self, facilityID : str, facility_list : list[Facility] ) -> bool:
         """Takes in a facility ID and a list of Facilities and returns True if the ID exists in the list, otherwise returns False."""
@@ -161,7 +161,7 @@ class LogicAPI:
     
     def property_validate(self, propertyID: str) -> bool:
         """Takes in a property ID and returns True if it exists in the system, otherwise returns False."""
-        return self.property_manager.validate_property(propertyID)
+        return self.property_manager.property_validate(propertyID)
 
 #==========================================================================
 #--Staff-------------------------------------------------------------------
