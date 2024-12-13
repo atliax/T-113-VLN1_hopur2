@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from StorageLayer import StorageAPI
 from Exceptions import IDNotFoundError
@@ -118,7 +118,22 @@ class TicketManager:
         return filtered_tickets
 
     def ticket_update_pending(self) -> None:
-        pass
+        all_tickets = self.ticket_get_all()
+        for ticket in all_tickets:
+            if ticket.status == "Pending":
+                ticket_date = datetime.strptime(ticket.open_date, "%d-%m-%Y")
+                if ticket_date <= datetime.now():
+                    ticket.status = "Open"
+                    self.storage_api.ticket_edit(ticket)
 
     def ticket_update_recurring(self) -> None:
-        pass
+        all_tickets = self.ticket_get_all()
+        for ticket in all_tickets:
+            if ticket.status == "Open" and ticket.recurring == True:
+                ticket_date = datetime.strptime(ticket.open_date, "%d-%m-%Y")
+                new_open_date = ticket_date + timedelta(days=ticket.recurring_days)
+                tmp = Ticket(None,ticket.facilityID,ticket.propertyID,ticket.priority,ticket.title,ticket.description,"Pending",True,ticket.recurring_days,new_open_date,None,None,None,0,None,None,None,0)
+                self.storage_api.ticket_add(tmp)
+                ticket.recurring = False
+                ticket.recurring_days = 0
+                self.storage_api.ticket_edit(ticket)
