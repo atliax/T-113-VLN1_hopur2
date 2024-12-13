@@ -74,7 +74,14 @@ class ContractorScreen(BaseScreen):
             else:
                 contractor_destination_country = "Not assigned"
 
-            contractor_table.add_row([contractor.ID, fill(contractor.name,width=20), contractor.contractor_type, contractor_destination_country, contractor.contact, contractor.rating, contractor.opening_hours])
+            contractor_table.add_row([
+                contractor.ID,
+                fill(contractor.name,width=20),
+                fill(contractor.contractor_type,width=18),
+                fill(contractor_destination_country,width=15),
+                fill(contractor.contact,width=18),
+                contractor.rating,
+                fill(contractor.opening_hours,width=18)])
 
         print(f"|  Contractor list (Page {self.current_page + 1}/{total_pages}):")
         print("|  [N] Next page    [P] Previous page")
@@ -208,7 +215,14 @@ class ContractorScreen(BaseScreen):
 
                 view_contact_table = PrettyTable()
                 view_contact_table.field_names = ["ID", "Name", "Phone", "Address", "Rating"]
-                view_contact_table.add_row([view_contact.ID,view_contact.name,view_contact.phone,view_contact.address,view_contact.rating])
+
+                view_contact_table.add_row([
+                    view_contact.ID,
+                    fill(view_contact.name,width=25),
+                    fill(view_contact.phone,width=25),
+                    fill(view_contact.address,width=30),
+                    view_contact.rating])
+
                 print(view_contact_table)
                 input(ui_consts.MSG_ENTER_CONTINUE)
                 return None
