@@ -85,14 +85,14 @@ class StaffManager:
                     return True
 
         if email.upper() == 'BOSS' and password == 'Man':
-            self.logged_in_staff = Staff("S0", "D0", "Manager", "090488-2959", "Grundargata 12", "555-5555", "867-5309", "siggi@nanair.is", "flubber", "Yfirmaður rekstrarsviðs", True)
-            self.tmp_destination = Destination("D0", "Ísland", "Keflavík", "555-5556", "24/7", self.logged_in_staff.ID)
+            self.logged_in_staff = Staff("S0", "D1", "Manager", "090488-2959", "Grundargata 12", "555-5555", "867-5309", "siggi@nanair.is", "flubber", "Yfirmaður rekstrarsviðs", True)
+            self.tmp_destination = Destination("D1", "Ísland", "Keflavík", "555-5556", "24/7", self.logged_in_staff.ID)
             self.logged_in_staff.destinationID = self.tmp_destination.ID
             return True
 
         if email.upper() == 'PLEB' and password == '1234':
-            self.logged_in_staff = Staff("S0", "D0", "Jón afi", "120488-2959", "Grundargata 14", "555-5555", "867-5309", "siggi@nanair.is", "flubber", "Starfsmaður", False)
-            self.tmp_destination = Destination("D0", "Ísland", "Keflavík", "555-5556", "24/7", self.logged_in_staff.ID)
+            self.logged_in_staff = Staff("S0", "D2", "Jón afi", "120488-2959", "Grundargata 14", "555-5555", "867-5309", "siggi@nanair.is", "flubber", "Starfsmaður", False)
+            self.tmp_destination = Destination("D2", "Ísland", "Keflavík", "555-5556", "24/7", self.logged_in_staff.ID)
             self.logged_in_staff.destinationID = self.tmp_destination.ID
             return True
 

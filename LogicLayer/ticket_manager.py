@@ -40,6 +40,24 @@ class TicketManager:
         else:
             raise IDNotFoundError(f" {ticketID} does not exist")
 
+    def ticket_search_only_destinationID(self, search_string : str, destinationID : str) -> list[Ticket]:
+        searched_tickets = self.ticket_search(search_string)
+        filtered_tickets = []
+        for ticket in searched_tickets:
+            if self.storage_api.property_get_by_ID(ticket.propertyID).destinationID == destinationID:
+                filtered_tickets.append(ticket)
+
+        return filtered_tickets
+
+    def ticket_get_by_destinationID(self, destinationID : str) -> list[Ticket]:
+        all_tickets : list[Ticket] = self.ticket_get_all()
+        filtered_tickets = []
+        for ticket in all_tickets:
+            if self.storage_api.property_get_by_ID(ticket.propertyID).destinationID == destinationID:
+                filtered_tickets.append(ticket)
+
+        return filtered_tickets
+
     def ticket_search(self, search_string : str) -> list[Ticket]:
         """Takes a string and returns a list of tickets in the system that have attributes containing that string."""
         all_tickets : list[Ticket] = self.storage_api.ticket_get_all()
